@@ -1,0 +1,350 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>前言 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html" class="active">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="前言preface"><a class="header" href="#前言preface">前言（<a href="https://www.pbr-book.org/4ed/Preface">Preface</a>）</a></h1>
+<div class="warning">
+<p>请注意</p>
+<p>出于时间原因，前言章节尚未人工校对，还请谅解。<br />
+可以点击英文标题跳转至原文。</p>
+</div>
+<p><em>[ 正如 ]其他信息应该对那些想要学习和理解的人开放，程序源代码是程序员向前辈学习艺术的唯一途径。剧作家不允许其他剧作家阅读他们的剧本[或在剧院演出时]不允许他们甚至做笔记，这简直不可想象。同样，任何优秀的作者都是博览群书的，因为每个学习写作的孩子阅读的次数都比写作多出数百倍。然而，程序员却被期望独自发明字母表并学习写长篇小说。编程无法成长和学习，除非下一代程序员能够接触到前辈程序员所积累的知识和信息。</em> —埃里克·纳古姆（Erik Naggum）</p>
+<p>渲染是计算机图形学的一个基本组成部分。在最高抽象层次上，渲染是将三维场景的描述转换为图像的过程。动画、几何建模、纹理处理以及计算机图形学其他领域的算法都必须通过某种渲染过程来输出结果，以便在图像中可见。渲染已变得无处不在；从电影到游戏及其他领域，它为创造性表达、娱乐和可视化开辟了新的前沿。</p>
+<p>在该领域的早期，渲染研究主要集中在解决基本问题，例如确定从给定视点可见的对象。随着这些问题的有效解决方案的出现，以及由于其他图形领域的持续进展而提供了更丰富和更真实的场景描述，现代渲染已经开始吸收来自广泛学科的思想，包括物理学和天体物理学、天文学、生物学、心理学和感知研究，以及纯数学和应用数学。渲染的跨学科特性是其成为一个如此迷人研究领域的原因之一。</p>
+<p>本书通过完整渲染系统的文档源代码展示了一系列现代渲染算法。本书中的几乎所有图像，包括封面上的图像，都是由该软件渲染的。生成这些图像的所有算法都在这些页面中进行了描述。该系统 <strong>pbrt</strong> 是使用一种称为 <em>文艺编程（literate programming）</em> 的编程方法编写的，该方法将描述系统的散文与实现它的源代码混合在一起。我们相信，文献编程方法是介绍计算机图形学和计算机科学一般思想的有价值方式。通常，算法的一些细微之处在实现之前可能不清晰或隐藏，因此查看实际实现是深入理解该算法细节的好方法。实际上，我们认为以这种方式深入理解一些精心挑选的算法比对许多算法的肤浅理解提供了更好的计算机图形学进一步研究的基础。</p>
+<p>除了阐明算法在实践中的实现方式之外，在完整且非平凡的软件系统的背景下呈现这些算法还使我们能够解决中型渲染系统设计和实现中的问题。渲染系统基本抽象和接口的设计对实现的优雅性和后续扩展能力有着重要影响，但在这个设计空间中的权衡很少被讨论。</p>
+<p><strong>pbrt</strong> 和本书的内容专注于 <em>照片级真实感渲染（photorealistic rendering）</em>，这可以被定义为生成与相机在照片中捕捉到的图像无法区分的图像，或者生成能够引发人类观察者与实际场景相同反应的图像。有许多理由专注于照片级真实感。照片级真实感图像对于电影中的特效至关重要，因为计算机生成的图像通常必须与真实世界的镜头无缝混合。在计算机游戏等所有图像都是合成的应用中，照片级真实感是让观察者忘记他们正在看一个实际上不存在的环境的有效工具。最后，照片级真实感为评估渲染系统输出质量提供了一个相对明确的标准。</p>
+<h2 id="读者audience"><a class="header" href="#读者audience">读者（Audience）</a></h2>
+<p>本书主要面向三类读者群体。第一类是研究生或高年级本科生的计算机图形学课程学生。本书假设读者具备大学入门级课程的计算机图形学基础知识，尽管某些关键概念，如基本向量几何和变换将在此进行回顾。对于没有接触过数万行源代码程序的学生，文献编程风格提供了一个温和的引导，帮助他们理解这种复杂性。我们特别关注解释系统中一些关键接口和抽象背后的推理，以便让这些读者理解系统为何以这种方式构建。</p>
+<p>第二个受众是计算机图形学的高级研究生和研究人员。对于那些从事渲染研究的人来说，这本书提供了该领域的广泛介绍，而 <strong>pbrt</strong> 源代码提供了一个可以用作基础的框架（或者至少可以使用一些源代码）。对于在计算机图形学其他领域工作的人，我们相信对渲染的透彻理解可以提供有用的背景。</p>
+<p>我们的最终受众是行业中的软件开发人员。尽管本书中的许多基本概念对该受众来说是熟悉的，但以文艺风格呈现的算法解释可能会带来新的视角。 <strong>pbrt</strong> 还包括许多经过精心设计和调试的算法实现，这些算法的正确实现可能具有挑战性；这些内容对渲染领域的经验丰富的从业者尤其具有吸引力。我们希望深入探讨一个完整且非平凡的渲染系统的特定组织形式，也能引发该受众的思考。</p>
+<h2 id="概述与目标overview-and-goals"><a class="header" href="#概述与目标overview-and-goals">概述与目标（Overview and Goals）</a></h2>
+<p><strong>pbrt</strong> 基于光线追踪（ray-tracing）算法。光线追踪是一种优雅的技术，其起源于镜头制造；卡尔·弗里德里希·高斯在 19 世纪手动追踪光线通过镜头。计算机上的光线追踪算法沿着微小光线在场景中的路径，直到它们与表面相交。这种方法提供了一种简单的方法来找到从任何特定位置和方向看到的第一个可见物体，并且是许多渲染算法的基础。</p>
+<p><strong>pbrt</strong> 的设计和实现有三个主要目标：它应该是 <em>完整的（complete）</em>，它应该是 <em>具有示范性的（illustrative）</em>，并且它应该是 <em>基于物理的（physically based）</em>。</p>
+<p>完整性意味着系统不应缺少高质量商业渲染系统中的关键特性。特别是，这意味着重要的实际问题，如抗锯齿、稳健性、数值精度以及高效渲染复杂场景的能力，都应得到充分解决。考虑这些问题在系统设计的初期阶段非常重要，因为这些特性可能对系统的所有组件产生微妙的影响，并且在后期实施阶段很难将其重新集成到系统中。</p>
+<p>我们的第二个目标意味着我们尽量选择算法、数据结构和渲染技术时要谨慎，并关注可读性和清晰度。由于它们的实现将被比其他渲染系统更多的读者审查，我们努力选择我们所知道的最优雅的算法，并尽可能地实现它们。这个目标还要求系统足够小，以便一个人能够完全理解。我们使用可扩展架构实现了 <strong>pbrt</strong> ，系统的核心是通过一组精心设计的接口类来实现的，尽可能多的具体功能则在这些接口的实现中完成。结果是，理解系统的基本结构并不需要了解所有具体的实现。这使得深入研究感兴趣的部分变得更容易，而跳过其他部分时也不会失去对整体系统如何结合在一起的理解。</p>
+<p>在完整性和示范性这两个目标之间存在一种紧张关系。实现和描述每一种可能的有用技术不仅会使这本书变得过于冗长，还会使系统对大多数读者来说变得过于复杂。在 <strong>pbrt</strong> 缺乏特别有用的功能的情况下，我们尝试设计架构，以便可以在不改变整体系统设计的情况下添加该功能。</p>
+<p>物理基础渲染的基本基础是物理定律及其数学表达。 <strong>pbrt</strong> 旨在使用正确的物理单位和概念来计算其计算的量和实现的算法。 <strong>pbrt</strong> 努力计算出 <em>物理上正确（physically correct）</em> 的图像；它们准确反映了场景在现实世界中的照明情况。†（当然，任何计算机物理模拟都需要仔细选择适应于需求且高效计算的方式，可以阅读第 <a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html">1.2</a> 节中关于 <strong>pbrt</strong> 做出的选择的进一步讨论。） 选择使用物理基础的一个优点是，它为程序的正确性提供了一个具体的标准：对于简单场景，当期望结果可以以封闭形式计算时，如果 <strong>pbrt</strong> 没有计算出相同的结果，我们就知道实现中一定存在错误。同样，如果 <strong>pbrt</strong> 中不同的物理基础照明算法对同一场景给出了不同的结果，或者如果 <strong>pbrt</strong> 与另一个物理基础渲染器的结果不相同，那么其中肯定存在一个错误。最后，我们相信这种基于物理的渲染方法是有价值的，因为它是严谨的。 当不清楚特定计算应如何进行时，物理学提供了一个答案，以确保结果的一致性。</p>
+<p>效率的优先级低于这三个目标。由于渲染系统在生成图像的过程中通常会运行数分钟或数小时，因此效率显然很重要。然而，我们主要关注算法效率，而不是低级代码优化。在某些情况下，明显的微优化让位于清晰、结构良好的代码，尽管我们确实努力优化了系统中大部分计算发生的部分。</p>
+<p>在展示 <strong>pbrt</strong> 并讨论其实施过程中，我们希望传达一些经过多年研究和开发所学到的宝贵经验。编写一个好的渲染器不仅仅是将一组快速算法串联在一起；使系统既灵活又稳健是一项艰巨的任务。随着更多几何体或光源的添加，或任何其他复杂性轴的压力，系统的性能必须优雅地下降。</p>
+<p>开发一个解决所有这些问题的系统所带来的回报是巨大的——编写一个新的渲染器或向现有渲染器添加新功能，并利用它创建以前无法生成的图像是一种极大的乐趣。我们编写本书的最根本目标是将这一机会带给更广泛的受众。鼓励读者在阅读本书的过程中使用该系统渲染 <strong>pbrt</strong> 软件分发中的示例场景。每章末尾的练习建议对系统进行修改，以帮助澄清其内部工作原理，并提出更复杂的项目，通过添加新功能来扩展系统。</p>
+<p>本书的网站位于 <a href="https://pbrt.org/">pbrt.org</a>。该网站包含指向 <strong>pbrt</strong> 源代码的链接、可以下载以使用 <strong>pbrt</strong> 渲染的场景，以及错误跟踪器和勘误表。任何未在勘误表中列出的文本错误可以报告至电子邮件地址 <em>authors@pbrt.org</em>。我们非常重视您的反馈！</p>
+<h2 id="第一版与第二版之间的变化changes-between-the-first-and-second-editions"><a class="header" href="#第一版与第二版之间的变化changes-between-the-first-and-second-editions">第一版与第二版之间的变化（Changes Between The First and Second Editions）</a></h2>
+<p>自 2004 年本书第一版出版到 2010 年第二版出版之间过去了六年。在这段时间里，书籍售出了数千本，并且 <strong>pbrt</strong> 软件在书籍网站上被下载了数千次。 <strong>pbrt</strong> 用户群体给了我们大量的反馈和鼓励，我们在系统上的经验指导了我们在第一版和第二版之间进行更改时所做的许多决策。除了若干错误修复外，我们还进行了几项重要的设计更改和增强：</p>
+<ul>
+<li><em>移除插件架构（Removal of the plugin architecture）：</em> <strong>pbrt</strong> 的第一个版本使用了运行时插件架构，以动态加载用于当前渲染场景中的对象（如形状、光源、积分器、相机和其他对象）的实现代码。这种方法允许用户在不重新编译整个渲染系统的情况下，使用新对象类型（例如，新形状原语）扩展 <strong>pbrt</strong> 。这种方法最初看起来很优雅，但它使得在多个平台上支持 <strong>pbrt</strong> 的任务变得复杂，并且使调试变得更加困难。它真正启用的唯一新使用场景（仅二进制分发的 <strong>pbrt</strong> 或二进制插件）实际上与我们的教学和开源目标相悖。因此，在本版中放弃了插件架构。</li>
+<li><em>移除图像处理管道（Removal of the image-processing pipeline）：</em> <strong>pbrt</strong> 的第一个版本提供了一个色调映射接口，将高动态范围（HDR）浮点输出图像直接转换为低动态范围 TIFF 以供显示。这个功能在 2004 年是有意义的，因为对 HDR 图像的支持仍然稀少。然而，到 2010 年，数字摄影的进步使得 HDR 图像变得普遍。尽管色调映射的理论和实践优雅且值得学习，我们决定将新书的重点完全放在图像形成的过程上，跳过图像显示的主题。感兴趣的读者应参考 Reinhard 等人（2010）撰写的书籍，以获得对 HDR 图像显示过程的全面和现代的处理。</li>
+<li><em>任务并行性（Task parallelism）：</em> 多核架构变得无处不在，我们认为 <strong>pbrt</strong> 如果不能扩展到本地可用核心的数量，将不会保持相关性。我们也希望本书中记录的并行编程实现细节能够帮助图形程序员理解编写可扩展并行代码的一些细微差别和复杂性。</li>
+<li><em>“生产”渲染的适用性（Appropriateness for “production” rendering）：</em> <strong>pbrt</strong> 的第一个版本仅作为教学工具和渲染研究的跳板。实际上，我们在准备第一版时做出了一些与生产环境使用相悖的决策，例如对基于图像的光照支持有限、不支持运动模糊，以及在复杂光照下不够稳健的光子映射实现。随着对这些特性的支持大幅改善，以及对次表面散射和梅特罗波利斯光传输的支持，我们认为在第二版中， <strong>pbrt</strong> 变得更加适合渲染复杂环境的高质量图像。</li>
+</ul>
+<h2 id="第二版与第三版之间的变化changes-between-the-second-and-third-editions"><a class="header" href="#第二版与第三版之间的变化changes-between-the-second-and-third-editions">第二版与第三版之间的变化（Changes Between The Second and Third Editions）</a></h2>
+<p>随着又六年的过去，是时候更新和扩展这本书以及 <strong>pbrt</strong> 系统了。我们继续从读者和用户的经验中学习，以更好地理解哪些主题最有用。此外，研究的进展也在持续进行；书中的许多部分需要更新，以反映当前的最佳实践。我们在多个方面进行了显著改进：</p>
+<ul>
+<li><em>双向光传输（Bidirectional light transport）：</em> <strong>pbrt</strong> 的第三个版本增加了一个双向路径追踪器，包括对体积光传输的全面支持和多重重要性采样以加权路径。全新的大都会光传输积分器使用了双向路径追踪器的组件，从而实现了该算法的特别简洁的实现。</li>
+<li><em>次表面散射（Subsurface scattering）：</em> 许多物体的外观——特别是皮肤和半透明物体——是次表面光传输的结果。我们在第二版中实现的次表面散射反映了 2000 年代初的最新技术；我们彻底更新了 BSSRDF 模型和我们的次表面光传输算法，以反映在随后的十年研究中取得的进展。</li>
+<li><em>数值稳健的交点（Numerically robust intersections）：</em> 浮点舍入误差在几何光线交点计算中的影响一直是光线追踪中的一个长期挑战：它们可能导致图像中存在小误差。我们专注于这个问题，并推导出了这种误差的保守（但紧密）界限，这使我们的实现比以前的渲染系统对这个问题更具稳健性。</li>
+<li><em>参与介质表示（Participating media representation）：</em> 我们显著改善了系统中散射媒体的描述和表示方式；这使得在嵌套散射媒体中获得更准确的结果成为可能。一种新的采样技术实现了对异质媒体的无偏渲染，并与系统的其他部分干净地集成。</li>
+<li><em>测量材质（Measured materials）：</em> 本版新增了一种使用稀疏频率空间基表示和评估测量材料的新技术。这种方法方便，因为它允许进行精确的重要性采样，而这是在上一版中使用的表示方法所无法实现的。</li>
+<li><em>光子映射（Photon mapping）：</em> 光子映射算法的一项重要进展是开发了不需要在内存中存储所有光子的变体。我们用基于随机渐进光子映射的实现替换了 <strong>pbrt</strong> 的光子映射算法，该算法有效地渲染了许多复杂的光传输效果。</li>
+<li><em>样本生成算法（Sample generation algorithms）：</em> 用于渲染算法中数值积分的样本值分布对最终结果的质量可能产生意想不到的重大影响。我们对该主题进行了全面更新，深入探讨了新方法和高效实现技术。</li>
+</ul>
+<p>系统的许多其他部分得到了改进和更新，以反映该领域的进展：微面反射模型得到了更深入的处理，采样技术大大提高；新增了一种“曲线”形状，用于建模头发和其他精细几何体；并且提供了一种新的相机模型，模拟真实的镜头系统。在整本书中，我们进行了许多较小的更改，以更清晰地解释和说明物理基础渲染系统中的关键概念，如 <strong>pbrt</strong> 。</p>
+<h2 id="第三版与第四版之间的变化changes-between-the-third-and-fourth-editions"><a class="header" href="#第三版与第四版之间的变化changes-between-the-third-and-fourth-editions">第三版与第四版之间的变化（Changes Between The Third and Fourth Editions）</a></h2>
+<p>渲染算法的创新没有减缓的迹象，因此在 2019 年我们开始专注于第四版的工作。几乎每一章都包含了大量的新增内容，我们还更新了章节和引入思想的顺序，将蒙特卡罗积分和路径追踪的基本思想放在了前面，而不是留到最后。</p>
+<p>系统中特别显著改进的能力包括：</p>
+<ul>
+<li><em>体积散射（Volumetric scattering）：</em> 我们已将参与介质散射的算法更新至最新水平，增加了对发射体积的支持、高效采样具有不同密度的体积，以及对色散介质的强大支持，其中散射特性随波长变化。</li>
+<li><em>光谱渲染（Spectral rendering）：</em> 我们已剔除所有用于照明计算的 RGB 颜色； <strong>pbrt</strong> 现在仅根据波长依赖的光谱分布样本进行照明计算。这种方法不仅比使用 RGB 更具物理准确性，还允许 <strong>pbrt</strong> 准确模拟色散等效果。</li>
+<li><em>反射模型（Reflection models）：</em> 我们对 BSDF 基础和反射模型的覆盖进行了广泛修订，并扩展了所涵盖的 BSDF 范围，包括一种准确模拟头发反射的模型和另一种模拟分层材料散射的模型。测量的 BRDF 采用了一种新方法，可以表示广泛材料的反射光谱。</li>
+<li><em>光采样（Light sampling）：</em> 我们不仅改进了单个光源上采样点的算法，以更好地反映最新技术，这一版本还支持 <em>多光源采样（many-light sampling）</em>，使得通过仔细采样少量光源来高效渲染具有成千上万或数百万光源的场景成为可能。</li>
+<li><em>GPU 渲染（GPU rendering）：</em> 此版本的 <strong>pbrt</strong> 增加了对 GPU 渲染的支持，GPU 的光线追踪性能比 CPU 高出 10 到 100 倍。我们以一种方式实现了这一功能，使书中几乎所有的代码都可以在 CPU 和 GPU 上运行，这使得将与 GPU 相关的问题的讨论局限于第 <a href="../15_Wavefront_Rendering_on_GPUs/">15</a> 章成为可能。</li>
+</ul>
+<p>该系统还进行了许多其他改进和新增功能，包括新的双线性补丁形状，对蒙特卡洛积分核心的样本生成算法进行了多次更新，支持在每个像素输出关于可见表面几何和反射属性的辅助信息，以及对系统的许多其他小改进。</p>
+<h2 id="致谢acknowledgments"><a class="header" href="#致谢acknowledgments">致谢（Acknowledgments）</a></h2>
+<p>帕特·汉拉汉为本书的贡献超出了我们所能承认的范围；我们对他深感感激。他不懈地主张使用干净的接口和找到合适的抽象来贯穿整个系统，他对渲染的理解和方法深刻影响了其设计。他愿意在斯坦福的渲染课程中使用 <strong>pbrt</strong> 和这份手稿，对其早期发展阶段尤其有帮助，当时它仍处于非常粗糙的状态；他在整个过程中提供的反馈对将文本带到目前的状态至关重要。最后，帕特在斯坦福图形实验室帮助组建的团队，以及他所营造的开放环境，创造了一个令人兴奋、刺激和富有成效的氛围。马特和格雷格都感到非常荣幸能够参与其中。</p>
+<p>我们要感谢许多在 1999 年至 2004 年间在斯坦福大学和维吉尼亚大学课程中使用本书早期草稿的学生。这些学生提供了大量关于本书的反馈和 <strong>pbrt</strong> 。这些课程的助教值得特别提及：斯坦福的 Tim Purcell、Mike Cammarano、Ian Buck 和 Ren Ng，以及维吉尼亚的 Nolan Goodnight。那些班级中的一些学生提供了特别有价值的反馈，并发送了错误报告和修复；我们特别感谢 Evan Parker 和 Phil Beatty。本书的手稿草稿在德克萨斯大学奥斯汀分校的 Bill Mark 和 Don Fussell 教授的课程中使用，以及在俄亥俄州立大学的 Raghu Machiraju 教授的课程中使用；他们的反馈是无价的，我们感谢他们在课程中大胆地融入这个系统，即使在它仍在编辑和修订的过程中。</p>
+<p>马特·法尔想要感谢在渲染相关工作中给予他极大教育支持的同事和合作伙伴，他们对他编写渲染器的方法和对该领域的理解产生了重要影响。特别感谢克雷格·科尔布，他通过公开的 rayshade 光线追踪系统源代码为马特早期的计算机图形教育奠定了基础；以及埃里克·维奇，他也慷慨地提供了时间和专业知识。还要感谢道格·舒尔特和斯坦·艾森斯塔特，在高中和大学期间分别给予的数学和计算机科学的基础课程，最重要的是感谢马特的父母，感谢他们提供的教育和一路上的持续鼓励。最后，感谢 NVIDIA 支持本书第一版和最新版本的准备；在 NVIDIA，感谢尼克·特里安托斯和贾扬特·科尔赫在第一版准备的最后阶段给予的支持，以及感谢亚伦·莱丰、戴维·卢布基和比尔·达利对第四版工作的支持。</p>
+<p>格雷格·汉弗莱斯非常感谢所有在他普林斯顿大学本科期间容忍他的教授和助教。许多人鼓励他对图形的兴趣，特别是迈克尔·科恩、大卫·多布金、亚当·芬克尔斯坦、迈克尔·考克斯、戈登·斯托尔、帕特里克·敏和丹·沃拉赫。道格·克拉克、史蒂夫·莱昂和安迪·沃尔夫也监督了各种独立研究项目，甚至没有笑一次。一次，在关于一个为期一年的机器人项目的组会上，史蒂夫·莱昂变得恼火，喊道：“别告诉我为什么做不到，想办法怎么做！”——这是一堂永远不会被遗忘的即兴课。埃里克·里斯塔德在格雷格大一结束后（甚至在夏天开始之前）解雇了他作为暑期研究助理，把他推给了毫无防备的帕特·汉拉汉，开始了一段跨越 10 年和两个海岸的指导关系。最后，戴夫·汉森教会格雷格，文艺编程是一种很好的工作方式，计算机编程可以是一种美丽而微妙的艺术形式。</p>
+<p>温泽尔·雅各布在 2004 年本科期间收到第一版 <strong>pbrt</strong> 时感到非常兴奋。毫无疑问，这对他的职业生涯产生了深远的影响——因此，温泽尔想首先感谢他的合著者邀请他成为本书第三版和第四版的一部分。温泽尔非常感激史蒂夫·马斯切尔，他在康奈尔大学的五年博士生涯中担任了他的导师。史蒂夫将他带入了研究的世界，并始终是他灵感的源泉。温泽尔还感谢图形组其他成员的指导和创造的激励研究环境，包括卡维塔·巴拉、道格·詹姆斯和布鲁斯·沃尔特。温泽尔与奥尔加·索尔基娜·霍尔农度过了美好的博士后时光，她向他介绍了几何处理。温泽尔非常感激奥尔加对他参与本书第三版的支持。</p>
+<p>我们特别感谢那些完整阅读了草稿的评审；他们在手稿不同阶段提供了深刻而建设性的反馈。感谢 Ian Ashdown、Per Christensen、Doug Epps、Dan Goldman、Eric Haines、Erik Reinhard、Pete Shirley、Peter-Pike Sloan、Greg Ward 以及一众匿名评审对书籍第一版和第二版的反馈。对于第二版，感谢 Janne Kontkanen、Bill Mark、Nelson Max 和 Eric Tabellion。对于第四版，我们感谢 Thomas Müller 和 Per Christensen，他们都提供了大量反馈，显著改善了最终版本。</p>
+<p>许多专家友好地向我们解释了他们工作中的细微差别，并指导我们最佳实践。对于第一版和第二版，我们还要感谢唐·米切尔，他帮助我们理解了一些采样和重建的细节；托马斯·科利格和亚历山大·凯勒，解释了低差异采样的细微之处；克里斯特·埃里克森，他对改进我们的 kd 树实现提出了一些建议；以及克里斯托夫·赫里和尤金·德昂，帮助我们理解了次表面散射的细微差别。</p>
+<p>在第三版中，我们特别感谢 Leo Grünschloß对我们采样章节的审阅；感谢 Alexander Keller 对该章节主题的建议；感谢 Eric Heitz 在微面和我们关于该主题的文本审阅方面提供的广泛帮助；感谢 Thiago Ize 对浮点错误文本的全面审阅；感谢 Tom van Bussel 报告我们 BSSRDF 代码中的多个错误；感谢 Ralf Habel 审阅我们的 BSSRDF 文本；以及感谢 Toshiya Hachisuka 和 Anton Kaplanyan 对我们光传输章节的广泛审阅和评论。</p>
+<p>在第四版中，感谢 Alejandro Conty Estevez 对我们多光采样处理的审阅；感谢 Eugene d’Eon、Bailey Miller 和 Jan Novák 对体积散射章节的评论；感谢 Eric Haines、Simon Kallweit、Martin Stich 和 Carsten Wächter 对 GPU 渲染章节的审阅；感谢 Karl Li 对多个章节的反馈；感谢 Tzu-Mao Li 对我们关于逆向和可微渲染讨论的审阅；感谢 Fabrice Rousselle 对机器学习和渲染的反馈；感谢 Gurprit Singh 对我们关于蒙特卡罗积分的傅里叶分析讨论的评论。我们还感谢 Jeppe Revall Frisvad 对 <strong>pbrt</strong> 在前几版中反射模型处理的广泛评论和建议。</p>
+<p>对于本版本中对 <strong>pbrt</strong> 实现的改进，感谢 Pierre Moreau 在调试 <strong>pbrt</strong> 在 Windows 上的 GPU 支持方面所做的努力，以及 Jim Price，他不仅发现并修复了 <strong>pbrt</strong> 源代码早期版本中的众多错误，还贡献了比我们原始实现更好的色彩体积媒体表示。我们还非常感谢 Weta Digital 的 Anders Langlands 和 Luca Fascione 提供的 <em>PhysLight</em> 系统实现，该实现已被纳入 <strong>pbrt</strong> 的 <strong>PixelSensor</strong> 类和光源实现中。</p>
+<p>许多人报告了之前版本文本中的错误或 <strong>pbrt</strong> 中的漏洞。我们特别感谢 Solomon Boulos、Stephen Chenney、Per Christensen、John Danks、Mike Day、Kevin Egan、Volodymyr Kachurovskyi、Kostya Smolenskiy、Ke Xu 和 Arek Zimny，他们的贡献尤其丰硕。</p>
+<p>对于他们的建议和错误报告，我们还要感谢 Rachit Agrawal、Frederick Akalin、Thomas de Bodt、Mark Bolstad、Brian Budge、Jonathon Cai、Bryan Catanzaro、Tzu-Chieh Chang、Mark Colbert、Yunjian Ding、Tao Du、Marcos Fajardo、Shaohua Fan、Luca Fascione、Etienne Ferrier、Nigel Fisher、Jeppe Revall Frisvad、Robert G. Graf、Asbjørn Heid、Steve Hill、Wei-Feng Huang、John “Spike” Hughes、Keith Jeffery、Greg Johnson、Aaron Karp、Andrew Kensler、Alan King、Donald Knuth、Martin Kraus、Chris Kulla、Murat Kurt、Larry Lai、Morgan McGuire、Craig McNaughton、Don Mitchell、Swaminathan Narayanan、Anders Nilsson、Jens Olsson、Vincent Pegoraro、Srinath Ravichandiran、Andy Selle、Sébastien Speierer、Nils Thuerey、Eric Veach、Ingo Wald、Zejian Wang、Xiong Wei、Wei-Wei Xu、Tizian Zeltner 和 Matthias Zwicker。最后，我们要感谢 <em>LuxRender</em> 开发者和 <em>LuxRender</em> 社区，特别是 Terrence Vergauwen、Jean-Philippe Grimaldi 和 Asbjørn Heid；看到他们从 <strong>pbrt</strong> 的基础上构建的渲染系统令人愉快，我们从阅读他们的源代码和新渲染算法的实现中学到了很多。</p>
+<p>特别感谢 Framestore 的 Martin Preston 和 Steph Bruning，感谢他们帮助我们使用 <em>《地心引力》（Gravity）</em> 的一个画面（图片由华纳兄弟和 Framestore 提供），以及 Weta Digital 对 <em>《阿丽塔：战斗天使》（Alita: Battle Angel）</em> 画面的支持（© 2018 二十世纪福克斯电影公司，版权所有）。</p>
+<h2 id="生产production"><a class="header" href="#生产production">生产（Production）</a></h2>
+<p>在第一版的制作过程中，我们还要感谢我们的编辑 Tim Cox，感谢他愿意承担这个稍显不寻常的项目，以及在整个过程中给予的指导和耐心。我们非常感谢项目经理 Elisabeth Beller，她在书籍制作中超出了职责范围；她能够将这个复杂的项目控制在轨道上并按时完成，令人赞叹，我们特别感谢她对最终结果质量的显著影响。还要感谢 Rick Camp（编辑助理）在整个过程中所做的许多贡献。Windfall Software 的 Paul Anagnostopoulos 和 Jacqui Scarlott 负责了书籍的排版；他们能够将作者的自制文献编程文件格式转化为高质量的最终输出，同时还处理我们要求的多种不寻常的索引类型，令人非常感激。还要感谢 Ken DellaPenta（校对编辑）和 Jennifer McClain（校对员），以及 Chen Design 的 Max Spector（文本和封面设计师）和 Steve Rath（索引员）。</p>
+<p>在第二版中，我们要感谢 Greg Chalson，他说服我们扩展和更新这本书；Greg 还确保 Windfall Software 的 Paul Anagnostopoulos 再次负责本书的排版。我们要再次感谢 Paul 在处理本书的制作复杂性方面所做的努力。最后，我们还要感谢 Elsevier 的 Todd Green、Paul Gottehrer 和 Heather Scherer。</p>
+<p>在第三版中，我们要感谢托德·格林，他负责了这一轮的工作，以及艾米·因弗内齐，她在整个过程中保持了进度。我们很高兴保罗·阿纳格诺斯托普洛斯再次参与了这一过程；他的努力对本书的高制作价值至关重要，这对我们来说非常重要。</p>
+<p>第四版让我们转向了麻省理工学院出版社；非常感谢 Elizabeth Swayze 对我们加入的热情、在制作过程中的指导，以及确保 Paul Anagnostopoulos 再次负责排版。我们对 Paul 再次与我们合作一版表示最深切的感谢，同时也非常感谢 MaryEllen Oliver 在校对和编辑方面的出色工作。</p>
+<h2 id="在线版the-online-edition"><a class="header" href="#在线版the-online-edition">在线版（The Online Edition）</a></h2>
+<p>截至 2023 年 11 月 1 日，第四版的完整文本已在线免费提供。非常感谢麻省理工学院出版社和伊丽莎白·斯威兹对该书免费版本的支持。</p>
+<p>许多开源系统对 <em>基于物理的渲染（Physically Based Rendering）</em> 在线版本的开发起到了重要作用。我们特别感谢 <a href="https://getbootstrap.com/">Bootstrap</a>、<a href="https://jeri.io/">JERI</a>、<a href="https://www.mathjax.org/">MathJax</a> 和 <a href="https://jquery.com/">JQuery</a> 的开发者。我们还要感谢 Impallari Type 设计的用于正文的 <a href="https://fonts.google.com/specimen/Domine">Domine</a> 字体；Christian Robertson 设计的用于代码的 <a href="https://fonts.google.com/specimen/Roboto+Mono">Roboto Mono</a> 字体；以及 <a href="https://fontawesome.com/">Font Awesome</a> 字体的设计者。</p>
+<p>我们还要感谢所有通过 <em>Patreon</em> 支持早期在线版的人；截至 2023 年 11 月 1 日：3Dscan、Abdelhakim Deneche、Alain Galvan、Andréa Machizaud、Aras Pranckevicius、Arman Uguray、Ben Bass、Claudia Doppioslash、Dong Feng、Enrico、Filip Strugar、Haralambi Todorov、Jaewon Jung、Jan Walter、Jendrik Illner、Jim Price、Joakim Dahl、Jonathan Stone、KrotanHill、Laura Reznikov、Malte Nawroth、Mauricio Vives、Mrinal Deo、Nathan Vegdahl、Pavel Panchekha、Pratool Gadtaula、Saad Ahmed、Scott Pilet、Shin Watanabe、Steve Watts Kennedy、Tom Hulton-Harrop、Torgrim Boe Skaarsmoen、William Newhall、Yining Karl Li 和 Yury Mikhaylov。然而，随着第四版的发布，我们已关闭了 <em>Patreon</em>。</p>
+<p>尽管这本书在线发布，供任何人免费阅读，但书籍的文本仍然受© 版权保护，版权归 2004–2023 年 Matt Pharr、Wenzel Jakob 和 Greg Humphreys 所有，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> 许可证。书中的图形采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可证，认为它们在教授图形课程时可能会有用。</p>
+<h2 id="场景模型和数据scenes-models-and-data"><a class="header" href="#场景模型和数据scenes-models-and-data">场景、模型和数据（Scenes, Models, and Data）</a></h2>
+<p>许多人和组织慷慨地提供了本书和 <strong>pbrt</strong> 发行中使用的场景和模型。他们的慷慨对我们在整个文本中创建有趣的示例图像帮助巨大。</p>
+<p>我们非常感谢 Evolución Visual 的 Guillermo M. Leal Llaguno，<a href="http://www.evvisual.com/">www.evvisual.com</a>，他为第二版封面上展示的标志性 <em>圣米格尔场景（San Miguel）</em> 进行了建模和渲染，并且该场景仍在书中的多个图形中使用。我们还特别感谢 Marko Dabrovic（<a href="http://www.3lhd.com/">www.3lhd.com</a>）和 RNA Studios 的 Mihovil Odak（<a href="http://www.rna.hr/">www.rna.hr</a>），他们提供了大量在书的早期版本中使用的模型和场景，包括 Sponza 中庭、斯 ibenik 大教堂以及在本版的图 <a href="#figure-16-1">16.1</a> 中可以看到的 Audi TT 汽车模型。我们还要特别感谢 Florent Boyer，他提供了在第 chap:bidir-methods 章中某些图像中使用的现代住宅场景。</p>
+<p>我们衷心感谢 Laubwerk 的 Jan-Walter Schliep、Burak Kahraman 和 Timm Dapper（<a href="http://www.laubwerk.com/">www.laubwerk.com</a>）为本书前一版封面上展示的 <em>乡村（Countryside ）</em> 景观场景的创作，并在本版的多个图形中使用。</p>
+<p>非常感谢 Lucydreams 的 Angelo Ferretti（<a href="http://www.lucydreams.it/">www.lucydreams.it</a>）授权使用 <em>Watercolor</em> 和 <em>Kroken</em> 场景，这为本版提供了精彩的封面图像、众多图形的素材，以及一对复杂的场景，展示了 <strong>pbrt</strong> 的能力。</p>
+<p>吉姆·普赖斯友好地提供了一些包含有趣体积媒体的场景；这些场景显著改善了该主题的数据。还要感谢 Beeple 以宽松许可提供 <em>《零日》（Zero Day）</em> 和 <em>《透明机器》（Transparent Machines）</em> 场景，以及马丁·卢比奇提供的奥地利帝国皇冠模型。最后，衷心感谢华特迪士尼动画工作室提供的制作复杂度 <em>《莫阿娜岛》（Moana Island）</em> 场景，以及提供的详细体积云模型。</p>
+<p>兔子、佛陀和龙模型由斯坦福计算机图形实验室的扫描库提供。“killeroo”模型经 Phil Dench 和 Martin Rezard 许可使用（3D 扫描和数字表现由 headus 提供，设计和粘土雕塑由 Rezard 完成）。第 <a href="../9_Reflection_Models/">9</a> 章中使用的龙模型扫描由 Christian Schüller 提供，感谢 Yasutoshi Mori 提供的材料球和跑车模型。用于说明第 chap:bidir-methods 章中的光学现象的玻璃由 Simon Wendsche 提供。用于说明次表面散射的头部模型由 Infinite Realities, Inc.根据创意共享署名 3.0 许可证提供。还要感谢“暴君猴子”提供的 BMW M6 汽车模型和“Wig42”提供的早餐桌场景；这两者均在 <a href="http://blendswap.com/">blendswap.com</a> 上发布，也是在创意共享署名 3.0 许可证下。</p>
+<p>我们使用了来自 <em>PolyHaven</em> 网站（<a href="http://polyhaven.com/">polyhaven.com</a>）的多个环境贴图用于各种场景的 HDR 照明；所有贴图均在创意共享 CC0 许可证下提供。感谢 Sergej Majboroda 和 Greg Zaal，我们使用了他们的环境贴图。</p>
+<p>马克·埃伦斯提供了多种光源的光谱数据，而多种显示器的光谱 RGB 测量数据由 X-Rite 的汤姆·利安扎提供。我们还要感谢丹尼·帕斯卡尔（<a href="http://www.babelcolor.com/">www.babelcolor.com</a>）允许我们包含他的色卡光谱反射率测量数据。感谢米哈伊尔·波利扬斯基通过 <a href="http://refractiveindex.info/">refractiveindex.info</a> 提供的折射率数据，以及安德斯·朗兰兹、卢卡·法乔内和 Weta Digital 提供的相机传感器响应数据，这些数据包含在 <strong>pbrt</strong> 中。</p>
+<h2 id="关于封面"><a class="header" href="#关于封面">关于封面</a></h2>
+<p>封面上的 <em>水彩（Watercolor）</em> 场景由 Lucydreams 的安杰洛·费雷蒂（Angelo Ferretti）创作（<a href="http://www.lucydreams.it/">www.lucydreams.it</a>）。几何体需要总共 2 GiB 的磁盘存储，纹理贴图需要 836 MiB。在渲染时，场景描述需要 15 GiB 的内存来存储超过 3300 万个独特三角形、412 个纹理贴图和相关数据结构。</p>
+<br/>
+<br/>
+<h1 id="延伸阅读further-reading"><a class="header" href="#延伸阅读further-reading">延伸阅读（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading">Further Reading</a>）</a></h1>
+<p>唐纳德·克努斯的文章 <em>《文艺编程》（Literate Programming）</em>（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Knuth84">Knuth 1984</a>）描述了文艺编程的主要思想以及他的 <strong>web</strong> 编程环境。开创性的 \( \text{T}_\text{E}\text{X} \) 排版系统是用 <strong>web</strong> 编写的，并已作为一系列书籍出版（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Knuth:1986:MP">Knuth 1986</a>；<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Knuth93">Knuth 1993a</a>）。克努斯和莱维展示了 <strong>cweb</strong> 文艺编程系统的实现作为一个文艺程序（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Knuth1994">Knuth and Levy 1994</a>）。克努斯还在 <em>《斯坦福图形库》（The Stanford GraphBase）</em>（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Knuth93b">Knuth 1993b</a>）中发布了一系列图算法，并发布了文艺格式的 <em>MMIX</em> 指令集的模拟器（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Knuth1999">Knuth 1999</a>）。这些程序阅读起来令人愉快，并且是各自算法的优秀展示。网站 <a href="http://www.literateprogramming.com/">www.literateprogramming.com</a> 提供了许多关于文艺编程的文章链接、可下载的文艺程序以及各种文艺编程系统；自克努斯最初提出这一理念以来，已经进行了许多改进。</p>
+<p>我们知道的其他以书籍形式出版的有识字程序包括关于 <strong>lcc</strong> 编译器实现的一本书，该书由 Christopher Fraser 和 David Hanson 撰写，并以 <em>《可重定向 C 编译器：设计与实现》（A Retargetable C Compiler: Design and Implementation）</em>（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Fraser95">Fraser 和 Hanson 1995</a>）出版。另请参见 Hanson 关于程序接口设计的书（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Hanson1996">Hanson 1996</a>）、Mehlhorn 和 Näher 关于 LEDA 库实现的演示（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Melhorn1999">Mehlhorn 和 Näher 1999</a>）、Valiente 的图算法合集（<a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Valiente2002">Valiente 2002</a>）以及 Ruckert 对 mp3 音频格式的描述（Ruckert <a href="https://www.pbr-book.org/4ed/Preface/Further_Reading#cite:Ruckert05">2005</a>）。</p>
+<h2 id="参考文献references"><a class="header" href="#参考文献references">参考文献（References）</a></h2>
+<ul>
+<li>Fraser, C., and D. Hanson. 1995. A Retargetable C Compiler: Design and Implementation. Reading, Massachusetts: Addison-Wesley.</li>
+<li>Hanson, D. R. 1996. C Interfaces and Implementations: Techniques for Creating Reusable Software. Boston, Massachusetts: Addison-Wesley Longman.</li>
+<li>Knuth, D. E. 1984. Literate programming. The Computer Journal 27, 97–111. Reprinted in D. E. Knuth, Literate Programming, Stanford Center for the Study of Language and - Information, 1992.</li>
+<li>Knuth, D. E. 1986. MetaFont: The Program. Reading, Massachusetts: Addison-Wesley.</li>
+<li>Knuth, D. E. 1993a. TEX : The Program. Reading, Massachusetts: Addison-Wesley.</li>
+<li>Knuth, D. E. 1993b. The Stanford GraphBase. New York: ACM Press and Addison-Wesley.</li>
+<li>Knuth, D. E. 1999. MMIXware: A RISC Computer for the Third Millennium. Berlin: Springer-Verlag.</li>
+<li>Knuth, D. E., and S. Levy. 1994. The CWEB System of Structured Documentation: Version 3.0. Reading, Massachusetts: Addison-Wesley.</li>
+<li>Mehlhorn, K., and S. Näher. 1999. LEDA: A Platform for Combinatorial and Geometric Computing. Cambridge: Cambridge University Press.</li>
+<li>Reinhard, E., G. Ward, P. Debevec, S. Pattanaik, W. Heidrich, and K. Myszkowski. 2010. High Dynamic Range Imaging: Acquisition, Display, and Image-Based Lighting. San Francisco: - Morgan Kaufmann.</li>
+<li>Ruckert, M. 2005. Understanding MP3. Wiesbaden, Germany: GWV-Vieweg.</li>
+<li>Valiente, G. 2002. Algorithms on Trees and Graphs, Berlin, Heidelberg: Springer-Verlag.</li>
+</ul>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../1_Introduction/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../1_Introduction/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

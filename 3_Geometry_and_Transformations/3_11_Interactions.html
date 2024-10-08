@@ -1,0 +1,569 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>交互（相互作用） - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html" class="active"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="311-交互interactions"><a class="header" href="#311-交互interactions">3.11 交互（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Interactions">Interactions</a>）</a></h1>
+<p>本章中的最后两个抽象，<strong>SurfaceInteraction</strong> 和 <strong>MediumInteraction</strong>，分别表示在表面上和参与介质中的点的局部信息。例如，第 <a href="../6_Shapes/">6</a> 章中的光线-形状相交例程用一个 <strong>SurfaceInteraction</strong> 返回有关相交点的局部微分几何的信息。随后，第 <a href="../10_Textures_and_Materials/">10</a> 章中的纹理代码使用 <strong>SurfaceInteraction</strong> 中的值来计算材料属性。与之密切相关的 <a href="#MediumInteraction-definition"><strong>MediumInteraction</strong></a> 类被用来表示光与参与介质（如烟雾或云）相互作用的点。这些类的所有实现都在文件 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/interaction.h"><strong>interaction.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/interaction.cpp"><strong>interaction.cpp</strong></a> 中。</p>
+<p><strong>SurfaceInteraction</strong> 和 <a href="#MediumInteraction-definition"><strong>MediumInteraction</strong></a> 都继承自一个通用的 <strong>Interaction</strong> 类，该类提供了通用的成员变量和方法，这使得系统中对于表面和介质交互之间差异不重要的部分可以纯粹通过 <strong>Interaction</strong> 来实现。</p>
+<p><a name="Interaction-definition"></a></p>
+<pre><code class="language-cpp">/** Interaction 定义 */
+class Interaction {
+  public:
+    /** Interaction 公有方法 */
+<span class="boring">    Interaction() = default;
+</span><span class="boring">    Interaction(Point3fi pi, Normal3f n, Point2f uv, Vector3f wo, Float time)
+</span><span class="boring">        : pi(pi), n(n), uv(uv), wo(Normalize(wo)), time(time) {}
+</span><span class="boring">    Point3f p() const { return Point3f(pi); }
+</span><span class="boring">    bool IsSurfaceInteraction() const { return n != Normal3f(0, 0, 0); }
+</span><span class="boring">    bool IsMediumInteraction() const { return !IsSurfaceInteraction(); }
+</span><span class="boring">    const SurfaceInteraction &amp;AsSurface() const {
+</span><span class="boring">        CHECK(IsSurfaceInteraction());
+</span><span class="boring">        return (const SurfaceInteraction &amp;)*this;
+</span><span class="boring">    }
+</span><span class="boring">    SurfaceInteraction &amp;AsSurface() {
+</span><span class="boring">        CHECK(IsSurfaceInteraction());
+</span><span class="boring">        return (SurfaceInteraction &amp;)*this;
+</span><span class="boring">    }
+</span><span class="boring">    // used by medium ctor
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(Point3f p, Vector3f wo, Float time, Medium medium)
+</span><span class="boring">        : pi(p), time(time), wo(wo), medium(medium) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(Point3f p, Normal3f n, Float time, Medium medium)
+</span><span class="boring">        : pi(p), n(n), time(time), medium(medium) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(Point3f p, Point2f uv)
+</span><span class="boring">        : pi(p), uv(uv) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(const Point3fi &amp;pi, Normal3f n, Float time = 0,
+</span><span class="boring">                Point2f uv = {})
+</span><span class="boring">        : pi(pi), n(n), uv(uv), time(time) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(const Point3fi &amp;pi, Normal3f n, Point2f uv)
+</span><span class="boring">        : pi(pi), n(n), uv(uv) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(Point3f p, Float time, Medium medium)
+</span><span class="boring">        : pi(p), time(time), medium(medium) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(Point3f p, const MediumInterface *mediumInterface)
+</span><span class="boring">        : pi(p), mediumInterface(mediumInterface) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Interaction(Point3f p, Float time, const MediumInterface *mediumInterface)
+</span><span class="boring">        : pi(p), time(time), mediumInterface(mediumInterface) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    const MediumInteraction &amp;AsMedium() const {
+</span><span class="boring">        CHECK(IsMediumInteraction());
+</span><span class="boring">        return (const MediumInteraction &amp;)*this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    MediumInteraction &amp;AsMedium() {
+</span><span class="boring">        CHECK(IsMediumInteraction());
+</span><span class="boring">        return (MediumInteraction &amp;)*this;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    Point3f OffsetRayOrigin(Vector3f w) const {
+</span><span class="boring">        return pbrt::OffsetRayOrigin(pi, n, w);
+</span><span class="boring">    }
+</span><span class="boring">    Point3f OffsetRayOrigin(Point3f pt) const {
+</span><span class="boring">        return OffsetRayOrigin(pt - p());
+</span><span class="boring">    }
+</span><span class="boring">    RayDifferential SpawnRay(Vector3f d) const {
+</span><span class="boring">        return RayDifferential(OffsetRayOrigin(d), d, time, GetMedium(d));
+</span><span class="boring">    }
+</span><span class="boring">    Ray SpawnRayTo(Point3f p2) const {
+</span><span class="boring">        Ray r = pbrt::SpawnRayTo(pi, n, time, p2);
+</span><span class="boring">        r.medium = GetMedium(r.d);
+</span><span class="boring">        return r;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Ray SpawnRayTo(const Interaction &amp;it) const {
+</span><span class="boring">        Ray r = pbrt::SpawnRayTo(pi, n, time, it.pi, it.n);
+</span><span class="boring">        r.medium = GetMedium(r.d);
+</span><span class="boring">        return r;
+</span><span class="boring">    }
+</span><span class="boring">    Medium GetMedium(Vector3f w) const {
+</span><span class="boring">        if (mediumInterface)
+</span><span class="boring">            return Dot(w, n) &gt; 0 ? mediumInterface-&gt;outside :
+</span><span class="boring">                                    mediumInterface-&gt;inside;
+</span><span class="boring">        return medium;
+</span><span class="boring">    }
+</span><span class="boring">    Medium GetMedium() const {
+</span><span class="boring">        return mediumInterface ? mediumInterface-&gt;inside : medium;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span>    /** Interaction 公有成员 */
+<span class="boring">    Point3fi pi;
+</span><span class="boring">    Float time = 0;
+</span><span class="boring">    Vector3f wo;
+</span><span class="boring">    Normal3f n;
+</span><span class="boring">    Point2f uv;
+</span><span class="boring">    const MediumInterface *mediumInterface = nullptr;
+</span><span class="boring">    Medium medium = nullptr;
+</span><span class="boring">    
+</span>};
+</code></pre>
+<p>有多种 <strong>Interaction</strong> 构造函数可用；根据所构建的交互类型以及相关的信息类型，接受相应的参数集。下面这个其中最通用的一种。</p>
+<pre><code class="language-cpp">/** Interaction 公有方法 */
+Interaction(Point3fi pi, Normal3f n, Point2f uv, Vector3f wo, Float time)
+    : pi(pi), n(n), uv(uv), wo(Normalize(wo)), time(time) {}
+</code></pre>
+<p>所有交互都有一个与它们相关的点 \( \text{p} \)。这个点使用 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#Point3fi"><strong>Point3fi</strong></a> 类进行存储，该类使用 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#Interval-definition"><strong>Interval</strong></a> 来表示每个坐标值。存储一小段浮点值而不是单个 <a href="../1_Introduction/1_3_pbrt_System_Overview.html#Float"><strong>Float</strong></a> 使得能够表示交点的数值误差的边界，这种情况发生在通过光线交点计算得出点 \( \text{p} \) 时。该信息将有助于避免光线离开表面时出现不正确的自交，如第 <a href="../6_Shapes/6_8_Managing_Rounding_Error.html#686-%E7%A8%B3%E5%81%A5%E5%9C%B0%E7%94%9F%E6%88%90%E5%85%89%E7%BA%BF%E8%B5%B7%E7%82%B9robust-spawned-ray-origins">6.8.6</a> 节将讨论的。</p>
+<pre><code class="language-cpp">/** Interaction 公有成员 */
+Point3fi pi;
+</code></pre>
+<p><strong>Interaction</strong> 提供了一种便捷的方法，返回一个常规的 <a href="./3_4_Points.html#Point3*"><strong>Point3f</strong></a> ，用于系统中不需要考虑任何误差的交互点（例如，纹理评估例程）。</p>
+<pre><code class="language-cpp">/** Interaction 公有方法 */
+Point3f p() const { return Point3f(pi); }
+</code></pre>
+<p>所有交互也都有一个与它们相关的时间。除了其他用途外，这个值对于设置离开交互的生成光线（a spawned ray leaving the interaction）的时间是必要的。</p>
+<pre><code class="language-cpp">/** Interaction 公有成员 */
+Float time = 0;
+</code></pre>
+<p>对于沿光线的交互（无论是来自光线与形状的交点还是光线穿过参与介质），负光线方向存储在成员变量 <strong>wo</strong> 中，对应于 \( \omega_\text{o} \) ，这是我们在计算光照时用于表示出射方向的符号。对于其他类型的交互点，其中出射方向的概念不适用的（例如，通过随机采样形状表面上的点求出的点），<strong>wo</strong> 的值为 \( (0,0,0) \)。</p>
+<pre><code class="language-cpp">/** Interaction 公有成员 */
+Vector3f wo;
+</code></pre>
+<p>对于表面上的交互，<strong>n</strong> 存储了该点的表面法线，而 <strong>uv</strong> 存储了其 \( (u,v) \) 参数坐标。可以合理地问，为什么这些值存储在基类 <strong>Interaction</strong> 中而不是在 <strong>SurfaceInteraction</strong> 中？原因是系统中有一些部分 <em>通常</em> 不关心表面和介质交互之间的区别——例如，一些在要照亮给定点的光源进行采样点的例程。如果这些值可用，它们会被使用；如果设置为零，则会被忽略。通过接受这里将它们放在错误位置的小不和谐，这些方法的实现和调用它们的代码变得更加简单。</p>
+<pre><code class="language-cpp">/** Interaction 公有成员 */
+Normal3f n;
+Point2f uv;
+</code></pre>
+<p>可以检查指向 <strong>Interaction</strong> 的指针或引用是否属于两个子类之一。非零的表面法线被用作表面的区分符。</p>
+<pre><code class="language-cpp">/** Interaction 公有方法 */
+bool IsSurfaceInteraction() const { return n != Normal3f(0, 0, 0); }
+bool IsMediumInteraction() const { return !IsSurfaceInteraction(); }
+</code></pre>
+<p>还提供了将类型转换为子类类型的方法。这是进行运行时检查的好地方，以确保请求的转换是有效的。此方法的 <strong>non-const</strong> 变体和对应的 <strong>AsMedium()</strong> 方法都与之类似，未包含在文本中。</p>
+<pre><code class="language-cpp">/** Interaction 公有方法 */
+const SurfaceInteraction &amp;AsSurface() const {
+    CHECK(IsSurfaceInteraction());
+    return (const SurfaceInteraction &amp;)*this;
+}
+</code></pre>
+<p>交互也可以表示两种使用第 <a href="../11_Volume_Scattering/11_4_Media.html">11.4</a> 节中定义的 <a href="../11_Volume_Scattering/11_4_Media.html#MediumInterface-definition">MediumInterface</a> 类实例的参与介质之间的接口，或在其点上使用 <a href="../11_Volume_Scattering/11_4_Media.html#Medium-definition">Medium</a> 的散射介质的属性。在这里，<strong>Interaction</strong> 的抽象也会泄漏（abstraction leaks）：表面可以表示介质之间的接口，而在介质内部的某一点上，虽然没有接口，但存在当前介质。这两个值都存储在 <strong>Interaction</strong> 中，出于与 <strong>n</strong> 和 <strong>uv</strong> 相同的便利原因。</p>
+<pre><code class="language-cpp">/** Interaction 公有成员 */
+const MediumInterface *mediumInterface = nullptr;
+Medium medium = nullptr;
+</code></pre>
+<h2 id="3111-表面交互surface-interaction"><a class="header" href="#3111-表面交互surface-interaction">3.11.1 表面交互（Surface Interaction）</a></h2>
+<p>如前所述，表面上某一点的几何结构（通常是通过将光线与表面相交计算出的位置）由 <strong>SurfaceInteraction</strong> 表示。拥有这种抽象使得系统的大部分能够处理表面上的点，而无需考虑点所处的特定几何形状。</p>
+<p><a name="SurfaceInteraction-definition"></a></p>
+<pre><code class="language-cpp">/** SurfaceInteraction 定义 */
+class SurfaceInteraction : public Interaction {
+  public:
+    /** SurfaceInteraction 公有方法 */
+<span class="boring">    SurfaceInteraction() = default;
+</span><span class="boring">    SurfaceInteraction(Point3fi pi, Point2f uv, Vector3f wo, Vector3f dpdu,
+</span><span class="boring">            Vector3f dpdv, Normal3f dndu, Normal3f dndv, Float time,
+</span><span class="boring">            bool flipNormal)
+</span><span class="boring">        : Interaction(pi, Normal3f(Normalize(Cross(dpdu, dpdv))), uv, wo, time),
+</span><span class="boring">            dpdu(dpdu), dpdv(dpdv), dndu(dndu), dndv(dndv) {
+</span><span class="boring">        &lt;&lt;Initialize shading geometry from true geometry&gt;&gt; 
+</span><span class="boring">        &lt;&lt;Adjust normal based on orientation and handedness&gt;&gt; 
+</span><span class="boring">    }
+</span><span class="boring">    SurfaceInteraction(Point3fi pi, Point2f uv, Vector3f wo,
+</span><span class="boring">            Vector3f dpdu, Vector3f dpdv, Normal3f dndu,
+</span><span class="boring">            Normal3f dndv, Float time, bool flipNormal,
+</span><span class="boring">            int faceIndex)
+</span><span class="boring">        : SurfaceInteraction(pi, uv, wo, dpdu, dpdv, dndu, dndv, time, flipNormal) {
+</span><span class="boring">            this-&gt;faceIndex = faceIndex;
+</span><span class="boring">    }
+</span><span class="boring">    void SetShadingGeometry(Normal3f ns, Vector3f dpdus, Vector3f dpdvs,
+</span><span class="boring">            Normal3f dndus, Normal3f dndvs, bool orientationIsAuthoritative) {
+</span><span class="boring">        &lt;&lt;Compute shading.n for SurfaceInteraction&gt;&gt; 
+</span><span class="boring">        &lt;&lt;Initialize shading partial derivative values&gt;&gt; 
+</span><span class="boring">    }
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    void SetIntersectionProperties(Material mtl, Light area,
+</span><span class="boring">            const MediumInterface *primMediumInterface, Medium rayMedium) {
+</span><span class="boring">        material = mtl;
+</span><span class="boring">        areaLight = area;
+</span><span class="boring">        &lt;&lt;Set medium properties at surface intersection&gt;&gt;  
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    void ComputeDifferentials(const RayDifferential &amp;r, Camera camera,
+</span><span class="boring">                                int samplesPerPixel);
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    void SkipIntersection(RayDifferential *ray, Float t) const;
+</span><span class="boring">    using Interaction::SpawnRay;
+</span><span class="boring">    RayDifferential SpawnRay(const RayDifferential &amp;rayi, const BSDF &amp;bsdf,
+</span><span class="boring">                            Vector3f wi, int /*BxDFFlags*/ flags, Float eta) const;
+</span><span class="boring">    BSDF GetBSDF(const RayDifferential &amp;ray,
+</span><span class="boring">                SampledWavelengths &amp;lambda, Camera camera,
+</span><span class="boring">                ScratchBuffer &amp;scratchBuffer, Sampler sampler);
+</span><span class="boring">    BSSRDF GetBSSRDF(const RayDifferential &amp;ray,
+</span><span class="boring">                SampledWavelengths &amp;lambda, Camera camera,
+</span><span class="boring">                ScratchBuffer &amp;scratchBuffer);
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Le(Vector3f w, const SampledWavelengths &amp;lambda) const;
+</span><span class="boring">
+</span>    /** SurfaceInteraction 公有成员 */
+<span class="boring">    Vector3f dpdu, dpdv;
+</span><span class="boring">    Normal3f dndu, dndv;
+</span><span class="boring">    struct {
+</span><span class="boring">        Normal3f n;
+</span><span class="boring">        Vector3f dpdu, dpdv;
+</span><span class="boring">        Normal3f dndu, dndv;
+</span><span class="boring">    } shading;
+</span><span class="boring">    int faceIndex = 0;
+</span><span class="boring">    Material material;
+</span><span class="boring">    Light areaLight;
+</span><span class="boring">    Vector3f dpdx, dpdy;
+</span><span class="boring">    Float dudx = 0, dvdx = 0, dudy = 0, dvdy = 0;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>除了来自 <strong>Interaction</strong> 基类的表面参数设定中的点 \( \text{p} \)、表面法线 \( \mathbf{n} \) 和 \( (u,v) \) 坐标外，<strong>SurfaceInteraction</strong> 还存储了点的参数偏导数（parametric partial derivatives） \( \partial \text{p}/\partial u \) 和 \( \partial \text{p}/\partial v \)，以及表面法线的偏导数 \( \partial\mathbf{n}/\partial u \) 和 \( \partial\mathbf{n}/\partial v \)。有关这些值的示意图，请参见图 <a href="#figure-3-30">3.30</a>。</p>
+<pre><code class="language-cpp">/** SurfaceInteraction 公有成员 */
+Vector3f dpdu, dpdv;
+Normal3f dndu, dndv;
+</code></pre>
+<blockquote>
+<p><a name="figure-3-30"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f31.svg" width="432" height="336" style="max-width: 100%;">
+</div>
+<p><strong>图 3.30：点 \( \text{p} \) 周围的局部微分几何（Local Differential Geometry）。</strong> 表面的参数偏导数 \( \partial \text{p}/\partial u \) 和 \( \partial \text{p}/\partial v \) 位于切平面内，但不一定正交。表面法线 \( \mathbf{n} \) 由 \( \partial \text{p}/\partial u \) 和 \( \partial \text{p}/\partial v \) 的叉积给出。向量 \( \partial\mathbf{n}/\partial u \) 和 \( \partial\mathbf{n}/\partial v \) 记录了当我们沿表面移动 \( u \) 和 \( v \) 时表面法线的微分变化。</p>
+</blockquote>
+<p>这种表示隐含地假设形状具有参数描述（parametric description）——即对于某些范围的 \( (u,v) \) 值，表面上的点由某个函数 \( f \) 给出，使得 \( \text{p}=f(u,v) \) 。尽管并非所有形状都符合这一点，但 <strong>pbrt</strong> 支持的所有形状至少具有一个局部参数描述，因此我们将坚持使用参数表示，因为这一假设在其他地方也是有帮助的（例如，在第 <a href="../10_Textures_and_Materials/">10</a> 章中用于纹理的抗锯齿处理）。</p>
+<p><a href="#SurfaceInteraction-definition"><strong>SurfaceInteraction</strong></a> 的构造函数接受参数来设置所有这些值。它通过偏导数的叉积计算法线。</p>
+<pre><code class="language-cpp">/** SurfaceInteraction 公有方法 */
+SurfaceInteraction(Point3fi pi, Point2f uv, Vector3f wo, Vector3f dpdu,
+        Vector3f dpdv, Normal3f dndu, Normal3f dndv, Float time,
+        bool flipNormal)
+    : Interaction(pi, Normal3f(Normalize(Cross(dpdu, dpdv))), uv, wo, time),
+      dpdu(dpdu), dpdv(dpdv), dndu(dndu), dndv(dndv) {
+    /** 从真实几何初始化着色几何（Initialize shading geometry from true geometry） */
+    /** 根据方向和手性调整法线（Adjust normal based on orientation and handedness） */
+}
+</code></pre>
+<p><strong>SurfaceInteraction</strong> 存储了一个表面法线的第二个实例以及各种偏导数，以表示这些量的可能受到扰动的值——这些值可以通过凹凸映射（bump mapping）或与网格的每个顶点法线插值生成。系统的某些部分使用这种着色几何（shading geometry），而其他部分则需要处理原始量。</p>
+<pre><code class="language-cpp">/** SurfaceInteraction 公共成员 */
+struct {
+    Normal3f n;
+    Vector3f dpdu, dpdv;
+    Normal3f dndu, dndv;
+} shading;
+</code></pre>
+<p>着色几何的值在构造函数中初始化，以匹配原始表面几何。如果存在着色几何，通常在 <strong>SurfaceInteraction</strong> 的构造函数运行后的一段时间内不会计算。稍后将定义的 <strong>SetShadingGeometry()</strong> 方法更新着色几何。</p>
+<pre><code class="language-cpp">/** 从真实几何初始化着色几何 */
+shading.n = n;
+shading.dpdu = dpdu;
+shading.dpdv = dpdv;
+shading.dndu = dndu;
+shading.dndv = dndv;
+</code></pre>
+<p>表面法线对 <strong>pbrt</strong> 具有特殊意义，它假设对于封闭形状（closed shapes），法线的方向指向形状的外部。对于用作面光源（area light source）的几何体，光默认仅从法线指向的一侧发出；另一侧为黑色。由于法线具有这种特殊意义，<strong>pbrt</strong> 提供了一种机制，允许用户反转法线的方向，使其指向相反的方向。在 <strong>pbrt</strong> 输入文件中的 <strong>ReverseOrientation</strong> 指令（directive）会将法线翻转，使其指向相反、非默认的方向。因此，有必要检查给定的 <strong>Shape</strong> 是否设置了相应的标志，如果是，则在此处切换法线的方向。</p>
+<p>然而，还有一个因素影响法线的方向，也必须在这里考虑。如果一个形状的变换矩阵将对象坐标系的手性从 <strong>pbrt</strong> 的默认左手坐标系切换到右手坐标系，我们也需要切换法线的方向。要理解为什么会这样，考虑一个缩放矩阵 \( \mathbf{S}(1,1,-1) \) 。我们自然会期望这个缩放会切换法线的方向，尽管因为我们是通过 \( \mathbf{n} = \partial\text{p}/\partial u \times \partial\text{p}/\partial v \) 计算法线的，</p>
+<p>\[
+\begin{align}
+\mathbf{S}(1,1,-1)\frac{\partial\text{p}}{\partial u} \times \mathbf{S}(1,1,-1)\frac{\partial\text{p}}{\partial v} &amp;= \mathbf{S}(-1,-1,1)\left(\frac{\partial\text{p}}{\partial u} \times \frac{\partial\text{p}}{\partial v} \right) \\
+&amp;= \mathbf{S}(-1,-1,1)\mathbf{n} \\
+&amp;\neq \mathbf{S}(1,1,-1)\mathbf{n}
+\end{align}
+\]</p>
+<p>因此，如果变换改变了坐标系统的手性，则有必要翻转法线的方向，因为使用叉积计算法线方向时不会考虑到这一翻转。调用者传递的标志指示是否需要进行此翻转。</p>
+<pre><code class="language-cpp">/** 根据方向和手性调整法线 */
+if (flipNormal) {
+    n *= -1;
+    shading.n *= -1;
+}
+</code></pre>
+<p><strong>pbrt</strong> 还提供了将整数索引与多边形网格的每个面关联的能力。这些信息用于某些纹理映射操作。一个单独的 <strong>SurfaceInteraction</strong> 构造函数允许指定它。</p>
+<pre><code class="language-cpp">/** SurfaceInteraction 公有成员 */
+int faceIndex = 0;
+</code></pre>
+<p>当计算着色坐标框架（shading coordinate frame）时，<strong>SurfaceInteraction</strong> 通过其 <strong>SetShadingGeometry()</strong> 方法进行更新。</p>
+<pre><code class="language-cpp">/** SurfaceInteraction 公有方法 */
+void SetShadingGeometry(Normal3f ns, Vector3f dpdus, Vector3f dpdvs,
+        Normal3f dndus, Normal3f dndvs, bool orientationIsAuthoritative) {
+    /** 计算 SurfaceInteraction 的 shading.n */
+<span class="boring">    shading.n = ns;
+</span><span class="boring">    if (orientationIsAuthoritative)
+</span><span class="boring">        n = FaceForward(n, shading.n);
+</span><span class="boring">    else
+</span><span class="boring">        shading.n = FaceForward(shading.n, n);
+</span><span class="boring">
+</span>    /** 初始化着色偏导数的值 */
+<span class="boring">    shading.dpdu = dpdus;
+</span><span class="boring">    shading.dpdv = dpdvs;
+</span><span class="boring">    shading.dndu = dndus;
+</span><span class="boring">    shading.dndv = dndvs;
+</span><span class="boring">    
+</span>}
+</code></pre>
+<p>在执行与之前相同的叉乘（并可能翻转法线的朝向）以计算初始着色法线后，实现接着会根据需要翻转着色法线或真实几何法线，以确保这两个法线位于同一半球内。由于着色法线通常表示几何法线的相对较小的扰动（perturbation），因此它们应该始终位于同一半球内。根据上下文，几何法线或着色法线中的一个可能更权威地指向表面的正确“外侧”，因此调用者传递一个布尔值，以确定在需要时应翻转哪一个。</p>
+<pre><code class="language-cpp">/** 计算 SurfaceInteraction 的 shading.n */
+shading.n = ns;
+if (orientationIsAuthoritative)
+    n = FaceForward(n, shading.n);
+else
+    shading.n = FaceForward(shading.n, n);
+</code></pre>
+<p>在设置法线后，各种偏导数可以被复制。</p>
+<pre><code class="language-cpp">/** 初始化着色偏导数的值 */
+shading.dpdu = dpdus;
+shading.dpdv = dpdvs;
+shading.dndu = dndus;
+shading.dndv = dndvs;
+</code></pre>
+<h2 id="3112-介质互动medium-interaction"><a class="header" href="#3112-介质互动medium-interaction">3.11.2 介质互动（Medium Interaction）</a></h2>
+<p>如前所述，<strong>MediumInteraction</strong> 类用于表示在散射介质（如烟雾或云）中的某一点的交互。</p>
+<p><a name="MediumInteraction-definition"></a></p>
+<pre><code class="language-cpp">/** MediumInteraction 定义 */
+class MediumInteraction : public Interaction {
+  public:
+    /** MediumInteraction 公有方法 */
+<span class="boring">    MediumInteraction(Point3f p, Vector3f wo, Float time, Medium medium,
+</span><span class="boring">                    PhaseFunction phase)
+</span><span class="boring">    : Interaction(p, wo, time, medium), phase(phase) {}
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>    /** MediumInteraction 公有成员 */
+<span class="boring">    PhaseFunction phase;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>与 <strong>SurfaceInteraction</strong> 相比，它对基类 <strong>Interaction</strong> 添加的内容很少。唯一的补充是一个 <a href="../11_Volume_Scattering/11_4_Phase_Functions.html#PhaseFunction-definition"><strong>PhaseFunction</strong></a> ，它描述了介质中的粒子如何散射光。相位函数和 [<strong>PhaseFunction</strong>] 类在第 <a href="../11_Volume_Scattering/11_3_Phase_Functions.html">11.3</a> 节中介绍。</p>
+<pre><code class="language-cpp">/** MediumInteraction 公有方法 */
+MediumInteraction(Point3f p, Vector3f wo, Float time, Medium medium,
+                  PhaseFunction phase)
+    : Interaction(p, wo, time, medium), phase(phase) {}
+</code></pre>
+<pre><code class="language-cpp">/** MediumInteraction 公有成员 */
+PhaseFunction phase;
+</code></pre>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../3_Geometry_and_Transformations/Further_Reading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../3_Geometry_and_Transformations/Further_Reading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

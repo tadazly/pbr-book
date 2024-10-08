@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>分布之间的转换 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html" class="active"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="24-分布之间的转换transforming-between-distributions"><a class="header" href="#24-分布之间的转换transforming-between-distributions">2.4 分布之间的转换（<a href="https://www.pbr-book.org/4ed/Monte_Carlo_Integration/Transforming_between_Distributions">Transforming between Distributions</a>）</a></h1>
+<p>在描述反演方法时，我们引入了一种通过以特定方式转换典型均匀随机变量来生成符合某种分布的样本的技术。在这里，我们将研究一个更一般的问题，即当我们使用函数 \( f \) 将来自任意分布的样本转换为某种其他分布时，结果是如何分布的。理解这种转换的影响是有用的，尽管在这里我们将重点关注它们如何使我们能够推导出多维采样算法。</p>
+<p>假设我们有一个从某个 CDF 为 \( P(x) \) 的 PDF \( p(x) \) 中抽取的随机变量 \( X \) 。给定一个函数 \( f(x) \) ，其具有 \( y=f(x) \) ，如果我们计算 \( Y = f(X) \) ，我们希望找到新随机变量 \( Y \) 的分布。在这种情况下，函数 \( f(x) \) 必须满足一对一变换；如果多个 \( x \) 值映射到相同的 \( y \) 值，那么就不可能明确描述特定 \( y \) 值的概率密度。 \( f \) 是一对一的直接结果是其导数必须严格大于 0 或严格小于 0，这意味着对于给定的 \( x \) ，</p>
+<p>\[
+\Pr\{ Y \leq f(x) \} = \Pr\{ X \leq x \}
+\]</p>
+<p>根据 CDF 的定义，方程（<a href="./2_1_Monte_Carlo_Basics.html#equation-2-3">2.3</a>），我们可以看出</p>
+<p>\[
+P_f(y) = P_f(f(x)) = P(x)<br />
+\]</p>
+<p>这个 CDF 之间的关系直接导致了它们的 PDF 之间的关系。如果我们假设 \( f \) 的导数大于 0，进行微分得到</p>
+<p>\[
+p_f(y) \frac{\text{d}f}{\text{d}x} = p(x)
+\]</p>
+<p>因此</p>
+<p>\[
+p_f(y) = \left( \frac{\text{d}f}{\text{d}x} \right)^{-1} p(x)
+\]</p>
+<p>一般来说， \( f \) 的导数要么严格为正，要么严格为负，密度之间的关系是</p>
+<p>\[
+p_f(y) = \left| \frac{\text{d}f}{\text{d}x} \right|^{-1} p(x)
+\]</p>
+<p>我们如何使用这个公式？假设在定义域 \( [0,1] \) 上的 \( p(x) = 2x \) ，并设 \( f(x) = \sin{x} \) 。随机变量 \( Y = f(X) \) 的 PDF 是什么？因为我们知道 \( \text{d}f/\text{d}x = \cos{x} \) ，</p>
+<p>\[
+p_f(y) = \frac{p(x)}{|\cos{x}|} = \frac{2x}{\cos{x}} = \frac{2\arcsin(y)}{\sqrt{1 - y^2}}<br />
+\]</p>
+<p>这个过程可能看起来有些反常——通常我们有一些想要从中采样的 PDF，而不是给定变换。例如，我们可能有从某个 \( p(x) \) 中抽取的 \( X \)，并希望从某个分布 \( p_f(y) \) 计算 \( Y \) 。我们应该使用什么变换？我们所需要的只是 CDF 相等，或者 \( P_f(y) = P(x) \) ，这立即给出了变换</p>
+<p>\[
+f(x) = P_f^{-1}(P(x))<br />
+\]</p>
+<p>这是反演法的一个概括，因为如果 \( X \) 在 \( [0,1) \) 上均匀分布，那么 \( P(x) = x \) ，我们有与之前介绍的相同的过程。</p>
+<h2 id="241-多维中的变换transformation-in-multiple-dimensions"><a class="header" href="#241-多维中的变换transformation-in-multiple-dimensions">2.4.1 多维中的变换（Transformation in Multiple Dimensions）、</a></h2>
+<p>在一般的 \( d \) 维情况下，类似的推导给出了不同密度之间的类比关系。我们在这里不展示推导；它遵循与一维情况相同的形式。假设我们有一个 \( d \) 维随机变量 \( X \) ，其密度函数为 \( p(x) \) 。现在设 \( Y=T(X) \) ，其中 \( T \) 是一个双射（bijection）。在这种情况下，密度之间的关系为</p>
+<p><a name="equation-2-21">(2.21)</a></p>
+<p>\[
+p_T(y) = p_T(T(x)) = \frac{p(x)}{|J_T(x)|}<br />
+\]</p>
+<p>其中 \( |J_T| \) 是 \( T \) 的雅可比矩阵（Jacobian matrix）的行列式的绝对值，</p>
+<p>\[
+\left(
+\begin{matrix}
+{\partial T_1 / \partial x_1}&amp;{\cdots}&amp;{\partial T_1 / \partial x_d} \\
+{\vdots}&amp;{\ddots}&amp;{\vdots} \\
+{\partial T_d / \partial x_1}&amp;{\cdots}&amp;{\partial T_d / \partial x_d} \\
+\end{matrix}
+\right)
+\]</p>
+<p>其中下标索引 \( T(x) \) 和 \( x \) 的维度。</p>
+<p>对于方程（<a href="#equation-2-21">2.21</a>）的二维示例，极坐标变换将笛卡尔坐标 \( (x,y) \) 与极半径和角度相关联，</p>
+<p>\[
+x = r \cos{\theta}
+\]
+\[
+y = r \sin{\theta}
+\]</p>
+<p>假设我们从某个密度 \( p(r,\theta) \) 中抽取样本。那么对应的密度 \( p(x,y) \) 是什么？该变换的雅可比行列式为</p>
+<p>\[
+J_T =
+\left(
+\begin {matrix}
+\frac{\partial x}{\partial r} &amp; \frac{\partial x}{\partial \theta} \\
+\frac{\partial y}{\partial r} &amp; \frac{\partial y}{\partial \theta} \\
+\end {matrix}
+\right) =
+\left(
+\begin {matrix}
+\cos{\theta} &amp; -r\sin{\theta} \\
+\sin{\theta} &amp; r\cos{\theta} \\
+\end {matrix}
+\right)
+\]</p>
+<p>行列式为 \( r(\cos^2\theta + \sin^2\theta) = r \) 。所以， \( p(x,y) = p(r,\theta)/r \) 。当然，这与我们通常想要的相反——通常我们的采样策略是想从笛卡尔坐标系开始，将其转换为极坐标系。在这种情况下，我们将会有</p>
+<p><a name="equation-2-22">(2.22)</a></p>
+<p>\[
+p(r,\theta) = rp(x,y)<br />
+\]</p>
+<p>在三维空间中，给定方向的球坐标表示，方程（[3.7](../3_Geometry_and_Transformations/3_8_Spherical_Geometry.md#equation-3-7），该变换的雅可比行列式为 \( |J_T| = r^2\sin{\theta} \) ，因此相应的密度函数为</p>
+<p><a name="equation-2-23">(2.23)</a></p>
+<p>\[
+p(r,\theta,\phi) = r^2\sin\theta p(x,y,z)<br />
+\]</p>
+<p>这种变换很重要，因为它帮助我们将方向表示为单位球面上的点 \( (x,y,z) \) 。</p>
+<h2 id="242-具有多维变换的采样sampling-with-multidimensional-transformations"><a class="header" href="#242-具有多维变换的采样sampling-with-multidimensional-transformations">2.4.2 具有多维变换的采样（Sampling with Multidimensional Transformations）</a></h2>
+<p>假设我们有一个二维联合密度函数 \( p(x,y) \) ，我们希望从中抽取样本 \( (X,Y) \) 。如果这些密度是独立的，它们可以表示为一维密度的乘积</p>
+<p>\[
+p(x,y) = p_x(x)p_y(y)<br />
+\]</p>
+<p>而随机变量 \( (X,Y) \) 可以通过独立地从 \( p_x \) 中抽样 \( X \) 和从 \( p_y \) 中抽样 \( Y \) 来找到。然而，许多有用的密度并不是可分离的，因此我们将介绍在一般情况下如何从多维分布中抽样的理论。</p>
+<p>给定一个二维密度函数，<em>边缘密度函数（marginal density function）</em> \( p(x) \) 是通过“整合出（integrating out）”其中一个维度获得的：</p>
+<p><a name="equation-2-24">(2.24)</a></p>
+<p>\[
+p(x) = \int p(x,y) \text{d}y<br />
+\]</p>
+<p>这可以被视为仅针对 \( X \) 的密度函数。更准确地说，它是特定的 \( x \) 在 <em>所有</em> 可能的 \( y \) 值上的平均密度。</p>
+<p>如果我们可以抽取一个样本 \( X \sim p(x) \) ，那么——使用方程（<a href="./2_1_Monte_Carlo_Basics.html#equation-2-1">2.1</a>）——我们可以看到，为了抽取 \( Y \) ，我们需要从条件概率密度 \( Y \sim p(y|x) \) 中抽样，该密度由以下公式给出：</p>
+<p>\[
+p(y|x) = \frac{p(x,y)}{\int p(x,y) \text{d}y}<br />
+\]</p>
+<p>从高维分布中进行采样可以以类似的方式进行，整合出所有维度中除了一个维度的部分，采样那个维度，然后对剩余的条件分布应用相同的技术，该条件分布的维度减少了一维。</p>
+<h3 id="采样双线性函数sampling-the-bilinear-function"><a class="header" href="#采样双线性函数sampling-the-bilinear-function">采样双线性函数（Sampling the Bilinear Function）</a></h3>
+<p>双线性函数</p>
+<p><a name="equation-2-25">(2.25)</a></p>
+<p>\[
+f(x,y) = (1-x)(1-y)w_0 + x(1-y)w_1 + y(1-x)w_2 + xyw_3<br />
+\]</p>
+<p>在 \( [0,1]^2 \) 的四个角点处的四个值 \( w_i \) 之间进行插值。（ \( w_0 \) 位于 \( (0,0) \) ， \( w_1 \) 位于 \( (1,0) \) ， \( w_2 \) 位于 \( (0,1) \) ， \( w_3 \) 位于 \( (1,1) \) 。）经过积分和归一化后，我们可以发现其概率密度函数（PDF）是</p>
+<p>\[
+p(x,y) = \frac{4f(x,y)}{w_0 + w_1 + w_2 + w_3}<br />
+\]</p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+Float BilinearPDF(Point2f p, pstd::span&lt;const Float&gt; w) {
+    if (p.x &lt; 0 || p.x &gt; 1 || p.y &lt; 0 || p.y &gt; 1)
+        return 0;
+    if (w[0] + w[1] + w[2] + w[3] == 0)
+        return 1;
+    return 4 * ((1 - p[0]) * (1 - p[1]) * w[0] + p[0] * (1 - p[1]) * w[1] +
+                (1 - p[0]) * p[1] * w[2] + p[0] * p[1] * w[3]) /
+           (w[0] + w[1] + w[2] + w[3]);
+}
+</code></pre>
+<p>该函数的两个维度并不是独立的，因此采样方法在采样结果条件分布之前先对边缘分布进行采样。</p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+Point2f SampleBilinear(Point2f u, pstd::span&lt;const Float&gt; w) {
+    Point2f p;
+    /** 对双线性边缘分布采样 y（Sample **y** for bilinear marginal distribution） */
+    /** 对双线性条件分布采样 x（Sample **x** for bilinear conditional distribution） */
+    return p;
+}
+</code></pre>
+<p>我们可以选择 \( x \) 或 \( y \) 作为边缘分布。如果我们选择 \( y \) 并对 \( x \) 进行积分，我们发现</p>
+<p>\[
+\begin {align}
+p(y) = \int_{0}^{1} p(x,y) \text{d}x &amp;= 2 \frac{(1-y)(w_0+w_1)+y(w_2+w_3)}{w_0+w_1+w_2+w_3} \\
+&amp;\propto (1-y)(w_0+w_1)+y(w_2+w_3)
+\end {align}
+\]</p>
+<p>\( p(y) \) 在两个常数值之间执行线性插值，因此我们可以使用 <a href="./2_3_Sampling_Using_the_Inversion_Method.html#function-SampleLinear"><strong>SampleLinear()</strong></a> 从简化的比例函数中进行采样，因为它对相关的 PDF 进行了归一化。</p>
+<pre><code class="language-cpp">/** 对双线性边缘分布采样 y（Sample **y** for bilinear marginal distribution） */
+p.y = SampleLinear(u[1], w[0] + w[1], w[2] + w[3]);
+</code></pre>
+<p>应用方程（<a href="./2_1_Monte_Carlo_Basics.html#equation-2-1">2.1</a>），并再次消去公因子，我们得到</p>
+<p>\[
+p(x|y) = \frac{p(x,y)}{p(y)} \propto (1-x)[(1-y)w_0 + yw_2] + x[(1-y)w_1 + yw_3]<br />
+\]</p>
+<p>可以在 \( x \) 中使用 <a href="./2_3_Sampling_Using_the_Inversion_Method.html#function-SampleLinear"><strong>SampleLinear()</strong></a> 进行采样。</p>
+<pre><code class="language-cpp">/** 对双线性条件分布采样 x（Sample **x** for bilinear conditional distribution） */
+p.x = SampleLinear(u[0], Lerp(p.y, w[0], w[2]), Lerp(p.y, w[1], w[3]));
+</code></pre>
+<p>由于双线性采样过程是基于两个一维线性采样操作的组合，因此可以通过反向应用这两个操作的逆来进行反演。</p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+Point2f InvertBilinearSample(Point2f p, pstd::span&lt;const Float&gt; w) {
+    return {InvertLinearSample(p.x, Lerp(p.y, w[0], w[2]),
+                               Lerp(p.y, w[1], w[3])),
+            InvertLinearSample(p.y, w[0] + w[1], w[2] + w[3])};
+}
+</code></pre>
+<p>请参见 <a href="#TODO">A.5</a> 节以获取更多多维采样算法的示例，包括在单位球体和半球上采样方向的技术、采样单位圆盘以及其他用于渲染的有用分布。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../2_Monte_Carlo_Integration/Further_Reading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../2_Monte_Carlo_Integration/Further_Reading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

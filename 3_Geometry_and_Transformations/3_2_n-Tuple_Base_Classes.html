@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>n-元组基类 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html" class="active"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="32-n-元组基类n-tuple-base-classes"><a class="header" href="#32-n-元组基类n-tuple-base-classes">3.2 n-元组基类（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/n-Tuple_Base_Classes">n-Tuple Base Classes</a>）</a></h1>
+<p><strong>pbrt</strong> 中表示二维和三维点、向量以及表面法线的类，均基于通用的 \( n \)-元组类，我们将从这些类的定义开始。这些类的定义以及继承自它们的类型都在 <strong>pbrt</strong> 源代码的 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/util/vecmath.h"><strong>util/vecmath.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/util/vecmath.cpp"><strong>util/vecmath.cpp</strong></a> 中定义。</p>
+<p>尽管本节及接下来的几节定义的类在大多数方法实现中只有简单的逻辑，但它们比我们在 <strong>pbrt</strong> 中通常使用的更充分地利用了高级 C++编程技术。这样做减少了实现点、向量和法线类所需的冗余代码，并使它们在之后可以更好地扩展。如果您不是 C++专家，可以略过这些细节，专注于理解这些类提供的功能。或者，您也可以借此机会学习语言的更多细节。</p>
+<p><a href="#Tuple2-definition"><strong>Tuple2</strong></a> 和 <a href="#Tuple3-definition"><strong>Tuple3</strong></a> 都是模板类。它们不仅在存储坐标值的类型上进行了模板化，还在继承自它的类的类型上进行了模板化，以定义特定的二维或三维类型。如果之前没有见过，这是一种奇怪的构造：通常，继承就足够了，基类不需要知道子类的类型。†（这种继承形式在C++中通常被称为 <em>奇异递归模板模式（curiously recurring template pattern）</em>（CRTP）。）在这种情况下，让基类知道子类的类型使得编写操作子类型并返回子类型值的泛型方法成为可能，正如我们稍后将看到的。</p>
+<p><a name="Tuple2-definition"></a></p>
+<pre><code class="language-cpp">/** Tuple2 定义 */
+template &lt;template &lt;typename&gt; class Child, typename T&gt;
+class Tuple2 {
+  public:
+    /** Tuple2 公有方法 */
+    /** Tuple2 公有成员 */
+};
+</code></pre>
+<p>二维元组将其值存储为 <strong>x</strong> 和 <strong>y</strong> ，并将它们作为公有成员变量提供。每个变量后的一对大括号确保成员变量被 <em>默认初始化（default initialized）</em>；对于数值类型，会将其初始化为 0。</p>
+<pre><code class="language-cpp">/** Tuple2 公有成员 */
+T x{}, y{};
+</code></pre>
+<p>我们将专注于本节剩余部分的 <strong>Tuple3</strong> 实现。 <strong>Tuple2</strong> 除了少一个坐标，几乎完全相同。</p>
+<p><a name="Tuple3-definition"></a></p>
+<pre><code class="language-cpp">/** Tuple3 定义 */
+template &lt;template &lt;typename&gt; class Child, typename T&gt;
+class Tuple3 {
+  public:
+    /** Tuple3 公有方法 */
+    /** Tuple3 公有成员 */
+};
+</code></pre>
+<p>默认情况下，\( (x,y,z) \) 的值被设置为零，当然类的用户可以选择为每个分量提供初始值。如果用户确实提供了初始值，构造函数会使用 <a href="../B_Utilities/B_3_User_Interaction.html#DCHECK"><strong>DCHECK()</strong></a> 宏检查这些值中是否有浮点数“不是一个数字（not a number）”（NaN）。在优化模式下编译时，该宏会从编译后的代码中消失，从而节省验证此情况的开销。NaN 几乎肯定表示系统中存在错误；如果某个计算生成了 NaN，我们希望尽快捕获它，以便更容易地隔离其来源。（有关 NaN 值的更多讨论，请参见第 <a href="../6_Shapes/6_8_Managing_Rounding_Error.html#681-%E6%B5%AE%E7%82%B9%E8%BF%90%E7%AE%97floating-point-arithmetic">6.8.1</a> 节。）</p>
+<pre><code class="language-cpp">/** Tuple3 公有方法 */
+Tuple3(T x, T y, T z) : x(x), y(y), z(z) { DCHECK(!HasNaN()); }
+</code></pre>
+<p>接触过面向对象设计的读者可能会质疑我们将元组分量值公开访问的决定。通常，成员变量仅在其类内部可访问，外部代码如果希望访问或修改类的内容，必须通过一个明确定义的 API 来实现，该 API 可能包括选择器（selector）和修改器（mutator）函数。尽管我们对封装（encapsulation）原则表示同情，但在这里并不合适。选择器和修改器函数的目的是隐藏类的内部实现细节。在三维元组的情况下，隐藏其设计的基本部分没有任何好处，反而增加了使用它们的代码的复杂性。</p>
+<pre><code class="language-cpp">/** Tuple3 公有成员 */
+T x{}, y{}, z{};
+</code></pre>
+<p><strong>HasNaN()</strong> 测试单独检查每个分量。</p>
+<pre><code class="language-cpp">/** Tuple3 公有方法 */
+bool HasNaN() const { return IsNaN(x) || IsNaN(y) || IsNaN(z); }
+</code></pre>
+<p>这两个元组类的另一种实现方式是使用一个单一的模板类，该类用一个整数参数作为维度，并用一个包含相应数量 <strong>T</strong> 值的数组来表示坐标。虽然这种方法通过消除对单独的二维和三维元组类型的需求来减少代码总量，但向量的各个分量无法像 <strong>v.x</strong> 那样被访问。我们认为，在这种情况下，向量实现中多一些代码是值得的，以换取对分量的更透明访问。然而，一些例程确实发现能够轻松遍历向量的分量是有用的；元组类还提供了一个 C++运算符来索引分量，例如给定实例 <strong>v</strong> ， <strong>v[0] == v.x</strong> 等。</p>
+<pre><code class="language-cpp">/** Tuple3 公有方法 */
+T operator[](int i) const {
+    if (i == 0) return x;
+    if (i == 1) return y;
+    return z;
+}
+</code></pre>
+<p>如果元组类型不是 const ，则索引返回一个引用，允许设置元组的分量。</p>
+<pre><code class="language-cpp">/** Tuple3 公有方法 */
+T &amp;operator[](int i) {
+    if (i == 0) return x;
+    if (i == 1) return y;
+    return z;
+}
+</code></pre>
+<p>我们现在可以转向对存储在元组中的值进行算术运算的实现。它们的代码相当难懂。例如，下面是将两个某种类型的三元组相加的方法（例如， <strong>Child</strong> 可能是 <strong>Vector3</strong> ，即即将出现的三维向量类型）。</p>
+<pre><code class="language-cpp">/** Tuple3 公有方法 */
+template &lt;typename U&gt;
+auto operator+(Child&lt;U&gt; c) const -&gt; Child&lt;decltype(T{} + U{})&gt; {
+    return {x + c.x, y + c.y, z + c.z};
+}
+</code></pre>
+<p>在实现 <strong>operator+</strong> 时，有几点需要注意。由于它是基于另一种类型 <strong>U</strong> 的模板方法，因此它支持将两个同为 <strong>Child</strong> 模板类型的元素相加，尽管它们可能使用不同的类型来存储其分量（这里代码中的 <strong>T</strong> 和 <strong>U</strong> ）。然而，由于该方法参数的基类型是 <strong>Child</strong> ，因此此方法只能相加两个相同子类型的值。如果该方法的参数改为 <strong>Tuple3</strong> ，那么它将默认允许与任何继承自 Tuple3 的类型进行相加，这可能不是预期的。</p>
+<p>在方法参数列表后的 <strong>-&gt;</strong> 运算符右侧，返回类型的声明中有两个有趣的地方。首先，基本返回类型是 <strong>Child</strong> ；因此，如果将两个 <strong>Vector3</strong> 值相加，返回的值将是 <strong>Vector3</strong> 类型。这也消除了一类潜在的错误：如果返回了一个 <strong>Tuple3</strong> ，那么就可以将两个 <strong>Vector3</strong> 相加并将结果赋值给一个 <strong>Point3</strong> ，这显然是没有意义的。其次，返回类型的分量类型是基于类型为 <strong>T</strong> 和 <strong>U</strong> 的值相加后表达式的类型来确定的。因此，这个方法遵循 C++的标准类型提升规则：如果一个存储整数值的 <strong>Vector3</strong> 与一个存储 Float 的 <strong>Vector3</strong> 相加，那么结果是一个存储 Float 的 <strong>Vector3</strong> 。</p>
+<p>出于篇幅考虑，我们将不在此处包含其他 <strong>Tuple3</strong> 的算术运算符，也不会包含对它们执行逐元素操作的各种其他工具函数。 <a href="#Tuple2-definition"><strong>Tuple2</strong></a> 和 <a href="#Tuple3-definition"><strong>Tuple3</strong></a> 提供的完整功能列表：</p>
+<ul>
+<li>每个分量的基本算术运算符，包括加法、减法和取反，以及它们的“复合赋值（in place）”形式（例如，<strong>operator+=</strong> ）。</li>
+<li>使用标量值按分量进行的乘法和除法，包括“复合赋值”变体。</li>
+<li><strong>Abs(a)</strong> ，它返回一个值，其中包含元组类型的每个分量的绝对值。</li>
+<li><strong>Ceil(a)</strong> 和 <strong>Floor(a)</strong> ，分别返回一个值，其中分量被向上或向下取整到最接近的整数值。</li>
+<li><strong>Lerp(t, a, b)</strong> ，它返回线性插值的结果 <strong>(1-t)<em>a + t</em>b</strong> 。</li>
+<li><strong>FMA(a, b, c)</strong> ，它接受三个元组并返回按分量融合乘加（fused multiply-add）的结果 <strong>a*b + c</strong> 。</li>
+<li><strong>Min(a, b)</strong> 和 <strong>Max(a, b)</strong> ，分别返回给定元组的分量最小值和最大值。</li>
+<li><strong>MinComponentValue(a)</strong> 和 <strong>MaxComponentValue(a)</strong> ，分别返回元组分量的最小值和最大值。</li>
+<li><strong>MinComponentIndex(a)</strong> 和 <strong>MaxComponentIndex(a)</strong> ，分别返回具有最小值或最大值的元组元素的零基索引。</li>
+<li><strong>Permute(a, perm)</strong> ，它根据索引数组返回元组的排列（permutation）。</li>
+<li><strong>HProd(a)</strong> ，它返回横向积（horizontal product）——各个分量值相乘。</li>
+</ul>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_3_Vectors.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_3_Vectors.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

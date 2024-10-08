@@ -1,0 +1,1074 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>pbrt：系统概述 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html" class="active"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="13-pbrt系统概述system-overview"><a class="header" href="#13-pbrt系统概述system-overview">1.3 pbrt：系统概述（<a href="https://www.pbr-book.org/4ed/Introduction/pbrt_System_Overview">System Overview</a>）</a></h1>
+<p><strong>pbrt</strong> 是使用标准面向对象技术构建的：对于每一个基本类型，系统指定了实现该类型必须满足的接口。例如， <strong>pbrt</strong> 要求在场景中表示几何图形的具体形状类型，需要实现一组方法，比如返回形状边界框(bounding box)的方法，和测试与给定光线是否相交的方法。反过来，系统中的大部分功能可以完全基于这些接口来实现；例如，检查光源与被着色点之间是否存在遮挡物的代码，只需调用形状的相交方法，而不必考虑场景中存在的具体形状类型。</p>
+<blockquote>
+<p><a name="table-1-1"></a>
+<strong>表 1.1：主要接口类型。</strong> <strong>pbrt</strong> 的大部分是基于 14 种关键基础类型实现的，如下所示。可以轻松地将每种实现添加到系统中以扩展其功能。</p>
+<div class="table-wrapper"><table><thead><tr><th>基础类型</th><th>源文件</th><th>章节</th></tr></thead><tbody>
+<tr><td>Spectrum</td><td>base/spectrum.h, util/spectrum.h, util/spectrum.cpp</td><td>4.5</td></tr>
+<tr><td>Camera</td><td>base/camera.h, cameras.h, cameras.cpp</td><td>5.1</td></tr>
+<tr><td>Shape</td><td>base/shape.h, shapes.h, shapes.cpp</td><td>6.1</td></tr>
+<tr><td>Primitive</td><td>cpu/primitive.h, cpu/primitive.cpp,cpu/accelerators.h, cpu/accelerators.cpp</td><td>7.1</td></tr>
+<tr><td>Sampler</td><td>base/sampler.h, samplers.h, samplers.cpp</td><td>8.3</td></tr>
+<tr><td>Filter</td><td>base/filter.h, filters.h, filters.cpp</td><td>8.8.1</td></tr>
+<tr><td>BxDF</td><td>base/bxdf.h, bxdfs.h, bxdfs.cpp</td><td>9.1.2</td></tr>
+<tr><td>Material</td><td>base/material.h, materials.h, materials.cpp</td><td>10.5</td></tr>
+<tr><td>FloatTexture</td><td></td><td></td></tr>
+<tr><td>SpectrumTexture</td><td>base/texture.h, textures.h, textures.cpp</td><td>10.3</td></tr>
+<tr><td>Medium</td><td>base/medium.h, media.h, media.cpp</td><td>11.4</td></tr>
+<tr><td>Light</td><td>base/light.h, lights.h, lights.cpp</td><td>12.1</td></tr>
+<tr><td>LightSampler</td><td>base/lightsampler.h, lightsamplers.h, lightsamplers.cpp</td><td>12.6</td></tr>
+<tr><td>Integrator</td><td>cpu/integrators.h, cpu/integrators.cpp</td><td>1.3.3</td></tr>
+</tbody></table>
+</div></blockquote>
+<p>这些关键基础类型总共有 14 种，汇总在表 <a href="#table-1-1">1.1</a> 中。将这些类型中的一个新实现添加到系统中是简单直接的；该实现必须提供所需的方法，必须编译并链接到可执行文件中，并且场景对象创建例程(“routine”（例程）通常指的是一段可以被重复调用的代码)必须修改，以便在解析场景描述文件时根据需要创建对象的实例。<a href="#TODO">C.4</a> 节更详细地讨论了如何扩展系统功能。</p>
+<p>在 C++中，传统做法是使用定义纯虚函数的抽象基类为这些类型指定接口，并让实现类从这些基类继承并实现所需的虚函数。然后，编译器会负责生成代码，根据基类类型的指针调用适当的方法。这种方法在 <strong>pbrt</strong> 的前三个版本中使用，但由于在本版本中增加对图形处理单元（GPU）渲染的支持，促使采用一种更具可移植性的 <em>基于标签调度(tag-based dispatch)</em> 的方法，其中每个特定类型的实现被分配一个唯一的整数，以确定其在运行时的类型。（有关此主题的更多信息，请参见第 <a href="#TODO">1.5.7</a> 节。）在 <strong>pbrt</strong> 中以这种方式实现的多态(polymorphic)类型都在 <code>base/</code> 目录中的头文件中定义。</p>
+<p>此版本的 <strong>pbrt</strong> 能够在支持 C++17 并提供光线相交测试 API 的 GPU 上运行。我们精心设计了系统，使得几乎所有的 <strong>pbrt</strong> 实现都可以在 CPU 和 GPU 上运行，正如第 <a href="../2_Monte_Carlo_Integration/index.html">2</a> 章到第 <a href="../12_Light_Sources/index.html">12</a> 章中所展示的。因此，在接下来的大部分内容中，我们将很少提及 CPU 与 GPU 的区别。</p>
+<p>在 <strong>pbrt</strong> 中，CPU 和 GPU 渲染路径之间的主要区别在于它们的数据流、如何实现高效化并行以及各部分如何连接起来。本章后面描述的基本渲染算法以及第 <a href="../13_Light_Transport_I_Surface_Reflection/index.html">13</a> 章和第 <a href="../14_Light_Transport_II_Volume_Rendering/index.html">14</a> 章中描述的光传输算法仅在 CPU 上可用。GPU 渲染管线在第 <a href="../15_Wavefront_Rendering_on_GPUs/index.html">15</a> 章中讨论，尽管它也可以在 CPU 上运行（但效率不如针对 CPU 的光传输算法）。</p>
+<p>虽然 <strong>pbrt</strong> 在当前实现中可以很好地渲染许多场景，但它经常被学生、研究人员和开发者扩展。本节中有许多来自这些努力的成果展示。图 <a href="#figure-1-13">1.13</a>、<a href="#figure-1-14">1.14</a> 和 <a href="#figure-1-15">1.15</a> 都是由一门渲染课程的学生创作的，最终的课堂项目是通过新功能扩展 <strong>pbrt</strong> ，以渲染之前无法渲染的图像。这些图像是该课程中最优秀的作品之一。</p>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-13">
+    <img src="figures/nightsnow.png" style="max-width: 100%; height: auto;" width="1369" height="1027">
+  </a>
+</div>
+<p><strong>图 1.13：</strong> Guillaume Poncin 和 Pramod Sharma 以多种方式扩展了 <strong>pbrt</strong> ，实现了多种复杂的渲染算法，以制作这幅斯坦福大学的 CS348b 渲染比赛中的获奖图像。树木采用 L系统（L-systems）进行程序建模，发光图像处理滤镜增强了树上灯光的真实感，雪采用元球（metaballs）进行程序建模，次表面散射算法通过考虑光在雪下传播一段距离后再离开的效果，使雪呈现出真实的外观。</p>
+</blockquote>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-14">
+    <img src="figures/icecave.png" style="max-width: 100%; height: auto;" width="1388" height="1388">
+  </a>
+</div>
+<p><strong>图 1.14：</strong> 阿贝·戴维斯、戴维·雅各布斯和郑敏·白渲染了这幅惊人的冰洞图像，赢得了 2009 年斯坦福大学 CS348b 渲染比赛的大奖。他们首先实现了冰川化(glaciation)的物理过程模拟，这一过程是指雪在多年间落下、融化并重新冻结，形成分层的冰层。然后，他们模拟了由于融水径流导致的冰的侵蚀，随后生成了冰的几何模型。体积内的光散射通过体积光子映射进行模拟；冰的蓝色完全是由于对冰体积中光的波长依赖吸收的建模。</p>
+</blockquote>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-15">
+    <img src="figures/cotton_candy.png" style="max-width: 100%; height: auto;" width="1920" height="1080">
+  </a>
+</div>
+<p><strong>图 1.15：</strong> 陈林孟、霍伯特·张和志仁·朱渲染了这张看起来美味的棉花糖在茶杯中的图像，以赢得 2018 年斯坦福 CS348b 渲染比赛的大奖。他们使用多层曲线建模棉花糖，然后在中心填充参与介质，以高效地模拟其内部的散射。</p>
+</blockquote>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-16">
+    <img src="figures/crown.png" style="max-width: 100%; height: auto;" width="1000" height="1400">
+  </a>
+</div>
+<p><strong>图 1.16：</strong> 马丁·卢比奇使用 Blender 模拟了这个奥地利皇室皇冠的场景；最初使用 LuxRender 渲染，该软件最初是 <strong>pbrt-v1</strong> 代码库的一个分支。皇冠由大约 350 万个三角形组成，受到六个区域光源的照明，这些光源的发射光谱基于来自真实光源的测量数据。最初在四核 CPU 上以每像素 1280 个样本的设置渲染，计算耗时 73 小时。在现代 GPU 上， <strong>pbrt</strong> 以相同的采样率可以在 184 秒内渲染此场景。</p>
+</blockquote>
+<h2 id="131-执行阶段phases-of-execution"><a class="header" href="#131-执行阶段phases-of-execution">1.3.1 执行阶段（Phases of Execution）</a></h2>
+<p><strong>pbrt</strong> 可以概念上分为三个执行阶段。在第一阶段，它解析用户提供的场景描述文件。场景描述是一个文本文件，指定构成场景的几何形状、它们的材质属性、照亮它们的光源、虚拟相机在场景中的位置，以及系统中使用的所有单个算法的参数。场景文件格式在 <strong>pbrt</strong> 网站 <a href="https://pbrt.org/">pbrt.org</a> 上有详细文档。</p>
+<p>解析阶段的结果是一个 <a href="#TODO"><strong>BasicScene</strong></a> 类的实例，它存储场景规范，但尚未以适合渲染的形式存储。在执行的第二阶段， <strong>pbrt</strong> 创建与场景对应的特定对象；例如，如果指定了透视投影，则在此阶段会创建一个与指定视图参数对应的 <a href="#TODO"><strong>PerspectiveCamera</strong></a> 对象。之前版本的 <strong>pbrt</strong> 将这两个阶段混合在一起，但在这个版本中我们将它们分开，因为 CPU 和 GPU 的渲染路径在内存中表示场景的某些方式不同。</p>
+<p>在第三阶段，执行主渲染循环。这个阶段是 <strong>pbrt</strong> 通常花费大部分运行时间的地方，本书的大部分内容都专注于在这个阶段执行的代码。为了协调渲染， <strong>pbrt</strong> 实现了一个 <em>积分器(integrator)</em>，之所以这样命名是因为它的主要任务是评估(evaluate)方程 (<a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html#equation-1-1">1.1</a>) 中的积分。</p>
+<h2 id="132-pbrt-的-main函数pbrts-main-function"><a class="header" href="#132-pbrt-的-main函数pbrts-main-function">1.3.2 <strong>pbrt</strong> 的 main函数（pbrt’s main() Function）</a></h2>
+<p><strong>pbrt</strong> 可执行文件的 main() 函数在 <strong>pbrt</strong> 源码的 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/cmd/pbrt.cpp"><strong>cmd/pbrt.cpp</strong></a> 中定义，位于 <strong>pbrt</strong> 分支的 <strong>src/pbrt</strong> 的目录中。它只有大约一百五十行代码，其中大部分用于处理命令行参数和相关的簿记。</p>
+<pre><code class="language-cpp">/** 程序入口 */
+int main(int argc, char *argv[]) {
+    /** 将命令行参数转换为字符串向量 */
+<span class="boring">       std::vector&lt;std::string&gt; args = GetCommandLineArguments(argv);
+</span><span class="boring"> 
+</span>    /** 为要解析的命令行申明变量 */
+<span class="boring">       PBRTOptions options;
+</span><span class="boring">       std::vector&lt;std::string&gt; filenames;
+</span><span class="boring"> 
+</span>    /** 处理命令行参数 */
+<span class="boring">       for (auto iter = args.begin(); iter != args.end(); ++iter) {
+</span><span class="boring">           if ((*iter)[0] != '-') {
+</span><span class="boring">               filenames.push_back(*iter);
+</span><span class="boring">               continue;
+</span><span class="boring">           }
+</span><span class="boring">         
+</span><span class="boring">           auto onError = [](const std::string &amp;err) {
+</span><span class="boring">               usage(err);
+</span><span class="boring">               exit(1);
+</span><span class="boring">           };
+</span><span class="boring">         
+</span><span class="boring">           std::string cropWindow, pixelBounds, pixel, pixelMaterial;
+</span><span class="boring">           if (ParseArg(&amp;iter, args.end(), "cropwindow", &amp;cropWindow, onError)) {
+</span><span class="boring">               std::vector&lt;Float&gt; c = SplitStringToFloats(cropWindow, ',');
+</span><span class="boring">               if (c.size() != 4) {
+</span><span class="boring">                   usage("Didn't find four values after --cropwindow");
+</span><span class="boring">                   return 1;
+</span><span class="boring">               }
+</span><span class="boring">               options.cropWindow = Bounds2f(Point2f(c[0], c[2]), Point2f(c[1], c[3]));
+</span><span class="boring">           } else if (ParseArg(&amp;iter, args.end(), "pixel", &amp;pixel, onError)) {
+</span><span class="boring">               std::vector&lt;int&gt; p = SplitStringToInts(pixel, ',');
+</span><span class="boring">               if (p.size() != 2) {
+</span><span class="boring">                   usage("Didn't find two values after --pixel");
+</span><span class="boring">                   return 1;
+</span><span class="boring">               }
+</span><span class="boring">               options.pixelBounds =
+</span><span class="boring">                   Bounds2i(Point2i(p[0], p[1]), Point2i(p[0] + 1, p[1] + 1));
+</span><span class="boring">           } else if (ParseArg(&amp;iter, args.end(), "pixelbounds", &amp;pixelBounds, onError)) {
+</span><span class="boring">               std::vector&lt;int&gt; p = SplitStringToInts(pixelBounds, ',');
+</span><span class="boring">               if (p.size() != 4) {
+</span><span class="boring">                   usage("Didn't find four integer values after --pixelbounds");
+</span><span class="boring">                   return 1;
+</span><span class="boring">               }
+</span><span class="boring">               options.pixelBounds = Bounds2i(Point2i(p[0], p[2]), Point2i(p[1], p[3]));
+</span><span class="boring">           } else if (ParseArg(&amp;iter, args.end(), "pixelmaterial", &amp;pixelMaterial, onError)) {
+</span><span class="boring">               std::vector&lt;int&gt; p = SplitStringToInts(pixelMaterial, ',');
+</span><span class="boring">               if (p.size() != 2) {
+</span><span class="boring">                   usage("Didn't find two values after --pixelmaterial");
+</span><span class="boring">                   return 1;
+</span><span class="boring">               }
+</span><span class="boring">               options.pixelMaterial = Point2i(p[0], p[1]);
+</span><span class="boring">           } else if (
+</span><span class="boring">       #ifdef PBRT_BUILD_GPU_RENDERER
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "gpu", &amp;options.useGPU, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "gpu-device", &amp;options.gpuDevice, onError) ||
+</span><span class="boring">       #endif
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "debugstart", &amp;options.debugStart, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "disable-pixel-jitter", &amp;options.disablePixelJitter,
+</span><span class="boring">                       onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "disable-texture-filtering",
+</span><span class="boring">                       &amp;options.disableTextureFiltering, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "disable-wavelength-jitter", &amp;options.disableWavelengthJitter,
+</span><span class="boring">                       onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "displacement-edge-scale",
+</span><span class="boring">                       &amp;options.displacementEdgeScale, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "display-server", &amp;options.displayServer, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "force-diffuse", &amp;options.forceDiffuse, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "format", &amp;format, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "log-level", &amp;logLevel, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "log-utilization", &amp;options.logUtilization, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "log-file", &amp;options.logFile, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "mse-reference-image", &amp;options.mseReferenceImage, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "mse-reference-out", &amp;options.mseReferenceOutput, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "nthreads", &amp;options.nThreads, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "outfile", &amp;options.imageFile, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "pixelstats", &amp;options.recordPixelStatistics, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "quick", &amp;options.quickRender, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "quiet", &amp;options.quiet, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "render-coord-sys", &amp;renderCoordSys, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "seed", &amp;options.seed, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "spp", &amp;options.pixelSamples, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "stats", &amp;options.printStatistics, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "toply", &amp;toPly, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "wavefront", &amp;options.wavefront, onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "write-partial-images", &amp;options.writePartialImages,
+</span><span class="boring">                       onError) ||
+</span><span class="boring">               ParseArg(&amp;iter, args.end(), "upgrade", &amp;options.upgrade, onError)) {
+</span><span class="boring">               // success
+</span><span class="boring">           } else if (*iter == "--help" || *iter == "-help" || *iter == "-h") {
+</span><span class="boring">               usage();
+</span><span class="boring">               return 0;
+</span><span class="boring">           } else {
+</span><span class="boring">               usage(StringPrintf("argument \"%s\" unknown", *iter));
+</span><span class="boring">               return 1;
+</span><span class="boring">           }
+</span><span class="boring">       }
+</span><span class="boring">
+</span>    /** 初始化 pbrt */
+<span class="boring">       InitPBRT(options);
+</span><span class="boring">
+</span>    /** 解析提供的场景描述文件 */
+<span class="boring">       BasicScene scene;
+</span><span class="boring">       BasicSceneBuilder builder(&amp;scene);
+</span><span class="boring">       ParseFiles(&amp;builder, filenames);
+</span><span class="boring">
+</span>    /** 渲染场景 */
+<span class="boring">       if (Options-&gt;useGPU || Options-&gt;wavefront)
+</span><span class="boring">           RenderWavefront(scene);
+</span><span class="boring">       else
+</span><span class="boring">           RenderCPU(scene);
+</span><span class="boring">
+</span>    /** 渲染场景后的清理 */
+<span class="boring">       CleanupPBRT();
+</span><span class="boring">
+</span>}
+</code></pre>
+<p>相较于直接操作提供给 main() 函数的 <strong>argv</strong> 值， <strong>pbrt</strong> 将提供的参数转换为 <strong>std::string</strong> 的vector。这样做不仅是为了 <strong>string</strong> 类的更好的便利性，还支持非 ASCII 字符集。<a href="#TODO">B.3.2</a> 节提供了有关字符编码及其在 <strong>pbrt</strong> 中处理的更多信息。</p>
+<pre><code class="language-cpp">/** 将命令行参数转换为字符串向量 */
+std::vector&lt;std::string&gt; args = GetCommandLineArguments(argv);
+</code></pre>
+<p>我们将在书中仅包含一些 main 函数片段的定义。某些片段，例如处理用户提供的命令行参数的片段，既简单又长，不值得增加几页书的长度。然而，我们将包含声明存储选项值变量的片段。</p>
+<pre><code class="language-cpp">/** 为要解析的命令行的申明变量 */
+PBRTOptions options;
+std::vector&lt;std::string&gt; filenames;
+</code></pre>
+<p><a href="#TODO"><strong>GetCommandLineArguments()</strong></a> 函数和 <a href="#TODO"><strong>PBRTOptions</strong></a> 类型出现在页面边缘的 <em>迷你索引(mini-index)</em> 中，并附有它们定义所在页面的页码。迷你索引指向几乎所有在每页中使用或提及的函数、类、方法和成员变量的定义。（为了简洁起见，我们将从迷你索引中省略非常广泛使用的类，如 <strong>Ray</strong> ，以及在前几页刚刚介绍的类型或方法。）</p>
+<p><a href="#TODO"><strong>PBRTOptions</strong></a> 类存储各种渲染选项，这些选项通常更适合在命令行中指定，而不是在场景描述文件中指定。例如， <strong>pbrt</strong> 在渲染过程中应该以何种详细程度报告其进度。它被传递给 <a href="#TODO"><strong>InitPBRT()</strong></a> 函数，该函数汇总在进行其他工作之前必须执行的各种系统级初始化任务。例如，它初始化日志系统并启动一组用于 <strong>pbrt</strong> 并行化的线程。</p>
+<pre><code class="language-cpp">/** 初始化 pbrt */
+InitPBRT(options);
+</code></pre>
+<p>在参数被解析和验证后， <a href="#TODO"><strong>ParseFiles()</strong></a> 函数接管处理前面描述的三个执行阶段中的第一个。借助于两个类 <a href="#TODO"><strong>BasicSceneBuilder</strong></a> 和 <a href="#TODO"><strong>BasicScene</strong></a> ，它们分别在 <a href="#TODO"><strong>C.2</strong></a> 和 <a href="#TODO"><strong>C.3</strong></a> 节中描述，它循环遍历提供的文件名，逐个解析每个文件。如果 <strong>pbrt</strong> 在没有提供文件名的情况下运行，它会从标准输入中查找场景描述。本书中不会描述场景描述文件的标记化和解析机制，但解析器的实现可以在 <strong>src/pbrt</strong> 目录中的 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/parser.h"><strong>parser.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/tree/master/src/pbrt/parser.cpp"><strong>parser.cpp</strong></a> 文件中找到。</p>
+<pre><code class="language-cpp">/** 解析提供的场景描述文件 */
+BasicScene scene;
+BasicSceneBuilder builder(&amp;scene);
+ParseFiles(&amp;builder, filenames);
+</code></pre>
+<p>在场景描述被解析后，将调用两个函数中的一个来渲染场景。 <a href="#TODO"><strong>RenderWavefront()</strong></a> 同时支持 CPU 和 GPU 渲染路径，能够并行处理大约一百万个图像采样(image samples)。它是第 <a href="../15_Wavefront_Rendering_on_GPUs/index.html">15</a> 章的主题。 <strong>RenderCPU()</strong> 使用 <a href="#TODO"><strong>Integrator</strong></a> 的实现来渲染场景，且仅支持在 CPU 上运行。它的并行性远低于 <a href="#TODO"><strong>RenderWavefront()</strong></a> ，仅并行渲染与 CPU 线程数量相同的图像采样。</p>
+<p>这两个函数首先都将 <a href="#TODO"><strong>BasicScene</strong></a> 转换为适合高效渲染的形式，然后将控制权传递给特定处理器的积分器(processor-specific integrator)。（有关此过程的更多信息，请参见 <a href="#TODO"><strong>C.3</strong></a> 节。）我们暂时略过这一转换的细节，以便专注于 <strong>RenderCPU()</strong> 中的主要渲染循环，这要有趣得多。为此，我们将高效的场景表示视为已获取。</p>
+<pre><code class="language-cpp">/** 渲染场景 */
+if (Options-&gt;useGPU || Options-&gt;wavefront)
+    RenderWavefront(scene);
+else
+    RenderCPU(scene);
+</code></pre>
+<p>在图像渲染完成后， <a href="#TODO"><strong>CleanupPBRT()</strong></a> 负责优雅地关闭系统，包括例如终止由 <a href="#TODO"><strong>InitPBRT()</strong></a> 启动的线程。</p>
+<pre><code class="language-cpp">/** 渲染场景后的清理 */
+CleanupPBRT();
+</code></pre>
+<h2 id="133-积分器接口integrator-interface"><a class="header" href="#133-积分器接口integrator-interface">1.3.3 积分器接口（Integrator Interface）</a></h2>
+<p>在 <a href="#TODO"><strong>RenderCPU()</strong></a> 渲染路径中，由实现 <strong>Integrator</strong> 接口的类的实例负责渲染。由于 <strong>Integrator</strong> 实现仅在 CPU 上运行，我们将定义 <strong>Integrator</strong> 作为具有纯虚方法的标准基类。 <strong>Integrator</strong> 类和各种实现分别定义在文件 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/cpu/integrators.h"><strong>cpu/integrators.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/cpu/integrators.cpp"><strong>cpu/integrators.cpp</strong></a> 中。</p>
+<p><a name="integrator-definition"></a></p>
+<pre><code class="language-cpp">/** 积分器定义 */
+class Integrator {
+  public:
+    /** 积分器公有方法 */
+<span class="boring">       virtual ~Integrator();
+</span><span class="boring">       
+</span><span class="boring">       static std::unique_ptr&lt;Integrator&gt; Create(const std::string &amp;name,
+</span><span class="boring">                                                   const ParameterDictionary &amp;parameters,
+</span><span class="boring">                                                   Camera camera, Sampler sampler,
+</span><span class="boring">                                                   Primitive aggregate,
+</span><span class="boring">                                                   std::vector&lt;Light&gt; lights,
+</span><span class="boring">                                                   const RGBColorSpace *colorSpace,
+</span><span class="boring">                                                   const FileLoc *loc);
+</span><span class="boring">       
+</span><span class="boring">       virtual std::string ToString() const = 0;
+</span><span class="boring">       virtual void Render() = 0;
+</span><span class="boring">       pstd::optional&lt;ShapeIntersection&gt; Intersect(const Ray &amp;ray,
+</span><span class="boring">                                                   Float tMax = Infinity) const;
+</span><span class="boring">       bool IntersectP(const Ray &amp;ray, Float tMax = Infinity) const;
+</span><span class="boring">       bool Unoccluded(const Interaction &amp;p0, const Interaction &amp;p1) const {
+</span><span class="boring">           return !IntersectP(p0.SpawnRayTo(p1), 1 - ShadowEpsilon);
+</span><span class="boring">       }
+</span><span class="boring">       SampledSpectrum Tr(const Interaction &amp;p0, const Interaction &amp;p1,
+</span><span class="boring">                           const SampledWavelengths &amp;lambda) const;
+</span><span class="boring">
+</span>    /** 积分器公有成员 */
+<span class="boring">       Primitive aggregate;
+</span><span class="boring">       std::vector&lt;Light&gt; lights;
+</span><span class="boring">       std::vector&lt;Light&gt; infiniteLights;
+</span><span class="boring">
+</span>  protected:
+    /** 积分器保护方法 */
+<span class="boring">       Integrator(Primitive aggregate, std::vector&lt;Light&gt; lights)
+</span><span class="boring">           : aggregate(aggregate), lights(lights) {
+</span><span class="boring">           // 积分器构造函数实现
+</span><span class="boring">           Bounds3f sceneBounds = aggregate ? aggregate.Bounds() : Bounds3f();
+</span><span class="boring">           for (auto &amp;light : lights) {
+</span><span class="boring">               light.Preprocess(sceneBounds);
+</span><span class="boring">               if (light.Type() == LightType::Infinite)
+</span><span class="boring">                   infiniteLights.push_back(light);
+</span><span class="boring">           }
+</span><span class="boring">       }
+</span><span class="boring">
+</span>};
+</code></pre>
+<p><a href="#integrator-definition"><strong>Integrator</strong></a> 基类构造函数接受一个呈现场景中的所有几何对象的<a href="#TODO"><strong>Primitive</strong></a>，以及一个包含场景中的所有光源的数组。</p>
+<pre><code class="language-cpp">/** 积分器保护方法 */
+Integrator(Primitive aggregate, std::vector&lt;Light&gt; lights)
+    : aggregate(aggregate), lights(lights) {
+        // 积分器构造函数实现
+<span class="boring">       Bounds3f sceneBounds = aggregate ? aggregate.Bounds() : Bounds3f();
+</span><span class="boring">       for (auto &amp;light : lights) {
+</span><span class="boring">           light.Preprocess(sceneBounds);
+</span><span class="boring">           if (light.Type() == LightType::Infinite)
+</span><span class="boring">               infiniteLights.push_back(light);
+</span><span class="boring">       }
+</span>}
+</code></pre>
+<p>场景中的每个几何对象都由一个 <a href="#TODO"><strong>Primitive</strong></a> 表示，该对象主要负责结合指定其几何形状的 <a href="#TODO"><strong>Shape</strong></a> ，和描述其外观的 <a href="#TODO"><strong>Material</strong></a>（例如，对象的颜色，或它的表面是哑光还是光泽的）。反过来，场景中的所有几何图元都被收集到一个存储在 <a href="#TODO"><strong>Integrator::aggregate</strong></a> 成员变量中的单一聚合图元(single aggregate primitive)中。这个聚合是一个特殊类型的图元，它本身持有对许多其他图元的引用。聚合实现将场景中的所有图元存储在一个加速数据结构中，从而减少与距离给定光线较远的图元进行不必要的光线相交测试的次数。由于它实现了 <a href="#TODO"><strong>Primitive</strong></a> 接口，因此对系统的其余部分来说，它与单个图元没有区别。</p>
+<pre><code class="language-cpp">/** 积分器公共成员 */
+Primitive aggregate;
+std::vector&lt;Light&gt; lights;
+</code></pre>
+<p>场景中的每个光源由实现 <a href="#TODO"><strong>Light</strong></a> 接口的对象表示，该接口允许光源指定其形状和发射的能量分布。有些光源需要知道整个场景的边界框，而在它们首次创建时这些信息是不可用的。因此， <strong>Integrator</strong> 构造函数调用它们的 <strong>Preprocess()</strong> 方法，提供这些边界。此时任何“无限”的光源也会存储在一个单独的数组中。这种光源将在第 <a href="#TODO"><strong>12.5</strong></a> 节中介绍，为无限远的光源建模，例如，这是一个用于模拟地球表面接收到的天光(skylight)的合理的模型。有时仅循环遍历这些无限光源是有必要的，对于有成千上万光源的场景，循环遍历所有光源以找到这些无限光源是低效的。</p>
+<pre><code class="language-cpp">// 积分器构造函数实现
+Bounds3f sceneBounds = aggregate ? aggregate.Bounds() : Bounds3f();
+for (auto &amp;light : lights) {
+    light.Preprocess(sceneBounds);
+    if (light.Type() == LightType::Infinite)
+        infiniteLights.push_back(light);
+}
+</code></pre>
+<pre><code class="language-cpp">/** 积分器公有成员 */
+std::vector&lt;Light&gt; infiniteLights;
+</code></pre>
+<p><a href="#integrator-definition"><strong>Integrator</strong></a>s 必须提供 <strong>Render()</strong> 方法的实现，该方法不接受其他参数。该方法在场景表示初始化完成后由 <a href="#TODO"><strong>RenderCPU()</strong></a> 函数调用。积分器的任务是根据聚合图元和光源渲染场景。除此之外，具体的积分器使用其所需的其他类（例如，相机模型）来定义它要渲染的场景。此接口有意设计得非常通用，以允许广泛的实现——例如，可以实现一个 <a href="#integrator-definition"><strong>Integrator</strong></a> ，它仅在分布在场景中的稀疏点集上测量光，而不是生成常规的 2D 图像。</p>
+<pre><code class="language-cpp">/** 积分器公有方法 */
+virtual void Render() = 0;
+</code></pre>
+<p><a href="#integrator-definition"><strong>Integrator</strong></a> 类提供了两个与光线-图元相交相关的方法供其子类使用。 <strong>Intersect()</strong> 接受一条光线和一个最大参数距离 <strong>tMax</strong> ，在场景中追踪给定的光线，如果在 <strong>tMax</strong> 之前沿光线有交点的话，返回一个被光线击中最近的图元对应的 <a href="#TODO"><strong>ShapeIntersection</strong></a> 对象。（ <a href="#TODO"><strong>ShapeIntersection</strong></a> 结构在第 <a href="#TODO"><strong>6.1.3</strong></a> 节中定义。）需要注意的是，此方法使用类型 <strong>pstd::optional</strong> 作为返回值，而不是来自 C++ 标准库的 <strong>std::optional</strong> ；我们在 pstd 命名空间中重新实现了标准库的部分内容，原因在第 <a href="#TODO"><strong>1.5.5</strong></a> 节中讨论。</p>
+<p><a name="integrator-method-intersect"></a></p>
+<pre><code class="language-cpp">/** 积分器方法定义 */
+pstd::optional&lt;ShapeIntersection&gt;
+Integrator::Intersect(const Ray &amp;ray, Float tMax) const {
+    if (aggregate) return aggregate.Intersect(ray, tMax);
+    else           return {};
+}
+</code></pre>
+<p>请注意 <strong>Intersect()</strong> 函数签名中首字母大写的浮点类型 <a href="#Float"><strong>Float</strong></a> ：几乎 <strong>pbrt</strong> 中所有的浮点值都被声明为 <strong>Float</strong> 。 (唯一的例外是少数情况下需要特定的 32 位 float 或 64 位 double （例如，当将二进制值保存到文件时）。) 根据 <strong>pbrt</strong> 的编译标志， <strong>Float</strong> 是 <strong>float</strong> 或 <strong>double</strong> 的别名，尽管在实践中单精度 <strong>float</strong> 几乎总是足够的。 <strong>Float</strong> 的定义在 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/pbrt.h"><strong>pbrt.h</strong></a> 头文件中，该文件被 <strong>pbrt</strong> 中的所有其他源文件包含。</p>
+<p><a name="Float"></a></p>
+<pre><code class="language-cpp">/** Float 浮点类型定义 */
+#ifdef PBRT_FLOAT_AS_DOUBLE
+    using Float = double;
+#else
+    using Float = float;
+#endif
+</code></pre>
+<p><a href="#integrator-method-intersectp"><strong>Integrator::IntersectP()</strong></a> 与 <strong>Intersect()</strong> 方法密切相关。它检查沿着光线是否存在交点，但仅返回一个布尔值，指示是否找到交点。（其名称中的“P”表示它是一个评估谓词(evaluates a predicate)的函数(在编程中，谓词（predicate）通常指的是一个返回布尔值（true或false）的函数。)，使用了 Lisp 编程语言中的常见命名约定。）由于它不需要搜索最近的交点或返回关于交点的额外几何信息， <strong>IntersectP()</strong> 通常比 <a href="#integrator-method-intersect"><strong>Integrator::Intersect()</strong></a> 更高效。此例程用于阴影光线。</p>
+<p><a name="integrator-method-intersectp"></a></p>
+<pre><code class="language-cpp">/** 积分器方法定义 */
+bool Integrator::IntersectP(const Ray &amp;ray, Float tMax) const {
+    if (aggregate) return aggregate.IntersectP(ray, tMax);
+    else           return false;
+}
+</code></pre>
+<h2 id="134-图像块积分器和主渲染循环imagetileintegrator-and-the-main-rendering-loop"><a class="header" href="#134-图像块积分器和主渲染循环imagetileintegrator-and-the-main-rendering-loop">1.3.4 图像块积分器和主渲染循环（ImageTileIntegrator and the Main Rendering Loop）</a></h2>
+<p>在实现一个基本的积分器以模拟光传输来渲染图像之前，我们将定义两个 <a href="#integrator-definition"><strong>Integrator</strong></a> 子类，这些子类提供该积分器以及许多后续积分器实现所需的额外通用功能。我们从 <strong>ImageTileIntegrator</strong> 开始，它继承自 <a href="#integrator-definition"><strong>Integrator</strong></a> 。下一节定义 <a href="#rayintegrator-definition"><strong>RayIntegrator</strong></a> ，它继承自 <strong>ImageTileIntegrator</strong> 。</p>
+<p><strong>pbrt</strong> 的所有基于 CPU 的积分器都使用相机模型来定义视图参数并渲染图像，并通过将图像分割成块(tile)并让不同的处理器处理不同的块来实现渲染的并行化。因此， <strong>pbrt</strong> 包含一个 <strong>ImageTileIntegrator</strong> ，为这些任务提供通用功能。</p>
+<a name="iamgetileintegrator-definition">
+<pre><code class="language-cpp">/** 图像块积分器定义 */
+class ImageTileIntegrator : public Integrator {
+  public:
+    /** 图像块积分器公有方法 */
+<span class="boring">       ImageTileIntegrator(Camera camera, Sampler sampler,
+</span><span class="boring">               Primitive aggregate, std::vector&lt;Light&gt; lights)
+</span><span class="boring">           : Integrator(aggregate, lights), camera(camera),
+</span><span class="boring">               samplerPrototype(sampler) {}
+</span><span class="boring">       void Render();
+</span><span class="boring">       virtual void EvaluatePixelSample(Point2i pPixel, int sampleIndex,
+</span><span class="boring">           Sampler sampler, ScratchBuffer &amp;scratchBuffer) = 0;
+</span><span class="boring">       
+</span>  protected:
+    /** 图像块积分器保护成员 */
+<span class="boring">       Camera camera;
+</span><span class="boring">       Sampler samplerPrototype;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>除了聚合和光源， <strong>ImageTileIntegrator</strong> 构造函数接受一个 <a href="#TODO"><strong>Camera</strong></a>，该参数指定视图和镜头参数，如位置、方向、焦距和视场。由相机存储的 <a href="#TODO"><strong>Film</strong></a> 处理图像存储。 <a href="#TODO"><strong>Camera</strong></a> 类是第 <a href="../5_Cameras_and_Film/index.html"><strong>5</strong></a> 章的大部分内容， Film 在第 <a href="#TODO"><strong>5.4</strong></a> 节中描述。 <a href="#TODO"><strong>Film</strong></a> 负责将最终图像写入文件。</p>
+<p>构造函数还接受一个 <a href="#TODO"><strong>Sampler</strong></a> ；它的作用更为微妙，但其实现可以显著影响系统生成的图像质量。首先，采样器负责选择图像平面上的点，以确定最初追踪到场景中的光线。其次，它负责提供随机样本值，这些值被积分器用于估计光传输积分的值，方程（<a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html#equation-1-1">1.1</a>）。例如，一些积分器需要选择光源上的随机点，以计算来自区域光源的照明。生成这些样本的良好分布是渲染过程中的一个重要部分，可以显著影响整体效率；这个主题是第 <a href="../8_Sampling_and_Reconstruction/index.html"><strong>8</strong></a> 章的主要焦点。</p>
+<pre><code class="language-cpp">/** 图像块积分器公有方法 */
+ImageTileIntegrator(Camera camera, Sampler sampler,
+        Primitive aggregate, std::vector&lt;Light&gt; lights)
+    : Integrator(aggregate, lights), camera(camera),
+      samplerPrototype(sampler) {}
+</code></pre>
+<pre><code class="language-cpp">/** 图像块积分器保护成员 */
+Camera camera;
+Sampler samplerPrototype;
+</code></pre>
+<p>对于 <strong>pbrt</strong> 的所有积分器，每个像素计算的最终颜色基于随机采样算法。如果每个像素的最终值是多个样本的平均值，则图像质量会提高。在样本数量较少时，采样误差(sampling error)表现为图像中的颗粒状高频噪声(grainy high-frequency noise)，随着样本数量的增加，误差以可预测的速率下降。（此主题在第 <a href="#TODO"><strong>2.1.4</strong></a> 节中有更深入的讨论。）因此， <strong>ImageTileIntegrator::Render()</strong> 将图像分成若干 <em>波次(waves)</em> 进行渲染，每个像素每次只处理少量样本。在前两波中，每个像素只取一个样本。在下一波中，每个像素取两个样本，每波的样本数量逐渐翻倍，直到达到一个限制。虽然最终图像的效果与图像是按波次渲染还是在一个像素中取完所有样本再转到下一个像素没有区别，但这种计算方式使得在渲染过程中可以看到最终图像的预览，其中所有像素都有一些样本，而不是只有少数像素有许多样本，其余像素没有样本。</p>
+<p>因为 <strong>pbrt</strong> 是并行化以使用多个线程运行的，因此这种方法需要找到一个平衡。线程在获取新图像块的工作时会产生一定的开销，而一些线程在每波次结束时可能会变得空闲，因为它们没有更多的工作可做，而其他线程仍在处理它们被分配的图像块。这些考虑促使了限制翻倍方法的使用。</p>
+<p><a name="imagetileintegrator-definition"></a></p>
+<pre><code class="language-cpp">/** 图像块积分器方法定义 */
+void ImageTileIntegrator::Render() {
+    /** 声明用于分块渲染图像的公共变量 */
+<span class="boring">       ThreadLocal&lt;ScratchBuffer&gt; scratchBuffers(
+</span><span class="boring">           []() { return ScratchBuffer(); } );
+</span><span class="boring">       ThreadLocal&lt;Sampler&gt; samplers(
+</span><span class="boring">           [this]() { return samplerPrototype.Clone(); });
+</span><span class="boring">       Bounds2i pixelBounds = camera.GetFilm().PixelBounds();
+</span><span class="boring">       int spp = samplerPrototype.SamplesPerPixel();
+</span><span class="boring">       ProgressReporter progress(int64_t(spp) * pixelBounds.Area(), "Rendering",
+</span><span class="boring">                                   Options-&gt;quiet);
+</span><span class="boring">       int waveStart = 0, waveEnd = 1, nextWaveSize = 1;
+</span><span class="boring">       
+</span>    /** 按波次渲染图像 */
+<span class="boring">       while (waveStart &lt; spp) {
+</span><span class="boring">           /** 并行渲染当前波次的图像块 */
+</span><span class="boring">           ParallelFor2D(pixelBounds, [&amp;](Bounds2i tileBounds) {
+</span><span class="boring">               /** 渲染 tileBounds 提供的图像块 */
+</span><span class="boring">               ScratchBuffer &amp;scratchBuffer = scratchBuffers.Get();
+</span><span class="boring">               Sampler &amp;sampler = samplers.Get();
+</span><span class="boring">               for (Point2i pPixel : tileBounds) {
+</span><span class="boring">                   /** 渲染像素 pPixel 中的样本 */
+</span><span class="boring">                   for (int sampleIndex = waveStart; sampleIndex &lt; waveEnd; ++sampleIndex) {
+</span><span class="boring">                       sampler.StartPixelSample(pPixel, sampleIndex);
+</span><span class="boring">                       EvaluatePixelSample(pPixel, sampleIndex, sampler, scratchBuffer);
+</span><span class="boring">                       scratchBuffer.Reset();
+</span><span class="boring">                   }
+</span><span class="boring">               }
+</span><span class="boring">               progress.Update((waveEnd - waveStart) * tileBounds.Area());
+</span><span class="boring">           });
+</span><span class="boring">           
+</span><span class="boring">           /** 更新开始和结束波次 */
+</span><span class="boring">           waveStart = waveEnd;
+</span><span class="boring">           waveEnd = std::min(spp, waveEnd + nextWaveSize);
+</span><span class="boring">           nextWaveSize = std::min(2 * nextWaveSize, 64);
+</span><span class="boring">           
+</span><span class="boring">           /** 可选的将当前图像写入磁盘 */  
+</span><span class="boring">           if (waveStart == spp || Options-&gt;writePartialImages || referenceImage) {
+</span><span class="boring">               ImageMetadata metadata;
+</span><span class="boring">               metadata.renderTimeSeconds = progress.ElapsedSeconds();
+</span><span class="boring">               metadata.samplesPerPixel = waveStart;
+</span><span class="boring">               if (waveStart == spp || Options-&gt;writePartialImages) {
+</span><span class="boring">                   camera.InitMetadata(&amp;metadata);
+</span><span class="boring">                   camera.GetFilm().WriteImage(metadata, 1.0f / waveStart);
+</span><span class="boring">               }
+</span><span class="boring">           }
+</span><span class="boring">       }
+</span><span class="boring">       
+</span>}
+</code></pre>
+<p>在渲染开始之前，需要一些额外的变量。首先，积分器的实现需要分配少量临时内存，以存储在计算每条光线的贡献过程中表面散射属性。大量的内存分配可能会轻易地压倒系统的常规内存分配例程（例如， new ），这些例程必须协调多线程维护复杂的数据结构以跟踪空闲内存。一个简单的实现可能会在内存分配器中花费相当大一部分的计算时间。</p>
+<p>为了解决这个问题， <strong>pbrt</strong> 提供了一个 <a href="#TODO"><strong>ScratchBuffer</strong></a> 类，该类管理一块小的预分配内存缓冲区。 <strong>ScratchBuffer</strong> 分配非常高效，只需增加偏移量。 <a href="#TODO"><strong>ScratchBuffer</strong></a> 不允许独立释放分配；相反，所有分配必须一次性释放，但这样做只需重置该偏移量。</p>
+<p>因为 <a href="#TODO"><strong>ScratchBuffer</strong></a> 在多个线程同时使用时不安全，所以为每个线程使用 <a href="#TODO"><strong>ThreadLocal</strong></a> 模板类创建一个单独的实例。它的构造函数接受一个返回其管理的对象类型的新实例的 lambda 函数：在这里，调用默认的 <a href="#TODO"><strong>ScratchBuffer</strong></a> 构造函数就足够了。 <a href="#TODO"><strong>ThreadLocal</strong></a> 然后处理了为每个线程维护对象的独立副本的细节，并按需分配这些副本。</p>
+<pre><code class="language-cpp">/** 声明用于分块渲染图像的公共变量 */
+ThreadLocal&lt;ScratchBuffer&gt; scratchBuffers(
+    []() { return ScratchBuffer(); } );
+</code></pre>
+<p>大多数 <a href="#TODO"><strong>Sampler</strong></a> 实现发现维护一些状态是有用的，例如当前像素的坐标。这意味着多个线程不能同时使用单个 <strong>Sampler</strong> ，因此 <a href="#TODO"><strong>ThreadLocal</strong></a> 也用于 <strong>Sampler</strong> 管理。 <strong>Samplers</strong> 提供了一个 <strong>Clone()</strong> 方法，用于创建其采样器类型的新实例。在开始时提供给 <a href="#TODO"><strong>ImageTileIntegrator</strong></a> 构造函数的采样器 <strong>samplerPrototype</strong> ，在这里提供这些副本。</p>
+<pre><code class="language-cpp">/** 声明用于分块渲染图像的公共变量 */
+ThreadLocal&lt;Sampler&gt; samplers(
+    [this]() { return samplerPrototype.Clone(); });
+</code></pre>
+<p>提供给用户渲染工作完成多少以及还需要多长时间的指示是很有帮助的。这个任务由 <a href="#TODO"><strong>ProgressReporter</strong></a> 类处理，它的第一个参数是工作项的总数。在这里，工作总量是每个像素采样的数量乘以总像素数。使用 64 位精度来计算这个值是很重要的，因为 32 位 <strong>int</strong> 可能不足以处理具有多个每像素样本的高分辨率图像。</p>
+<pre><code class="language-cpp">/** 声明用于分块渲染图像的公共变量 */
+Bounds2i pixelBounds = camera.GetFilm().PixelBounds();
+int spp = samplerPrototype.SamplesPerPixel();
+ProgressReporter progress(int64_t(spp) * pixelBounds.Area(), "Rendering",
+                          Options-&gt;quiet);
+</code></pre>
+<p>接下来，当前波次中要采集的样本范围由 <strong>waveStart</strong> 和 <strong>waveEnd</strong> 给出； <strong>nextWaveSize</strong> 给出下一波中要采集的样本数量。</p>
+<pre><code class="language-cpp">/** 声明用于分块渲染图像的公共变量 */
+int waveStart = 0, waveEnd = 1, nextWaveSize = 1;
+</code></pre>
+<p>手握这些变量，渲染继续进行，直到在所有像素中采集到所需数量的样本。</p>
+<pre><code class="language-cpp">/** 按波次渲染图像 */
+while (waveStart &lt; spp) {
+    /** 并行渲染当前波次的图像块 */
+<span class="boring">       ParallelFor2D(pixelBounds, [&amp;](Bounds2i tileBounds) {
+</span><span class="boring">           /** 渲染 tileBounds 提供的图像块 */
+</span><span class="boring">           ScratchBuffer &amp;scratchBuffer = scratchBuffers.Get();
+</span><span class="boring">           Sampler &amp;sampler = samplers.Get();
+</span><span class="boring">           for (Point2i pPixel : tileBounds) {
+</span><span class="boring">               /** 渲染像素 pPixel 中的样本 */
+</span><span class="boring">               for (int sampleIndex = waveStart; sampleIndex &lt; waveEnd; ++sampleIndex) {
+</span><span class="boring">                   sampler.StartPixelSample(pPixel, sampleIndex);
+</span><span class="boring">                   EvaluatePixelSample(pPixel, sampleIndex, sampler, scratchBuffer);
+</span><span class="boring">                   scratchBuffer.Reset();
+</span><span class="boring">               }
+</span><span class="boring">           }
+</span><span class="boring">           progress.Update((waveEnd - waveStart) * tileBounds.Area());
+</span><span class="boring">       });
+</span><span class="boring">           
+</span>    /** 更新开始和结束波次 */
+<span class="boring">       waveStart = waveEnd;
+</span><span class="boring">       waveEnd = std::min(spp, waveEnd + nextWaveSize);
+</span><span class="boring">       nextWaveSize = std::min(2 * nextWaveSize, 64);
+</span><span class="boring">           
+</span>    /** 可选的将当前图像写入磁盘 */  
+<span class="boring">       if (waveStart == spp || Options-&gt;writePartialImages || referenceImage) {
+</span><span class="boring">           ImageMetadata metadata;
+</span><span class="boring">           metadata.renderTimeSeconds = progress.ElapsedSeconds();
+</span><span class="boring">           metadata.samplesPerPixel = waveStart;
+</span><span class="boring">           if (waveStart == spp || Options-&gt;writePartialImages) {
+</span><span class="boring">               camera.InitMetadata(&amp;metadata);
+</span><span class="boring">               camera.GetFilm().WriteImage(metadata, 1.0f / waveStart);
+</span><span class="boring">           }
+</span><span class="boring">       }
+</span>}
+</code></pre>
+<p><strong>ParallelFor2D()</strong> 函数遍历图像块，多个循环迭代并发运行；它是第 <a href="#TODO"><strong>B.6</strong></a> 节中介绍的与并行相关的实用函数的一部分。C++ lambda 表达式提供了循环体。 <a href="#TODO"><strong>ParallelFor2D()</strong></a> 自动选择图像块的大小，以平衡两个方面：一方面，我们希望图像块的数量显著多于系统中的处理器数量。某些块的处理时间可能会少于其他块，因此如果处理器与块之间存在 1:1 的映射，那么一些处理器在完成工作后将处于空闲状态，而其他处理器则继续处理其图像区域。（图 <a href="#figure-1-17"><strong>1.17</strong></a> 显示了渲染示例图像块所需时间的分布，说明了这一问题。）另一方面，块过多也会影响效率。线程在并行 <strong>for</strong> 循环中获取更多工作时，会有一个小的固定开销，块越多，这个开销付出的代价就越大。因此， <strong>ParallelFor2D()</strong> 选择的块大小考虑了待处理区域的范围和系统中的处理器数量。</p>
+<pre><code class="language-cpp">/** 并行渲染当前波次的图像块 */
+ParallelFor2D(pixelBounds, [&amp;](Bounds2i tileBounds) {
+    /** 渲染 tileBounds 提供的图像块 */
+<span class="boring">   ScratchBuffer &amp;scratchBuffer = scratchBuffers.Get();
+</span><span class="boring">   Sampler &amp;sampler = samplers.Get();
+</span><span class="boring">   for (Point2i pPixel : tileBounds) {
+</span><span class="boring">       /** 渲染像素 pPixel 中的样本 */
+</span><span class="boring">       for (int sampleIndex = waveStart; sampleIndex &lt; waveEnd; ++sampleIndex) {
+</span><span class="boring">           sampler.StartPixelSample(pPixel, sampleIndex);
+</span><span class="boring">           EvaluatePixelSample(pPixel, sampleIndex, sampler, scratchBuffer);
+</span><span class="boring">           scratchBuffer.Reset();
+</span><span class="boring">       }
+</span><span class="boring">   }
+</span><span class="boring">   progress.Update((waveEnd - waveStart) * tileBounds.Area());
+</span>});    
+</code></pre>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-17">
+    <img src="figures/pha01f17.svg" width="628" height="407" style="max-width: 100%;">
+  </a>
+</div>
+<p><strong>图 1.17：图 <a href="./1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html#figure-1-11">1.11</a> 中场景每个瓦片渲染所花费时间的直方图。</strong> 横轴以秒为单位测量时间。注意执行时间的广泛变化，说明图像的不同部分需要的计算量有显著差异。</p>
+</blockquote>
+<p>给定一个要渲染的瓦片，实现在开始时会为当前执行的线程获取 <a href="#TODO"><strong>ScratchBuffer</strong></a> 和 <a href="#TODO"><strong>Sampler</strong></a> 。如前所述， <a href="#TODO"><strong>ThreadLocal::Get()</strong></a> 方法负责为每个线程分配和返回它们的独立实例的细节。</p>
+<p>有了这些，实现使用基于范围的 <strong>for</strong> 循环遍历图像块中的所有像素，该循环使用 <a href="#TODO"><strong>Bounds2</strong></a> 类提供的迭代器，然后通知 ProgressReporter 已完成的工作量。</p>
+<pre><code class="language-cpp">/** 渲染 tileBounds 提供的图像块 */
+ScratchBuffer &amp;scratchBuffer = scratchBuffers.Get();
+Sampler &amp;sampler = samplers.Get();
+for (Point2i pPixel : tileBounds) {
+    /** 渲染像素 pPixel 中的样本 */
+<span class="boring">    for (int sampleIndex = waveStart; sampleIndex &lt; waveEnd; ++sampleIndex) {
+</span><span class="boring">        sampler.StartPixelSample(pPixel, sampleIndex);
+</span><span class="boring">        EvaluatePixelSample(pPixel, sampleIndex, sampler, scratchBuffer);
+</span><span class="boring">        scratchBuffer.Reset();
+</span><span class="boring">    }
+</span>}
+progress.Update((waveEnd - waveStart) * tileBounds.Area());
+</code></pre>
+<p>给定一个像素以进行一个或多个采样，通过 <strong>StartPixelSample()</strong> 通知线程的 <strong>Sampler</strong> 应该开始为当前像素生成样本，这使采样器能够根据当前正在处理的像素来设置任何内部状态。积分器的 <strong>EvaluatePixelSample()</strong> 方法负责确定具体样本的值，之后调用 <strong>ScratchBuffer::Reset()</strong> 来释放它在 [<em>ScratchBuffer</em>] 中分配的临时内存。</p>
+<pre><code class="language-cpp">/** 渲染像素 pPixel 中的样本 */
+for (int sampleIndex = waveStart; sampleIndex &lt; waveEnd; ++sampleIndex) {
+    sampler.StartPixelSample(pPixel, sampleIndex);
+    EvaluatePixelSample(pPixel, sampleIndex, sampler, scratchBuffer);
+    scratchBuffer.Reset();
+}
+</code></pre>
+<p>提供了纯虚方法 <a href="#TODO"><strong>Integrator::Render()</strong></a> 的实现后， <a href="#TODO"><strong>ImageTileIntegrator</strong></a> 现在要求其子类实现接下来的 <strong>EvaluatePixelSample()</strong> 方法。</p>
+<pre><code class="language-cpp">/** 图像块积分器公有方法 */
+virtual void EvaluatePixelSample(Point2i pPixel, int sampleIndex,
+    Sampler sampler, ScratchBuffer &amp;scratchBuffer) = 0;
+</code></pre>
+<p>在当前波次的并行 for 循环完成后，计算下一波要处理的样本索引范围。</p>
+<pre><code class="language-cpp">/** 更新开始和结束波次 */
+waveStart = waveEnd;
+waveEnd = std::min(spp, waveEnd + nextWaveSize);
+nextWaveSize = std::min(2 * nextWaveSize, 64);
+</code></pre>
+<p>如果用户提供了 –write-partial-images 命令行选项，则在处理下一波样本之前，正在进行的图像会写入磁盘。我们在这里不包括处理此操作的片段，<code>可选的将当前图像写入磁盘</code>。</p>
+<h2 id="135-光线积分器实现rayintegrator-implementation"><a class="header" href="#135-光线积分器实现rayintegrator-implementation">1.3.5 光线积分器实现（RayIntegrator Implementation）</a></h2>
+<p>正如 <a href="#imagetileintegrator-definition"><strong>ImageTileIntegrator</strong></a> 集中处理与将图像分解为瓦片的积分器相关的功能， <a href="#rayintegrator-definition"><strong>RayIntegrator</strong></a> 为从相机开始追踪光线路径的积分器提供通用功能。在第 <a href="../13_Light_Transport_I_Surface_Reflection/index.html"><strong>13</strong></a> 章和第 <a href="../14_Light_Transport_II_Volume_Rendering/index.html"><strong>14</strong></a> 章中实现的所有积分器都继承自 <a href="#rayintegrator-definition"><strong>RayIntegrator</strong></a> 。</p>
+<p><a name="rayintegrator-definition"></a></p>
+<pre><code class="language-cpp">/** 光线积分器定义 */
+class RayIntegrator : public ImageTileIntegrator {
+  public:
+    /** 光线积分器公有方法 */
+<span class="boring">       RayIntegrator(Camera camera, Sampler sampler, Primitive aggregate,
+</span><span class="boring">                       std::vector&lt;Light&gt; lights)
+</span><span class="boring">           : ImageTileIntegrator(camera, sampler, aggregate, lights) {}
+</span><span class="boring">       void EvaluatePixelSample(Point2i pPixel, int sampleIndex,
+</span><span class="boring">                               Sampler sampler, ScratchBuffer &amp;scratchBuffer) final;
+</span><span class="boring">       virtual SampledSpectrum Li(
+</span><span class="boring">           RayDifferential ray, SampledWavelengths &amp;lambda, Sampler sampler,
+</span><span class="boring">           ScratchBuffer &amp;scratchBuffer, VisibleSurface *visibleSurface) const = 0;
+</span><span class="boring">       
+</span>};
+</code></pre>
+<p>它的构造函数只是将提供的对象传递给 <a href="#imagetileintegrator-definition"><strong>ImageTileIntegrator</strong></a> 构造函数。</p>
+<pre><code class="language-cpp">/** 光线积分器公有方法 */
+RayIntegrator(Camera camera, Sampler sampler, Primitive aggregate,
+              std::vector&lt;Light&gt; lights)
+    : ImageTileIntegrator(camera, sampler, aggregate, lights) {}
+</code></pre>
+<p><strong>RayIntegrator</strong> 实现了来自 <a href="#imagetileintegrator-definition"><strong>ImageTileIntegrator</strong></a> 的纯虚方法 <strong>EvaluatePixelSample()</strong> 。在给定的像素处，它使用其 <a href="#TODO"><strong>Camera</strong></a> 和 <a href="#TODO"><strong>Sampler</strong></a> 生成一条射线进入场景，然后调用由子类提供的 <strong>Li()</strong> 方法，以确定沿该射线到达图像平面的光量。正如我们将在后面的章节中看到的，该方法返回的值的单位与射线起点的入射光谱辐射有关，通常在方程中用符号 \( L_\text{i} \) 表示——该方法的名称也因此而来。该值被传递给 <a href="#TODO"><strong>Film</strong></a> ，记录射线对图像的贡献。</p>
+<p>图 1.18 总结了该方法中使用的主要类及他们之间的数据流。</p>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-18">
+    <img src="figures/pha01f18.svg" width="782" height="232" style="max-width: 100%;">
+  </a>
+</div>
+<p><strong>图 1.18： RayIntegrator::EvaluatePixelSample() 中执行计算的类之间的关系。</strong> <a href="#TODO"><strong>Sampler</strong></a> 为每个要采样的图像提供样本值。 <a href="#TODO"><strong>Camera</strong></a> 将样本转换为来自胶片平面(film plane)的相应光线， <strong>Li()</strong> 方法计算到达胶片的该光线上的辐射亮度(radiance)。样本及其辐射亮度被传递给 <a href="#TODO"><strong>Film</strong></a> ，后者将它们的贡献存储在图像中。</p>
+</blockquote>
+<pre><code class="language-cpp">/** 光线积分器方法定义 */
+void RayIntegrator::EvaluatePixelSample(Point2i pPixel, int sampleIndex,
+        Sampler sampler, ScratchBuffer &amp;scratchBuffer) {
+    /** 采样光线的波长  */
+<span class="boring">       Float lu = sampler.Get1D();
+</span><span class="boring">              SampledWavelengths lambda = camera.GetFilm().SampleWavelengths(lu);
+</span><span class="boring">       
+</span>    /** 为当前样本初始化CameraSample */
+<span class="boring">       Filter filter = camera.GetFilm().GetFilter();
+</span><span class="boring">       CameraSample cameraSample = GetCameraSample(sampler, pPixel, filter);
+</span><span class="boring">       
+</span>    /** 为当前样本生成摄像机光线 */
+<span class="boring">       pstd::optional&lt;CameraRayDifferential&gt; cameraRay =
+</span><span class="boring">           camera.GenerateRayDifferential(cameraSample, lambda);
+</span><span class="boring">       
+</span>    /** 追踪有效的摄像机光线(cameraRay) */
+<span class="boring">       SampledSpectrum L(0.);
+</span><span class="boring">       VisibleSurface visibleSurface;
+</span><span class="boring">       if (cameraRay) {
+</span><span class="boring">           /** 根据图像采样率缩放摄像机光线微分 */
+</span><span class="boring">           Float rayDiffScale =
+</span><span class="boring">               std::max&lt;Float&gt;(.125f, 1 / std::sqrt((Float)sampler.SamplesPerPixel()));
+</span><span class="boring">           cameraRay-&gt;ray.ScaleDifferentials(rayDiffScale);
+</span><span class="boring">           /** 沿摄像机光线评估辐射亮度 */
+</span><span class="boring">           bool initializeVisibleSurface = camera.GetFilm().UsesVisibleSurface();
+</span><span class="boring">           L = cameraRay-&gt;weight *
+</span><span class="boring">               Li(cameraRay-&gt;ray, lambda, sampler, scratchBuffer,
+</span><span class="boring">                   initializeVisibleSurface ? &amp;visibleSurface : nullptr);
+</span><span class="boring">           /** 如果返回意外的辐射亮度值，则发出警告 */
+</span><span class="boring">           if (L.HasNaNs()) {
+</span><span class="boring">               LOG_ERROR("Not-a-number radiance value returned for pixel (%d, "
+</span><span class="boring">                       "%d), sample %d. Setting to black.",
+</span><span class="boring">                       pPixel.x, pPixel.y, sampleIndex);
+</span><span class="boring">               L = SampledSpectrum(0.f);
+</span><span class="boring">           } else if (IsInf(L.y(lambda))) {
+</span><span class="boring">               LOG_ERROR("Infinite radiance value returned for pixel (%d, %d), "
+</span><span class="boring">                       "sample %d. Setting to black.",
+</span><span class="boring">                       pPixel.x, pPixel.y, sampleIndex);
+</span><span class="boring">               L = SampledSpectrum(0.f);
+</span><span class="boring">           }
+</span><span class="boring">       }
+</span><span class="boring">       
+</span>    /** 将摄像机光线的贡献值添加到图像中 */
+<span class="boring">       camera.GetFilm().AddSample(pPixel, L, lambda, &amp;visibleSurface,
+</span><span class="boring">                               cameraSample.filterWeight);
+</span><span class="boring">       
+</span>}
+</code></pre>
+<p>每个光线在多个离散波长 \( \lambda \) （默认四个）上携带辐射。当计算每个像素的颜色时， <strong>pbrt</strong> 在不同的像素样本中选择不同的波长，以便最终结果更好地反映所有波长的正确结果。为了选择这些波长，首先由 <a href="#TODO"><strong>Sampler</strong></a> 提供一个样本值 <strong>lu</strong> 。该值在范围 \( [0,1) \) 内均匀分布。然后， <a href="#TODO"><strong>Film::SampleWavelengths()</strong></a> 方法将此样本映射到一组特定波长，把它的胶片传感器响应模型当作一个关于波长的函数。大多数 <a href="#TODO"><strong>Sampler</strong></a> 实现确保如果在一个像素中采样多个样本，这些样本在总体上均匀分布在 \( [0,1] \) 上。相应的，它们确保采样的波长在有效波长范围内也均匀分布，从而提高图像质量。</p>
+<pre><code class="language-cpp">/** 采样光线的波长  */
+Float lu = sampler.Get1D();
+SampledWavelengths lambda = camera.GetFilm().SampleWavelengths(lu);
+</code></pre>
+<p><a href="#TODO"><strong>CameraSample</strong></a> 结构记录了相机应生成光线的胶片位置。该位置受到采样器提供的样本位置和用于将给像素的多个样本值过滤为单个值的重建滤波器(reconstruction filter)的影响。 <a href="#TODO"><strong>GetCameraSample()</strong></a> 处理这些计算。 <a href="#TODO"><strong>CameraSample</strong></a> 还存储与光线相关的时间以及镜头位置样本，这些在渲染移动物体的场景和模拟非针孔光圈的相机模型时使用。</p>
+<pre><code class="language-cpp">/** 为当前样本初始化CameraSample */
+Filter filter = camera.GetFilm().GetFilter();
+CameraSample cameraSample = GetCameraSample(sampler, pPixel, filter);
+</code></pre>
+<p><a href="#TODO"><strong>Camera</strong></a> 接口提供了两种生成光线的方法： <strong>GenerateRay()</strong> 返回给定图像采样位置的光线，以及 <strong>GenerateRayDifferential()</strong> 返回 <em>光线微分(ray differential)</em> ，包含相机在图像平面的 \( x \) 和 \( y \) 方向上与样本相距一个像素的位置生成的光线的信息。光线微分用于从第 <a href="#TODO"><strong>10</strong></a> 章中定义的一些纹理函数中获得更好的结果，通过使得能够计算纹理随像素间距变化的速度，这是一种纹理抗锯齿的关键组成部分。</p>
+<p>某些 <a href="#TODO"><strong>CameraSample</strong></a> 值可能与给定相机的有效光线不一致。因此，用 <strong>pstd::optional</strong> 来包装相机返回的 <a href="#TODO"><strong>CameraRayDifferential</strong></a> 。</p>
+<p><a name="为当前样本生成摄像机光线"></a></p>
+<pre><code class="language-cpp">/** 为当前样本生成摄像机光线 */
+pstd::optional&lt;CameraRayDifferential&gt; cameraRay =
+    camera.GenerateRayDifferential(cameraSample, lambda);
+</code></pre>
+<p>如果摄像机光线有效，它将在一些额外准备后传递给 <a href="#TODO"><strong>RayIntegrator</strong></a> 子类的 <strong>Li()</strong> 方法实现。除了返回沿光线 \( \text{L} \) 的辐射亮度外，子类还负责初始化 <a href="#TODO"><strong>VisibleSurface</strong></a> 类的一个实例，该实例记录光线在每个像素处与表面相交（如果有的话）的几何信息，以供 <strong>Film</strong> 实现使用，例如 <a href="#TODO"><strong>GBufferFilm</strong></a> ，它在每个像素处存储的不仅仅是颜色的信息。</p>
+<pre><code class="language-cpp">/** 追踪有效的摄像机光线(cameraRay) */
+SampledSpectrum L(0.);
+VisibleSurface visibleSurface;
+if (cameraRay) {
+    /** 根据图像采样率缩放摄像机光线微分 */
+    /** 沿摄像机光线评估辐射亮度 */
+    /** 如果返回意外的辐射亮度值，则发出警告 */
+}
+</code></pre>
+<p>在将光线传递给 <strong>Li()</strong> 方法之前， <strong>ScaleDifferentials()</strong> 在每个像素进行多个采样时，会调整微分光线的比例，以考虑到胶片平面上样本之间的实际间距。。</p>
+<pre><code class="language-cpp">/** 根据图像采样率缩放摄像机光线微分 */
+Float rayDiffScale =
+    std::max&lt;Float&gt;(.125f, 1 / std::sqrt((Float)sampler.SamplesPerPixel()));
+cameraRay-&gt;ray.ScaleDifferentials(rayDiffScale);
+</code></pre>
+<p>对于不在每个像素处存储几何信息的 <strong>Film</strong> 实现，节省填充 <a href="#TODO"><strong>VisibleSurface</strong></a> 类的工作是值得的。因此，只有在必要时，才会在调用 <strong>Li()</strong> 方法时传递指向该类的指针，否则传递空指针。积分器实现应仅在 <a href="#TODO"><strong>VisibleSurface</strong></a> 非空时进行初始化。</p>
+<p><a href="#TODO"><strong>CameraRayDifferential</strong></a> 还携带与光线相关的权重，用于缩放返回的辐射值。对于简单的相机模型，每条光线的权重相等，但更准确模拟透镜系统成像过程的相机模型可能会生成一些贡献大于其他光线的光线。这种相机模型可能会模拟在胶片平面的边缘到达的光线少于中心的效果，这种效果称为 <em>渐晕(vignetting)</em> 。</p>
+<pre><code class="language-cpp">/** 沿摄像机光线评估辐射亮度 */
+bool initializeVisibleSurface = camera.GetFilm().UsesVisibleSurface();
+L = cameraRay-&gt;weight *
+    Li(cameraRay-&gt;ray, lambda, sampler, scratchBuffer,
+       initializeVisibleSurface ? &amp;visibleSurface : nullptr);
+</code></pre>
+<p><a href="#rayintegrator-definition"><strong>RayIntegrator</strong></a> 子类必须实现纯虚方法 <strong>Li()</strong> 。它返回在指定波长采样时，给定光线的起点处的入射辐射，。</p>
+<pre><code class="language-cpp">/** 光线积分器公有方法 */
+virtual SampledSpectrum Li(
+    RayDifferential ray, SampledWavelengths &amp;lambda, Sampler sampler,
+    ScratchBuffer &amp;scratchBuffer, VisibleSurface *visibleSurface) const = 0;
+</code></pre>
+<p>渲染过程中的出现的 bugs 的一个常见副作用是计算出不可能的辐射值。例如，除以零会导致辐射值等于 IEEE 浮点无穷大或“不是一个数字(not a number)”值。渲染器会查找这些可能性，并在遇到时打印错误消息。这里我们不包括执行此操作的片段，<code>/** 如果返回意外的辐射亮度值，则发出警告 */</code>。如果您对其细节感兴趣，请参见 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/cpu/integrators.cpp"><strong>cpu/integrators.cpp</strong></a> 中的实现。</p>
+<p>在已知光线起始处的辐射亮度后，调用 <a href="#TODO"><strong>Film::AddSample()</strong></a> 更新图像中相应的像素，给定样本的加权辐射亮度。样本值如何记录在胶片中的细节在第 <a href="#TODO"><strong>5.4</strong></a> 节和第 <a href="#TODO"><strong>8.8</strong></a> 节中解释。</p>
+<pre><code class="language-cpp">/** 将摄像机光线的贡献值添加到图像中 */
+camera.GetFilm().AddSample(pPixel, L, lambda, &amp;visibleSurface,
+                           cameraSample.filterWeight);
+</code></pre>
+<h2 id="136-随机游走积分器random-walk-integrator"><a class="header" href="#136-随机游走积分器random-walk-integrator">1.3.6 随机游走积分器（Random Walk Integrator）</a></h2>
+<p>尽管我们花了几页时间整理积分器基础设施的实现终于完成了 <a href="#rayintegrator-definition"><strong>RayIntegrator</strong></a> ，但现在我们可以在一个比实现完整的 <a href="#TODO"><strong>Integrator::Render()</strong></a> 方法更简单的上下文中转向实现光传输积分算法。本节中我们将描述的 <strong>RandomWalkIntegrator</strong> 继承自 <a href="#rayintegrator-definition"><strong>RayIntegrator</strong></a> ，因此多线程的所有细节、从相机生成初始光线以及沿着该光线将辐射度添加到图像的过程都已处理好。积分器在一个更简单的上下文中操作：给定一条光线，其任务是计算到达其起点的辐射度。</p>
+<p>请回忆在第 <a href="./1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html#127-%E5%85%89%E7%BA%BF%E4%BC%A0%E6%92%ADray-propagation">1.2.7</a> 节中我们提到，在没有参与介质的情况下，光线通过自由空间时所携带的光是不变的。在实现这个积分器时，我们将忽略参与介质的可能性，这使我们能够迈出第一步：给定光线与场景中几何体的第一次交点，到达光线起点的辐射度等于从交点朝向光线起点发出的辐射度。该出射辐射(outgoing radiance)由光传输方程（<a href="./1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html#equation-1-1"><strong>1.1</strong></a>）给出，尽管以封闭形式评估它是不可能的。需要采用数值方法，而在 <strong>pbrt</strong> 中使用的方法基于蒙特卡罗积分(Monte Carlo integration)，这使得可以通过对被积函数进行逐点计算来估计积分的值。第 <a href="../2_Monte_Carlo_Integration/index.html">2</a> 章提供了蒙特卡罗积分的介绍，额外的蒙特卡罗技术将在书中使用到时进行介绍。</p>
+<p>为了计算出射辐射， <strong>RandomWalkIntegrator</strong> 实现了一种基于增量构建 <em>随机游走(random walk)</em> 的简单蒙特卡洛方法，其在场景表面上连续随机选择一系列点，以构建从相机开始的光携带路径。这种方法有效地反向模拟了现实世界中的图像形成，从相机而不是从光源发出光线。在这方面向后推导在物理上仍然是有效的，因为 <strong>pbrt</strong> 所基于的光的物理模型是时间可逆的。</p>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-19">
+    <img src="figures/random-walk-insanity.png" width="938" height="1250" style="max-width: 100%;height: auto;">
+  </a>
+</div>
+<p><strong>图 1.19：使用 <a href="#randomwalkintegrator-definition"><strong>RandomWalkIntegrator</strong></a> 渲染的 <em>水彩(Watercolor)</em> 场景的图像。</strong> 由于 <strong>RandomWalkIntegrator</strong> 无法完美处理镜面表面，桌子上的两个玻璃杯呈黑色。此外，即使使用每像素 8,192 个样本来渲染此图像，结果仍然布满高频噪声。（例如，请注意远处的墙壁和椅子的底部。） <em>（场景由 Angelo Ferretti 提供。）(Scene courtesy of Angelo Ferretti)</em></p>
+</blockquote>
+<p>尽管随机游走采样算法的实现总共只有二十多行代码，但它能够模拟复杂的光照和着色效果；图 <a href="#figure-1-19">1.19</a> 显示了使用该算法渲染的图像。（不过，该图像的计算耗费了许多小时才能达到这样的质量。）在本节的其余部分，我们将略过一些积分器实现的数学细节，专注于对该方法的直观理解，后续章节将填补这些空白，并更严格地解释这一点以及更复杂的技术。</p>
+<p><a name="randomwalkintegrator-definition"></a></p>
+<pre><code class="language-cpp">/** 随机游走积分器定义 */
+class RandomWalkIntegrator : public RayIntegrator {
+  public:
+    /** 随机游走积分器 公有方法 */
+<span class="boring">       RandomWalkIntegrator(int maxDepth, Camera camera, Sampler sampler,
+</span><span class="boring">                       Primitive aggregate, std::vector&lt;Light&gt; lights)
+</span><span class="boring">           : RayIntegrator(camera, sampler, aggregate, lights), maxDepth(maxDepth) {}
+</span><span class="boring">       
+</span><span class="boring">       static std::unique_ptr&lt;RandomWalkIntegrator&gt; Create(
+</span><span class="boring">           const ParameterDictionary &amp;parameters, Camera camera, Sampler sampler,
+</span><span class="boring">           Primitive aggregate, std::vector&lt;Light&gt; lights, const FileLoc *loc);
+</span><span class="boring">       
+</span><span class="boring">       std::string ToString() const;
+</span><span class="boring">       SampledSpectrum Li(RayDifferential ray, SampledWavelengths &amp;lambda,
+</span><span class="boring">               Sampler sampler, ScratchBuffer &amp;scratchBuffer,
+</span><span class="boring">               VisibleSurface *visibleSurface) const {
+</span><span class="boring">           return LiRandomWalk(ray, lambda, sampler, scratchBuffer, 0);
+</span><span class="boring">       }
+</span><span class="boring">       
+</span>  private:
+    /** 随机游走积分器 私有方法 */
+SampledSpectrum LiRandomWalk(RayDifferential ray,
+        SampledWavelengths &amp;lambda, Sampler sampler,
+        ScratchBuffer &amp;scratchBuffer, int depth) const {
+    /** 让光线与场景相交并在没有交点时返回 */
+<span class="boring">       pstd::optional&lt;ShapeIntersection&gt; si = Intersect(ray);
+</span><span class="boring">       if (!si) {
+</span><span class="boring">           /** 返回从无限远光源发出的光 */
+</span><span class="boring">           SampledSpectrum Le(0.f);
+</span><span class="boring">           for (Light light : infiniteLights)
+</span><span class="boring">               Le += light.Le(ray, lambda);
+</span><span class="boring">           return Le;
+</span><span class="boring">       }
+</span><span class="boring">       SurfaceInteraction &amp;isect = si-&gt;intr;
+</span><span class="boring">       
+</span>    /** 获取表面交点的发射辐射 */
+<span class="boring">       Vector3f wo = -ray.d;
+</span><span class="boring">       SampledSpectrum Le = isect.Le(wo, lambda);
+</span><span class="boring">       
+</span>    /** 如果达到最大递归深度则终止随机游走 */
+<span class="boring">       if (depth == maxDepth)
+</span><span class="boring">           return Le;
+</span><span class="boring">       
+</span>    /** 在随机游走交点计算 BSDF */
+<span class="boring">       BSDF bsdf = isect.GetBSDF(ray, lambda, camera, scratchBuffer, sampler);
+</span><span class="boring">       
+</span>    /** 为随机游走随机采样离开表面时的方向 */
+<span class="boring">       Point2f u = sampler.Get2D();
+</span><span class="boring">       Vector3f wp = SampleUniformSphere(u);
+</span><span class="boring">       
+</span>    /** 在采样方向评估表面的 BSDF */
+<span class="boring">       SampledSpectrum fcos = bsdf.f(wo, wp) * AbsDot(wp, isect.shading.n);
+</span><span class="boring">       if (!fcos)
+</span><span class="boring">           return Le;
+</span><span class="boring">       
+</span>    /** 递归追踪光线以估计表面的入射辐射亮度 */
+<span class="boring">       ray = isect.SpawnRay(wp);
+</span><span class="boring">       return Le  + fcos * LiRandomWalk(ray, lambda, sampler, scratchBuffer,
+</span><span class="boring">                                        depth + 1) / (1 / (4 * Pi));
+</span><span class="boring">       
+</span>}
+    /** 随机游走积分器 私有成员 */
+<span class="boring">       int maxDepth;
+</span>};
+</code></pre>
+<p>这个积分器递归地评估随机游走。因此，它的 <strong>Li()</strong> 方法实现几乎只是通过调用 <strong>LiRandomWalk()</strong> 方法来启动递归。大多数传递给 <strong>Li()</strong> 的参数只是被传递下去，因此这个简单的积分器忽略 <a href="#TODO"><strong>VisibleSurface</strong></a> ，取而代之添加一个额外的参数来跟踪递归的深度。</p>
+<pre><code class="language-cpp">/** 随机游走积分器 公有方法 */
+SampledSpectrum Li(RayDifferential ray, SampledWavelengths &amp;lambda,
+        Sampler sampler, ScratchBuffer &amp;scratchBuffer,
+        VisibleSurface *visibleSurface) const {
+    return LiRandomWalk(ray, lambda, sampler, scratchBuffer, 0);
+}
+</code></pre>
+<pre><code class="language-cpp">/** 随机游走积分器 私有方法 */
+SampledSpectrum LiRandomWalk(RayDifferential ray,
+        SampledWavelengths &amp;lambda, Sampler sampler,
+        ScratchBuffer &amp;scratchBuffer, int depth) const {
+    /** 让光线与场景相交并在没有交点时返回 */
+    /** 获取表面交点的发射辐射 */
+    /** 如果达到最大递归深度则终止随机游走 */
+    /** 在随机游走交点计算 BSDF */
+    /** 为随机游走随机采样离开表面时的方向 */
+    /** 在采样方向评估表面的 BSDF */
+    /** 递归追踪光线以估计表面的入射辐射亮度 */
+}
+</code></pre>
+<p>第一步是找到光线与场景中形状的最近交点。如果没有找到交点，那么光线就已经离开场景。否则，作为 <a href="#TODO"><strong>ShapeIntersection</strong></a> 结构一部分返回的 <a href="#TODO"><strong>SurfaceInteraction</strong></a> 提供了关于交点局部几何属性的信息。</p>
+<pre><code class="language-cpp">/** 让光线与场景相交并在没有交点时返回 */
+pstd::optional&lt;ShapeIntersection&gt; si = Intersect(ray);
+if (!si) {
+    /** 返回从无限远光源发出的光 */
+<span class="boring">   SampledSpectrum Le(0.f);
+</span><span class="boring">   for (Light light : infiniteLights)
+</span><span class="boring">       Le += light.Le(ray, lambda);
+</span><span class="boring">   return Le;
+</span>}
+SurfaceInteraction &amp;isect = si-&gt;intr;
+</code></pre>
+<p>如果没有找到交点，辐射仍然可能沿着光线传播，因为存在一些没有几何形状的光源，例如 <a href="#TODO"><strong>ImageInfiniteLight</strong></a> 。 <a href="#TODO"><strong>Light::Le()</strong></a> 方法允许这些光源为给定光线返回其辐射。</p>
+<pre><code class="language-cpp">/** 返回从无限远光源发出的光 */
+SampledSpectrum Le(0.f);
+for (Light light : infiniteLights)
+    Le += light.Le(ray, lambda);
+return Le;
+</code></pre>
+<p>如果找到了有效的交点，我们必须在交点处评估光传输方程。第一个项，\( L_\text{e}(\text{p},\omega_\text{o}) \) ，即发射辐射，比较简单：发射是场景规格的一部分，发射辐射可以通过调用 <a href="#TODO"><strong>SurfaceInteraction::Le()</strong></a> 方法获得，该方法接受关注的出射方向。在这里，我们关注的是沿光线方向发射回来的辐射。如果物体不是发射体，该方法将返回一个零值的光谱分布(zero-valued spectral distribution)。</p>
+<pre><code class="language-cpp">/** 获取表面交点的发射辐射 */
+Vector3f wo = -ray.d;
+SampledSpectrum Le = isect.Le(wo, lambda);
+</code></pre>
+<p>评估光传输方程的第二项需要计算在交点 \( \text{p} \) 周围的方向球面上的积分。可以应用蒙特卡罗积分原理来表明，如果以相等的概率选择所有可能的方向 \( \omega' \) ，则积分的估值可以计算为 BSDF \( f \) （材质在 \( \text{p} \) 处的的光散射特性）、入射光照 \( L_\text{i} \) 以及一个余弦因子的加权乘积：</p>
+<p><a name="equation-1-2">(1.2)</a></p>
+<p>\[ \int_{\text{S}^2}^{} f(\text{p},\omega_\text{o},\omega_\text{i}) L_\text{i}(\text{p},\omega_\text{i}) |\cos{\theta_\text{i}}| \text{d}\omega_\text{i} \approx \frac{f(\text{p},\omega_\text{o},\omega') L_\text{i}(\text{p},\omega') |\cos{\theta'}|}{1/4\pi} \]</p>
+<p>换句话说，给定一个随机方向 \( \omega' \) ，估计积分的值需要评估该方向下被积函数中的项，然后乘以一个因子 \( 4\pi \) 进行缩放。（这个因子在 <a href="#TODO">A.5.2</a> 节中推导，与单位球的表面积有关。）由于只考虑一个方向，因此与积分的真实值相比，蒙特卡洛估计几乎总是存在误差。然而，可以证明像这样的估计 <em>在期望上(in expectation)</em> 是正确的：非正式地说，它们在平均上给出了正确的结果。对多个独立估计取平均通常会减少这种误差——因此，采取每个像素多个样本的做法。</p>
+<p>BSDF 和估计的余弦因子很容易评估，那么只剩下一个未知的 \( L_\text{i} \) ，即入射辐射。然而，请注意，我们发现自己又回到了最初调用 <strong>LiRandomWalk()</strong> 的地方：我们有一条光线，我们希望找到起点的入射辐射——这将通过对 <strong>LiRandomWalk()</strong> 的递归调用来提供。</p>
+<p>在计算积分的估计值之前，我们必须考虑递归的终止条件。 <strong>RandomWalkIntegrator</strong> 在预定的最大深度 <strong>maxDepth</strong> 处停止。如果没有这个终止条件，算法可能永远不会终止（例如，想象一个镜子迷宫的场景）。这个成员变量在构造函数中根据可以在场景描述文件中设置的参数进行初始化。</p>
+<pre><code class="language-cpp">/** 随机游走积分器 私有成员 */
+int maxDepth;
+</code></pre>
+<pre><code class="language-cpp">/** 如果达到最大递归深度则终止随机游走 */
+if (depth == maxDepth)
+    return Le;
+</code></pre>
+<p>如果随机游走没有终止，则调用 <strong>SurfaceInteraction::GetBSDF()</strong> 方法找到交点处的 BSDF。它评估纹理函数以确定表面属性，然后初始化 BSDF 的表示。通常需要为构成 BSDF 表示的对象分配内存；因为这段内存只需要在处理当前光线时激活，所以提供 <a href="#TODO"><strong>ScratchBuffer</strong></a> 供其进行分配。</p>
+<pre><code class="language-cpp">/** 在随机游走交点计算 BSDF */
+BSDF bsdf = isect.GetBSDF(ray, lambda, camera, scratchBuffer, sampler);
+</code></pre>
+<p>接下来，我们需要随机采样一个方向 \( \omega' \) 来计算方程(<a href="#equation-1-2">1.2</a>)中的估值。 <a href="#TODO"><strong>SampleUniformSphere()</strong></a> 函数返回单位球面上的均匀分布方向，输入由采样器提供的两个均匀值 \( [0, 1) \) 。</p>
+<pre><code class="language-cpp">/** 为随机游走随机采样离开表面时的方向 */
+Point2f u = sampler.Get2D();
+Vector3f wp = SampleUniformSphere(u);
+</code></pre>
+<p>除了入射辐射外，蒙特卡洛估计的所有因素现在都可以轻松评估。 <a href="#TODO"><strong>BSDF</strong></a> 类提供了一个 <strong>f()</strong> 方法，该方法评估一对指定方向的 BSDF，并且可以使用 <a href="#TODO"><strong>AbsDot()</strong></a> 函数计算与表面法线夹角的余弦，该函数返回两个向量之间点积的绝对值。如果向量是归一化的（在这里都是），则该值等于它们之间夹角余弦的绝对值（第 <a href="#TODO">3.3.2</a> 节）。</p>
+<p>BSDF 在提供的方向上可能为零值，因此 <strong>fcos</strong> 也可能为零——例如，当表面不透光而两个方向位于其相对两侧时，BSDF 为零。在这种情况下，没有理由继续随机游走，因为后续点对结果没有贡献。</p>
+<pre><code class="language-cpp">/** 在采样方向评估表面的 BSDF */
+SampledSpectrum fcos = bsdf.f(wo, wp) * AbsDot(wp, isect.shading.n);
+if (!fcos)
+    return Le;
+</code></pre>
+<p>剩余的任务是计算在采样方向 \( \omega' \) 上离开表面的新光线。这个任务由 <strong>SpawnRay()</strong> 方法处理，该方法返回在提供方向上离开交点的光线，确保光线与表面有足够的偏移，以避免因舍入误差而错误地重新相交。给定光线后，可以递归调用 <strong>LiRandomWalk()</strong> 来估计入射辐射，从而完成方程 (<a href="#equation-1-2">1.2</a>) 的估计。</p>
+<pre><code class="language-cpp">/** 递归追踪光线以估计表面的入射辐射亮度 */
+ray = isect.SpawnRay(wp);
+return Le  + fcos * LiRandomWalk(ray, lambda, sampler, scratchBuffer,
+                                 depth + 1) / (1 / (4 * Pi));
+</code></pre>
+<p>这种简单的方法有许多缺点。例如，如果发射表面很小，大多数光线路径将找不到任何光照，但是需要追踪许多光线以形成准确的图像。在点光源的极限情况下，图像将是黑色，因为与这样的光源相交的概率为零。类似的问题也适用于在集中方向上散射光的 BSDF 模型。在完美镜子的极限情况下，它沿单一方向散射入射光， <a href="#randomwalkintegrator-definition"><strong>RandomWalkIntegrator</strong></a> 将永远无法随机采样该方向。</p>
+<p>这些问题以及更多问题可以通过更复杂的蒙特卡罗积分技术来解决。在后续章节中，我们将介绍一系列改进，以获得更准确的结果。第 <a href="../13_Light_Transport_I_Surface_Reflection/index.html">13</a> 到 <a href="../15_Wavefront_Rendering_on_GPUs/index.html">15</a> 章中定义的积分器是这些发展的巅峰。所有这些仍然基于 <strong>RandomWalkIntegrator</strong> 中使用的基本思想，但比它更高效和稳健。图 <a href="#figure-1-20">1.20</a> 将 <a href="#randomwalkintegrator-definition"><strong>RandomWalkIntegrator</strong></a> 与其中一个改进的积分器进行比较，并展示了可能的改进程度。</p>
+<blockquote>
+<p>(a) RandomWalkIntegrator 随机游走积分器</p>
+<div class="figure-row">
+  <a name="figure-1-20">
+    <img src="figures/watercolor-randomwalk.png" width="940" height="1250" style="max-width: 100%;">
+  </a>
+</div>
+<p>(b) PathIntegrator 路径积分器</p>
+<div class="figure-row">
+    <img src="figures/watercolor-path.png" width="940" height="1250" style="max-width: 100%;">
+</div>
+<p><strong>图 1.20：使用每像素 32 个样本渲染的 <em>水彩(Watercolor)</em> 场景。</strong> (a) 使用 <a href="#randomwalkintegrator-definition"><strong>RandomWalkIntegrator</strong></a> 渲染。(b) 使用 <a href="#TODO"><strong>PathIntegrator</strong></a> 渲染，采用相同的一般方法，但使用更复杂的蒙特卡洛技术。 <a href="#TODO"><strong>PathIntegrator</strong></a> 在大致相同的工作量下提供了显著更好的图像，均方误差减少了 \( 54.5\times \) 。</p>
+</blockquote>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

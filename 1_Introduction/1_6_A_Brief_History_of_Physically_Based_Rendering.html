@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>基于物理的渲染简史 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html" class="active"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="16-基于物理的渲染简史a-brief-history-of-physically-based-rendering"><a class="header" href="#16-基于物理的渲染简史a-brief-history-of-physically-based-rendering">1.6 基于物理的渲染简史（<a href="https://www.pbr-book.org/4ed/Introduction/A_Brief_History_of_Physically_Based_Rendering">A Brief History of Physically Based Rendering</a>）</a></h1>
+<p>在 1970 年代计算机图形学的早期阶段，最重要的问题是解决基本问题，如可见性算法和几何表示。当一兆字节的 RAM 是一种稀有且昂贵的奢侈品，而一台能够每秒进行一百万次浮点运算的计算机的价格高达数十万美元时，计算机图形学中可能实现的复杂性相应地受到限制，任何尝试准确模拟物理以进行渲染的努力都是不可行的。</p>
+<p>随着计算机变得更强大且成本更低，考虑更具计算需求的渲染方法变得可能，这反过来使得基于物理的方法变得可行。这个进展可以通过 <em>布林定律(Blinn’s law)</em> 很好地解释：“随着技术的进步，渲染时间保持不变。”</p>
+<p>吉姆·布林的简单陈述捕捉了一个重要的限制：给定必须渲染的图像数量（无论是为研究论文准备的少量图像，还是为一部特效电影准备的十万多张图像），每张图像所能花费的处理时间是有限的。可用的计算量是有限的，而在渲染必须完成之前可用的时间也是有限的，因此每张图像的最大计算量必然受到限制。</p>
+<p>布林定律还表达了一个评论-，即人们希望能够渲染的图像与他们能够渲染的图像之间仍然存在差距：随着计算机变得更快，内容创作者继续利用增强的计算能力来渲染更复杂的场景，使用更复杂的渲染算法，而不是仅仅更快地渲染之前的相同场景。渲染继续消耗所有可用的计算能力。</p>
+<h2 id="161-研究research"><a class="header" href="#161-研究research">1.6.1 研究（Research）</a></h2>
+<p>基于物理的渲染方法在 1980 年代开始受到图形研究人员的认真考虑。Whitted 的论文（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Whitted80">1980</a>）提出了使用光线追踪进行全局光照效果的想法，为准确模拟场景中光的分布打开了大门。他的方法所生成的渲染图像与之前看到的任何图像截然不同，这激发了人们对这种方法的兴奋。</p>
+<p>另一个值得注意的早期物理基础渲染进展是 Cook 和 Torrance 的反射模型（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Cook81">1981</a> 年，<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Cook82">1982</a> 年），该模型将微面反射模型引入图形学。除了其他贡献，他们还表明，准确建模微面反射使得能够准确渲染金属表面；早期的方法无法很好地渲染金属。</p>
+<p>不久之后，Goral 等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Goral1984">1984</a>）将热传递文献与渲染联系起来，展示了如何使用基于物理的光传输近似来融入全局漫反射光照效果。该方法基于有限元技术，场景中表面的区域相互交换能量。这种方法被称为“辐射度”，以一个相关的物理单位命名。随后，Cohen 和 Greenberg（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Cohen1985">1985</a>）以及 Nishita 和 Nakamae（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Nishita1985">1985</a>）的工作引入了重要的改进。再次，基于物理的方法导致了在渲染图像中未曾见过的光照效果，这促使许多研究人员在这一领域追求改进。</p>
+<p>尽管辐射度方法基于物理单位和能量守恒，但随着时间的推移，显然它不会导致实用的渲染算法：渐近计算复杂度是一个难以管理的 \( O(n^2) \) ，并且为了获得良好的结果，有必要沿着阴影边界重新细分几何模型；研究人员在为此开发稳健且高效的细分算法方面遇到了困难。辐射度在实践中的应用受到限制。</p>
+<p>在辐射度年代，一小组研究人员追求基于物理的渲染方法，这些方法基于光线追踪和蒙特卡罗积分。当时，许多人对他们的工作持怀疑态度；由于蒙特卡罗积分误差导致图像中的噪声似乎是不可避免的，而基于辐射度的方法在相对简单的场景中很快就能产生视觉上令人满意的结果。</p>
+<p>在 1984 年，Cook、Porter 和 Carpenter 引入了分布式光线追踪，将 Whitted 的算法推广到从相机计算运动模糊和散焦模糊、从光滑表面计算模糊反射以及从区域光源计算照明（Cook et al. <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Cook84">1984</a>），显示出光线追踪能够生成一系列重要的柔和光照效果。</p>
+<p>不久之后，Kajiya（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Kajiya86">1986</a>）引入了路径追踪；他提出了渲染问题的严格公式（光传输积分方程），并展示了如何应用蒙特卡洛积分来解决它。这项工作需要巨大的计算量：在 IBM 4341 计算机上渲染一个包含两个球体的 \( 256 \times 256 \ \) 像素图像需要 7 小时的计算时间，该计算机在首次发布时的价格大约为 $280,000 美元（Farmer <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Farmer1981">1981</a>）。与 von Herzen 一起，Kajiya 还将体积渲染方程引入图形学（Kajiya 和 von Herzen <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Kajiya84">1984</a>）；该方程描述了参与介质中光的散射。</p>
+<p>库克等人和加吉亚的工作再次产生了前所未见的图像，展示了基于物理的方法的价值。在随后的几年中，阿尔沃和柯克（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Arvo90pt">1990</a>）以及柯克和阿尔沃（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Kirk91">1991</a>）在论文中描述了关于蒙特卡罗用于真实图像合成的重要工作。肖利的博士论文（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Shirley90phd">1990</a>）及肖利等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Shirley96">1996</a>）的后续工作是基于蒙特卡罗的努力的重要贡献。霍尔的书 <em>《计算机生成图像中的照明与色彩》(Illumination and Color in Computer Generated Imagery)</em>（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Hall89">1989</a>）是第一本以基于物理的框架呈现渲染的书籍之一，安德鲁·格拉斯纳的 <em>《数字图像合成原理》(Principles of Digital Image Synthesis)</em> 奠定了该领域的基础（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Glassner:PODIS">1995</a>）。沃德的 <em>Radiance</em> 渲染系统是早期的开源基于物理的渲染系统，专注于照明设计（沃德 <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Ward94">1994</a>），斯卢萨莱克的 <em>Vision</em> 渲染器旨在弥合基于物理的方法与当时广泛使用的非基于物理的 <em>RenderMan</em> 接口之间的差距（斯卢萨莱克 <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:SlusallekThesis">1996</a>）。</p>
+<p>在托兰斯和库克的研究之后，康奈尔大学计算机图形学项目的许多研究调查了基于物理的方法。格林伯格等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Greenberg:1997:AFF">1997</a>）总结了这项工作的动机，他们强烈主张基于对现实世界物体材料属性的测量和对人类视觉系统的深入理解进行物理准确的渲染。</p>
+<p>物理基础渲染的一个关键进展是 Veach 的工作，详细描述在他的论文中（Veach <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:VeachThesis">1997</a>）。Veach 推进了蒙特卡罗渲染的关键理论基础，同时开发了多重重要性采样、双向路径追踪和 Metropolis 光传输等新算法，这大大提高了其效率。我们相信，以 Blinn 定律为指导，这些效率的显著提升对这些方法的实际应用至关重要。</p>
+<p>在这个时候，随着计算机变得更快和更并行，许多研究人员开始追求实时光线追踪；Wald、Slusallek 和 Benthin 撰写了一篇有影响力的论文，描述了一种高度优化的光线追踪器，其效率远高于之前的光线追踪器（Wald et al. <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Wald01b">2001b</a>）。许多后续论文介绍了越来越高效的光线追踪算法。尽管大多数工作并不是基于物理的，但这些结果在光线追踪加速结构和光线追踪几何组件的性能上取得了重大进展。由于基于物理的渲染通常大量使用光线追踪，因此这项工作也产生了与更快的计算机相同的积极效果，使得使用物理方法渲染更复杂的场景成为可能。</p>
+<p>我们在此结束对基于物理的渲染研究进展关键步骤的总结，尽管还有更多的工作已完成。本书后续章节中的“进一步阅读”部分详细介绍了这些工作。</p>
+<h2 id="162-生产production"><a class="header" href="#162-生产production">1.6.2 生产（Production）</a></h2>
+<p>随着 1980 年代计算机性能的提升，计算机图形开始被用于动画和电影制作。早期的例子包括吉姆·布林（Jim Blinn）在 1981 年渲染的“ <em>旅行者 2 号(Voyager 2 )</em> ”飞掠土星的画面，以及电影 <em>《星际迷航 II：可汗之 wrath》(Star Trek II: The Wrath of Khan)</em> （1982）、 <em>《创战纪》(Tron)</em> （1982）和 <em>《最后的星际战士》(The Last Starfighter)</em> （1984）中的视觉特效。</p>
+<p>在早期计算机生成图像的生产使用中，基于光栅化的渲染（特别是 Reyes 算法（Cook 等，<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Cook87">1987</a>））是唯一可行的选择。一个原因是当时可用的计算能力不足以处理复杂的反射模型或物理基础光线追踪所能提供的全局光照效果。更重要的是，光栅化具有一个重要的优势，即它不要求整个场景表示能够装进主内存。</p>
+<p>当 RAM 还不够充足时，几乎任何有趣的场景都太大，无法完全放入主内存中。基于光栅化的算法使得在任何时候只需在内存中保留完整场景表示的一小部分就能渲染场景成为可能。如果整个场景无法放入主内存，全局光照效果就很难实现；多年来，由于计算机系统的限制，内容创作者有效地决定几何和纹理复杂性对视觉真实感比光照复杂性（进而物理准确性）更为重要。</p>
+<p>许多从业者在这个时候也认为基于物理的方法在制作中是不可取的：计算机图形学的一个伟大之处在于，可以不受惩罚地欺骗现实，以实现所需的艺术效果。例如，常规电影中的灯光设计师常常努力将光源放置在不被摄像机看到的位置，或者花费大量精力将光源放置在照亮演员的同时，不让背景受到过多光照。计算机图形学提供了这样的机会，例如，可以实现一个光源模型，使角色上照射的光是背景物体的两倍。多年来，这种能力似乎比物理准确性更有用。</p>
+<p>在 1990 年代末和 2000 年代初，具有将渲染图像与拍摄的真实环境相匹配特定需求的视觉效果从业者开创了捕捉真实世界光照和着色效果的技术，并早期采用了基于物理的方法。（例如，参见 Snow（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Snow2010">2010</a>）关于 ILM 在该领域早期工作的历史。）</p>
+<p>在此期间，蓝天工作室(Blue Sky Studios)采用了基于物理的管道（Ohmer <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Ohmer1997">1997</a>）。他们在 1992 年为博朗剃须刀制作的广告的照片真实感引起了许多人的关注，而他们在 1998 年展示的短片 <em>《兔子》(Bunny)</em> 是蒙特卡罗全局照明在制作中早期应用的一个例子。其视觉效果与使用 Reyes 渲染的电影和短片有显著不同，广受关注。蓝天后来的动画长片也遵循了这种方法。不幸的是，蓝天从未发布其方法的重大技术细节，限制了其更广泛的影响。</p>
+<p>在 2000 年代初，<em>mental ray</em> 光线追踪系统被许多工作室使用，主要用于视觉特效。它是一款高效的光线追踪器，具有复杂的全局光照算法实现。其开发者的主要关注点是计算机辅助设计和产品设计应用，因此缺乏处理极其复杂场景和电影制作所需的大量纹理贴图的功能。</p>
+<p>在 <em>兔子(Bunny)</em> 之后，另一个重要的时刻出现在 2001 年，当时马尔科斯·法哈多带着他早期版本的 <em>阿诺德(Arnold)</em> 渲染器参加了 SIGGRAPH 会议。他在蒙特卡罗图像合成过程中展示的图像不仅具有复杂的几何形状、纹理和全局光照，而且渲染时间仅需数十分钟。虽然这些场景的复杂性不及当时电影制作中使用的场景，但他的结果向许多人展示了全局光照与复杂场景结合所带来的创作机会。</p>
+<p>法哈多将 <em>Arnold</em> 带到了索尼影业图像工作室，在那里开始将其转变为一个具备生产能力的物理基础渲染系统。许多问题需要解决，包括高效的运动模糊、可编程着色、对极其复杂场景的支持，以及场景几何体和纹理的延迟加载。 <em>Arnold</em> 首次用于电影 <em>《怪兽屋》(Monster House)</em>，现在作为商业产品可用。</p>
+<p>在 2000 年代初，皮克斯的 <em>RenderMan</em> 渲染器开始支持混合光栅化和光线追踪算法，并包含了一些用于计算复杂场景中全局光照解决方案的创新算法。 <em>RenderMan</em> 最近被重写为一个基于物理的光线追踪器，遵循 <strong>pbrt</strong> （Christensen <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading.html#cite:Christensen2015">2015</a>）的通用系统架构。</p>
+<p>基于物理的蒙特卡罗渲染方法在生产中成功的主要原因之一是它们最终提高了艺术家的生产力。这些是一些重要因素：</p>
+<ul>
+<li>所涉及的算法基本上只有一个质量调节器：每个像素采样的数量；这对艺术家非常有帮助。光线追踪算法也适合渐进式细化和通过每个像素仅取少量样本快速计算粗略预览；基于光栅化的渲染器没有相应的能力。</li>
+<li>采用基于物理的反射模型使得表面材料的设计变得更加容易。早期，当使用不一定能量守恒的反射模型时，一个物体可能被放置在单一的照明环境中，同时调整其表面反射参数。该物体在该环境中看起来很好，但当移动到另一个照明环境时，往往会显得完全不对，因为表面反射的能量过少或过多：表面属性被设置为不合理的值。</li>
+<li>使用光线追踪计算的阴影质量远远优于光栅化。消除了调整阴影贴图分辨率、偏差和其他参数的需要，减轻了灯光艺术家的不愉快工作。此外，基于物理的方法带来了反射光和其他软光效果，这些效果是由方法本身产生的，而不是通过艺术家手动调节的。</li>
+</ul>
+<p>截至本文撰写时，基于物理的渲染已广泛用于制作电影的计算机生成图像；图 <a href="#figure-1-21">1.21</a> 和图 <a href="#figure-1-22">1.22</a> 展示了两部最近使用基于物理方法的电影中的图像。</p>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-21">
+    <img src="figures/gravity.png" style="max-width: 100%; height: auto;" width="1300" height="604">
+  </a>
+</div>
+<p><strong>图 1.21：</strong> 电影 <em>《地心引力》(Gravity)</em>（2013）展示了逼真的太空环境的壮观计算机生成图像，具有体积散射和大量各向异性金属表面。该图像是使用 <em>Arnold</em> 生成的，这是一种考虑全局光照的物理基础渲染系统。图片由华纳兄弟和 Framestore 提供。</p>
+</blockquote>
+<blockquote>
+<div class="figure-row">
+  <a name="figure-1-21">
+    <img src="figures/alita.png" style="max-width: 100%; height: auto;" width="2080" height="1099">
+  </a>
+</div>
+<p><strong>图 1.22：</strong> 这张来自 <em>《阿丽塔：战斗天使》(Alita: Battle Angel)</em>（2019）的图像也是使用基于物理的渲染系统渲染的。图像由 Weta Digital 提供，© 2018 二十世纪福克斯电影公司。版权所有。</p>
+</blockquote>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../1_Introduction/Further_Reading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../1_Introduction/Further_Reading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

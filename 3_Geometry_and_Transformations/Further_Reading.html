@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>延伸阅读 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html" class="active"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="延伸阅读further-reading"><a class="header" href="#延伸阅读further-reading">延伸阅读（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading">Further Reading</a>）</a></h1>
+<p>DeRose、Goldman 及其合作者提出了一种优雅的“无坐标（coordinate-free）”方法来描述图形的向量几何，其中位置和方向恰好用特定坐标系的 \( (x,y,z) \) 坐标表示的事实被淡化，而点和向量本身记录了它们所表达的坐标系（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Goldman85">Goldman 1985</a>；<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:DeRose89">DeRose 1989</a>；<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Mann97">Mann 等，1997</a>）。这使得软件层能够确保常见错误，例如在一个坐标系中将向量与另一个坐标系中的点相加，可以通过先将它们转换为一个公共坐标系来透明地处理。Geisler 等（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Geisler2020">2020</a>）描述了一种相关的方法，他们使用编程语言的类型系统对坐标系进行了编码。我们在 <strong>pbrt</strong> 中没有遵循这两种方法，尽管它们背后的原则在处理计算机图形中的坐标系时非常值得理解和牢记。</p>
+<p>施耐德和埃伯利的 <em>《计算机图形学的几何工具》（Geometric Tools for Computer Graphics）</em> 受到无坐标方法的影响，涵盖了本章主题的更深层次内容（施耐德和埃伯利 <a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Schneider03">2003</a>）。该书还包含了许多用于图形的有用几何算法。罗杰斯和亚当斯的 <em>《计算机图形学的数学元素》（Mathematical Elements for Computer Graphics）</em>（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Rogers90">1990</a>）是本章主题的经典且更传统的介绍。需要注意的是，他们的书使用行向量表示点和向量，这意味着在他们的框架中，我们的矩阵会被转置，并且他们通过矩阵乘以点和向量来进行变换 \( (\text{p}\mathbf{M}) \)，而不是像我们那样将矩阵乘以点 \( \mathbf{M}\text{p} \)。齐次坐标在本章中仅被简要提及，尽管它们是投影几何的基础，许多优雅算法的基础。斯托尔菲的书是该主题的优秀介绍（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Stolfi91">斯托尔菲 1991</a>）。</p>
+<p>关于线性代数和向量几何，有许多优秀的书籍。我们发现 Lang（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Lang86">1986</a>）和 Buck（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Buck78">1978</a>）在这些主题上是很好的参考。另请参阅 Akenine-Möller 等人的 <em>《实时渲染》（Real-Time Rendering）</em> 一书（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Moller18">2018</a>），该书为线性代数提供了扎实的图形基础介绍。Ström 等人撰写了一本优秀的在线线性代数书籍，<a href="http://immersivemath.com/">immersivemath.com</a>，书中包含互动图形，展示了关键概念（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Strom2020">2020</a>）。</p>
+<p>Donnay 的书（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Donnay1945">1945</a>）对球面三角学进行了简明而全面的介绍。方程（<a href="./3_8_Spherical_Geometry.html#equation-3-6">3.6</a>）中三角形的立体角表达式源于 Van Oosterom 和 Strackee（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:VanOosterom1983">1983</a>）。</p>
+<p>一种设计向量数学库的替代方法是由 Guennebaud、Jacob 等人（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Guennebaud2010">2010</a>）提出的广泛使用的 <em>eigen</em> 系统。除了支持 CPU SIMD 向量指令集外，它还广泛使用 <em>表达式模板（expression templates）</em>，这是一种 C++编程技术，使得在编译时简化和优化向量及矩阵表达式的评估成为可能。</p>
+<p>法向量变换的细微之处在图形学界首次被广泛理解，源于 Wallis（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Wallis90">1990</a>）和 Turkowski（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Turkowski90">1990b</a>）的文章。</p>
+<p>Cigolle 等人（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Cigolle2014">2014</a>）比较了多种紧凑编码单位向量的方法。 <a href="./3_8_Spherical_Geometry.html#OctahedralVector-definition"><strong>OctahedralVector</strong></a> 中实现的方法源于 Meyer 等人（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Meyer2010">2010</a>），他们还表明，如果使用 52 位进行这种表示，精度等同于归一化的 <a href="./3_3_Vectors.html#Vector3*"><strong>Vector3f</strong></a>。 （我们的实现还包括 Cigolle 等人（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Cigolle2014">2014</a>）建议的改进。）它所基于的八面体编码是由 Praun 和 Hoppe（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Praun2003">2003</a>）提出的。</p>
+<p>第 <a href="./3_8_Spherical_Geometry.html#383-%E7%90%83%E9%9D%A2%E5%8F%82%E6%95%B0%E5%8C%96spherical-parameterizations">3.8.3</a> 节中的等面积球面映射算法源于 Clarberg（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Clarberg2008">2008</a>）；我们对映射函数的实现来自于该论文附带的高性能 CPU SIMD 实现。其基于的正方形到半球的映射是由 Shirley 和 Chiu（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Shirley97">1997</a>）开发的。</p>
+<p>在 <a href="./3_3_Vectors.html#CoordinateSystem"><strong>CoordinateSystem()</strong></a> 中使用的算法基于 Frisvad（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Frisvad2012">2012</a>）首次提出的方法。我们在实现中使用的提高数值精度的重构是由 Duff 等人（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Duff2017">2017</a>）和 Max（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Max2017">2017</a>）同时提出的。在 <a href="./3_9_Transformations.html#RotateFromTo"><strong>RotateFromTo()</strong></a> 中实现的算法是由 Möller 和 Hughes（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Tomas99">1999</a>）引入的，Hughes（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Hughes2021">2021</a>）对反射向量的计算进行了调整。</p>
+<p>本章定义的数值稳健的 <a href="./3_3_Vectors.html#AngleBetween"><strong>AngleBetween()</strong></a> 函数源于 Hatch（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Hatch2003">2003</a>）。</p>
+<p>Barequet 和 Elber（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading#cite:Barequet2005">2005</a>）提出了一种计算多个方向向量的 <em>紧凑边界圆锥（tight bounding cone）</em> 的算法。</p>
+<h2 id="参考文献references"><a class="header" href="#参考文献references">参考文献（References）</a></h2>
+<ul>
+<li>Akenine-Möller, T., E. Haines, N. Hoffman, A. Peesce, M. Iwanicki, and S. Hillaire. 2018. Real-Time Rendering (4th ed.). Boca Raton, FL: CRC Press.</li>
+<li>Arvo, J. 1990. Transforming axis-aligned bounding boxes. In A. S. Glassner (ed.), Graphics Gems I, 548–50. San Diego: Academic Press.</li>
+<li>Barequet, G., and G. Elber. 2005. Optimal bounding cones of vectors in three dimensions. Information Processing Letters 93 (2), 83–89.</li>
+<li>Buck, R. C. 1978. Advanced Calculus. New York: McGraw-Hill.</li>
+<li>Cigolle, Z. H., S. Donow, D. Evangelakos, M. Mara, M. McGuire, and Q. Meyer. 2014. Survey of efficient representations for independent unit vectors. Journal of Computer Graphics Techniques (JCGT) 3 (2), 1–30.</li>
+<li>Clarberg, P. 2008. Fast equal-area mapping of the (hemi)sphere using SIMD. Journal of Graphics Tools 13 (3), 53–68.</li>
+<li>DeRose, T. D. 1989. A Coordinate-Free Approach to Geometric Programming. Math for SIGGRAPH, SIGGRAPH Course Notes #23. Also available as Technical Report No. 89-09-16, Department of Computer Science and Engineering, University of Washington, Seattle.</li>
+<li>Donnay, J. D. H. 1945. Spherical Trigonometry after the Cesàro Method. New York, NY: Interscience Publishers.</li>
+<li>Duff, T., J. Burgess, P. Christensen, C. Hery, A. Kensler, M. Liani, and R. Villemin. 2017. Building an orthonormal basis, revisited. Journal of Computer Graphics Techniques (JCGT) 6 (1), 1–8.</li>
+<li>Frisvad, J. R. 2012. Building an orthonormal basis from a 3d unit vector without normalization. Journal of Graphics Tools 16 (3), 151–159.</li>
+<li>Geisler, D., I. Yoon, A. Kabra, H. He, Y. Sanders, and A. Sampson. 2020. Geometry types for graphics programming. Proceedings of the ACM on Programming Languages (OOPSLA 2020) 4, 173:1–25.</li>
+<li>Goldman, R. 1985. Illicit expressions in vector algebra. ACM Transactions on Graphics 4 (3), 223–43.</li>
+<li>Guennebaud, G., B. Jacob, and others. 2010. Eigen v3. http://eigen.tuxfamily.org.</li>
+<li>Hatch, D. 2003. The right way to calculate stuff. http://www.plunk.org/ hatch/rightway.html.</li>
+<li>Hughes, J. F. 2021. Personal communication.</li>
+<li>Lang, S. 1986. An Introduction to Linear Algebra. New York: Springer-Verlag.</li>
+<li>Möller, T., and J. Hughes. 1999. Efficiently building a matrix to rotate one vector to another. Journal of Graphics Tools 4 (4), 1–4.</li>
+<li>Mann, S., N. Litke, and T. DeRose. 1997. A coordinate free geometry ADT. Research Report CS-97-15, Computer Science Department, University of Waterloo.</li>
+<li>Max, N. 2017. Improved accuracy when building an orthonormal basis. Journal of Computer Graphics Techniques (JCGT) 6 (1), 9–16.</li>
+<li>Meyer, Q., J. Süssmuth, G. Sussner, M. Stamminger, and G. Greiner. 2010. On floating-point normal vectors. Proceedings of the 21st Eurographics Conference on Rendering, 1405–9.</li>
+<li>Praun, E., and Hoppe, H. 2003. Spherical parameterization and remeshing. ACM Transactions on Graphics (Proceedings of SIGGRAPH 2003) 22 (3), 340–49.</li>
+<li>Rogers, D. F., and J. A. Adams. 1990. Mathematical Elements for Computer Graphics. New York: McGraw-Hill.</li>
+<li>Schneider, P. J., and D. H. Eberly. 2003. Geometric Tools for Computer Graphics. San Francisco: Morgan Kaufmann.</li>
+<li>Shirley, P., and K. Chiu. 1997. A low distortion map between disk and square. Journal of Graphics Tools 2 (3), 45–52.</li>
+<li>Stolfi, J. 1991. Oriented Projective Geometry. San Diego: Academic Press.</li>
+<li>Ström, J., K. Åström, and T. Akenine-Möller. 2020. Immersive linear algebra. immersivemath.com.</li>
+<li>Turkowski, K. 1990b. Properties of surface-normal transformations. In A. S. Glassner (ed.), Graphics Gems I, 539–47. San Diego: Academic Press.</li>
+<li>Van Oosterom, A., and J. Strackee. 1983. The solid angle of a plane triangle. IEEE Transactions on Biomedical Engineering BME-30 (2), 125–26.</li>
+<li>Wallis, B. 1990. Forms, vectors, and transforms. In A. S. Glassner (ed.), Graphics Gems I, 533–38. San Diego: Academic Press.</li>
+</ul>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../3_Geometry_and_Transformations/3_11_Interactions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../3_Geometry_and_Transformations/Exercises.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../3_Geometry_and_Transformations/3_11_Interactions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../3_Geometry_and_Transformations/Exercises.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

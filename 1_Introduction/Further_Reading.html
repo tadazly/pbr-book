@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>延伸阅读 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html" class="active"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="延伸阅读further-reading"><a class="header" href="#延伸阅读further-reading">延伸阅读（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading">Further Reading</a>）</a></h1>
+<p>在一篇开创性的早期论文中，Arthur Appel（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Appel68">1968</a>）首次描述了光线追踪的基本思想，以解决隐藏表面问题并计算多边形场景中的阴影。Goldstein 和 Nagel（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Goldstein71">1971</a>）随后展示了光线追踪如何用于渲染具有二次曲面的场景。Kay 和 Greenberg（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Kay79">1979</a>）描述了一种渲染透明度的光线追踪方法，而 Whitted 的开创性 <em>CACM</em> 文章描述了一种通用递归光线追踪算法，准确模拟了镜面表面的反射和折射以及点光源的阴影（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Whitted80">Whitted 1980</a>）。Whitted 最近撰写了一篇文章，描述了光线追踪早期发展的情况（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Whitted2020">Whitted 2020</a>）。</p>
+<p>除了第 <a href="./1_6_A_Brief_History_of_Physically_Based_Rendering.html">1.6</a> 节中讨论的内容，早期关于基于物理的渲染和图像合成的著名书籍还包括 Cohen 和 Wallace 的 <em>《辐射度与真实图像合成》(Radiosity and Realistic Image Synthesis)</em> （<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Cohen93">1993 年</a>）、Sillion 和 Puech 的 <em>《辐射度与全局光照》(Radiosity and Global Illumination)</em> （<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Sillion94">1994 年</a>）以及 Ashdown 的 <em>《辐射度：程序员的视角》(Radiosity: A Programmer’s Perspective)</em> （<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Ashdown94-RPP">1994 年</a>），这些书籍主要描述了有限元辐射度方法。SIGGRAPH 的蒙特卡罗光线追踪课程的课程笔记包含了大量实用信息（Jensen 等，<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Jensen01course">2001a</a>，<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Jensen03course">2003</a>），其中许多内容在近二十年后仍然相关。</p>
+<p>在一篇关于光线追踪系统设计的论文中，Kirk 和 Arvo（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Kirk88">1988</a>）提出了许多现在已成为渲染器设计经典的原则。他们的渲染器被实现为一个核心内核，封装了基本的渲染算法，并通过精心构建的面向对象接口与图元和着色例程进行交互。这种方法使得用新的图元和加速方法扩展系统变得容易。 <strong>pbrt</strong> 的设计基于这些思想。</p>
+<p>至今，关于基本光线追踪器设计的一个良好参考是 <em>《光线追踪导论》(Introduction to Ray Tracing)</em>（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Glassner:IntroRayTracing">Glassner 1989a</a>），该书描述了当时光线追踪的最新技术，并有 Heckbert 撰写的一章，概述了基本光线追踪器的设计。最近，Shirley 和 Morley 的 <em>《真实光线追踪》(Realistic Ray Tracing)</em> （<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Shirley03">2003</a>）提供了一个易于理解的光线追踪入门，并包括一个基本光线追踪器的完整源代码。Suffern 的书（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Suffern2007">2007</a>）也提供了对光线追踪的温和介绍。Shirley 的 <em>《七天入门光线追踪》(Ray Tracing in One Weekend)</em> 系列（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Shirley2020">2020</a>）是一个容易体验到光线追踪编写乐趣的入门。</p>
+<p>康奈尔大学的研究人员经过多年的努力开发了一个渲染测试平台；其设计和整体结构由 Trumbore、Lytle 和 Greenberg（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Trumbore93">1993</a>）描述。其前身由 Hall 和 Greenberg（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Hall83">1983</a>）描述。该系统是一个松散耦合的模块和库集合，每个模块都旨在处理单一任务（光线-物体相交加速、图像存储等），并以易于组合适当模块的方式编写，以便研究和开发新的渲染算法。这个测试平台非常成功，成为了 1990 年代康奈尔大学进行的大部分渲染研究的基础。</p>
+<p><em>Radiance</em> 是第一个广泛可用的基于物理量的开源渲染器。它旨在为建筑设计执行准确的光照模拟。Ward 在一篇论文和一本书中描述了它的设计和历史（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Ward94">Ward 1994</a>；<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Ward98">Larson 和 Shakespeare 1998</a>）。 <em>Radiance</em> 采用 UNIX 风格设计，作为一组相互作用的程序，每个程序处理渲染过程的不同部分。这种一般类型的渲染架构首次由 Duff（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Duff85">1985</a>）描述。</p>
+<p>Glassner（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Glassner93">1993</a>）的 <em>Spectrum</em> 渲染架构也专注于基于物理的渲染，通过基于信号处理的问题公式进行处理。它是一个可扩展的系统，采用插件架构； <strong>pbrt</strong> 使用参数/值列表来初始化主要抽象接口实现的方法 <em>Spectrum</em> 的类似。 <em>Spectrum</em> 的一个显著特点是，描述场景的所有参数都可以是时间的函数。</p>
+<p>Slusallek 和 Seidel (<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Slusallek95">1995</a>, <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Slusallek96">1996</a>; Slusallek <a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:SlusallekThesis">1996</a>) 描述了 <em>Vision</em> 渲染系统，该系统同样是基于物理的，旨在支持多种光传输算法。特别是，它有一个雄心勃勃的目标，即支持蒙特卡罗和有限元基础的光传输算法。</p>
+<p>许多论文描述了其他渲染系统的设计和实现，包括用于娱乐和艺术应用的渲染器。Reyes 架构是皮克斯 <em>RenderMan</em> 渲染器的基础，首次由 Cook 等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Cook87">1987 年</a>）描述，Apodaca 和 Gritz（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Apodaca00">2000 年</a>）总结了对原有算法的一些改进。Gritz 和 Hahn（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Gritz96">1996 年</a>）描述了 <em>BMRT</em> 光线追踪器。 <em>Maya</em> 建模和动画系统中的渲染器由 Sung 等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Sung98">1998 年</a>）描述，<em>mental ray</em> 渲染器的一些内部结构在 Driemeyer 和 Herken 的 API 书中有所描述（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Driemeyer02">Driemeyer 和 Herken 2002 年</a>）。高性能 <em>Manta</em> 交互式光线追踪器的设计由 Bigler 等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Bigler2006">2006 年</a>）描述。</p>
+<p><em>OptiX</em> 引入了一种特别有趣的高性能光线追踪设计方法：它基于在运行时进行即时编译，以生成专用版本的光线追踪器，将用户提供的代码（例如材料评估和采样）与渲染器提供的代码（例如高性能光线-物体相交）交织在一起。该方法由 Parker 等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Parker2010">2010</a>）描述。</p>
+<p>最近，Eisenacher 等人讨论了迪士尼 <em>Hyperion</em> 渲染器的光线排序架构（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Eisenacher2013">Eisenacher 等人 2013</a>），而 Lee 等人则撰写了关于梦工厂 <em>MoonRay</em> 渲染系统实现的文章（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Lee2017">Lee 等人 2017</a>）。 <em>Iray</em> 光线追踪器的实现由 Keller 等人描述（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Keller2017">2017</a>）。</p>
+<p>在 2018 年，<em>ACM 图形学会刊(ACM Transactions on Graphics)</em> 的特刊中包含了描述五个用于电影制作的渲染系统实现的论文。这些论文详细介绍了各种渲染器；阅读它们是值得的。它们包括 Burley 等人对迪士尼 <em>Hyperion</em> 渲染器的描述（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Burley2018">2018</a>），Christensen 等人关于皮克斯最新的 <em>RenderMan</em> 的论文（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Christensen2018:renderman">2018</a>），Fascione 等人描述的 Weta Digital 的 <em>Manuka</em>（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Fascione2018">2018</a>），Georgiev 等人关于 Solid Angle 的 <em>Arnold</em> 版本的论文（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Georgiev2018">2018</a>），以及 Kulla 等人关于索尼影像工作室使用的 <em>Arnold</em> 版本的论文（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:Kulla2018">2018</a>）。</p>
+<p>标准渲染算法是从 3D 场景描述生成图像，而 <em>Mitsuba 2</em> 系统则围绕相应的逆问题进行设计。它使用 JIT 编译的内核计算与场景参数相关的导数，这些内核可以高效地在 GPU 和 CPU 上运行。这些内核随后在优化算法的内循环中使用，以重建与用户提供的输入图像一致的 3D 场景。该主题在第 <a href="#TODO">16.3.1</a> 节中进一步讨论。该系统的设计和实现由 Nimier-David 等人（<a href="https://www.pbr-book.org/4ed/Introduction/Further_Reading#cite:NimierDavid2019">2019</a>）描述。</p>
+<h2 id="参考文献references"><a class="header" href="#参考文献references">参考文献（References）</a></h2>
+<ul>
+<li>Apodaca, A. A., and L. Gritz. 2000. Advanced RenderMan: Creating CGI for Motion Pictures. San Francisco: Morgan Kaufmann.</li>
+<li>Appel, A. 1968. Some techniques for shading machine renderings of solids. In AFIPS 1968 Spring Joint Computer Conference 32, 37–45.</li>
+<li>Arvo, J., and D. Kirk. 1990. Particle transport and image synthesis. Computer Graphics (SIGGRAPH ’90 Proceedings) 24 (4), 63–66.</li>
+<li>Ashdown, I. 1994. Radiosity: A Programmer’s Perspective. New York: John Wiley &amp; Sons.</li>
+<li>Bigler, J., A. Stephens, and S. Parker. 2006. Design for parallel interactive ray tracing systems. IEEE Symposium on Interactive Ray Tracing, 187–95.</li>
+<li>Burley, B., D. Adler, M. J-Y. Chiang, H. Driskill, R. Habel, P. Kelly, P. Kutz, Y. K. Li, and D. Teece. 2018. The design and evolution of Disney’s Hyperion renderer. ACM Transactions on Graphics 37 (3), 33:1–22.</li>
+<li>Christensen, P. 2015. The path-tracing revolution in the movie industry. ACM SIGGRAPH 2015 Course, 24:1–7.</li>
+<li>Christensen, P., J. Fong, J. Shade, W. Wooten, B. Schubert, A. Kensler, S. Friedman, C. Kilpatrick, C. Ramshaw, M. Bannister, B. Rayner, J. Brouillat, and M. Liani. 2018. RenderMan: An advanced path-tracing architecture for movie rendering. ACM Transactions on Graphics 37 (3), 30:1–21.</li>
+<li>Cohen, M., and D. P.  Greenberg. 1985. The hemi-cube: A radiosity solution for complex environments. SIGGRAPH Computer Graphics 19 (3), 31–40.</li>
+<li>Cohen, M., and J. Wallace. 1993. Radiosity and Realistic Image Synthesis. San Diego: Academic Press Professional.</li>
+<li>Cook, R. L., and K. E. Torrance. 1981. A reflectance model for computer graphics. Computer Graphics (SIGGRAPH ’81 Proceedings) 15, 307–16.</li>
+<li>Cook, R. L., and K. E. Torrance. 1982. A reflectance model for computer graphics. ACM Transactions on Graphics 1 (1), 7–24.</li>
+<li>Cook, R. L., L. Carpenter, and E. Catmull. 1987. The Reyes image rendering architecture. Computer Graphics (Proceedings of SIGGRAPH ’87) 21 (4), 95–102.</li>
+<li>Cook, R. L., T. Porter, and L. Carpenter. 1984. Distributed ray tracing. Computer Graphics (SIGGRAPH ’84 Proceedings) 18, 137–45.</li>
+<li>Driemeyer, T., and R. Herken. 2002. Programming mental ray. Wien: Springer-Verlag.</li>
+<li>Duff, T. 1985. Compositing 3-D rendered images. Computer Graphics (Proceedings of SIGGRAPH ’85) 19, 41–44.</li>
+<li>Eisenacher, C., G. Nichols, A. Selle, and B. Burley. 2013. Sorted deferred shading for production path tracing. Computer Graphics Forum (Proceedings of the 2013 Eurographics Symposium on Rendering) 32 (4), 125–32.</li>
+<li>Farmer, D. F. 1981. Comparing the 4341 and M80/40. Computerworld 15 (6), 9–20.</li>
+<li>Fascione, L., J. Hanika, M. Leone, M. Droske, J. Schwarzhaupt, T. Davidovič, A. Weidlich, and J. Meng. 2018. Manuka: A batch-shading architecture for spectral path tracing in movie production. ACM Transactions on Graphics 37 (3), 31:1–18.</li>
+<li>Georgiev, I., T. Ize, M. Farnsworth, R. Montoya-Vozmediano, A. King, B. Van Lommel, A. Jimenez, O. Anson, S. Ogaki, E. Johnston, A. Herubel, D. Russell, F. Servant, and M. Fajardo. 2018. Arnold: A brute-force production path tracer. ACM Transactions on Graphics 37 (3), 32:1–12.</li>
+<li>Glassner, A. (ed.) 1989a. An Introduction to Ray Tracing. San Diego: Academic Press.</li>
+<li>Glassner, A. 1993. Spectrum: An architecture for image synthesis, research, education, and practice. Developing Large-Scale Graphics Software Toolkits, SIGGRAPH ’93 Course Notes, 3, 1:14–43.</li>
+<li>Glassner, A. 1995. Principles of Digital Image Synthesis. San Francisco: Morgan Kaufmann.</li>
+<li>Goldstein, R. A., and R. Nagel. 1971. 3-D visual simulation. Simulation 16 (1), 25–31.</li>
+<li>Goral, C. M., K. E. Torrance, D. P. Greenberg, and B. Battaile. 1984. Modeling the interaction of light between diffuse surfaces. Proceedings of the 11th Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH ’84) 18 (3), 213–22.</li>
+<li>Greenberg, D. P., K. E. Torrance, P. S. Shirley, J. R. Arvo, J. A. Ferwerda, S. Pattanaik, E. P. F. Lafortune, B. Walter, S.-C. Foo, and B. Trumbore. 1997. A framework for realistic image synthesis. Proceedings of SIGGRAPH ’97, Computer Graphics Proceedings, Annual Conference Series, 477–94.</li>
+<li>Gritz, L., and J. K. Hahn. 1996. BMRT: A global illumination implementation of the RenderMan standard. Journal of Graphics Tools 1 (3), 29–47.</li>
+<li>Hall, R. 1989. Illumination and Color in Computer Generated Imagery. New York: Springer-Verlag.</li>
+<li>Hall, R. A., and D. P. Greenberg. 1983. A testbed for realistic image synthesis. IEEE Computer Graphics and Applications 3 (8), 10–20.</li>
+<li>Jensen, H. W., J. Arvo, M. Fajardo, P. Hanrahan, D. Mitchell, M. Pharr, and P. Shirley. 2001a. State of the art in Monte Carlo ray tracing for realistic image synthesis. In SIGGRAPH 2001 Course 29, Los Angeles.</li>
+<li>Jensen, H. W., J. Arvo, P. Dutré, A. Keller, A. Owen, M. Pharr, and P. Shirley. 2003. Monte Carlo ray tracing. In SIGGRAPH 2003 Courses, San Diego.</li>
+<li>Kajiya, J. T. 1986. The rendering equation. In Computer Graphics (SIGGRAPH ’86 Proceedings) 20, 143–50.</li>
+<li>Kajiya, J. T., and B. P. Von Herzen. 1984. Ray tracing volume densities. In Computer Graphics (Proceedings of SIGGRAPH ’84), Volume 18, 165–74.</li>
+<li>Kay, D. S., and D. P. Greenberg. 1979. Transparency for computer synthesized images. In Computer Graphics (SIGGRAPH ’79 Proceedings), Volume 13, 158–64.</li>
+<li>Keller, A., C. Wächter, M. Raab, D. Seibert, D. van Antwerpen, J. Korndörfer, and L. Kettner. 2017. The Iray light transport simulation and rendering system. arXiv:1705.01263 [cs.GR].</li>
+<li>Kirk, D. B., and J. Arvo. 1991. Unbiased sampling techniques for image synthesis. Computer Graphics (SIGGRAPH ’91 Proceedings), Volume 25, 153–56.</li>
+<li>Kirk, D., and J. Arvo. 1988. The ray tracing kernel. In Proceedings of Ausgraph ’88, 75–82.</li>
+<li>Kulla, C., A. Conty, C. Stein, and L. Gritz. 2018. Sony Pictures Imageworks Arnold. ACM Transactions on Graphics 37 (3), 29:1–18.</li>
+<li>Larson, G. W., and R. A. Shakespeare. 1998. Rendering with Radiance: The Art and Science of Lighting Visualization. San Francisco: Morgan Kaufmann.</li>
+<li>Lee, M., B. Green, F. Xie, and E. Tabellion. 2017. Vectorized production path tracing. In Proceedings of High Performance Graphics (HPG ’17), 10:1–11.</li>
+<li>Nimier-David, M., D. Vicini, T. Zeltner, W. Jakob. 2019. Mitsuba 2: A retargetable forward and inverse renderer. ACM Transactions on Graphics (Proceedings of SIGGRAPH 2019) 38 (6), 203:1–17.</li>
+<li>Nishita, T., and E. Nakamae. 1985. Continuous tone representation of three-dimensional objects taking account of shadows and interreflection. SIGGRAPH Computer Graphics 19 (3), 23–30.</li>
+<li>Ohmer, S. 1997. Ray Tracers: Blue Sky Studios. Animation World Network, http://www.awn.com/animationworld/ray-tracers-blue-sky-studios.</li>
+<li>Parker, S. G., J. Bigler, A. Dietrich, H. Friedrich, J. Hoberock, D. Luebke, D. McAllister, M. McGuire, K. Morley, A. Robison, and M. Stich. 2010. OptiX: A general purpose ray tracing engine. ACM Transactions on Graphics (Proceedings of SIGGRAPH 2010) 29 (4), 66:1–13.</li>
+<li>Shirley, P. 1990. Physically based lighting calculations for computer graphics. Ph.D. thesis, Department of Computer Science, University of Illinois, Urbana–Champaign.</li>
+<li>Shirley, P. 2020. Ray Tracing in One Weekend Series. https://raytracing.github.io/.</li>
+<li>Shirley, P., and R. K. Morley. 2003. Realistic Ray Tracing. Natick, Massachusetts: A. K. Peters.</li>
+<li>Shirley, P., C. Y. Wang, and K. Zimmerman. 1996. Monte Carlo techniques for direct lighting calculations. ACM Transactions on Graphics 15 (1), 1–36.</li>
+<li>Sillion, F., and C. Puech. 1994. Radiosity and Global Illumination. San Francisco: Morgan Kaufmann.</li>
+<li>Slusallek, P. 1996. Vision—An architecture for physically-based rendering. Ph.D. thesis, University of Erlangen.</li>
+<li>Slusallek, P., and H.-P. Seidel. 1995. Vision—An architecture for global illumination calculations. IEEE Transactions on Visualization and Computer Graphics 1 (1), 77–96.</li>
+<li>Slusallek, P., and H.-P. Seidel. 1996. Towards an open rendering kernel for image synthesis. In Eurographics Rendering Workshop 1996, 51–60.</li>
+<li>Snow, J. 2010. Terminators and Iron Men: Image-based lighting and physical shading at ILM. SIGGRAPH 2010 Course: Physically-Based Shading Models in Film and Game Production.</li>
+<li>Suffern, K. 2007. Ray Tracing from the Ground Up. Natick, Massachusetts: A. K. Peters.</li>
+<li>Sung, K., J. Craighead, C. Wang, S. Bakshi, A. Pearce, and A. Woo. 1998. Design and implementation of the Maya renderer. In Pacific Graphics ’98.</li>
+<li>Trumbore, B., W. Lytle, and D. P. Greenberg. 1993. A testbed for image synthesis. In Developing Large-Scale Graphics Software Toolkits, SIGGRAPH ’93 Course Notes, Volume 3, 4-7–19.</li>
+<li>Veach, E. 1997. Robust Monte Carlo methods for light transport simulation. Ph.D. thesis, Stanford University.</li>
+<li>Wald, I., P. Slusallek, and C. Benthin. 2001b. Interactive distributed ray tracing of highly complex models. In Rendering Techniques 2001: 12th Eurographics Workshop on Rendering, 277–88.</li>
+<li>Ward, G. J. 1994. The Radiance lighting simulation and rendering system. In Proceedings of SIGGRAPH ’94, 459–72.</li>
+<li>Whitted, T. 1980. An improved illumination model for shaded display. Communications of the ACM 23 (6), 343–49.</li>
+<li>Whitted, T. 2020. Origins of global illumination. IEEE Computer Graphics and Applications 40 (1), 20–27.</li>
+</ul>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../1_Introduction/Exercises.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../1_Introduction/Exercises.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

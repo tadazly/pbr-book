@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>使用反演法进行采样 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html" class="active"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="23-使用反演法进行采样sampling-using-the-inversion-method"><a class="header" href="#23-使用反演法进行采样sampling-using-the-inversion-method">2.3 使用反演法进行采样（<a href="https://www.pbr-book.org/4ed/Monte_Carlo_Integration/Sampling_Using_the_Inversion_Method">Sampling Using the Inversion Method</a>）</a></h1>
+<p>为了评估方程（<a href="./2_1_Monte_Carlo_Basics.html#equation-2-7">2.7</a>）中的蒙特卡洛估计，有必要能够从选定的概率分布中抽取随机样本。实现这一点有多种技术，但对于渲染而言，最重要的方法之一是 <em>反演法（inversion method）</em> ，它通过反转分布的累积分布函数（CDF）来将 \( [0,1) \) 的均匀样本映射到给定的一维概率分布。（在第 <a href="#TODO">2.4.2</a> 节中，我们将看到如何通过鉴于一系列一维分布将这种方法应用于高维函数。）当与第 <a href="../8_Sampling_and_Reconstruction/README.index">8</a> 章中定义的采样器生成的分布良好的样本一起使用时，反演法可以特别有效。在本书的其余部分，我们将看到反演法在从 BSDF、光源、相机和散射介质定义的分布中生成样本的应用。</p>
+<h2 id="231-离散情况discrete-case"><a class="header" href="#231-离散情况discrete-case">2.3.1 离散情况（Discrete Case）</a></h2>
+<p>方程（<a href="./2_1_Monte_Carlo_Basics.html#equation-2-2">2.2</a>）导出了一个使用均匀随机变量从一组离散概率中采样的算法。假设我们有一个过程，其可能的四个结果的概率分别为 \( p_1 \) 、 \( p_2 \) 、 \( p_3 \) 和 \( p_4 \) ，总和为 \( \sum_{i} p_i = 1 \) 。相应的概率质量函数（PMF）如图 <a href="#figure-2-3">2.3</a> 所示。</p>
+<blockquote>
+<p><a name="figure-2-3"></a></p>
+<div class="figure-row">
+  <img src="figures/discrete-pdf.svg" width="312" height="203" style="max-width: 100%;">
+</div>
+<p><strong>图 2.3：四个事件的 PMF ，每个事件的概率为 \( p_i \) 。</strong> 它们的概率之和 \( \sum_{i} p_i \) 必然为 1。</p>
+</blockquote>
+<p>方程（<a href="./2_1_Monte_Carlo_Basics.html#equation-2-2">2.2</a>）中的和与累积分布函数（CDF）的定义之间存在直接联系。离散的 CDF 由以下公式给出</p>
+<p>\[
+P_i = \sum_{j=1}^{i} p_j<br />
+\]</p>
+<p>可以通过将概率质量函数（PMF）的条形图从左侧开始逐个叠加来图形化解释。这一思想在图 <a href="#figure-2-4">2.4</a> 中展示。</p>
+<blockquote>
+<p><a name="figure-2-4"></a></p>
+<div class="figure-row">
+  <img src="figures/discrete-cdf.svg" width="312" height="208" style="max-width: 100%;">
+</div>
+<p><strong>图 2.4：离散 CDF ，对应于图 <a href="#figure-2-3">2.3</a> 中的 PMF。</strong> 每一列的高度由其所代表事件的 PMF 加上之前事件的 PMF 之和给出， \( P_i = \sum_{j=1}^{i} p_j \) 。</p>
+</blockquote>
+<p>方程 (<a href="./2_1_Monte_Carlo_Basics.html#equation-2-2">2.2</a>) 的采样操作可以表示为寻找 \( i \) 使得</p>
+<p><a name="equation-2-19">(2.19)</a></p>
+<p>\[
+P_{i-1} \leq \xi &lt; P_i<br />
+\]</p>
+<p>可以将其解释为反转 CDF \( P \) ，该技术也因此得名。继续图形解释，这种采样操作可以被视为将事件的概率投影到纵坐标的 \( [0,1] \) 范围上，并使用随机变量 \( \xi \) 在它们之间进行选择（见图 <a href="#figure-2-5">2.5</a>）。显然，这是从正确的分布中抽取的——均匀样本击中任何特定条形的概率恰好等于该条形的高度。</p>
+<p><strong>SampleDiscrete()</strong> 函数实现了该算法。它接受一组不一定归一化的非负权重、一个均匀随机样本 <strong>u</strong> ，并返回一个权重的索引，其概率与该权重成正比。它执行的采样操作对应于寻找 \( i \) 使得</p>
+<p><a name="equation-2-20">(2.20)</a></p>
+<p>\[
+\sum_{i=1}^{i-1} w_j \leq \xi \sum w_i &lt; \sum_{j=1}^{i} w_j<br />
+\]</p>
+<p>这对应于将方程（<a href="#equation-2-19">2.19</a>）乘以 \( \sum w_i \) 。（不要求归一化的 PMF 对于调用代码来说是一种便利，并且在函数的实现中并没有太多额外的工作。）提供了两个可选参数，以返回样本的 PMF 值以及一个新的均匀随机样本，该样本源自 <strong>u</strong> 。</p>
+<p>该函数旨在处理仅需从权重分布中生成单个样本的情况；如果需要多个样本，则通常应使用将在 <a href="#TODO">A.1</a> 节中介绍的 <a href="#TODO"><strong>AliasTable</strong></a> ：它在经过一个 \( O(n) \) 的预处理步骤后以 \( O(1) \) 时间生成样本，而 <strong>SampleDiscrete()</strong> 则需要为每个生成的样本花费 \( O(n) \) 时间。</p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+int SampleDiscrete(pstd::span&lt;const Float&gt; weights, Float u, Float *pmf,
+                   Float *uRemapped) {
+    /** 处理离散采样的空权重（Handle empty **weights** for discrete sampling）*/
+    /** 计算权重的总和（Compute sum of **weights**）*/
+    /** 计算重缩放后的 u' 样本（Compute rescaled u' sample）*/
+    /** 在权重中找到 u' 对应的偏移量（Find offset in **weights** corresponding to u'）*/
+    /** 计算 PMF 并重新映射 u 的值（如有必要）（Compute PMF and remapped u value, if necessary）*/
+    return offset;
+}
+</code></pre>
+<p>首先处理 <strong>weights</strong> 为空的情况，以便后续代码可以假设至少存在一个权重。</p>
+<pre><code class="language-cpp">/** 处理离散采样的空权重（Handle empty **weights** for discrete sampling）*/
+if (weights.empty()) {
+    if (pmf)
+        *pmf = 0;
+    return -1;
+}
+</code></pre>
+<p>采样第 <strong>i</strong> 个元素的离散概率由 <strong>weights[i]</strong> 除以所有权重值的总和给出。因此，该函数接下来计算该总和。</p>
+<pre><code class="language-cpp">/** 计算权重的总和（Compute sum of **weights**）*/
+Float sumWeights = 0;
+for (Float w : weights)
+    sumWeights += w;
+</code></pre>
+<p>根据方程（<a href="#equation-2-20">2.20</a>），均匀样本 <strong>u</strong> 通过权重之和进行缩放，以获得值 \( u' \) ，该值将用于从中进行采样。尽管提供的 <strong>u</strong> 值应在范围 \( [0,1) \) 内，但由于浮点数舍入的原因， <strong>u * sumWeights</strong> 可能等于 <strong>sumWeights</strong> 。在这种罕见情况下， <strong>up</strong> 被降低到下一个较低的浮点值，以便后续代码可以假设 <strong>up &lt; sumWeights</strong> 。</p>
+<pre><code class="language-cpp">/** 计算重缩放后的 u' 样本（Compute rescaled u' sample）*/
+Float up = u * sumWeights;
+if (up == sumWeights)
+    up = NextFloatDown(up);
+</code></pre>
+<p>我们现在想要找到权重数组 \( i \) 中最后一个使随机样本 <strong>up</strong> 大于 \( i \) 之前权重总和的偏移量。采样是通过从数组开头开始的线性搜索进行的，累积权重总和，直到该总和大于 \( u' \)。</p>
+<pre><code class="language-cpp">/** 在权重中找到 u' 对应的偏移量（Find offset in **weights** corresponding to u'）*/
+int offset = 0;
+Float sum = 0;
+while (sum + weights[offset] &lt;= up)
+    sum += weights[offset++];
+</code></pre>
+<p>在 while 循环终止后，提供的样本 <strong>u</strong> 中的随机性仅用于选择数组中的一个元素——一个离散选择。样本在包围它的 CDF 值之间的偏移量本身是一个均匀随机值，可以很容易地重新映射到 \( [0,1) \) 。如果请求，该值将在 <strong>uRemapped</strong> 中返回给调用者。</p>
+<p>有人可能会问：为什么要这样做？生成均匀随机变量并不太困难，因此提供这个选项的好处似乎微不足道。然而，对于第 <a href="../8_Sampling_and_Reconstruction/">8</a> 章中一些高质量的样本生成算法，以这种方式重用样本而不是生成新样本可能是有益的——因此，提供了这个选项。</p>
+<pre><code class="language-cpp">/** 计算 PMF 并重新映射 u 的值（如有必要）（Compute PMF and remapped **u** value, if necessary）*/
+if (pmf)
+    *pmf = weights[offset] / sumWeights;
+if (uRemapped)
+    *uRemapped = std::min((up - sum) / weights[offset], OneMinusEpsilon);
+</code></pre>
+<blockquote>
+<p><a name="figure-2-5"></a></p>
+<div class="figure-row">
+  <img src="figures/discrete-inversion.svg" width="312" height="211" style="max-width: 100%;">
+</div>
+<p><strong>图 2.5：</strong> 为了使用反演方法从图 <a href="#figure-2-3">2.3</a> 中的 PMF 描述的分布中抽取样本，标准均匀随机变量（canonical uniform random variable）被绘制在纵轴上。根据构造， \( \xi \) 的水平延伸线将以概率 \( p_i \) 与表示第 \( i \) 个结果的框相交。如果为一组随机变量 \( \xi \) 选择了相应的事件，则结果事件的分布将根据 PMF 进行分布。</p>
+</blockquote>
+<h2 id="232-连续情况continuous-case"><a class="header" href="#232-连续情况continuous-case">2.3.2 连续情况（Continuous Case）</a></h2>
+<p>为了将这一技术推广到连续分布，考虑当离散可能性的数量趋近于无穷大时会发生什么。图 <a href="#figure-2-3">2.3</a> 中的概率质量函数（PMF）变为概率密度函数（PDF），而图 <a href="#figure-2-4">2.4</a> 中的累积分布函数（CDF）则变为其积分。投影过程仍然相同，但它具有一个方便的数学解释——它表示对 CDF 进行反转并在 \( \xi \) 处评估逆值。</p>
+<p>更准确地说，我们可以通过以下步骤从 PDF \( p(X) \) 中抽取样本 \( X_i \) ：</p>
+<ol>
+<li>
+<p>对 PDF 积分以找到 CDF  \( P(x) = \int_{0}^{x} p(x') \text{d} x' \).†（一般来说，积分的下限应该是 -∞，不过如果 p(x) = 0 且 x &lt; 0，那么这个方程是等效的。）</p>
+</li>
+<li>
+<p>获取一个均匀分布的随机数 \( \xi \) 。</p>
+</li>
+<li>
+<p>通过求解 \( \xi = P(X) \) 来为 \( X \) 生成一个样本；换句话说，找到 \( X = P^{-1}(\xi) \) 。</p>
+</li>
+</ol>
+<p>我们将用一个简单的例子来说明这个算法；有关其在多个附加函数中的应用，请参见 <a href="#TODO">A.4</a> 节。</p>
+<p>采样线性函数（Sampling a Linear Function）</p>
+<p>函数 \( f(x) = (1-x)a + xb \) 在 \( [0,1] \) 上定义，在 \( x = 0 \) 的 \( a \) 和 \( x = 1 \) 的 \( b \) 之间线性插值。这里我们将假设 \( a,b \geq 0 \) ；章节末尾有一个练习讨论了更一般的情况。</p>
+<p><a name="Lerp"></a></p>
+<pre><code class="language-cpp">/** 数学内联函数（Math Inline Functions） */
+Float Lerp(Float x, Float a, Float b) {
+    return (1 - x) * a + x * b;
+}
+</code></pre>
+<p>该函数的积分为 \( \int_{0}^{1} f(x) \text{d}x = (a+b)/2 \) ，这给出了归一化常数 \( 2/(a+b) \) 以定义其 PDF,</p>
+<p>\[
+p(x) = \frac{2f(x)}{a+b}<br />
+\]</p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+Float LinearPDF(Float x, Float a, Float b) {
+    if (x &lt; 0 || x &gt; 1)
+        return 0;
+    return 2 * Lerp(x, a, b) / (a + b);
+}
+</code></pre>
+<p>对 PDF 积分得到 CDF，其为二次函数</p>
+<p>\[
+P(x) = \frac{x(a(2-x) + bx)}{a+b}<br />
+\]</p>
+<p>反转 \( \xi = P(X) \) 给出了一个采样方案</p>
+<p>\[
+X = \frac{a - \sqrt{(1 - \xi)a^2 + \xi b^2}}{a-b}<br />
+\]</p>
+<p>请注意，在这种形式下，当 \( a=b \) 时会给出一个不确定的结果。更稳定的方程</p>
+<p>\[
+X = \frac{\xi(a+b)}{a+\sqrt{(1-\xi)a^2 + \xi b^2}}
+\]</p>
+<p>计算出相同的结果，并在此实现。</p>
+<p><a name="function-SampleLinear"></a></p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+Float SampleLinear(Float u, Float a, Float b) {
+    if (u == 0 &amp;&amp; a == 0) return 0;
+    Float x = u * (a + b) / (a + std::sqrt(Lerp(u, Sqr(a), Sqr(b))));
+    return std::min(x, OneMinusEpsilon);
+}
+</code></pre>
+<p>需要注意的一个细节是返回语句中的 <strong>std::min</strong> 调用，它确保返回的值在范围 \( [0,1) \) 内。尽管采样算法在给定 \( \xi \in [0,1) \) 的情况下会生成该范围内的值，但舍入误差可能导致结果等于 1。由于一些调用采样例程的代码依赖于返回值在指定范围内，因此采样例程必须确保这一点。</p>
+<p>除了提供从分布中采样和计算样本的 PDF 的函数外， <strong>pbrt</strong> 通常还提供反转采样操作的函数，返回与值 \( x \) 对应的随机样本 \( \xi \) 。在一维情况下，这相当于评估 CDF。</p>
+<pre><code class="language-cpp">/** 采样内联函数（Sampling Inline Functions） */
+Float InvertLinearSample(Float x, Float a, Float b) {
+    return x * (a * (2 - x) + b * x) / (a + b);
+}
+</code></pre>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

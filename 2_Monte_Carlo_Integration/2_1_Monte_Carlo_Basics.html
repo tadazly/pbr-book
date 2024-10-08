@@ -1,0 +1,539 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>蒙特卡罗：基础知识 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html" class="active"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="21-蒙特卡罗基础知识monte-carlo-basics"><a class="header" href="#21-蒙特卡罗基础知识monte-carlo-basics">2.1 蒙特卡罗：基础知识（<a href="https://www.pbr-book.org/4ed/Monte_Carlo_Integration/Monte_Carlo_Basics">Monte Carlo: Basics</a>）</a></h1>
+<p>由于蒙特卡罗积分基于随机性（randomization），我们将以对概率（probability）和统计学（statistics）概念的简要回顾开始本章，这些概念为该方法提供了基础。这样做将使我们能够介绍基本的蒙特卡罗算法以及评估其误差的数学工具。</p>
+<h2 id="211-背景与概率回顾background-and-probability-review"><a class="header" href="#211-背景与概率回顾background-and-probability-review">2.1.1 背景与概率回顾（Background and Probability Review）</a></h2>
+<p>我们将首先定义一些术语并回顾概率的基本概念。我们假设读者已经熟悉基本的概率概念；想要更全面了解这一主题的读者应参考谢尔顿·罗斯的 <em>《概率模型导论》(Introduction to Probability Models)</em>（<a href="https://www.pbr-book.org/4ed/Monte_Carlo_Integration/Further_Reading#cite:Ross:ProbabilityModels">2002</a>）。</p>
+<p><em>随机变量（random variable）</em> \( X \) 是由某种随机过程选择的值。我们通常使用大写字母来表示随机变量，但对于一些表示特殊随机变量的希腊字母则另作例外。随机变量总是从某个定义域中抽取，这个定义域可以是离散的（例如，一个固定的有限可能集合），也可以是连续的（例如，实数集 \( \mathbf{R} \) ）。对随机变量 \( X \) 应用一个函数 \( f \) 会产生一个新的随机变量 \( Y = f(X) \) 。</p>
+<p>例如，掷骰子的结果是从事件集合 \( X_i \in \{1,2,3,4,5,6\} \) 中抽取的离散随机变量。每个事件的概率为 \( p_i = \frac{1}{6} \) ，而概率的总和 \( \sum p_i \) 必然为一。像这样的随机变量，对于其所有潜在值具有相同的概率，称为 <em>均匀的（uniform）</em> 。给出离散随机变量概率的函数 \( p(X) \) 称为 <em>概率质量函数（probability mass function）</em>（PMF），因此在这种情况下我们可以等效地写作 \( p(X) = \frac{1}{6} \) 。</p>
+<p>两个随机变量是 <em>独立的（independent）</em> ，如果一个的概率不影响另一个的概率。在这种情况下，两个随机变量的 <em>联合概率（joint probability）</em> \( p(X, Y) \) 由它们的概率的乘积给出：</p>
+<p>\[ p(X,Y) = p(X)p(Y) \]</p>
+<p>例如，表示骰子六个面的随机样本的两个随机变量是独立的。</p>
+<p>对于 <em>相依（dependent）</em> 随机变量，一个的概率会影响另一个的概率。想象一个装有若干个黑球和若干个白球的袋子。如果我们从袋子中随机选择两个球，第二个球是白色的概率会受到第一个球颜色的影响，因为第一个球的选择改变了袋子中剩下的某种类型球的数量。我们将说第二个球的概率是以第一个球的选择 <em>为条件的（conditioned）</em> 。在这种情况下，选择两个球 \( X \) 和 \( Y \) 的联合概率为</p>
+<p><a name="equation-2-1">(2.1)</a></p>
+<p>\[ p(X,Y) = p(X)p(Y|X) \]</p>
+<p>其中 \( p(Y|X) \) 是在给定 \( X \) 的值时 \( Y \) 的 <em>条件概率（conditional probability）</em>。</p>
+<p>在后面的内容中，随机变量的概率通常会依赖于多个值；例如，在选择光源以进行照明采样时，第 <a href="#TODO">12.6.3</a> 节中的 <a href="#TODO">BVHLightSampler</a> 考虑了接收点的三维位置及其表面法线，因此光源的选择依赖于这些因素。然而，在随机变量依赖于多个变量且列举这些变量会使符号变得模糊的情况下，我们通常会省略这些变量。</p>
+<p>一个特别重要的随机变量是 <em>标准均匀随机变量（canonical uniform random variable）</em> ，我们将其写作 \( \xi \) 。该变量在其定义域 \( [0,1) \) 中独立地以均匀概率取所有值。这个特定变量重要的原因有两个。首先，在软件中生成具有这种分布的变量很简单——大多数运行时库都有一个伪随机数生成器（pseudo-random number generator），正是用来实现这一点的。†（虽然蒙特卡罗理论是基于使用真正的随机数，但在实际应用中，一个编写良好的伪随机数生成器（PRNG）已经足够。pbrt 使用了一个质量非常高的伪随机数生成器，它返回的伪随机数序列在效果上与真正的随机数一样“随机”。真正的随机数可以通过测量诸如原子衰变或大气噪声等随机现象获得，对于那些认为伪随机数生成器不可接受的人来说，可以从诸如 <a href="https://www.random.org">www.random.org</a> 之类的来源获取。）其次，我们可以将标准均匀随机变量 \( \xi \) 映射到一个离散随机变量，选择 \( X_i \), 若</p>
+<p><a name="equation-2-2">(2.2)</a></p>
+<p>\[ \sum_{j=1}^{i-1}{p_i} \leq \xi &lt; \sum_{j=1}^{i}{p_j} \]</p>
+<p>对于照明应用，我们可能希望根据场景中每个光源相对于所有光源的总功率 \( \Phi_i \) 来定义从每个光源采样照明的概率：</p>
+<p>\[ p_i = \frac{\Phi_i}{\sum_j{\Phi_j}} \]</p>
+<p>注意，这些 \( p_i \) 值的总和也为 1。给定这样的每个光源的概率，\( \xi \) 可以用来选择一个光源以采样照明。</p>
+<p>随机变量的 <em>累积分布函数（cumulative distribution function）</em>（CDF）\( P(x) \) 是指从该变量的分布中取出的值小于或等于某个值 \( x \) 的概率（"随机变量 \( X \) 小于或等于 \( x \) 的概率"）：</p>
+<p><a name="equation-2-3">(2.3)</a></p>
+<p>\[ P(x) = \text{Pr}\{ X \leq x \} \]</p>
+<p>对于骰子的例子，\( P(2) = \frac{1}{3} \) ，因为六种可能性中有两个小于或等于 2。</p>
+<p><em>连续随机变量（Continuous random variables）</em> 在连续域的范围内取值（例如，实数、单位球面上的方向或场景中形状的表面）。除了 \( \xi \) ，另一个连续随机变量的例子是取值于 0 到 2 之间的实数的随机变量，其中其取特定值 \( x \) 的概率与值 \( 2 - x \) 成正比：该随机变量取值接近 0 的可能性是取值接近 1 的两倍，依此类推。</p>
+<p><em>概率密度函数（probability density function）</em> （PDF）形式化了这一概念：它描述了随机变量取特定值的相对概率，是概率质量函数（PMF）的连续模拟（continuous analog）。PDF \( p(x) \) 是随机变量累积分布函数（CDF）的导数，</p>
+<p>\[ p(x) = \frac{\text{d}P(x)}{\text{d}x} \]</p>
+<p>对于均匀随机变量， \( p(x) \) 是一个常数；这是均匀性的直接结果。对于 \( \xi \) 我们有</p>
+<p>\[
+p(x) = \begin {cases}
+1 &amp;\text{x} \in [0, 1) \\
+0 &amp;\text{otherwise}
+\end {cases}
+\]</p>
+<p>PDF 必然是非负的，并且在其定义域上总是积分为 1。请注意，它们在某一点 \( x \) 的值 <em>不</em> 一定小于 1。</p>
+<p>在定义域内给定一个区间 \( [a, b] \) ，对 PDF 进行积分可以得到随机变量位于该区间内的概率：</p>
+<p>\[
+\text{Pr}\{ x \in [a, b] \} = \int_{a}^{b}{p(x) \text{d}x} = P(b) - P(a)
+\]</p>
+<p>这直接源于微积分的第一基本定理和 PDF 的定义。</p>
+<!-- 
+<div class="hidden">
+
+> 这句话涉及到 **微积分的基本定理** 和 **概率密度函数（PDF）** 的定义，主要在解释连续随机变量的累积分布函数（CDF）与其概率密度函数（PDF）之间的关系。
+> 
+> ### 1. **微积分的基本定理**（第一基本定理）：
+> 微积分的第一基本定理告诉我们，**积分和导数是互为逆运算**。具体来说，如果 \\( F(x) \\) 是某个函数的原函数（即它的导数是 \\( f(x) \\)），那么我们可以通过对 \\( f(x) \\) 进行积分得到 > \\( F(x) \\)，反之，通过对 \\( F(x) \\) 求导数可以得到 \\( f(x) \\)。
+> 
+> \\[
+> F'(x) = f(x)
+> \\]
+> 这意味着，给定一个函数 \\( F(x) \\) 的原函数，如果对它求导数，结果就是 \\( f(x) \\)。
+> 
+> ### 2. **概率密度函数（PDF）** 和 **累积分布函数（CDF）** 的定义：
+> - **概率密度函数（PDF）** \\( f(x) \\)：它描述了随机变量在某个特定值附近取值的相对可能性。对于连续随机变量，PDF 是一个非负函数，定义在整个实数集或某个区间上。
+>   
+> - **累积分布函数（CDF）** \\( F(x) \\)：它描述了随机变量 \\( X \\) 小于或等于 \\( x \\) 的概率，即：
+>   \\[
+>   F(x) = \text{Pr}(X \leq x)
+>   \\]
+>   对于 PDF \\( f(x) \\)，它的累积分布函数可以通过对 \\( f(x) \\) 从负无穷大到 \\( x \\) 的积分来计算：
+>   \\[
+>   F(x) = \int_{-\infty}^{x} f(t) dt
+>   \\]
+> 
+> ### 3. **结合两者：**
+> 根据**微积分的第一基本定理**，累积分布函数 \\( F(x) \\) 的导数就是概率密度函数 \\( f(x) \\)：
+> \\[
+> f(x) = \frac{d}{dx}F(x)
+> \\]
+> 换句话说，PDF \\( f(x) \\) 是 CDF \\( F(x) \\) 的导数。这也是 PDF 的定义之一。
+> 
+> ### 解释原句：
+> **“This follows directly from the first fundamental theorem of calculus and the definition of the PDF”** 这句话的意思是，**根据微积分的基本定理和 PDF 的定> 义，我们可以直接得出 PDF 和 CDF 之间的关系**。具体来说，PDF 是 CDF 的导数，而 CDF 是 PDF 的积分。
+> 
+> 总结：
+> - 根据微积分的第一基本定理，PDF 是 CDF 的导数。
+> - 根据 PDF 的定义，给定 PDF，我们可以通过积分求出 CDF。
+
+</div> -->
+<h2 id="212-期望值expected-values"><a class="header" href="#212-期望值expected-values">2.1.2 期望值（Expected Values）</a></h2>
+<p>函数 \( f \) 的 <em>期望值（expected value）</em> \( E_p[f(x)] \) 被定义为在其定义域 \( D \) 上某些值 \( p(x) \) 的分布下函数的平均值。它被定义为</p>
+<p><a name="equation-2-4">(2.4)</a></p>
+<p>\[
+E_p[f(x)] = \int_{D}{f(x)p(x)\text{d}x}
+\]</p>
+<p>作为一个例子，考虑在 \( 0 \) 和 \( \pi \) 之间寻找余弦函数的期望值，其中 \( p \) 是均匀分布的。因为 PDF \( p(x) \) 必须在该区间内积分为 1， \( p(x) = 1 / \pi \) ，所以†（当计算均匀分布的期望值时，我们将从 \( E_p \) 中删除下标 \( p \) ）</p>
+<p>\[
+E[\cos{x}] = \int_{0}^{\pi} \frac{\cos{x}}{\pi} \text{d}x = \frac{1}{\pi}(\sin{\pi} - \sin{0}) = 0
+\]</p>
+<p>这正是预期的结果。（考虑 \( \cos{x} \) 在 \( [0,\pi] \) 区间的图形以了解原因。）</p>
+<p>期望值具有一些有用的属性，这些属性源于其定义：</p>
+<p>\[
+E[af(x)] = aE[f(x)]
+\]</p>
+<p><a name="equation-2-5">(2.5)</a></p>
+<p>\[
+E\left[\sum_{i=1}^{n}{f(X_i)}\right] = \sum_{i=1}^{n}{E[f(X_i)]}
+\]</p>
+<p>我们将在后面章节的推导中反复使用这些性质。</p>
+<h2 id="213-蒙特卡罗估计the-monte-carlo-estimator"><a class="header" href="#213-蒙特卡罗估计the-monte-carlo-estimator">2.1.3 蒙特卡罗估计（The Monte Carlo Estimator）</a></h2>
+<p>我们现在可以定义蒙特卡罗估计，它用于近似任意积分的值。假设我们想要评估一个一维积分 \( \int_{a}^{b}{f(x)\text{d}x} \) 。给定一组独立均匀随机变量 \( X_i \in [a,b] \) ，蒙特卡罗估计表示估计量(estimator)的期望值为</p>
+<p><a name="equation-2-6">(2.6)</a></p>
+<p>\[
+F_n = \frac{b-a}{n} \sum_{i=1}^{n}{f(X_i)}
+\]</p>
+<p>\( E[F_n] \) 等于积分。这个事实可以通过几个步骤来证明。首先，注意到与随机变量 \( X_i \) 对应的 PDF \( p(x) \) 必须等于 \( 1/(b-a) \) ，因为 \( p \) 不仅必须是一个常数，还必须在域 \( [a,b] \) 上积分为 1。然后，利用方程 (<a href="#equation-2-4">2.4</a>) 和 (<a href="#equation-2-5">2.5</a>) 的性质进行代数运算，可以得出：</p>
+<p>\[
+\begin{align}
+E[F_n] &amp;= E\left[\frac{b-a}{n}\sum_{i=1}^{n}{f(X_i)}\right] \\
+&amp;= \frac{b-a}{n}\sum_{i=1}^{n}{E[f(X_i)]} \\
+&amp;= \frac{b-a}{n}\sum_{i=1}^{n}{\int_{a}^{b}{f(x)p(x)\text{d}x}} \\
+&amp;= \frac{1}{n}\sum_{i=1}^{n}{\int_{a}^{b}{f(x)\text{d}x}} \\
+&amp;= \int_{a}^{b}{f(x)\text{d}x}
+\end{align}
+\]</p>
+<p>将此估计量推广到多个维度或复杂积分域是简单的：从均匀多维的 PDF 中取 \( n \) 个独立样本 \( X_i \) ，并以相同的方式应用估计量。例如，考虑三维积分</p>
+<p>\[
+\int_{z_0}^{z_1} \int_{y_0}^{y_1} \int_{x_0}^{x_1} f(x,y,z) \text{d}x \text{d}y \text{d}z
+\]</p>
+<p>如果样本 \( X_i = (x_i,y_i,z_i) \) 是从立方体 \( [x_0,x_1] \times [y_0,y_1] \times [z_0,z_1] \) 中均匀选择的，则 PDF \( p(X) \) 是常数值</p>
+<p>\[
+\frac{1}{(x_1-x_0)} \frac{1}{(y_1-y_0)} \frac{1}{(z_1-z_0)}
+\]</p>
+<p>估计量是</p>
+<p>\[
+\frac{(x_1-x_0)(y_1-y_0)(z_1-z_0)}{n} \sum_{i=1}^{n} f(X_i)
+\]</p>
+<p>对均匀随机变量的限制可以通过小的推广来放宽。这是一个重要的步骤，因为仔细选择抽取样本的 PDF 可以引出减少蒙特卡罗方法中的误差的关键技术，这将在第 <a href="#TODO">2.2.2</a> 节中介绍。如果随机变量 \( X_i \) 是从 PDF \( p(x) \) 中抽取的，则估计量</p>
+<p><a name="equation-2-7">(2.7)</a></p>
+<p>\[
+F_n = \frac{1}{n} \sum_{i=1}^{n} \frac{f(X_i)}{p(X_i)}
+\]</p>
+<p>可以用来估计积分。对 \( p(x) \) 的唯一限制是对于 \( |f(x)| &gt; 0 \) 所有的 \( x \) 必须是非零的。</p>
+<p>同样不难看出，这个估计量的期望值是所需的函数 \( f \) 的积分：</p>
+<p>\[
+\begin{align}
+E[F_n] &amp;= E \left[ \frac{1}{n} \sum_{i=1}^{n} \frac{f(X_i)}{p(X_i)} \right] \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n} \int_{a}^{b} \frac{f(x)}{p(x)} p(x) \text{d}x \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n} \int_{a}^{b} f(x) \text{d}x \\
+&amp;= \int_{a}^{b} f(x) \text{d}x
+\end{align}
+\]</p>
+<p>我们现在可以理解在 <strong>RandomWalkIntegrator</strong> 的实现中系数 \( 1/(4\pi) \) 的含义：在面积为 \( 4\pi \) 的单位球面上均匀采样方向。由于 PDF 在采样域上是归一化的，因此它必须具有常数值 \( 1/(4\pi) \) 。当应用方程（2.7）的估计量时，该值出现在除数中。</p>
+<p>通过蒙特卡罗方法，可以任意选择样本数量 \( n \) ，而不受被积函数维度的限制。这是蒙特卡罗方法相对于传统确定性求积技术的另一个重要优势，后者通常需要的样本数量在维度上是指数级的。</p>
+<h2 id="214-蒙特卡罗估计量的误差error-in-monte-carlo-estimators"><a class="header" href="#214-蒙特卡罗估计量的误差error-in-monte-carlo-estimators">2.1.4 蒙特卡罗估计量的误差（Error in Monte Carlo Estimators）</a></h2>
+<p>显示蒙特卡罗估计量收敛到正确答案并不足以证明其使用的合理性；其收敛速度也很重要。 <em>方差（Variance）</em> ，即一个函数与其期望值之间的期望平方偏差，是表征蒙特卡罗估计量收敛性的一种有用方法。估计量 \( F \) 的方差定义为</p>
+<p><a name="equation-2-8">(2.8)</a></p>
+<p>\[
+V[F] = E[(F - E[F])^2]
+\]</p>
+<p>由此可得</p>
+<p>\[
+V[aF] = a^2 V[F]
+\]</p>
+<!-- 
+<div class="hidden">
+
+第二个方程 \\( V[aF] = a^2 V[F] \\) 是利用方差的基本性质推导出来的。我们可以逐步解释这个推导过程：
+
+1. **方差的定义**：
+   给定一个随机变量 \\( F \\)，方差定义为：
+   \\[
+   V[F] = E[(F - E[F])^2]
+   \\]
+   这里，\( E[F] \\) 是 \\( F \\) 的期望值。
+
+2. **调整随机变量的标量倍**：
+   现在假设我们考虑 \\( aF \\) 的方差，其中 \\( a \\) 是一个常数。根据方差的定义：
+   \\[
+   V[aF] = E[(aF - E[aF])^2]
+   \\]
+   由于线性运算的性质，期望值 \\( E[aF] = aE[F] \\)，因此可以改写为：
+   \\[
+   V[aF] = E[(aF - aE[F])^2]
+   \\]
+
+3. **提取常数**：
+   在方差内部，常数 \\( a \\) 可以提出来：
+   \\[
+   V[aF] = E[a^2(F - E[F])^2]
+   \\]
+   由于 \\( a^2 \\) 是常数，它可以移出期望符号：
+   \\[
+   V[aF] = a^2 E[(F - E[F])^2]
+   \\]
+
+4. **得到结果**：
+   最后，根据方差的定义 \\( V[F] = E[(F - E[F])^2] \\)，我们可以得出：
+   \\[
+   V[aF] = a^2 V[F]
+   \\]
+
+因此，方差的这种性质表明，如果你将随机变量乘以一个常数 \\( a \\)，它的方差会被乘以 \\( a^2 \\)。
+
+</div> -->
+<p>该性质和方程（<a href="#equation-2-5">2.5</a>）提供了方差的另一种表达式：</p>
+<p><a name="equation-2-9">(2.9)</a></p>
+<p>\[
+V[F] = E[F^2] - E[F]^2
+\]</p>
+<p>因此，方差是平方的期望值减去期望值的平方。</p>
+<!-- 
+<div class="hidden">
+
+要推导出方差的形式 \\( V[F] = E[F^2] - E[F]^2 \\)，我们可以从方差的定义出发，逐步推导：
+
+### 1. 方差的定义
+方差 \\( V[F] \\) 的定义是：
+\\[
+V[F] = E[(F - E[F])^2]
+\\]
+这里，\( E[F] \\) 是随机变量 \\( F \\) 的期望值。
+
+### 2. 展开平方项
+现在将平方项展开：
+\\[
+(F - E[F])^2 = F^2 - 2F \cdot E[F] + (E[F])^2
+\\]
+这是一个常见的平方展开公式。
+
+### 3. 期望运算
+对上式的每一项求期望值 \\( E[\cdot] \\)：
+\\[
+E[(F - E[F])^2] = E[F^2] - 2E[F \cdot E[F]] + E[(E[F])^2]
+\\]
+因为 \\( E[F] \\) 是常数，所以可以将它移出期望符号，得到：
+\\[
+E[F \cdot E[F]] = E[F] \cdot E[F]
+\\]
+同样，\( E[(E[F])^2] \\) 是常数 \\( (E[F])^2 \\)，所以它的期望也是 \\( (E[F])^2 \\)。
+
+因此，上式变为：
+\\[
+E[(F - E[F])^2] = E[F^2] - 2E[F] \cdot E[F] + (E[F])^2
+\\]
+
+### 4. 简化表达式
+进一步简化：
+\\[
+E[(F - E[F])^2] = E[F^2] - 2(E[F])^2 + (E[F])^2
+\\]
+合并类似项：
+\\[
+E[(F - E[F])^2] = E[F^2] - (E[F])^2
+\\]
+
+### 5. 得到最终结果
+根据方差的定义 \\( V[F] = E[(F - E[F])^2] \\)，所以：
+\\[
+V[F] = E[F^2] - (E[F])^2
+\\]
+
+这个公式说明，随机变量的方差等于该随机变量平方的期望值减去该随机变量期望值的平方。
+
+</div> -->
+<p>如果估计量是独立随机变量的和（如蒙特卡罗估计量 \( Fn \) ），那么和的方差是各个随机变量方差的总和：</p>
+<p><a name="equation-2-10">(2.10)</a></p>
+<p>\[
+V \left[ \sum_{i=1}^{n} X_i \right] = \sum_{i=1}^{n} V[X_i]
+\]</p>
+<p>从方程（<a href="#equation-2-10">2.10</a>）可以很容易地证明，方差随着样本数量 \( n \) 的增加而线性减少 。由于方差是平方误差，因此蒙特卡罗估计中的误差仅以样本数量的 \( O(n^{-1/2}) \) 的速率下降。尽管标准求积技术在一维中以更快的速率收敛，但随着被积函数维度的增加，它们的性能会呈指数级恶化，而蒙特卡罗的收敛速率与维度无关，使得蒙特卡罗成为高维积分的唯一实用数值积分算法。</p>
+<p>蒙特卡罗误差减少的 \( O(n^{-1/2}) \) 特性在观察在所有像素中逐步采集额外样本的场景的渐进渲染时显而易见。因为这相对较少的额外工作，在前几个样本中，当样本数量翻倍时，图像迅速改善。随后，一旦采集了数十或数百个样本，每增加一个样本的翻倍所需的时间就会大大增加，图像中剩余的误差消失也需要很长时间。</p>
+<p>随着样本数量的增加，方差线性减少使得比较不同的蒙特卡罗估计量变得容易。考虑两个估计量，其中第二个的方差是第一个的一半，但计算一个估计所需的时间是第一个的三倍；那么这两者中哪个更好？在这种情况下，第一个是更可取的：它可以在第二个所消耗的时间内获取三倍的样本，这样就能实现 \( 3\times \) 的方差减少。这个概念可以用估计量 \( F \) 的 <em>效率（efficiency）</em> 来概括，效率定义为</p>
+<p>\[
+\epsilon[F] = \frac{1}{V[F]T[F]}
+\]</p>
+<p>其中 \( V[F] \) 是其方差，\( T[F] \) 是计算其值的运行时间。</p>
+<p>并非所有积分的估计量都有期望值等于积分的值。这些估计量被称为 <em>有偏的（biased）</em>，其中差值</p>
+<p>\[
+\beta = E[F] - \int f(x)\text{d}x
+\]</p>
+<p>是偏差的量。如果有偏估计量能够比无偏估计量更快地接近正确结果，它们仍然可能是可取的。Kalos 和 Whitlock（<a href="https://www.pbr-book.org/4ed/Monte_Carlo_Integration/Further_Reading.html#cite:Kalos86">1986</a> 年，第 36-37 页）给出了以下例子：考虑计算均匀分布 \( X_i \sim p \) 在区间 0 到 1 上的均值估计的问题。可以使用以下估计量：</p>
+<p>\[
+\frac{1}{n} \sum_{i=1}^{n} X_i
+\]</p>
+<p>或者可以使用有偏估计量</p>
+<p>\[
+\frac{1}{2} \max(X_1,X_2,...,X_n)
+\]</p>
+<p>第一个估计量是无偏的，但其方差的阶数为 \( O(n^{-1}) \) 。第二个估计量的期望值是</p>
+<p>\[
+0.5 \frac{n}{n+1} \neq 0.5
+\]</p>
+<p>因此它是有偏的，尽管它的方差是要好得多的 \( O(n^{-2}) \) 。这个估计量具有一个有用的特性，即当样本数量 \( n \) 趋向于无穷大时，它的误差趋向于 0；这样的估计量是 <em>一致的（consistent）</em> 。†（作为一个技术性说明，一个具有无限方差的估计量可能是无偏的，但不一致。然而，这样的估计量通常不会出现在渲染中。） 在 <strong>pbrt</strong> 中使用的大多数蒙特卡罗估计量是无偏的，唯一的例外是 <strong>SPPMIntegrator</strong> ，它实现了光子映射算法。</p>
+<p><em>均方误差（mean squared error）</em>（MSE）与方差密切相关，其定义为估计量与真实值之间平方差的期望</p>
+<p>\[
+MSE[F] = E \left[ (F - \int f(x) \text{d}x)^2 \right]
+\]</p>
+<p>对于无偏估计量，均方误差 MSE 等于方差；否则，它是方差与估计量的平方偏差之和。</p>
+<p>可以以封闭形式计算一些简单估计量的方差和均方误差，但对于大多数在渲染中感兴趣的估计量，这并不可行。然而，能够量化这些值仍然是有用的。为此，可以使用一组独立随机变量 \( X_i \) 计算 <em>样本方差（sample variance）</em> 。方程 (<a href="#equation-2-8">2.8</a>) 指出了一种计算一组 \( n \) 个随机变量 \( X_i \) 的样本方差的方法。如果 <em>样本均值（sample mean）</em> 被计算为它们的平均值 \( \overline{X} = (1/n) \sum X_i \) ，那么样本方差为</p>
+<p><a name="equation-2-11">(2.11)</a></p>
+<p>\[
+\frac{1}{n-1} \sum_{i=1}^{n}(X_i - \overline{X})^2
+\]</p>
+<p>对 \( n-1 \) 而不是 \( n \) 的除法是 <em>贝塞尔校正（Bessel’s correction）</em> ，确保样本方差是方差的无偏估计。（另见 <a href="#TODO">B.2.11</a> 节，其中介绍了一种数值稳定的样本方差计算方法。）</p>
+<p>样本方差本身就是方差的一个估计，因此它本身也有方差。例如，考虑一个随机变量，其值在 99.99% 的时间里为 1，而在 0.01% 的时间里为 一百万 。如果我们对它进行了十次随机抽样，所有样本的值都是 1，那么样本方差会表明这个随机变量的方差为零，尽管它的实际方差要高得多。</p>
+<p>如果可以计算出积分 \( \tilde{F} \approx \int f(x)\text{d}x \) 的准确估计（例如，使用大量样本），那么均方误差可以通过以下方式估计</p>
+<p>\[
+MSE[F] \approx \frac{1}{n} \sum_{i=1}^{n}(f(X_i) - \tilde{F})^2
+\]</p>
+<p>在 <strong>pbrt</strong> 的发行版中提供的 <strong>imgtool</strong> 工具程序可以通过其 <strong>diff</strong> 选项计算图像相对于参考图像的均方误差（MSE）。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../2_Monte_Carlo_Integration/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../2_Monte_Carlo_Integration/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

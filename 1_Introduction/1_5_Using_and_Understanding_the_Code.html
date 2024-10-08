@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>使用和理解代码 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html" class="active"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="15-使用和理解代码using-and-understanding-the-code"><a class="header" href="#15-使用和理解代码using-and-understanding-the-code">1.5 使用和理解代码（<a href="https://www.pbr-book.org/4ed/Introduction/Using_and_Understanding_the_Code">Using and Understanding the Code</a>）</a></h1>
+<p><strong>pbrt</strong> 源代码分发可从 <a href="https://pbrt.org"><strong>pbrt.org</strong></a> 获取。该网站还包括额外的文档、使用 <strong>pbrt</strong> 渲染的图像、示例场景、勘误表以及错误报告系统的链接。我们鼓励您访问该网站并订阅 <strong>pbrt</strong> 邮件列表。</p>
+<p><strong>pbrt</strong> 是用 C++编写的，但我们努力限制使用语言的复杂特性来使其对非 C++专家更易理解。紧密围绕核心语言特性也有助于系统的可移植性。我们会在适用时利用 C++的扩展标准库，但在文本中不会讨论对标准库函数调用的语义。我们期望读者在必要时查阅标准库的文档。</p>
+<p>我们将偶尔在书中省略 <strong>pbrt</strong> 的源代码的短部分。例如，当有多个几乎相同的代码需要处理时，我们将展示一个案例，并说明其余案例的代码已从文本中省略。默认的类构造函数通常不显示，文本中也不包括每个源文件开头的各种 #include 指令等细节。所有省略的代码可以在 <strong>pbrt</strong> 源代码分发中找到。</p>
+<h2 id="151-源代码组织source-code-organization"><a class="header" href="#151-源代码组织source-code-organization">1.5.1 源代码组织（Source Code Organization）</a></h2>
+<p>用于构建 <strong>pbrt</strong> 的源代码位于 <strong>pbrt</strong> 发行版中的 <strong>src</strong> 目录下。在该目录中有 <strong>src/ext</strong> ，其中包含 <strong>pbrt</strong> 使用的各种第三方库的源代码，以及 <strong>src/pbrt</strong> ，其中包含 <strong>pbrt</strong> 的源代码。我们在书中不会讨论第三方库的实现。</p>
+<p><strong>src/pbrt</strong> 目录中的源文件主要由各种接口类型的实现组成。例如， <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/shapes.h"><strong>shapes.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/shapes.cpp"><strong>shapes.cpp</strong></a> 实现了 <strong>Shape</strong> 接口， <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/materials.h"><strong>materials.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/materials.cpp"><strong>materials.cpp</strong></a> 实现了材质，等等。该目录还包含解析 <strong>pbrt</strong> 的场景描述文件的源代码。</p>
+<p><strong>src/pbrt</strong> 中的 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/pbrt.h"><strong>pbrt.h</strong></a> 头文件是系统中所有其他源文件包含的第一个文件。它包含了一些宏和广泛使用的前向声明，因此我们尽量保持其简短，并最小化它包含的其他头文件数量，以提高编译时间效率。</p>
+<p><strong>src/pbrt</strong> 目录还包含多个子目录。它们具有以下作用：</p>
+<ul>
+<li><strong>base</strong> : 头文件定义了表 <a href="./1_3_pbrt_System_Overview.html#table-1-1">1.1</a> 中列出的 12 种常见类型的接口（ <strong>Primitive</strong> 和 <strong>Integrator</strong> 仅限 CPU 运行，因此在 <strong>cpu</strong> 目录中的文件中定义）。</li>
+<li><strong>cmd</strong> : 包含为 <strong>pbrt</strong> 构建的可执行文件的 main() 函数的源文件。 （除了 <strong>pbrt</strong> 可执行文件之外，还包括 <strong>imgtool</strong> ，它执行各种图像处理操作，以及 <strong>pbrt_test</strong> ，它包含单元测试。）</li>
+<li><strong>cpu</strong> : CPU 特定代码，包括 <a href="./1_3_pbrt_System_Overview.html#133-%E7%A7%AF%E5%88%86%E5%99%A8%E6%8E%A5%E5%8F%A3integrator-interface"><strong>Integrator</strong></a> 的实现。</li>
+<li><strong>gpu</strong> : GPU 特定代码，包括在 GPU 上分配内存和启动工作的函数。</li>
+<li><strong>util</strong> : 底层工具程序代码，其中大部分与渲染无关。</li>
+<li><strong>wavefront</strong> : <a href="#TODO"><strong>WavefrontPathIntegrator</strong></a>的实现 ，该内容在第 <a href="../15_Wavefront_Rendering_on_GPUs/index.html">15</a> 章中介绍。该积分器可在 CPU 和 GPU 上运行。</li>
+</ul>
+<h2 id="152-命名约定naming-conventions"><a class="header" href="#152-命名约定naming-conventions">1.5.2 命名约定（Naming Conventions）</a></h2>
+<p>函数和类通常使用驼峰命名法命名，每个单词的首字母大写且没有空格分隔。一个例外是某些容器类的方法，当它们具有相应的功能时，遵循 C++标准库的命名约定（例如， size() 和 begin() 和 end() 用于迭代器）。变量也使用驼峰命名法，但首字母小写，除了少数全局变量。</p>
+<p>我们还尝试在命名中匹配数学符号：例如，我们使用变量 <strong>p</strong> 表示点 \( \text{p} \) ，使用 <strong>w</strong> 表示方向 \( \omega \) 。我们有时会在变量的末尾添加一个 <strong>p</strong> 来表示带撇号的符号： <strong>wp</strong> 表示 \( \omega' \) 。下划线用于表示方程中的下标：例如 <strong>theta_o</strong> 表示 \( \theta_\text{o} \) 。</p>
+<p>然而，我们对下划线的使用并不完全一致。短变量名通常省略下划线——我们使用 <strong>wi</strong> 表示 \( \omega_\text{i} \) ，并且我们已经看到 <strong>Li</strong> 用于 \( L_\text{i} \) 。我们有时也使用下划线将一个单词与小写数学符号分开。例如，我们使用 <strong>Sample_f</strong> 表示一个对函数 \( f \) 进行采样的方法，而不是 <strong>Samplef</strong> ，这样会更难阅读，或者 <strong>SampleF</strong> ，这会模糊与函数 \( f \) 的联系（“函数 \( F \) 是在哪里定义的？”）。</p>
+<h2 id="153-指针还是引用pointer-or-reference"><a class="header" href="#153-指针还是引用pointer-or-reference">1.5.3 指针还是引用？(Pointer or Reference?)</a></h2>
+<p>C++ 提供了两种不同的机制来将对象引用传递给函数或方法：指针和引用。如果函数参数不打算作为输出变量，可以使用任一方式来节省在栈上传递整个结构的开销。在 <strong>pbrt</strong> 中的约定是，当参数会被函数或方法完全改变时使用指针，当其内部状态会被改变但不会完全重新初始化时使用引用，而当参数根本不会被改变时使用 <strong>const</strong> 引用。这个规则的一个重要例外是，当我们希望能够传递 <strong>nullptr</strong> 来指示参数不可用或不应使用时，我们将始终使用指针。</p>
+<h2 id="154-抽象与效率abstraction-versus-efficiency"><a class="header" href="#154-抽象与效率abstraction-versus-efficiency">1.5.4 抽象与效率（Abstraction versus Efficiency）</a></h2>
+<p>在设计软件系统的接口时，主要的关注点之一是合理权衡抽象与效率。例如，许多程序员严格地将所有类中的所有数据设为 <strong>private</strong> ，并提供方法来获取或修改数据项的值。对于简单类（例如， <a href="#TODO"><strong>Vector3f</strong></a> ），我们认为这种方法无谓地隐藏了实现的一个基本属性——该类持有三个浮点坐标——我们可以合理地期望它们永远不会改变。当然，不使用隐藏信息并暴露所有类内部的细节会导致代码维护的噩梦，但我们认为在系统中明智地暴露基本设计决策没有任何问题。例如， <a href="#TODO"><strong>Ray</strong></a> 用一个点、一个向量、一个时间和它所处的介质来表示的事实是一个不需要隐藏在抽象层背后的决策。当这些细节被暴露时，其他地方的代码更简洁且更易于理解。</p>
+<p>在编写软件系统并进行这些权衡时，重要的一点是要考虑系统的预期最终规模。 <strong>pbrt</strong> 大约有 70,000 行代码，永远不会增长到一百万行代码；这一事实应体现在系统中使用的信息隐藏量上。设计接口以适应一个复杂度更高的系统将浪费程序员的时间（并可能导致运行时效率低下）。</p>
+<h2 id="155-pstd"><a class="header" href="#155-pstd">1.5.5 pstd</a></h2>
+<p>我们在 pstd 命名空间中重新实现了 C++ 标准库的一个子集；这是为了能够在 CPU 和 GPU 上可互换地使用这些部分。为了阅读 <strong>pbrt</strong> 的源代码， <strong>pstd</strong> 中的任何内容都提供与 <strong>std</strong> 中相应实体相同的功能、类型和方法。因此，我们在此文本中将不记录 <strong>pstd</strong> 的使用。</p>
+<h2 id="156-分配器allocators"><a class="header" href="#156-分配器allocators">1.5.6 分配器（Allocators）</a></h2>
+<p>几乎所有在 <strong>pbrt</strong> 中表示场景的对象的动态内存分配都是使用提供给对象创建方法的 <strong>Allocator</strong> 实例进行的。在 <strong>pbrt</strong> 中， <strong>Allocator</strong> 是 C++标准库的 <strong>pmr::polymorphic_allocator</strong> 类型的简写。它的定义在 <a href="https://github.com/mmp/pbrt-v4/tree/master/src/pbrt/pbrt.h"><strong>pbrt.h</strong></a> 中，以便所有其他源文件都可以使用。</p>
+<pre><code class="language-cpp">/** 定义 Allocator */
+using Allocator = pstd::pmr::polymorphic_allocator&lt;std::byte&gt;;
+</code></pre>
+<p><strong>std::pmr::polymorphic_allocator</strong> 实现提供了一些分配和释放对象的方法。下列三种方法在 <strong>pbrt</strong> 中被广泛使用：†（由于 pmr::polymorphic_allocator 是最近才添加到 C++ 中且未被广泛使用，于是我们破例再此列出标准库功能）</p>
+<pre><code class="language-cpp">void *allocate_bytes(size_t nbytes, size_t alignment);
+template &lt;class T&gt; T *allocate_object(size_t n = 1);
+template &lt;class T, class... Args&gt; T *new_object(Args &amp;&amp;... args);
+</code></pre>
+<p>第一个， <strong>allocate_bytes()</strong> 分配指定字节数量的内存。接下来， <strong>allocate_object()</strong> 分配一个指定类型 T 的包含 n 个对象的数组，使用其默认构造函数初始化每个对象。最后一个方法， <strong>new_object()</strong> ，分配一个类型为 T 的单个对象，并使用提供的参数调用其构造函数。每种分配类型都有相应的释放方法： <strong>deallocate_bytes()</strong> ， <strong>deallocate_object()</strong> 和 <strong>delete_object()</strong> 。</p>
+<p>与 C++ 标准库中的数据结构使用分配器相关的一个棘手细节是，一旦容器的构造函数运行完毕，其分配器是固定的。因此，如果一个容器被赋值给另一个容器，目标容器的分配器不会改变，即使它存储的所有值都已更新。（即使在 C++ 的移动语义下也是如此。）因此，常见的情况是，在 <strong>pbrt</strong> 中的对象构造函数在成员初始化列表中传递分配器给它们存储的容器，即使它们尚未准备好设置存储在其中的值。</p>
+<p>使用显式内存分配器而不是直接调用 <strong>new</strong> 和 <strong>delete</strong> 有几个优点。它不仅使跟踪已分配内存的总量变得简单，而且还使替换为许多小分配优化的分配器变得容易，这在第 <a href="../7_Primitives_and_Intersection_Acceleration/index.html">7</a> 章构建加速结构时非常有用。以这种方式使用分配器还使在使用 GPU 渲染时将场景对象存储在 GPU 可见的内存中变得简单。</p>
+<h2 id="157-动态调度dynamic-dispatch"><a class="header" href="#157-动态调度dynamic-dispatch">1.5.7 动态调度（Dynamic Dispatch）</a></h2>
+<p>如第 <a href="./1_3_pbrt_System_Overview.html">1.3</a> 节所述，虚函数通常不用于 <strong>pbrt</strong> 中的多态类型的动态调度（主要例外是 <strong>Integrator</strong> ）。相反， <a href="#TODO"><strong>TaggedPointer</strong></a> 类用于表示指向指定类型集合之一的指针；它包括运行时类型识别及随之而来的动态调度的机制。（其实现可以在附录 <a href="#TODO">B.4.4</a> 中找到。）使用它的原因有两个。</p>
+<p>首先，在 C++中，继承自抽象基类的对象实例包含一个隐藏的虚函数表指针，用于解析虚函数调用。在大多数现代系统中，这个指针使用八个字节的内存。虽然八个字节看起来不算多，但我们发现，在使用之前版本的 <strong>pbrt</strong> 渲染复杂场景时，仅用于形状和图元的虚函数指针就会消耗大量内存。使用 <a href="#TODO"><strong>TaggedPointer</strong></a> 类时，类型信息没有增量存储成本。</p>
+<p>虚函数表的另一个问题是它们存储指向可执行代码的函数指针。当然，这正是它们应该做的，但这一特性意味着虚函数表可以有效地用于来自 CPU 或 GPU 的方法调用，但不能同时用于两者，因为不同处理器的可执行代码存储在不同的内存位置。当使用 GPU 进行渲染时，能够从两个处理器调用方法是很有用的。</p>
+<p>对于所有仅调用多态对象方法的代码，使用 <strong>pbrt</strong> 的 <a href="#TODO"><strong>TaggedPointer</strong></a> 代替虚函数没有任何区别，除了方法调用是使用 <strong>.</strong> 运算符进行的，就像用 C++ 引用一样。第 <a href="#TODO"><strong>4.5.1</strong></a> 节介绍了 Spectrum ，这是书中出现的第一个基于 TaggedPointer 的类，关于 <strong>pbrt</strong> 的动态调度方案的实现有更多细节。</p>
+<h2 id="158-代码优化code-optimization"><a class="header" href="#158-代码优化code-optimization">1.5.8 代码优化（Code Optimization）</a></h2>
+<p>我们试图通过使用精心选择的算法而不是局部微优化来使 <strong>pbrt</strong> 高效，以便系统更容易理解。然而，效率是渲染的一个不可或缺的部分，因此我们在整本书中都会讨论性能问题。</p>
+<p>对于 CPU 和 GPU 而言，处理器性能的增长速度持续快于从主内存加载数据到处理器的速度。这意味着等待从内存中获取值可能成为一个主要的性能瓶颈。我们讨论的最重要的优化与最小化不必要的内存访问以及以有助于一致访问模式的方式组织算法和数据结构有关；关注这些问题可以比减少执行的总指令数更大程度地加快程序执行速度。</p>
+<h2 id="159-调试和日志记录debugging-and-logging"><a class="header" href="#159-调试和日志记录debugging-and-logging">1.5.9 调试和日志记录（Debugging and Logging）</a></h2>
+<p>调试渲染器可能很具挑战性，特别是在结果大多数时候是正确的但并非总是正确的情况下。 <strong>pbrt</strong> 包含了许多便利工具来简化调试。</p>
+<p>最重要的之一是一套单元测试。我们发现单元测试在 <strong>pbrt</strong> 的开发中是不可或缺的，因为它提供了被测试功能很可能是正确的保证。有了这种保证，可以减轻调试时诸如“我能确定这里使用的哈希表不是我错误的来源吗？”这样的问题背后的担忧。或者，失败的单元测试几乎总是比渲染器生成的不正确图像更容易调试；许多测试是在调试 <strong>pbrt</strong> 的过程中添加的。文件 <strong>code.cpp</strong> 的单元测试位于 <strong>code_tests.cpp</strong> 。所有单元测试都是通过调用 <strong>pbrt_test</strong> 可执行文件来执行的，特定的测试可以通过命令行选项进行选择。</p>
+<p>在 <strong>pbrt</strong> 代码库中有许多断言，其中大多数未包含在书本文本中。这些断言检查在运行时绝不应该为真的条件，如果发现为真，则会发出错误并立即退出。（有关 <strong>pbrt</strong> 中使用的断言宏的定义，请参见第 <a href="#TODO">B.3.6</a> 节。）失败的断言提供了错误来源的初步线索；像单元测试一样，断言有助于集中调试，至少提供了一个起点。在 <strong>pbrt</strong> 中一些计算开销较大的断言仅在调试构建中启用；如果渲染器崩溃或以其他方式产生不正确的输出，尝试运行调试构建以查看这些额外的断言是否失败并提供线索是值得的。</p>
+<p>我们还努力使在给定像素样本下执行 <strong>pbrt</strong> 具有确定性。调试渲染器的一大挑战是有些崩溃只在渲染计算几分钟或几小时后发生。通过确定性执行，可以在单个像素样本处重新启动渲染，以更快地返回到崩溃点。此外，在崩溃时， <strong>pbrt</strong> 将打印一条消息，例如“在 pixel (16, 27) sample 821 处渲染失败。使用 <code>--debugstart 16,27,821</code> 进行调试”。“debugstart”后打印的值取决于所使用的积分器，但足以在接近崩溃的地方重新启动其计算。</p>
+<p>最后，在调试过程中，打印出存储在数据结构中的值通常是有用的。我们为几乎所有的 <strong>pbrt</strong> 类实现了 <strong>ToString()</strong> 方法。它返回 <strong>std::string</strong> ，以便在程序执行期间轻松打印其完整的对象状态。此外， <strong>pbrt</strong> 的自定义 <a href="#TODO"><strong>Printf()</strong></a> 和 <a href="#TODO"><strong>StringPrintf()</strong></a> 函数（第 <a href="#TODO"><strong>B.3.3</strong></a> 节）在格式字符串中找到 <strong>%s</strong> 指定符时，会自动使用 <strong>ToString()</strong> 返回的对象字符串。</p>
+<h2 id="1510-并行性和线程安全parallelism-and-thread-safety"><a class="header" href="#1510-并行性和线程安全parallelism-and-thread-safety">1.5.10 并行性和线程安全（Parallelism and Thread Safety）</a></h2>
+<p>在 <strong>pbrt</strong> （对于大多数光线追踪器来说都是如此），在渲染时绝大多数数据是只读的（例如，场景描述和纹理图像）。场景文件的解析和场景表示在内存中的创建主要是通过单线程执行完成的，因此在执行的这一阶段几乎没有同步问题。†在渲染过程中，多个线程对所有只读数据的并发读取在 CPU 和 GPU 上都没有问题；我们只需关注内存中数据被修改的情况。</p>
+<p>作为一般规则，系统中的底层类和结构不是线程安全的。例如， <a href="#TODO"><strong>Point3f</strong></a> 类存储三个 <strong>float</strong> 值以表示 3D 空间中的一个点，让多个线程同时调用修改它的方法是不安全的。（当然，多个线程可以同时将 Point3f 作为只读数据使用。）使 Point3f 线程安全的运行时开销将对性能产生重大影响，而回报却微乎其微。</p>
+<p>对于像 <strong>Vector3f</strong> 、 <strong>Normal3f</strong> 、 <strong>SampledSpectrum</strong> 、 <strong>Transform</strong> 、 <strong>Quaternion</strong> 和 <strong>SurfaceInteraction</strong> 这样的类也是如此。这些类通常是在场景构建时创建的，然后作为只读数据使用，或者在渲染过程中在栈上分配，仅由单个线程使用。</p>
+<p>实用类 <a href="#TODO"><strong>ScratchBuffer</strong></a> （用于高性能临时内存分配）和 <a href="#TODO"><strong>RNG</strong></a> （伪随机数生成）也不适合多个线程使用；这些类存储的状态在调用其方法时会被修改，而保护其状态修改的互斥开销相对于它们执行的计算量来说过于庞大。因此，在之前的 <a href="./1_3_pbrt_System_Overview.html#134-%E5%9B%BE%E5%83%8F%E5%9D%97%E7%A7%AF%E5%88%86%E5%99%A8%E5%92%8C%E4%B8%BB%E6%B8%B2%E6%9F%93%E5%BE%AA%E7%8E%AFimagetileintegrator-and-the-main-rendering-loop"><strong>ImageTileIntegrator::Render()</strong></a> 方法中， <strong>pbrt</strong> 在栈上为每个线程分配这些类的实例。</p>
+<p>除了两个例外，表 1.1 中列出的基本类型的实现是安全的，可以被多个线程同时使用。只需稍加注意，通常可以简单地实现这些基类的新实例，以便它们在其方法中不修改任何共享状态。</p>
+<p>第一个例外是 <a href="#TODO"><strong>Light</strong></a> <strong>Preprocess()</strong> 方法实现。这些方法在场景构建期间由系统调用，通常会修改其对象中的共享状态。因此，允许实现者假设只有一个线程会调用这些方法是有帮助的。（这与考虑到计算密集型的这些方法实现可能使用 <strong>ParallelFor()</strong> 来并行化其计算是一个独立的问题。）</p>
+<p>第二个例外是 <a href="#TODO"><strong>Sampler</strong></a> 类实现；它们的方法也不被期望是线程安全的。这是另一个例子，在这种情况下，这一要求会对性能和可扩展性产生过大的影响；许多线程同时尝试从单个 <strong>Sampler</strong> 获取样本会限制系统的整体性能。因此，如第 <a href="./1_3_pbrt_System_Overview.html#134-%E5%9B%BE%E5%83%8F%E5%9D%97%E7%A7%AF%E5%88%86%E5%99%A8%E5%92%8C%E4%B8%BB%E6%B8%B2%E6%9F%93%E5%BE%AA%E7%8E%AFimagetileintegrator-and-the-main-rendering-loop">1.3.4</a> 节所述，为每个渲染线程使用 <a href="#TODO"><strong>Sampler::Clone()</strong></a> 创建一个唯一的 <strong>Sampler</strong> 。</p>
+<p><strong>pbrt</strong> 中的所有独立函数都是线程安全的（前提是多个线程不将指针传递给相同的数据）。</p>
+<h2 id="1511-扩展系统extending-the-system"><a class="header" href="#1511-扩展系统extending-the-system">1.5.11 扩展系统（Extending the System）</a></h2>
+<p>我们编写本书和构建 <strong>pbrt</strong> 系统的目标之一是让开发者和研究人员更容易地实验新的（或旧的！）渲染创意。计算机图形学的一大乐趣是编写新的软件以生成新的图像；即使是对系统的小改动也能带来有趣的实验体验。本书中的练习建议对系统进行许多更改，从小调整到大型开放式研究项目。附录 <a href="../C_Processing_the_Scene_Description/index.html">C</a> 的 <a href="#TODO">C.4</a> 节提供了有关添加表 <a href="./1_3_pbrt_System_Overview.html#table-1-1">1.1</a> 中列出的接口新实现的机制的更多信息。</p>
+<h2 id="1512--bugs"><a class="header" href="#1512--bugs">1.5.12  Bugs</a></h2>
+<p>尽管我们通过广泛的测试尽力使 <strong>pbrt</strong> 尽可能正确，但不可避免地仍然存在一些错误。</p>
+<p>如果您认为在系统中发现了一个错误，请执行以下操作：</p>
+<ol>
+<li>使用未修改的最新版本 <strong>pbrt</strong> 重现该错误。</li>
+<li>检查在线讨论论坛和 <a href="https://pbrt.org">pbrt.org</a> 的缺陷跟踪系统。您的问题可能是一个已知的错误，或者可能是一个常被误解的功能。</li>
+<li>尝试找到最简单的测试用例来演示这个错误。许多错误可以通过仅几行的场景描述文件来演示，使用简单场景进行调试比复杂场景要容易得多。</li>
+<li>通过我们的在线缺陷跟踪系统提交详细的缺陷报告。确保您包含演示缺陷的场景文件，以及您认为 <strong>pbrt</strong> 在场景中表现不正确的详细描述。如果您能提供修复缺陷的补丁，那就更好了！</li>
+</ol>
+<p>我们将定期更新 <strong>pbrt</strong> 源代码库，修复错误并进行小幅增强。（请注意，我们通常会让错误报告积累几个月再处理；不要将此视为我们不重视它们的迹象！）然而，我们不会对 <strong>pbrt</strong> 源代码进行重大更改，以确保它与本书中描述的系统保持一致。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

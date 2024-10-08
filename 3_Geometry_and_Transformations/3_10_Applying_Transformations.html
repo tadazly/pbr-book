@@ -1,0 +1,488 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>应用变换 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html" class="active"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="310-应用变换applying-transformations"><a class="header" href="#310-应用变换applying-transformations">3.10 应用变换（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Applying_Transformations">Applying Transformations</a>）</a></h1>
+<p>我们现在可以定义执行适当矩阵乘法来变换点和向量的例程。我们将重载函数应用运算符来描述这些变换；这使我们能够像下面这样编写代码：</p>
+<pre><code class="language-cpp">    Point3f p = ...;
+    Transform T = ...;
+    Point3f pNew = T(p);
+</code></pre>
+<h2 id="3101-点points"><a class="header" href="#3101-点points">3.10.1 点（Points）</a></h2>
+<p>点变换例程接受一个点 \( (x,y,z) \) 并隐式表示为齐次列向量 \( [x\ y\ z\ 1]^T \) 。然后，通过用变换矩阵左乘（premultiply）这个向量来变换该点。最后，将结果除以 \( w \) 来转换回非齐次点表示。为了提高效率，当权重 \( w=1 \) 时，该方法跳过了对齐次权重 \( w \) 的除法，这对于将在 <strong>pbrt</strong> 中使用的大多数变换是常见的——只有在第 <a href="../5_Cameras_and_Film/">5</a> 章中定义的投影变换才需要此除法。</p>
+<pre><code class="language-cpp">/** Transform 内联方法 */
+template &lt;typename T&gt;
+Point3&lt;T&gt; Transform::operator()(Point3&lt;T&gt; p) const {
+    T xp = m[0][0] * p.x + m[0][1] * p.y + m[0][2] * p.z + m[0][3];
+    T yp = m[1][0] * p.x + m[1][1] * p.y + m[1][2] * p.z + m[1][3];
+    T zp = m[2][0] * p.x + m[2][1] * p.y + m[2][2] * p.z + m[2][3];
+    T wp = m[3][0] * p.x + m[3][1] * p.y + m[3][2] * p.z + m[3][3];
+    if (wp == 1)
+        return Point3&lt;T&gt;(xp, yp, zp);
+    else
+        return Point3&lt;T&gt;(xp, yp, zp) / wp;
+}
+</code></pre>
+<p><a href="./3_9_Transformations.html#Transform-definition"><strong>Transform</strong></a> 类还为其变换的每种类型提供了相应的 <strong>ApplyInverse()</strong> 方法。针对 <strong>Point3</strong> 的方法对给定点应用其逆变换。调用此方法比先调用 <a href="./3_9_Transformations.html#Inverse"><strong>Transform::Inverse()</strong></a> 然后再调用其 <strong>operator()</strong> 更简洁且通常更高效。</p>
+<pre><code class="language-cpp">/** Transform 公有方法 */
+template &lt;typename T&gt;
+Point3&lt;T&gt; ApplyInverse(Point3&lt;T&gt; p) const;
+</code></pre>
+<p>所有后续可以变换的类型也都有 <strong>ApplyInverse()</strong> 方法，尽管我们不会在书中包含它们。</p>
+<h2 id="3102-向量vectors"><a class="header" href="#3102-向量vectors">3.10.2 向量（Vectors）</a></h2>
+<p>向量的变换可以以类似的方式计算。然而，矩阵与列向量的乘法被简化，因为隐式齐次 \( w \) 坐标为零。</p>
+<pre><code class="language-cpp">/** Transform 内联方法 */
+template &lt;typename T&gt;
+Vector3&lt;T&gt; Transform::operator()(Vector3&lt;T&gt; v) const {
+    return Vector3&lt;T&gt;(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z,
+                      m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z,
+                      m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z);
+}
+</code></pre>
+<h2 id="3103-法线normals"><a class="header" href="#3103-法线normals">3.10.3 法线（Normals）</a></h2>
+<blockquote>
+<p><a name="figure-3-29"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f29.svg" width="366" height="140" style="max-width: 100%;">
+</div>
+<p><strong>图 3.29：变换表面法线。</strong>(a) 原始的圆，法线在某一点由箭头表示。(b) 当将圆在 \( y \) 方向上缩放为一半高度时，简单地将法线视为一个方向并以相同方式缩放，会导致法线不再垂直于表面。(c) 正确变换的法线。</p>
+</blockquote>
+<p>法线的变换方式与向量不同，如图 <a href="#figure-3-29">3.29</a> 所示。尽管表面的切向量以简单的方式变换，法线却需要特别处理。由于法向量 \( \mathbf{n} \) 和表面上的任何切向量 \( \mathbf{t} \) 在构造上是正交的，我们知道</p>
+<p>\[
+\mathbf{n}\cdot\mathbf{t} = \mathbf{n}^T\mathbf{t} = 0<br />
+\]</p>
+<p>当我们通过某个矩阵 \( \mathbf{M} \) 变换表面上的一个点时，变换后点的切向量 \( \mathbf{t}' \) 为 \( \mathbf{M}\mathbf{t} \) 。变换后的法向量 \( \mathbf{n}' \) 应该等于通过某个 \( 4\times4 \) 矩阵 \( \mathbf{S} \) 变换后的 \( \mathbf{S}\mathbf{n} \) 。为了保持正交性要求，我们必须有</p>
+<p>\[
+\begin{align}
+0 &amp;= (\mathbf{n}')^T\mathbf{t}' \\
+&amp;= (\mathbf{S}\mathbf{n})^T\mathbf{M}\mathbf{t} \\
+&amp;= (\mathbf{n})^T\mathbf{S}^T\mathbf{M}\mathbf{t} \\
+\end{align}<br />
+\]</p>
+<p>该条件在 \( \mathbf{S}^T\mathbf{M} = \mathbf{I} \)，即单位矩阵的情况下成立。因此，\( \mathbf{S}^T = \mathbf{M}^{-1} \)，所以 \( \mathbf{S} = (\mathbf{M}^{-1})^T \)，我们看到法线必须通过变换矩阵的逆的转置进行变换。这个细节是 <a href="./3_9_Transformations.html#Transform-definition"><strong>Transform</strong></a> 包含其逆的原因之一。</p>
+<p>请注意，这种方法在变换法线时并不显式计算逆矩阵的转置。它只是以不同的顺序索引逆矩阵（相比于变换 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 的代码）。</p>
+<pre><code class="language-cpp">/** Transform 内联方法 */
+template &lt;typename T&gt;
+Normal3&lt;T&gt; Transform::operator()(Normal3&lt;T&gt; n) const {
+    T x = n.x, y = n.y, z = n.z;
+    return Normal3&lt;T&gt;(mInv[0][0] * x + mInv[1][0] * y + mInv[2][0] * z,
+                      mInv[0][1] * x + mInv[1][1] * y + mInv[2][1] * z,
+                      mInv[0][2] * x + mInv[1][2] * y + mInv[2][2] * z);
+}
+</code></pre>
+<h2 id="3104-光线rays"><a class="header" href="#3104-光线rays">3.10.4 光线（Rays）</a></h2>
+<p>变换光线在概念上是非常简单的：只需变换组成它的起点和方向，并复制其他数据成员。（ <strong>pbrt</strong> 也提供了一个类似的方法来变换 <a href="./3_6_Rays.html#RayDifferential-definition"><strong>RayDifferential</strong></a> 。）</p>
+<p>在 <strong>pbrt</strong> 中用于管理浮点数舍入误差的方法引入了一些细节，需要对变换后的光线起点进行小幅调整。&lt;&lt;<a href="../6_Shapes/6_8_Managing_Rounding_Error.html#%E5%B0%86%E5%85%89%E7%BA%BF%E8%B5%B7%E7%82%B9%E5%81%8F%E7%A7%BB%E5%88%B0%E8%AF%AF%E5%B7%AE%E7%95%8C%E9%99%90%E7%9A%84%E8%BE%B9%E7%BC%98%E5%B9%B6%E8%AE%A1%E7%AE%97tMax">将光线起点偏移到误差界限的边缘并计算 tMax</a>&gt;&gt;片段处理了这些细节；该片段在第 <a href="../6_Shapes/6_8_Managing_Rounding_Error.html#686-%E7%A8%B3%E5%81%A5%E5%9C%B0%E7%94%9F%E6%88%90%E5%85%89%E7%BA%BF%E8%B5%B7%E7%82%B9robust-spawned-ray-origins">6.8.6</a> 节中定义，其中讨论了舍入误差及 <strong>pbrt</strong> 处理该误差的机制。</p>
+<pre><code class="language-cpp">/** Transform 内联方法 */
+Ray Transform::operator()(const Ray &amp;r, Float *tMax) const {
+    Point3fi o = (*this)(Point3fi(r.o));
+    Vector3f d = (*this)(r.d);
+    /** 将光线起点偏移到误差界限的边缘并计算 tMax */
+<span class="boring">    if (Float lengthSquared = LengthSquared(d); lengthSquared &gt; 0) {
+</span><span class="boring">        Float dt = Dot(Abs(d), o.Error()) / lengthSquared;
+</span><span class="boring">        o += d * dt;
+</span><span class="boring">        if (tMax)
+</span><span class="boring">            *tMax -= dt;
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    return Ray(Point3f(o), d, r.time, r.medium);
+}
+</code></pre>
+<h2 id="3105-边界框bounding-boxes"><a class="header" href="#3105-边界框bounding-boxes">3.10.5 边界框（Bounding Boxes）</a></h2>
+<p>变换轴对齐包围盒（AABB）的最简单方法是变换其所有八个角顶点，然后计算一个包含这些点的新的边界框。下面展示了这种方法的实现；本章有一个课后练习要求你实现一种更高效地进行此计算的技术。</p>
+<pre><code class="language-cpp">/** Transform 方法定义 */
+Bounds3f Transform::operator()(const Bounds3f &amp;b) const {
+    Bounds3f bt;
+    for (int i = 0; i &lt; 8; ++i)
+        bt = Union(bt, (*this)(b.Corner(i)));
+    return bt;
+}
+</code></pre>
+<h2 id="3106-变换的复合composition-of-transformations"><a class="header" href="#3106-变换的复合composition-of-transformations">3.10.6 变换的复合（Composition of Transformations）</a></h2>
+<p>在定义了如何构建表示单个变换类型的矩阵之后，我们现在可以考虑由一系列单个变换所产生的总变换。我们终于将看到用矩阵表示变换的真正价值。</p>
+<p>考虑一系列变换 \( \mathbf{A}\mathbf{B}\mathbf{C} \) 。我们希望计算一个新的变换 \( \mathbf{T} \) ，使得应用 \( \mathbf{T} \) 的结果与反向应用 \( \mathbf{A} \)、 \( \mathbf{B} \) 和 \( \mathbf{C} \) 的结果相同；即 \( \mathbf{A}(\mathbf{B}(\mathbf{C}(\text{p}))) = \mathbf{T}(\text{p}) \) 。这样的变换 \( \mathbf{T} \) 可以通过将变换 \( \mathbf{A} \)、 \( \mathbf{B} \) 和 \( \mathbf{C} \) 的矩阵相乘来计算。在 <strong>pbrt</strong> 中，我们可以写：</p>
+<pre><code class="language-cpp">Transform T = A * B * C;
+</code></pre>
+<p>然后我们可以像往常一样将 <strong>T</strong> 应用于 <a href="./3_4_Points.html#Point3*"><strong>Point3f</strong></a> 的 <strong>p</strong> ， <strong>Point3f pp = T(p)</strong> ，而不是依次应用每个变换： <strong>Point3f pp = A(B(C(p)))</strong> 。</p>
+<p>我们在 <a href="./3_9_Transformations.html#Transform-definition"><strong>Transform</strong></a> 类中重载 C++ * 运算符，以计算用另一个变换 <strong>t2</strong> <em>后乘（postmultiply）</em> 该变换所得到的新变换。在矩阵乘法中，结果矩阵的地 \( (i,j) \) 个元素是第一个矩阵的第 \( i \) 行与第二个矩阵的第 \( j \) 列的内积。</p>
+<p>结果变换的逆等于 <strong>t2.mInv * mInv</strong> 的乘积。这是矩阵恒等式的结果</p>
+<p>\[
+(\mathbf{AB})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}<br />
+\]</p>
+<pre><code class="language-cpp">/** Transform 方法定义 */
+&lt;&lt;Transform Method Definitions&gt;&gt;+=  
+Transform Transform::operator*(const Transform &amp;t2) const {
+    return Transform(m * t2.m, t2.mInv * mInv);
+}
+</code></pre>
+<h2 id="3107-变换与坐标系手性transformations-and-coordinate-system-handedness"><a class="header" href="#3107-变换与坐标系手性transformations-and-coordinate-system-handedness">3.10.7 变换与坐标系手性（Transformations and Coordinate System Handedness）</a></h2>
+<p>某些类型的变换会将左手坐标系变成右手坐标系，反之亦然。一些例程需要知道源坐标系的手性是否与目标坐标系不同。特别是，想要确保表面法线始终指向表面“外部”的例程，在手性发生变化时，可能需要在变换后翻转法线的方向。</p>
+<p>幸运的是，判断变换是否改变了手性是很简单的：只有当变换的左上角 \( 3\times3 \) 子矩阵的行列式为负时，才会发生这种情况。</p>
+<pre><code class="language-cpp">/** Transform 方法定义 */
+&lt;&lt;Transform Method Definitions&gt;&gt;+= 
+bool Transform::SwapsHandedness() const {
+    SquareMatrix&lt;3&gt; s(m[0][0], m[0][1], m[0][2],
+                      m[1][0], m[1][1], m[1][2],
+                      m[2][0], m[2][1], m[2][2]);
+    return Determinant(s) &lt; 0;
+}
+</code></pre>
+<h2 id="3108-向量框架vector-frames"><a class="header" href="#3108-向量框架vector-frames">3.10.8 向量框架（Vector Frames）</a></h2>
+<p>有时定义一个旋转使得坐标系统中的三个规范正交向量（Orthonormal vectors）与 \( x \)、 \( y \) 和 \( z \) 轴对齐是有用的。将这种变换应用于该坐标系中的方向向量可以简化后续计算。例如，在 <strong>pbrt</strong> 中，BSDF 评估是在一个表面法线与 \( z \) 轴对齐的坐标系中进行的。除此之外，这使得可以高效地使用诸如第 <a href="./3_8_Spherical_Geometry.html#383-%E7%90%83%E9%9D%A2%E5%8F%82%E6%95%B0%E5%8C%96spherical-parameterizations">3.8.3</a> 节中介绍的 <a href="./3_8_Spherical_Geometry.html#CosTheta"><strong>CosTheta()</strong></a> 函数来计算三角函数。</p>
+<p><strong>Frame</strong> 类高效地表示并执行此类变换，避免了 <strong>Transform</strong> 类的完全通用性（因此也避免了复杂性）。它只需要存储一个 \( 3\times 3 \) 矩阵，存储逆矩阵是没有必要的，因为在规范正交基向量（orthonormal basis vectors）的情况下，逆矩阵仅仅是该矩阵的转置。</p>
+<pre><code class="language-cpp">/** Frame 定义 */
+class Frame {
+  public:
+    /** Frame 公有方法 */
+<span class="boring">    Frame() : x(1, 0, 0), y(0, 1, 0), z(0, 0, 1) {}
+</span><span class="boring">    Frame(Vector3f x, Vector3f y, Vector3f z);
+</span><span class="boring">    static Frame FromXZ(Vector3f x, Vector3f z) {
+</span><span class="boring">        return Frame(x, Cross(z, x), z);
+</span><span class="boring">    }
+</span><span class="boring">    static Frame FromXY(Vector3f x, Vector3f y) {
+</span><span class="boring">        return Frame(x, y, Cross(x, y));
+</span><span class="boring">    }
+</span><span class="boring">    static Frame FromZ(Vector3f z) {
+</span><span class="boring">        Vector3f x, y;
+</span><span class="boring">        CoordinateSystem(z, &amp;x, &amp;y);
+</span><span class="boring">        return Frame(x, y, z);
+</span><span class="boring">    }
+</span><span class="boring">    static Frame FromX(Vector3f x) {
+</span><span class="boring">        Vector3f y, z;
+</span><span class="boring">        CoordinateSystem(x, &amp;y, &amp;z);
+</span><span class="boring">        return Frame(x, y, z);
+</span><span class="boring">    }
+</span><span class="boring">    static Frame FromY(Vector3f y) {
+</span><span class="boring">        Vector3f x, z;
+</span><span class="boring">        CoordinateSystem(y, &amp;z, &amp;x);
+</span><span class="boring">        return Frame(x, y, z);
+</span><span class="boring">    }
+</span><span class="boring">    static Frame FromX(Normal3f x) {
+</span><span class="boring">        Vector3f y, z;
+</span><span class="boring">        CoordinateSystem(x, &amp;y, &amp;z);
+</span><span class="boring">        return Frame(Vector3f(x), y, z);
+</span><span class="boring">    }
+</span><span class="boring">    static Frame FromY(Normal3f y) {
+</span><span class="boring">        Vector3f x, z;
+</span><span class="boring">        CoordinateSystem(y, &amp;z, &amp;x);
+</span><span class="boring">        return Frame(x, Vector3f(y), z);
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    static Frame FromZ(Normal3f z) { return FromZ(Vector3f(z)); }
+</span><span class="boring">    Vector3f ToLocal(Vector3f v) const {
+</span><span class="boring">        return Vector3f(Dot(v, x), Dot(v, y), Dot(v, z));
+</span><span class="boring">    }
+</span><span class="boring">    Normal3f ToLocal(Normal3f n) const {
+</span><span class="boring">        return Normal3f(Dot(n, x), Dot(n, y), Dot(n, z));
+</span><span class="boring">    }
+</span><span class="boring">    Vector3f FromLocal(Vector3f v) const {
+</span><span class="boring">        return v.x * x + v.y * y + v.z * z;
+</span><span class="boring">    }
+</span><span class="boring">    Normal3f FromLocal(Normal3f n) const {
+</span><span class="boring">        return Normal3f(n.x * x + n.y * y + n.z * z);
+</span><span class="boring">    }
+</span><span class="boring">    std::string ToString() const {
+</span><span class="boring">        return StringPrintf("[ Frame x: %s y: %s z: %s ]", x, y, z);
+</span><span class="boring">    }
+</span><span class="boring">    
+</span>    /** Frame 公有成员 */
+<span class="boring">    Vector3f x, y, z;
+</span><span class="boring">    
+</span>};
+</code></pre>
+<p>给定三个规范正交向量 \( \mathbf{x} \)、 \( \mathbf{y} \) 和 \( \mathbf{z} \) ，将向量变换到其空间的矩阵 \( \mathbf{F} \) 是</p>
+<p>\[
+\mathbf{F} = \left(
+\begin{matrix}
+{\mathbf{x}_x} &amp; {\mathbf{x}_y} &amp; {\mathbf{x}_z} \\
+{\mathbf{y}_x} &amp; {\mathbf{y}_y} &amp; {\mathbf{y}_z} \\
+{\mathbf{z}_x} &amp; {\mathbf{z}_y} &amp; {\mathbf{z}_z} \\
+\end{matrix}
+\right) = \left(
+\begin{matrix}
+{x} \\ {y} \\ {z}
+\end{matrix}
+\right)
+\]</p>
+<p><strong>Frame</strong> 使用三个 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 来存储此矩阵。</p>
+<pre><code class="language-cpp">/** Frame 公有成员 */
+Vector3f x, y, z;
+</code></pre>
+<p>三个基向量可以被明确指定；在调试构建中，构造函数中的 <a href="../B_Utilities/B_3_User_Interaction.html#DCHECK"><strong>DCHECK()</strong></a> 确保提供的向量是规范正交的（orthonormal）。</p>
+<pre><code class="language-cpp">/** Frame 公有方法 */
+Frame() : x(1, 0, 0), y(0, 1, 0), z(0, 0, 1) {}
+Frame(Vector3f x, Vector3f y, Vector3f z);
+</code></pre>
+<p><strong>Frame</strong> 还提供了便利的方法，可以仅使用两个基向量来构造一个框架，通过叉积计算第三个向量。</p>
+<pre><code class="language-cpp">/** Frame 公有方法 */
+static Frame FromXZ(Vector3f x, Vector3f z) {
+    return Frame(x, Cross(z, x), z);
+}
+static Frame FromXY(Vector3f x, Vector3f y) {
+    return Frame(x, y, Cross(x, y));
+}
+</code></pre>
+<p>也可以仅提供 \( z \) 轴向量，在这种情况下，其他向量被任意设置。</p>
+<pre><code class="language-cpp">/** Frame 公有方法 */
+static Frame FromZ(Vector3f z) {
+    Vector3f x, y;
+    CoordinateSystem(z, &amp;x, &amp;y);
+    return Frame(x, y, z);
+}
+</code></pre>
+<p>其他多种未在此列出的函数允许使用法向量指定一个框架，和仅通过 \( x \) 或 \( y \) 基向量来指定它。</p>
+<p>将向量变换至框架的坐标空间是通过 \( \mathbf{F} \) 矩阵完成的。由于 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 被用来存储其行，因此矩阵-向量的乘积可以表示为三个点积。</p>
+<pre><code class="language-cpp">/** Frame 公有方法 */
+Vector3f ToLocal(Vector3f v) const {
+    return Vector3f(Dot(v, x), Dot(v, y), Dot(v, z));
+}
+</code></pre>
+<p>还提供了一种用于法向量的 <strong>ToLocal()</strong> 方法。在这种情况下，我们不需要计算 \( \mathbf{F} \) 的逆转置来变换法线（回顾第 <a href="#3103-%E6%B3%95%E7%BA%BFnormals">3.10.3</a> 节关于变换法线的讨论）。因为 \( \mathbf{F} \) 是一个规范正交矩阵（其行和列相互正交且都是单位长度），它的逆等于它的转置，所以它已经是它自己的逆转置。</p>
+<pre><code class="language-cpp">/** Frame 公有方法 */
+Normal3f ToLocal(Normal3f n) const {
+    return Normal3f(Dot(n, x), Dot(n, y), Dot(n, z));
+}
+</code></pre>
+<p>将向量从框架的局部空间变换出来的方法是转置 \( \mathbf{F} \) 以找到其逆，然后再与向量相乘。在这种情况下，计算的结果可以表示为矩阵列的三个缩放版本的总和。与之前一样，表面法线作为常规向量进行变换。（该方法不在此处包含。）</p>
+<pre><code class="language-cpp">/** Frame 公有方法 */
+Vector3f FromLocal(Vector3f v) const {
+    return v.x * x + v.y * y + v.z * z;
+}
+</code></pre>
+<p>为了方便，<a href="./3_9_Transformations.html#Transform-definition"><strong>Transform</strong></a> 还有一个接受 <strong>Frame</strong> 的构造函数。其简单的实现不在此处包含。</p>
+<pre><code class="language-cpp">/** Transform 公有方法 */
+explicit Transform(const Frame &amp;frame);
+</code></pre>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../3_Geometry_and_Transformations/3_9_Transformations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_11_Interactions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../3_Geometry_and_Transformations/3_9_Transformations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_11_Interactions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+.opener-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 250px;
+}
+
+div.figure-row {
+    background-color: #fff;
+    width: 100%;
+    margin: 6px auto;
+    padding: 2px;
+    text-align: center;
+}
+
+.figure-row img {
+    padding: 8px;
+    display: inline;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+}
+
+div.displaymath {
+    text-align: center;
+    padding-bottom: 18px;
+}

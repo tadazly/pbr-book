@@ -1,0 +1,457 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>向量 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html" class="active"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="33-向量vectors"><a class="header" href="#33-向量vectors">3.3 向量（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Vectors">Vectors</a>）</a></h1>
+<p><strong>pbrt</strong> 提供了基于相应二维和三维元组类的二维和三维向量类。这两种向量的类型都是由传入的向量元素参数的类型决定的，因此可以轻松实例化整数和浮点类型的向量。</p>
+<p><a name="Vector2-definition"></a></p>
+<pre><code class="language-cpp">/** Vector2 定义 */
+template &lt;typename T&gt;
+class Vector2 : public Tuple2&lt;Vector2, T&gt; {
+  public:
+    /** Vector2 公有方法 */
+};
+</code></pre>
+<p>浮点数和整数类型的二维向量被广泛使用，因此我们将为这两种类型定义别名（aliases）。</p>
+<pre><code class="language-cpp">/** Vector2* 定义 */
+using Vector2f = Vector2&lt;Float&gt;;
+using Vector2i = Vector2&lt;int&gt;;
+</code></pre>
+<p>与 <a href="./3_2_n-Tuple_Base_Classes.html#Tuple2-definition"><strong>Tuple2</strong></a> 类似，我们将不再包含关于 <a href="#Vector2-definition"><strong>Vector2</strong></a> 的更多细节，因为它与 <a href="#Vector3-definition"><strong>Vector3</strong></a> 非常相似，我们将对此进行更详细的讨论。</p>
+<p>一个 <strong>Vector3</strong> 的元组分量值给出了它在被定义的空间的 \( x \) 、 \( y \) 和 \( z \)（在三维中）轴上的表示。三维向量 \( \mathbf{v} \) 的各个分量将写作 \( \mathbf{v}_x \) 、 \( \mathbf{v}_y \) 和 \( \mathbf{v}_z \) 。</p>
+<p><a name="Vector3-definition"></a></p>
+<pre><code class="language-cpp">/** Vector3 定义 */
+template &lt;typename T&gt;
+class Vector3 : public Tuple3&lt;Vector3, T&gt; {
+  public:
+    /** Vector3 公有方法 */
+};
+</code></pre>
+<p>我们也为两种常用的三维向量类型定义了类型别名。</p>
+<p><a name="Vector3*-definitions"></a></p>
+<pre><code class="language-cpp">/** Vector3* 定义 */
+using Vector3f = Vector3&lt;Float&gt;;
+using Vector3i = Vector3&lt;int&gt;;
+</code></pre>
+<p><strong>Vector3</strong> 提供了一些构造函数，包括一个默认构造函数（此处未显示）和一个允许直接指定每个分量值的构造函数。</p>
+<pre><code class="language-cpp">/** Vector3 公有方法 */
+Vector3(T x, T y, T z) : Tuple3&lt;pbrt::Vector3, T&gt;(x, y, z) {}
+</code></pre>
+<p>还有一个接受一个不同元素类型的 <strong>Vector3</strong> 的构造函数。它被限定为 <strong>explicit</strong> ，以防止无意中的隐式自动类型转换（automatic）；必须使用强制类型转换（cast）来显示指定类型。</p>
+<pre><code class="language-cpp">/** Vector3 公有方法 */
+template &lt;typename U&gt;
+explicit Vector3(Vector3&lt;U&gt; v)
+    : Tuple3&lt;pbrt::Vector3, T&gt;(T(v.x), T(v.y), T(v.z)) {}
+</code></pre>
+<p>最后，还提供了用来转换即将介绍的 <a href="./3_4_Points.html#Point3-definition"><strong>Point3</strong></a> 和 <a href="./3_5_Normals.html#Normal3-definition"><strong>Normal3</strong></a> 类型的构造函数。它们的简单实现不在此处包含。这些构造函数也带有 <strong>explicit</strong> 关键字，以帮助确保它们仅在转换有意义的情况下使用。</p>
+<pre><code class="language-cpp">/** Vector3 公有方法 */
+template &lt;typename U&gt;
+explicit Vector3(Point3&lt;U&gt; p);
+template &lt;typename U&gt;
+explicit Vector3(Normal3&lt;U&gt; n);
+</code></pre>
+<p>向量的加法和减法是通过 <a href="./3_2_n-Tuple_Base_Classes.html#Tuple3-definition"><strong>Tuple3</strong></a> 中的方法按分量逐一进行的。向量加法和减法的常见几何解释如图 <a href="#figure-3-3">3.3</a> 和图 <a href="#figure-3-4">3.4</a> 所示。向量的长度可以通过让各分量与标量逐一相乘或相除来改变。这些功能同样由 <a href="./3_2_n-Tuple_Base_Classes.html#Tuple3-definition"><strong>Tuple3</strong></a> 提供，因此在 <a href="#Vector3-definition"><strong>Vector3</strong></a> 类中不需要任何额外的实现。</p>
+<blockquote>
+<p><a name="figure-3-3"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f03.svg" width="330" height="190" style="max-width: 100%;">
+</div>
+<p><strong>图 3.3：</strong> (a) 向量加法: \( \mathbf{v} + \mathbf{w} \) 。(b) 注意 \( \mathbf{v} + \mathbf{w} \) 的和形成了由 \( \mathbf{v} \) 和 \( \mathbf{w} \) 组成的平行四边形的对角线，这显示了向量加法的交换性: \( \mathbf{v} + \mathbf{w} = \mathbf{w} + \mathbf{v} \) 。</p>
+</blockquote>
+<blockquote>
+<p><a name="figure-3-4"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f04.svg" width="315" height="239" style="max-width: 100%;">
+</div>
+<p><strong>图 3.4：</strong>（a）向量减法。（b）如果我们考虑由这两个向量形成的平行四边形，那么对角线由 \( \mathbf{w} - \mathbf{v} \)（虚线）和 \( - \mathbf{v} - \mathbf{w} \)（未显示）给出。</p>
+</blockquote>
+<h2 id="331-归一化与向量的长度normalization-and-vector-length"><a class="header" href="#331-归一化与向量的长度normalization-and-vector-length">3.3.1 归一化与向量的长度（Normalization and Vector Length）</a></h2>
+<p>通常需要对向量进行 <em>归一化（normalize）</em>——即计算一个指向相同方向但只有单位长度的新向量。归一化的向量通常称为 <em>单位向量（unit vector）</em>。本书中对归一化向量的表示法是 \( \hat{\mathbf{v}} \)，即 \( \mathbf{v} \) 的归一化版本。在进行归一化之前，我们将先计算向量的长度。</p>
+<p>向量的平方长度由其分量值的平方和给出。</p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+T LengthSquared(Vector3&lt;T&gt; v) { return Sqr(v.x) + Sqr(v.y) + Sqr(v.z); }
+</code></pre>
+<p>讲到计算向量的长度会引发一个困惑： <strong>Length()</strong> 函数应该返回什么类型？例如，如果 <a href="#Vector3-definition"><strong>Vector3</strong></a> 存储的是整数类型，那么该类型可能不是一个合适的返回类型，因为向量的长度不一定是整数值。在这种情况下， <a href="../1_Introduction/1_3_pbrt_System_Overview.html#Float"><strong>Float</strong></a> 会是一个更好的选择，但是我们不应该对所有情况都标准化为 <a href="../1_Introduction/1_3_pbrt_System_Overview.html#Float"><strong>Float</strong></a> ，因为对于一组双精度值的 <a href="#Vector3-definition"><strong>Vector3</strong></a> ，我们也应该将长度返回为 <strong>double</strong> 。在我们继续深入高级 C++的旅程中，我们使用一种被称为 <em>类型特征（type traits）</em> 的技术来解决这个困境。</p>
+<p>首先，我们定义一个通用的 <strong>TupleLength</strong> 模板类，该类包含一个类型定义 <strong>type</strong> 。默认值在这里设置为 <strong>Float</strong> 。</p>
+<a name="TupleLength-definition">
+<pre><code class="language-cpp">/** TupleLength 定义 */
+template &lt;typename T&gt;
+struct TupleLength { using type = Float; };
+</code></pre>
+<p>对于 <strong>double</strong> 类型的 <strong>Vector3</strong>，我们还提供了一种模板特化（template specialization），当给定的元素类型为 <strong>double</strong> 时，定义长度的类型为 <strong>double</strong>。</p>
+<pre><code class="language-cpp">/** TupleLength 定义 */
+template &lt;&gt;
+struct TupleLength&lt;double&gt; { using type = double; };
+</code></pre>
+<p>现在我们可以实现 <strong>Length()</strong>，使用 <a href="#TupleLength-definition"><strong>TupleLength</strong></a> 来确定返回哪种类型。请注意，在函数声明完成之前，返回类型无法指定，因为在解析函数参数之前，类型 <strong>T</strong> 是未知的。因此，函数被声明为 <strong>auto</strong> ，返回类型在参数列表之后指定。</p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+auto Length(Vector3&lt;T&gt; v) -&gt; typename TupleLength&lt;T&gt;::type {
+    using std::sqrt;
+    return sqrt(LengthSquared(v));
+}
+</code></pre>
+<p>在这几行代码中还有一个 C++的细微之处：读者可能会想，为什么在 <strong>Length()</strong> 的实现中有一个 <strong>using std::sqrt</strong> 的声明，然后再调用 <strong>sqrt()</strong> ，而不是直接调用 <strong>std::sqrt()</strong> ？之所以使用这种结构，是因为我们希望能够使用分量类型 <strong>T</strong> 即使他们没有可用的 <strong>std::sqrt()</strong> 重载。例如，我们稍后用到的 <a href="#Vector3-definition"><strong>Vector3</strong></a> 会使用即将介绍的 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#Interval-definition"><strong>Interval</strong></a> 类来存储每个分量的数值区间。根据这里的代码写法，如果 <strong>std::sqrt()</strong> 支持类型 <strong>T</strong> ，则调用该函数的 <strong>std</strong> 变体。如果不支持，那么我们只要定义一个接受我们自定义类型的名为 <strong>sqrt()</strong> 的函数，就会使用该版本。</p>
+<p>有了这些， <strong>Normalize()</strong> 的实现就变得简单了。使用 <strong>auto</strong> 作为返回类型可以确保，例如，如果 <strong>Normalize()</strong> 被调用时传入一个整数分量的向量，则根据除法运算符的类型转换，返回的向量类型具有 <a href="../1_Introduction/1_3_pbrt_System_Overview.html#Float"><strong>Float</strong></a> 类型的分量。</p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+auto Normalize(Vector3&lt;T&gt; v) { return v / Length(v); }
+</code></pre>
+<h2 id="332-点积与叉积dot-and-cross-product"><a class="header" href="#332-点积与叉积dot-and-cross-product">3.3.2 点积与叉积（Dot and Cross Product）</a></h2>
+<p>两个有用的向量运算是点积（也称为标量积或内积）和叉积。对于两个三维向量 \( \mathbf{v} \) 和 \( \mathbf{w} \) ，它们的 <em>点积（dot product）</em> \( ( \mathbf{v} \cdot \mathbf{w} ) \) 定义为</p>
+<p>\[
+\mathbf{v}_x \mathbf{w}_x + \mathbf{v}_y \mathbf{w}_y + \mathbf{v}_z \mathbf{w}_z<br />
+\]</p>
+<p>并且实现如下。</p>
+<p><a name="Dot"></a></p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+T Dot(Vector3&lt;T&gt; v, Vector3&lt;T&gt; w) {
+    return v.x * w.x + v.y * w.y + v.z * w.z;
+}
+</code></pre>
+<p>从点积的定义可以直接得出一些基本性质。例如，有向量 \( \mathbf{u} \)，\( \mathbf{v} \)，\( \mathbf{w} \) 和一个标量 \( s \)，那么：</p>
+<p>\[
+\begin{align}
+( \mathbf{u} \cdot \mathbf{v} ) &amp;= ( \mathbf{v} \cdot \mathbf{u} ) \\
+( s\mathbf{u} \cdot \mathbf{v} ) &amp;= s( \mathbf{u} \cdot \mathbf{v} ) \\
+( \mathbf{u} \cdot ( \mathbf{v} + \mathbf{w} ) ) &amp;= ( \mathbf{u} \cdot \mathbf{v} ) + ( \mathbf{u} \cdot \mathbf{w} )
+\end{align}
+\]</p>
+<p>点积与两个向量的夹角有一个简单的关系：</p>
+<p><a name="equation-3-1">(3.1)</a></p>
+<p>\[
+( \mathbf{v} \cdot \mathbf{w} ) = \| \mathbf{v} \| \| \mathbf{w} \| \cos \theta
+\]</p>
+<p>其中 \( \theta \) 是 \( \mathbf{v} \) 和 \( \mathbf{w} \) 之间的角度， \( \| \mathbf{v} \| \) 表示向量 \( \mathbf{v} \) 的长度。由此可知，当且仅当 \( \mathbf{v} \) 和 \( \mathbf{w} \) 垂直（perpendicular）时， \( ( \mathbf{v} \cdot \mathbf{w} ) \) 为零，前提是 \( \mathbf{v} \) 和 \( \mathbf{w} \) 都不是 <em>退化的（degenerate）（零向量）</em>——等于 \( (0,0,0)\)。一组两个或多个相互垂直的向量称为 <em>正交（orthogonal）</em>。单位向量的正交集合称为 <em>标准正交（orthonormal）</em>。</p>
+<p>根据方程（<a href="#equation-3-1">3.1</a>），如果 \( \mathbf{v} \) 和 \( \mathbf{w} \) 是单位向量，则它们的点积是它们之间夹角的余弦。由于在渲染时常常需要计算两个向量之间夹角的余弦，我们将频繁利用这一性质。</p>
+<p>如果我们想要找到两个归一化向量之间的夹角，可以使用标准库的反余弦函数，将两个向量的点积传给它。然而，当两个向量几乎平行或几乎朝相反方向时，这种方法可能会导致精度损失。下面的重新计算更多地使用接近原点的数值，因为那里的浮点精度更高，结果也更精确。</p>
+<p><a name="AngleBetween"></a></p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+Float AngleBetween(Vector3&lt;T&gt; v1, Vector3&lt;T&gt; v2) {
+    if (Dot(v1, v2) &lt; 0)
+        return Pi - 2 * SafeASin(Length(v1 + v2) / 2);
+    else
+        return 2 * SafeASin(Length(v2 - v1) / 2);
+}
+</code></pre>
+<p>我们还需要频繁计算点积的绝对值。 <strong>AbsDot()</strong> 函数为我们完成了这一操作，因此在这种情况下不再需要单独调用 <strong>std::abs()</strong> 。</p>
+<p><a name="AbsDot"></a></p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+T AbsDot(Vector3&lt;T&gt; v1, Vector3&lt;T&gt; v2) { return std::abs(Dot(v1, v2)); }
+</code></pre>
+<blockquote>
+<p><a name="figure-3-5"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f05.svg" width="323" height="157" style="max-width: 100%;">
+</div>
+<p><strong>图 3.5：</strong> 向量 \( \mathbf{v} \) 在归一化向量 \( \hat{\mathbf{w}} \) 上的正交投影给出了一个与 \( \hat{\mathbf{w}} \) 平行的向量 \( \mathbf{v}_\mathbf{o} \) 。差向量 \( \mathbf{v} - \mathbf{v}_{\mathbf{o}} \) 在此以虚线表示，它垂直于 \( \hat{\mathbf{w}} \) 。</p>
+</blockquote>
+<p>基于点积的一个实用的向量运算是 <a href="https://www.bilibili.com/read/cv34718898/"><em>施密特正交化（Gram–Schmidt process）</em></a>，它将一组形成基（basis）的非正交向量转换为正交向量，这些正交向量张成相同的基。该过程基于对向量 \( \mathbf{v} \) 在归一化向量 \( \hat{\mathbf{w}} \) 上的 <em>正交投影（orthogonal projection）</em> 的连续应用，该投影由 \( ( \mathbf{v} \cdot \hat{\mathbf{w}} ) \hat{\mathbf{w}} \) 给出（见图 <a href="#figure-3-5">3.5</a>）。正交投影可用于计算出新向量</p>
+<p><a name="equation-3-2">(3.2)</a></p>
+<p>\[
+\mathbf{v}_\perp = \mathbf{v} - ( \mathbf{v} \cdot \hat{\mathbf{w}} ) \hat{\mathbf{w}}
+\]</p>
+<p>该向量与 \( \mathbf{w} \) 正交。以这种方式计算 \( \mathbf{v}_\perp \) 的一个优点是 \( \mathbf{v}_\perp \) 和 \( \mathbf{w} \) 张成的子空间与 \( \mathbf{v} \) 和 \( \mathbf{w} \) 相同。</p>
+<p><strong>GramSchmidt()</strong> 函数实现了方程 (<a href="#equation-3-2">3.2</a>)；它期望向量 <strong>w</strong> 已经被归一化。</p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+Vector3&lt;T&gt; GramSchmidt(Vector3&lt;T&gt; v, Vector3&lt;T&gt; w) {
+    return v - Dot(v, w) * w;
+}
+</code></pre>
+<p><em>叉积（cross product）</em> 是三维向量中另一种有用的运算。给定两个三维向量，叉积 \( \mathbf{v} \times \mathbf{w} \) 是一个与它们都垂直的向量。给定正交向量 \( \mathbf{v} \) 和 \( \mathbf{w} \) ，则定义 \( \mathbf{v} \times \mathbf{w} \) 为一个向量，使得 \( ( \mathbf{v},\mathbf{w},\mathbf{v}\times\mathbf{w} ) \) 形成一个正交坐标系。</p>
+<p>叉积定义为：</p>
+<p>\[
+\begin{align}
+( \mathbf{v} \times \mathbf{w} )_x &amp;= \mathbf{v}_y \mathbf{w}_z - \mathbf{v}_z \mathbf{w}_y \\
+( \mathbf{v} \times \mathbf{w} )_y &amp;= \mathbf{v}_z \mathbf{w}_x - \mathbf{v}_x \mathbf{w}_z \\
+( \mathbf{v} \times \mathbf{w} )_z &amp;= \mathbf{v}_x \mathbf{w}_y - \mathbf{v}_y \mathbf{w}_x \\
+\end{align}
+\]</p>
+<p>记住这一点的一种方法是计算矩阵的行列式：</p>
+<p>\[
+\mathbf{v} \times \mathbf{w} = \begin{vmatrix}
+i &amp; j &amp; k \\
+\mathbf{v}_x &amp; \mathbf{v}_y &amp; \mathbf{v}_z \\
+\mathbf{w}_x &amp; \mathbf{w}_y &amp; \mathbf{w}_z \\
+\end{vmatrix}
+\]</p>
+<p>其中 \( i \) 、 \( j \) 和 \( k \) 分别表示轴 \( (1,0,0) \) 、 \( (0,1,0) \) 和 \( (0,0,1) \) 。请注意，这个方程仅仅用于帮助记忆，而不是严谨的数学结构，因为矩阵中的元素混用了标量和向量。</p>
+<p>这里叉积的实现使用了在 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#b29-%E6%97%A0%E8%AF%AF%E5%B7%AE%E8%BD%AC%E6%8D%A2error-free-transformations">B.2.9</a> 节中介绍的 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#DifferenceOfProducts"><strong>DifferenceOfProducts()</strong></a> 函数。给定值 <strong>a</strong> 、 <strong>b</strong> 、 <strong>c</strong> 和 <strong>d</strong> ，它用一种比直接实现该表达式更好保持浮点精度的方式计算 <strong>a*b-c*d</strong> 。这个问题并非理论上的：之前的 <strong>pbrt</strong> 版本不得不使用双精度来实现 <strong>Cross()</strong> ，以避免数值误差导致渲染图像中的伪影。使用 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#DifferenceOfProducts"><strong>DifferenceOfProducts()</strong></a> 是一个更好的解决方案，因为它可以完全在单精度下操作，同时仍能计算出低误差的结果。</p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+Vector3&lt;T&gt; Cross(Vector3&lt;T&gt; v, Vector3&lt;T&gt; w) {
+    return {DifferenceOfProducts(v.y, w.z, v.z, w.y),
+            DifferenceOfProducts(v.z, w.x, v.x, w.z),
+            DifferenceOfProducts(v.x, w.y, v.y, w.x)};
+}
+</code></pre>
+<p>从叉积的定义出发，我们可以推导出</p>
+<p><a name="equation-3-3">(3.3)</a></p>
+<p>\[
+\| \mathbf{v} \times \mathbf{w} \| = \| \mathbf{v} \| \| \mathbf{w} \| |\sin \theta |<br />
+\]</p>
+<p>其中 \( \theta \) 是 \( \mathbf{v} \) 和 \( \mathbf{w} \) 之间的夹角。这一点的重要含义是，两个垂直单位向量的叉积本身也是一个单位向量。还要注意，如果 \( \mathbf{v} \) 和 \( \mathbf{w} \) 平行，则叉积的结果是一个零向量（degenerate vector）。</p>
+<p>这个定义还展示了一种方便计算平行四边形（parallelogram）面积的方法（图 <a href="#figure-3-6">3.6</a>）。如果平行四边形的两条边由向量 \( \mathbf{v}_1 \) 和 \( \mathbf{v}_2 \) 给出，并且它的高度为 \( h \) ，那么面积为 \( \| \mathbf{v}_1 \| h \) 。由于 \( h = \sin \theta \| \mathbf{v}_2 \| \) ，我们可以使用方程（<a href="#equation-3-3">3.3</a>）得出面积为 \( \| \mathbf{v}_1 \times \mathbf{v}_2 \| \) 。</p>
+<blockquote>
+<p><a name="figure-3-6"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f06.svg" width="339" height="232" style="max-width: 100%;">
+</div>
+<p><strong>图 3.6：</strong> 由向量 \( \mathbf{v}_1 \) 和 \( \mathbf{v}_2 \) 给出的平行四边形的面积等于 \( \| \mathbf{v}_1 \| h \) 。根据方程 (<a href="#equation-3-3">3.3</a>)，向量 \( \mathbf{v}_1 \) 和 \( \mathbf{v}_2 \) 的叉积的长度等于这两个向量长度的乘积乘以它们之间夹角的正弦——即平行四边形的面积。</p>
+</blockquote>
+<p>3.3.3 基于向量的坐标系（Coordinate System from a Vector）</p>
+<p>我们有时会发现，仅用一个归一化的三维向量来构建局部坐标系是有用的。为此，我们必须找到两个额外的归一化向量，使得这三个向量相互垂直。</p>
+<p>给定一个向量 \( \mathbf{v} \) ，可以证明这两个向量</p>
+<p>\[
+\left( 1 - \frac{\mathbf{v}_x^2}{1 + \mathbf{v}_z}, -\frac{\mathbf{v}_x \mathbf{v}_y}{1 + \mathbf{v}_z}, -\mathbf{v}_x \right) \text{和} \left( -\frac{\mathbf{v}_x\mathbf{v}_y}{1+\mathbf{v}_z}, 1 - \frac{\mathbf{v}_y^2}{1+\mathbf{v}_z}, -\mathbf{v}_y \right)
+\]</p>
+<p>满足这些条件。然而，直接计算这些属性时，当 \( \mathbf{v}_z \approx -1 \) 时误差较大，因为计算 \( 1/(1+\mathbf{v}_z) \) 时会损失精度。下面的实现中重新整理了该计算来解决了这个问题。</p>
+<p><a name="CoordinateSystem"></a></p>
+<pre><code class="language-cpp">/** Vector3 内联函数 */
+template &lt;typename T&gt;
+void CoordinateSystem(Vector3&lt;T&gt; v1, Vector3&lt;T&gt; *v2, Vector3&lt;T&gt; *v3) {
+    Float sign = pstd::copysign(Float(1), v1.z);
+    Float a = -1 / (sign + v1.z);
+    Float b = v1.x * v1.y * a;
+    *v2 = Vector3&lt;T&gt;(1 + sign * Sqr(v1.x) * a, sign * b, -sign * v1.x);
+    *v3 = Vector3&lt;T&gt;(b, sign + Sqr(v1.y) * a, -v1.y);
+}
+</code></pre>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_4_Points.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_4_Points.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

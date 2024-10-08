@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>文艺编程 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html" class="active"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="11-文艺编程literate-programming"><a class="header" href="#11-文艺编程literate-programming">1.1 文艺编程（<a href="https://www.pbr-book.org/4ed/Introduction/Literate_Programming">Literate Programming</a>）</a></h1>
+<div class="warning">
+<p>请注意</p>
+<p>本项目使用 Markdown 整理翻译，所以格式未遵循原文的文艺编程规范，还请谅解。</p>
+</div>
+<p>在创建 \( \text{T}_\text{E}\text{X} \) 排版系统时，唐纳德·克努斯（Donald Knuth）开发了一种基于简单但革命性思想的新编程方法论。引用克努斯的话：“让我们改变对程序构建的传统态度：与其想象我们的主要任务是指示计算机该做什么，不如集中精力向人类解释我们希望计算机做什么。”他将这种方法论称为 <em>文艺编程(literate programming)</em>。本书（包括您现在阅读的章节）是一个长篇文艺程序（literate program）。这意味着在阅读本书的过程中，您将阅读 <strong>pbrt</strong> 渲染系统的完整实现，而不仅仅是对它的高层次描述。</p>
+<p>文艺程序是用一种混合文档格式语言（例如 \( \text{T}_\text{E}\text{X} \) 或 HTML）和编程语言（例如 C++）的元语言编写的。两个独立的系统处理该程序：“编织（weaver）”将可读程序转换为适合排版的文档，“解开（tangler）”生成适合编译的源代码。我们的可读编程系统是自制的，但受到诺曼·拉姆齐（Norman Ramsey）的 <strong>noweb</strong> 系统的重大影响。</p>
+<p>文艺编程元语言提供了两个重要特性。第一个是将散文与源代码混合的能力。这个特性使得程序的描述与其实际源代码平起平坐，鼓励仔细的设计和文档编写。第二，该语言提供了以与编译器输入完全不同的顺序向读者呈现程序代码的机制。因此，程序可以以逻辑的方式进行描述。每个命名的代码块称为 <em>片段（fragment）</em>，每个片段可以通过名称引用其他片段。</p>
+<p>作为一个简单的例子，考虑一个函数 <strong>InitGlobals()</strong> ，它负责初始化程序的所有全局变量：†（本节的代码仅用于说明，并不是 <strong>pbrt</strong> 中的部分）</p>
+<pre><code class="language-cpp">void InitGlobals() {
+    nMarbles = 25.7;
+    shoeSize = 13;
+    dielectric = true;
+}
+</code></pre>
+<p>尽管这个函数很简短，但没有任何上下文很难理解。例如，为什么变量 <strong>nMarbles</strong> 可以取浮点值？仅仅查看代码，人们需要搜索整个程序，以查看每个变量的声明位置以及它是如何使用的，以理解其目的和合法值的含义。尽管这种系统结构对于编译器来说很好，但人类读者更希望看到每个变量的初始化代码单独呈现，靠近声明和使用该变量的代码。</p>
+<p>在一个文艺程序中，可以这样写 <strong>InitGlobals()</strong> ：</p>
+<p><a name="函数定义"></a></p>
+<pre><code class="language-cpp">/** 函数定义 */
+void InitGlobals() {
+    /** 初始化全局变量 */
+<span class="boring">    shoeSize = 13;
+</span><span class="boring">    dielectric = true;
+</span><span class="boring">
+</span>}
+</code></pre>
+<p>这定义了一个片段，称为 &lt;&lt;<a href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><em>函数定义</em></a>&gt;&gt;，其中包含 <strong>InitGlobals()</strong> 函数的定义。 <strong>InitGlobals()</strong> 函数本身引用了另一个片段 &lt;&lt;<a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><em>初始化全局变量</em></a>&gt;&gt;。由于初始化片段尚未定义，我们对这个函数一无所知，只知道它可能包含对全局变量的赋值。（不过，我们可以通过点击它右侧的加号提前查看；这样做会展开该片段的所有最终代码。）</p>
+<p>仅仅拥有片段名称在目前是合适的抽象层次，因为尚未声明任何变量。当我们在程序的后面某处引入全局变量 <strong>shoeSize</strong> 时，我们可以写。</p>
+<p><a name="初始化全局变量"></a></p>
+<pre><code class="language-cpp">/** 初始化全局变量 */
+shoeSize = 13;
+</code></pre>
+<p>在这里，我们开始定义 &lt;&lt;<a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><em>初始化全局变量</em></a>&gt;&gt; 的内容。当文艺程序被编译成源代码时，文艺编程系统会在 <strong>InitGlobals()</strong> 函数的定义中替换代码 <strong>shoeSize = 13;</strong> 。等号后面的 \( \blacktriangledown \) 符号表示稍后将向该片段添加更多代码。点击它可以带您到发生该操作的地方。</p>
+<p>在文本后面，我们可以定义另一个全局变量 <strong>dielectric</strong> ，并可以将其初始化附加到该片段中：</p>
+<pre><code class="language-cpp">/** 初始化全局变量 */
+dielectric = true;
+</code></pre>
+<p>在片段名称后面的 += 符号表示我们已添加到先前定义的片段。此外，\( \blacktriangle \)符号链接回之前 &lt;&lt;<a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><em>初始化全局变量</em></a>&gt;&gt; 添加代码的地方。</p>
+<p>当解开时，这三个片段变成代码</p>
+<pre><code class="language-cpp">void InitGlobals() {
+    // 初始化全局变量
+    shoeSize = 13;
+    dielectric = true;
+}
+</code></pre>
+<p>通过这种方式，我们可以将复杂的函数分解为逻辑上不同的部分，使它们更容易理解。例如，我们可以将一个复杂的函数写成一系列片段：</p>
+<pre><code class="language-cpp">/** 函数定义 */
+void complexFunc(int x, int y, double *values) {
+    &lt;&lt;Check validity of arguments&gt;&gt; 
+    /** 检查参数的有效性 */
+<span class="boring">
+</span>    if (x &lt; y) {
+        /** 交换 x 和 y */
+<span class="boring">
+</span>    }
+    /** 循环前进行预计算 */
+<span class="boring">
+</span>    /** 循环遍历并更新 values 数组 */
+<span class="boring">
+</span>}
+</code></pre>
+<p>再次，每个片段的内容在 <strong>complexFunc()</strong> 中展开以供编译。在文档中，我们可以依次介绍每个片段及其实现。这种分解使我们能够逐行呈现代码，从而更容易理解。这种编程风格的另一个优点是，通过将功能分成逻辑片段，每个片段都有一个单一且明确的目的，每个片段都可以独立编写、验证或阅读。一般来说，我们会尽量使每个片段少于 10 行。</p>
+<p>在某种意义上，文艺编程系统只是一个增强的宏替换包，专门用于重新排列程序源代码。这看起来可能是一个微不足道的变化，但实际上，文艺编程与其他软件系统结构化方式有很大不同。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../1_Introduction/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../1_Introduction/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>球面几何 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html" class="active"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="38-球面几何spherical-geometry"><a class="header" href="#38-球面几何spherical-geometry">3.8 球面几何（<a href="https://www.pbr-book.org/4ed/Geometry_and_Transformations/Spherical_Geometry">Spherical Geometry</a>）</a></h1>
+<p>单位球面上的几何在渲染中也常常非常有用。三维单位方向向量可以等效地表示为单位球面上的点，而方向集可以表示为单位球面上的区域。诸如限定一组方向之类的有用操作通常可以简洁地表示为单位球面上的边界。因此，我们将在本节中介绍一些有用的球面几何原理以及相关的类和函数。</p>
+<h2 id="381-立体角solid-angles"><a class="header" href="#381-立体角solid-angles">3.8.1 立体角（Solid Angles）</a></h2>
+<p>在二维中，<em>平面角（planar angle）</em> 是某个物体相对于某个位置所张的总角（图 <a href="#figure-3-12">3.12</a>）。考虑围绕点 \( \text{p} \) 的单位圆；如果我们将要着色的物体投影到该圆上，圆的某段长度 \( s \) 将被其投影覆盖。 \( s \) 的弧长（与角 \( \theta \) 相同）是物体所张的角度。平面角用 <em>弧度（radians ）</em> 来度量，整个单位圆覆盖 \( 2\pi \) 弧度。</p>
+<blockquote>
+<p><a name="figure-3-12"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f12.svg" width="364" height="225" style="max-width: 100%;">
+</div>
+<p><strong>图 3.12：平面角。</strong> 从点 \( p \) 观察，一个物体的平面角等于从 \( p \) 观察它时所张的角，或者等价地，等于单位球面上弧 \( s \) 的长度。</p>
+</blockquote>
+<p>立体角将二维的单位圆扩展为三维的单位球（图 <a href="#figure-3-13">3.13</a>）。总面积 \( s \) 是物体所张的立体角。立体角用 <em>球面度（steradians）</em>（sr）来度量。整个球面所张的立体角为 \( 4\pi sr \) ，而半球所张的立体角为 \( 2\pi sr \) 。</p>
+<blockquote>
+<p><a name="figure-3-13"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f13.svg" width="560" height="448" style="max-width: 100%;">
+</div>
+<p><strong>图 3.13：立体角。</strong> 由三维物体所张的立体角 \( s \) 是通过将物体投影到单位球面上并测量其投影面积来计算的。</p>
+</blockquote>
+<p>通过提供一种在单位球面上测量面积的方法（从而也在单位方向上测量），立体角也为积分球面函数的测度提供了基础；<em>微分立体角（differential solid angle）</em> \( \text{d}\omega \) 对应于单位球面上的微分面积测度。</p>
+<h2 id="382-球面多边形spherical-polygons"><a class="header" href="#382-球面多边形spherical-polygons">3.8.2 球面多边形（Spherical Polygons）</a></h2>
+<p>我们有时会发现，考虑从一个点到多边形表面的方向集合是有用的。（例如，当计算来自发光多边形到达某点处的照明时，这样做可能很有用。）如果将一个规则平面多边形投影到单位球上，它会形成一个 <em>球面多边形（spherical polygon）</em>。</p>
+<blockquote>
+<p><a name="figure-3-14"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f14.svg" width="581" height="260" style="max-width: 100%;">
+</div>
+<p><strong>图 3.14：</strong> 球面多边形对应于多边形在单位球面上的投影。它的顶点对应于指向原始多边形顶点的单位向量，而其边则由球面与经过球心和多边形两个顶点的平面的交线所定义。</p>
+</blockquote>
+<p>球面多边形的顶点可以通过归一化从球心指向原始多边形相应顶点的向量来找到。球面多边形的每一条边由单位球与经过球心和多边形对应两个顶点的平面的交线所定义。结果是在球面上形成一条 <em>大圆（great circle）</em>，它是在球面上连接这两个顶点的最短路径（图 <a href="#figure-3-14">3.14</a>）。</p>
+<blockquote>
+<p><a name="figure-3-15"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f15.svg" width="582" height="220" style="max-width: 100%;">
+</div>
+<p><strong>图 3.15：一个球面三角形（Spherical Triangle）。</strong> 每个顶点的角用与其顶点对应的希腊字母标记。</p>
+</blockquote>
+<p>每个顶点处的角由与该顶点相交的两条边对应的平面之间的夹角给出（图 <a href="#figure-3-15">3.15</a>）。 （两个平面之间的夹角称为 <em>二面角（dihedral angle）</em>。）我们将用与顶点标签对应的希腊字母标记每个顶点的角（ \( \alpha \) 表示顶点 \( \mathbf{a} \) 的角，依此类推）。与平面三角形不同，球面三角形的三个角之和不等于 \( \pi \) 弧度；相反，它们的和为 \( \pi + A \) ，其中 \( A \) 是球面三角形的面积。给定角 \( \alpha \) 、 \( \beta \) 和 \( \gamma \) ，可以使用 <em>吉拉尔定理（Girard’s theorem）</em> 计算出球面三角形的面积，该定理指出，单位球面上三角形的表面积 \( A \) 由“超角（excess angle）”给出</p>
+<p><a name="equation-3-5">(3.5)</a></p>
+<p>\[
+A = \alpha + \beta + \gamma - \pi<br />
+\]</p>
+<p>直接实现方程（<a href="#equation-3-5">3.5</a>）需要多次调用昂贵的反三角函数，并且由于<em>浮点数消除（floating-point cancellation）</em>，其计算可能容易出现错误。一种更高效且准确的方法是应用关系式</p>
+<p><a name="equation-3-6">(3.6)</a></p>
+<p>\[
+\tan\left(\frac{1}{2}A\right)=\frac{\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})}{1+(\mathbf{a}\cdot\mathbf{b})+(\mathbf{a}\cdot\mathbf{c})+(\mathbf{b}\cdot\mathbf{c})}
+\]</p>
+<p>它可以使用球面三角恒等式从方程（<a href="#equation-3-5">3.5</a>）推导出。该方法在 <strong>SphericalTriangleArea()</strong> 中使用，需要传入单位球面上与球面三角形的顶点对应的三个向量。</p>
+<p><a name="SphericalTriangleArea"></a></p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float SphericalTriangleArea(Vector3f a, Vector3f b, Vector3f c) {
+    return std::abs(2 * std::atan2(Dot(a, Cross(b, c)),
+                                   1 + Dot(a, b) + Dot(a, c) + Dot(b, c)));
+}
+</code></pre>
+<p>四边形（quadrilateral）投影到单位球上的面积由 \( \alpha + \beta + \gamma + \delta - 2\pi \) 给出，其中 \( \alpha \) 、 \( \beta \) 、 \( \gamma \) 和 \( \delta \) 是其内角（interior angles）。该值通过 <strong>SphericalQuadArea()</strong> 计算，该方法需传入单位球上的顶点位置。其实现与 <a href="#SphericalTriangleArea"><strong>SphericalTriangleArea()</strong></a> 非常相似，因此在此不再包含。</p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float SphericalQuadArea(Vector3f a, Vector3f b, Vector3f c, Vector3f d);
+</code></pre>
+<h2 id="383-球面参数化spherical-parameterizations"><a class="header" href="#383-球面参数化spherical-parameterizations">3.8.3 球面参数化（Spherical Parameterizations）</a></h2>
+<p>单位球面上用一个点的三维笛卡尔坐标来表示方向并不总是最方便的。例如，如果我们要在单位球上把一个函数制成表格，那么采用利用球面是二维这一事实的二维参数化会更为理想。</p>
+<p>在二维平面与球体之间存在多种映射。自制图术（map making）诞生以来，开发满足各种目标的此类映射一直是制图的重要部分。可以证明，任何从平面到球面的映射都会引入某种形式的失真；因此，我们的任务就是选择最能满足特定应用需求的映射方式。<strong>pbrt</strong> 因此使用了三种不同的球面参数化，每种都有不同的优缺点。</p>
+<h3 id="球面坐标spherical-coordinates"><a class="header" href="#球面坐标spherical-coordinates">球面坐标（Spherical Coordinates）</a></h3>
+<p>球面坐标 \( (\theta,\phi) \) 是球体中众所周知的参数化方式。对于半径为 \( r \) 的一般球体，它们与笛卡尔坐标系的关系为</p>
+<p><a name="equation-3-7">(3.7)</a></p>
+<p>\[
+\begin{align}
+x &amp;= r\sin\theta\cos\phi \\
+y &amp;= r\sin\theta\sin\phi \\
+z &amp;= r\cos\theta \\
+\end{align}
+\]</p>
+<p>（见图 <a href="#figure-3-16">3.16</a>。）</p>
+<blockquote>
+<p><a name="figure-3-16"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f16.svg" width="582" height="238" style="max-width: 100%;">
+</div>
+<p><strong>图 3.16：</strong> 如果给定 \( x \) 、 \( y \) 和 \( z \) 基向量，方向向量可以用球面坐标 \( (\theta,\phi) \) 表示，。球面角公式使得在这两种表示之间转换变得简单。</p>
+</blockquote>
+<p>为了方便，我们将定义一个 <strong>SphericalDirection()</strong> 函数，该函数直接应用上述方程将一对 \( \theta \) 和 \( \phi \) 转换为单位 \( (x,y,z) \) 向量，。请注意，该函数接收的是 \( \theta \) 的正弦和余弦，而不是 \( \theta \) 本身。这是因为 \( \theta \) 的正弦和余弦通常已经对调用者可用。然而，\( \phi \) 通常不是这种情况，因此 \( \phi \) 按原样传入。</p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Vector3f SphericalDirection(Float sinTheta, Float cosTheta, Float phi) {
+    return Vector3f(Clamp(sinTheta, -1, 1) * std::cos(phi),
+                    Clamp(sinTheta, -1, 1) * std::sin(phi),
+                    Clamp(cosTheta, -1, 1));
+}
+</code></pre>
+<p>将方向 \( (x,y,z) \) 转换为球面坐标可以通过以下方式进行</p>
+<p><a name="equation-3-8">(3.8)</a></p>
+<p>\[
+\begin{align}<br />
+\theta &amp;= \arccos z \\
+\phi &amp;= \arctan \frac{y}{x} \\
+\end{align}
+\]</p>
+<p>相应的函数如下。请注意， <a href="#SphericalTheta"><strong>SphericalTheta()</strong></a> 假设在传入之前向量 <strong>v</strong> 已经被归一化；使用 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#SafeACos"><strong>SafeACos()</strong></a> 代替 <strong>std::acos()</strong> 可以避免由于浮点数舍入误差导致的 \( |\text{v}.\mathbf{z}| \) 略大于 1 而出现的错误。</p>
+<p><a name="SphericalTheta"></a></p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float SphericalTheta(Vector3f v) { return SafeACos(v.z); }
+</code></pre>
+<p><strong>SphericalPhi()</strong> 返回一个在 \( [0,2\pi] \) 范围中的角，这有时需要对 <strong>std::atan2()</strong> 返回的值进行调整。</p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float SphericalPhi(Vector3f v) {
+    Float p = std::atan2(v.y, v.x);
+    return (p &lt; 0) ? (p + 2 * Pi) : p;
+}
+</code></pre>
+<p>给定一个方向向量 \( \omega \) ，计算类似角 \( \theta \) 的余弦这样的量是很简单的：</p>
+<p>\[
+\cos\theta = ((0,0,1)\cdot\omega) = \omega_z
+\]</p>
+<p>这比使用一个昂贵的反三角函数先计算 \( \omega \) 对应的 \( \theta \) ，然后再使用另一个昂贵的函数计算它的余弦值要高效得多。下面是计算这个余弦的函数及一些有用的变体。</p>
+<p><a name="CosTheta"></a></p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float CosTheta(Vector3f w) { return w.z; }
+Float Cos2Theta(Vector3f w) { return Sqr(w.z); }
+Float AbsCosTheta(Vector3f w) { return std::abs(w.z); }
+</code></pre>
+<p>\( \sin^2\theta \) 的值可以通过三角恒等式 \( \sin^2\theta + \cos^2\theta = 1 \) 高效计算得出，然而我们需要小心避免在 <strong>1 - Cos2Theta(w)</strong> 因浮点舍入误差而小于零的少见情况下返回负值。</p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float Sin2Theta(Vector3f w) { return std::max&lt;Float&gt;(0, 1 - Cos2Theta(w)); }
+Float SinTheta(Vector3f w) { return std::sqrt(Sin2Theta(w)); }
+</code></pre>
+<p>角 \( \theta \) 的正切可以通过恒等式 \( \tan\theta = \sin\theta/\cos\theta \) 计算得出。</p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float TanTheta(Vector3f w) { return SinTheta(w) / CosTheta(w); }
+Float Tan2Theta(Vector3f w) { return Sin2Theta(w) / Cos2Theta(w); }
+</code></pre>
+<p>角 \( \phi \) 的正弦和余弦也可以通过 \( (x,y,z) \) 坐标轻松找到，而无需使用反三角函数（图 <a href="#figure-3-17">3.17</a>）。在 \( z=0 \) 平面中，向量 \( \omega \) 的坐标为 \( (x,y) \) ，分别由 \( r\cos\phi \) 和 \( r\sin\phi \) 给出。半径 \( r \) 为 \( \sin\theta \) ，因此</p>
+<p>\[
+\begin{align}<br />
+\cos\phi &amp;= \frac{x}{r} = \frac{x}{\sin\theta} \\
+\sin\phi &amp;= \frac{y}{r} = \frac{y}{\sin\theta} \\
+\end{align}
+\]</p>
+<blockquote>
+<p><a name="figure-3-17"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f17.svg" width="582" height="238" style="max-width: 100%;">
+</div>
+<p><strong>图 3.17：</strong> \( \sin\phi \) 和 \( \cos\phi \) 的值可以使用圆坐标方程 \( x=r\cos\phi \) 和 \( y=r\sin\phi \) 计算，其中虚线的长度 \( r \)，等于 \( \sin\theta \) 。</p>
+</blockquote>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float CosPhi(Vector3f w) {
+    Float sinTheta = SinTheta(w);
+    return (sinTheta == 0) ? 1 : Clamp(w.x / sinTheta, -1, 1);
+}
+Float SinPhi(Vector3f w) {
+    Float sinTheta = SinTheta(w);
+    return (sinTheta == 0) ? 0 : Clamp(w.y / sinTheta, -1, 1);
+}
+</code></pre>
+<p>最后，两个向量的 \( \phi \) 值之间的角度 \( \Delta\phi \) 的余弦可以通过将它们的 \( z \) 坐标归零以获得在 \( z=0 \) 平面中的二维向量，然后对它们进行归一化来找到。这两个向量的点积给出了它们之间夹角的余弦。下面的实现稍微调整了项的顺序以提高效率，从而只需执行一次平方根操作。</p>
+<pre><code class="language-cpp">/** 球面几何内联函数 */
+Float CosDPhi(Vector3f wa, Vector3f wb) {
+    Float waxy = Sqr(wa.x) + Sqr(wa.y), wbxy = Sqr(wb.x) + Sqr(wb.y);
+    if (waxy == 0 || wbxy == 0) return 1;
+    return Clamp((wa.x * wb.x + wa.y * wb.y) / std::sqrt(waxy * wbxy),
+                 -1, 1);
+}
+</code></pre>
+<p>用球面坐标对球面进行参数化对应于球面的 <em>等矩形（equirectangular）</em> 映射。由于在球面两极存在显著的失真，它并不是一种用于表示球面上规则采样数据的特别好的参数化方法。</p>
+<h3 id="八面体编码octahedral-encoding"><a class="header" href="#八面体编码octahedral-encoding">八面体编码（Octahedral Encoding）</a></h3>
+<p>虽然 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 用来表示单位向量进行的计算时很方便，但它并没有高效利用存储：不仅使用了 12 字节的内存（假设 <a href="../1_Introduction/1_3_pbrt_System_Overview.html#Float">Float</a> 为 4 字节），而且能够表示任意长度的三维方向向量。然而，归一化向量只是所有可能的 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 的一个小子集，这意味着这 12 字节所代表的存储并没有很好地分配给它们。当需要在内存中存储许多归一化向量时，更节省空间的表示方式可能是值得的。</p>
+<p>球面坐标可以用于此任务。这样做可以把所需的存储减少到两个 <strong>Float</strong> ，但缺点是需要相对昂贵的三角函数和反三角函数来进行 <a href="./3_3_Vectors.html#Vector3-definition"><strong>Vector3</strong></a> 之间的转换。此外，球面坐标在两极附近精度更高，而在赤道附近则精度较低；在所有单位向量之间更均匀的精度分布是更理想的。（由于浮点数的表示方式， <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 在单位球面的不同部分也存在精度不同的问题。）</p>
+<p><a href="#OctahedralVector-definition"><strong>OctahedralVector</strong></a> 提供了一种紧凑的单位向量表示，具有均匀的精度分布和高效的编码与解码例程。我们的实现仅为每个单位向量使用 4 字节的内存；这 4 字节的所有可能值对应于一个有效的单位向量。它的表示不适合计算，但其与 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 之间转换非常简单，这使得它成为在内存中存储归一化向量的理想选择。</p>
+<p><a name="OctahedralVector-definition"></a></p>
+<pre><code class="language-cpp">/** OctahedralVector 定义 */
+class OctahedralVector {
+  public:
+    /** OctahedralVector 公有方法 */
+  private:
+    /** OctahedralVector 私有方法 */
+    /** OctahedralVector 私有成员 */
+};
+</code></pre>
+<p>正如其名，该单位向量基于单位球的八面体映射，如图 <a href="#figure-3-18">3.18</a> 所示。</p>
+<blockquote>
+<p><a name="figure-3-18"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f18.svg" width="780" height="185" style="max-width: 100%;">
+</div>
+<p><strong>图 3.18：</strong> 使用 <a href="#OctahedralVector-definition"><strong>OctahedralVector</strong></a> 对单位球的参数化可以这样理解，首先，想象 (a) 一个内切于球体的八面体。它的二维参数化随后通过 (b) 将顶部的金字塔展平到 \( z=0 \) 平面以及 (c) 展开下半部分并将其三角形投影到同一平面来定义。 (d) 得到的结果允许一个简单的 \( [-1,1]^2 \) 参数化。 (图 2 之后的图源自 Meyer 等人（<a href="#https://www.pbr-book.org/4ed/Geometry_and_Transformations/Further_Reading.html#cite:Meyer2010">2010</a>）。)</p>
+</blockquote>
+<p>将单位向量转换为这种表示的算法出奇地简单。第一步是将向量投影到三维八面体的面上；这步可以通过将向量分量除以向量的 L1 范数 \( |\mathbf{v}_x|+|\mathbf{v}_y|+|\mathbf{v}_z| \) 来完成。对于位于上半球的点（即，具有 \( \mathbf{v}_z \geq 0 \) ），投影到 \( z=0 \) 平面只需直接取 \( x \) 和 \( y \) 分量。</p>
+<pre><code class="language-cpp">/** OctahedralVector 公有方法 */
+OctahedralVector(Vector3f v) {
+    v /= std::abs(v.x) + std::abs(v.y) + std::abs(v.z);
+    if (v.z &gt;= 0) {
+        x = Encode(v.x);
+        y = Encode(v.y);
+    } else {
+        /** 编码 z &lt; 0 的八面体向量 */
+    }
+}
+</code></pre>
+<p>对于下半球的方向，投影到 \( [-1,1]^2 \) 中适当的点会稍微复杂一些，然而只需稍加注意即可在没有任何条件控制流的情况下表达出来。（以下是另一种值得理解的简洁代码片段；相比于基于 if 语句处理四个三角形独立展开的代码。）</p>
+<p><a name="编码z-0的八面体向量"></a></p>
+<pre><code class="language-cpp">/** 编码 z &lt; 0 的八面体向量 */
+x = Encode((1 - std::abs(v.y)) * Sign(v.x));
+y = Encode((1 - std::abs(v.x)) * Sign(v.y));
+</code></pre>
+<p>辅助函数 <a href="#Sign"><strong>OctahedralVector::Sign()</strong></a> 使用标准数学库函数 <strong>std::copysign()</strong> 根据 <strong>v</strong> 的符号（正/负零被视为普通数字）返回 \( \pm1 \)。</p>
+<p><a name="Sign"></a></p>
+<pre><code class="language-cpp">/** OctahedralVector 私有方法 */
+static Float Sign(Float v) { return std::copysign(1.f, v); }
+</code></pre>
+<p>图 <a href="#figure-3-18">3.18</a>(d)中的二维参数化随后使用一个 16 位的值来表示每个坐标，该值将范围 \( [-1,1] \) 量化为 \( 2^16 \) 步。</p>
+<pre><code class="language-cpp">/** OctahedralVector 私有成员 */
+uint16_t x, y;
+</code></pre>
+<p><strong>Encode()</strong> 将 \( [-1,1] \) 中的值编码为整数编码。</p>
+<pre><code class="language-cpp">/** OctahedralVector 私有方法 */
+static uint16_t Encode(Float f) {
+    return pstd::round(Clamp((f + 1) / 2, 0, 1) * 65535.f);
+}
+</code></pre>
+<p>反向执行相同的操作就可以映射回 <a href="./3_3_Vectors.html#Vector3*-definitions"><strong>Vector3f</strong></a> 。对于上半球的方向，八面体面上的 \( z \) 值很容易找到。对该向量进行归一化后，便得到了相应的单位向量。</p>
+<pre><code class="language-cpp">/** OctahedralVector 公有方法 */
+explicit operator Vector3f() const {
+    Vector3f v;
+    v.x = -1 + 2 * (x / 65535.f);
+    v.y = -1 + 2 * (y / 65535.f);
+    v.z = 1 - (std::abs(v.x) + std::abs(v.y));
+    /** 对八面体 z &lt; 0 的部分重新参数化方向 */
+    return Normalize(v);
+}
+</code></pre>
+<p>对于下半球的方向，在方向归一化之前，必须反向执行在 &lt;&lt;<a href="#%E7%BC%96%E7%A0%81z-0%E7%9A%84%E5%85%AB%E9%9D%A2%E4%BD%93%E5%90%91%E9%87%8F"><em>编码 z &lt; 0 的八面体向量</em></a>&gt;&gt; 片段中实现的映射。</p>
+<pre><code class="language-cpp">/** 对八面体 z &lt; 0 的部分重新参数化方向（Reparameterize directions in the z &lt; 0 portion of the octahedron） */
+if (v.z &lt; 0) {
+    Float xo = v.x;
+    v.x = (1 - std::abs(v.y)) * Sign(xo);
+    v.y = (1 - std::abs(xo)) * Sign(v.y);
+}
+</code></pre>
+<h3 id="等面积映射equal-area-mapping"><a class="header" href="#等面积映射equal-area-mapping">等面积映射（Equal-Area Mapping）</a></h3>
+<p>在 <strong>pbrt</strong> 中使用的第三种球面参数化方法经过精心设计以保持面积：球面上的任何区域都被映射到参数域中与之成比例的区域。这种表示方式对于球面上的制表函数（tabulating functions）是一个很好的选择，因为它是连续的，具有相对较低的失真，并且所有存储的值表示相同的立体角。它结合了在 <a href="#OctahedralVector-definition"><strong>OctahedralVector</strong></a> 类中使用的八面体映射和 <a href="../A_Sampling_Algorithms/A_5_Sampling_Multidimensional_Functions.html#a51-%E9%87%87%E6%A0%B7%E5%8D%95%E4%BD%8D%E5%9C%86%E7%9B%98sampling-a-unit-disk">A.5.1</a> 节中从正方形到圆盘映射的变体，该变体以保持面积的方式将单位正方形映射到半球。该映射将单位正方形分成四个区域（sector），每个区域映射到半球的一个区域（见图 <a href="#figure-3-19">3.19</a>）。</p>
+<blockquote>
+<p><a name="figure-3-19"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f19.svg" width="582" height="446" style="max-width: 100%;">
+</div>
+<p><strong>图 3.19：</strong> 均匀半球映射 (a) 首先将单位正方形转换为单位圆盘，使得正方形的四个着色区域映射到圆盘的相应着色区域。 (b) 然后，圆盘上的点以保持相对面积的方式映射到半球上。</p>
+</blockquote>
+<p>给定 \( (u,v) \in [-1,1]^2 \) ；那么在 \( u \geq 0 \) 和 \( u - |v| \geq 0 \) 的第一个区域，单位圆盘上点的极坐标为</p>
+<p>\[
+\begin{align}
+r &amp;= u \\
+\phi &amp;= \frac{\pi}{4}\frac{v}{u}
+\end{align}
+\]</p>
+<p>在 \( \phi \in [-\pi/4,\pi/4] \) 上给出了一个保面积映射（area-preserving mapping）。其他三个区域也可以找到类似的映射。</p>
+<p>给定 \( (r, \phi) \) ，则正半球上的对应点为</p>
+<p><a name="equation-3-9">(3.9)</a></p>
+<p>\[
+\begin{align}<br />
+x &amp;= (\cos\phi)r\sqrt{2-r^2} \\
+y &amp;= (\sin\phi)r\sqrt{2-r^2} \\
+z &amp;= 1-r^2 \\
+\end{align}
+\]</p>
+<p>该映射也是保持面积的。</p>
+<p>这种映射可以使用与 <a href="#OctahedralVector-definition"><strong>OctahedralVector</strong></a> 相同的八面体映射扩展到整个球体。然后有三个步骤：</p>
+<ol>
+<li>首先，将八面体映射应用于方向，得到一个点 \( (u,v) \in [-1,1]^2 \) 。</li>
+<li>对于上半球的方向，采用同心半球映射（concentric hemisphere mapping），即方程（<a href="#equation-3-9">3.9</a>），应用于八面体映射的内正方形。这需要考虑到它相对于半球映射所期望的正方形旋转了 \( 45^\circ \) 。</li>
+<li>下半球的方向在应用半球映射之前，会沿着其象限的对角线（quadrant’s diagonal）进行镜像。然后，得到的方向向量的 \( z \) 分量被取反。</li>
+</ol>
+<p>以下该方法的实现经过一些处理以确保 <em>无分支（branch free）</em>：无论输入值是什么，函数的控制流只有一条路径。当可能时，这一特性通常对性能有帮助，特别是在 GPU 上，然而我们注意到该函数通常只占 <strong>pbrt</strong> 执行时间的一小部分，因此这一特性并不会影响系统的整体性能。</p>
+<p><a name="EqualAreaSquareToSphere"></a></p>
+<pre><code class="language-cpp">/** 正方形-球体映射函数定义（Square–Sphere Mapping Function Definitions） */
+Vector3f EqualAreaSquareToSphere(Point2f p) {
+    /** 将 p 转换到 [-1,1]^2 并计算绝对值 */
+    /** 以对角线的有符号距离计算半径 r */
+    /** 计算用于正方体到球体映射的角 Φ */
+    /** 求球面方向的 z 坐标 */
+    /** 计算原象限的 cos ϕ 和 sin ϕ 并返回向量 */
+}
+</code></pre>
+<p>在将原始点 <strong>p</strong> 从 \( [0,1]^2 \) 转换到 \( (u,v) \in [-1,1]^2 \) 后，实现还计算了这些坐标的绝对值 \( u'=|u| \) 和 \( v'=|v| \) 。这样做将具有一个或两个负坐标值的三个象限重新映射到正象限，翻转每个象限，使其上半球映射到 \( u' + v' &lt; 1 \) ，这对应于原始正象限中的上半球。（每个下半球映射到 \( u' + v' &gt; 1 \) 区域，对应于原始负象限。）</p>
+<pre><code class="language-cpp">/** 将 p 转换到 [-1,1]^2 并计算绝对值 */
+Float u = 2 * p.x - 1, v = 2 * p.y - 1;
+Float up = std::abs(u), vp = std::abs(v);
+</code></pre>
+<p>该函数的大部分实现操作都使用正象限中的 \( (u',v') \) 。其下一步是通过计算到对角线 \( u+v=1 \) 的有符号距离来计算映射到圆盘的半径 \( r \) ，该对角线将上半球和下半球分开，其中下半球的有符号距离为负（图 <a href="#figure-3-20">3.20</a>）。</p>
+<blockquote>
+<p><a name="figure-3-19"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f20.svg" width="196" height="203" style="max-width: 100%;">
+</div>
+<p><strong>图 3.20：正方形到圆盘映射的半径 \( r \) 计算。</strong> 计算到直线 \( u' + v' = 1 \) 的有符号距离。1 减去它的绝对值得到介于 0 到 1 之间的半径。</p>
+</blockquote>
+<pre><code class="language-cpp">/** 以对角线的有符号距离计算半径 r */
+Float signedDistance = 1 - (up + vp);
+Float d = std::abs(signedDistance);
+Float r = 1 - d;
+</code></pre>
+<p>\( \phi \) 的计算通过增加一个 \( \pi/4 \) 项来进行 \( 45^\circ \) 的旋转。</p>
+<pre><code class="language-cpp">/** 计算用于正方体到球体映射的角 Φ */
+Float phi = (r == 0 ? 1 : (vp - up) / r + 1) * Pi / 4;
+</code></pre>
+<p>先前计算的有符号距离的符号表明了点 \( (u',v') \) 是否位于下半球；返回的 \( z \) 坐标使用其符号。</p>
+<pre><code class="language-cpp">/** 求球面方向的 z 坐标 */
+Float z = pstd::copysign(1 - Sqr(r), signedDistance);
+</code></pre>
+<p>在正象限计算 \( \cos\phi \) 和 \( \sin\phi \) 之后，有必要将这些值重新映射到原始点 \( (u,v) \) 所在的实际象限中的正确值。将 \( u \) 的符号与计算得到的 \( \cos\phi \) 值关联，并将 \( v \) 的符号与 \( \sin\phi \) 关联，便足以做到这一点，此操作可以通过再次使用 <strong>copysign()</strong> 来实现。</p>
+<pre><code class="language-cpp">/** 计算原象限的 cos ϕ 和 sin ϕ 并返回向量 */
+Float cosPhi = pstd::copysign(std::cos(phi), u);
+Float sinPhi = pstd::copysign(std::sin(phi), v);
+return Vector3f(cosPhi * r * SafeSqrt(2 - Sqr(r)),
+                sinPhi * r * SafeSqrt(2 - Sqr(r)), z);
+</code></pre>
+<p>逆映射由 <strong>EqualAreaSphereToSquare()</strong> 函数执行，该函数以相反的方式有效地执行相同的操作，因此没有包含在此。同样有用且没有包括在此的还有 <strong>WrapEqualAreaSquare()</strong> 函数，它处理位于 \( [0,1]^2 \) 之外的点 p 的边界情况（在进行图像纹理查找的双线性插值时可能会发生），并将它们映射到可以传给 <a href="#EqualAreaSquareToSphere"><strong>EqualAreaSquareToSphere()</strong></a> 的适当的有效坐标。</p>
+<h2 id="384-边界方向bounding-directions"><a class="header" href="#384-边界方向bounding-directions">3.8.4 边界方向（Bounding Directions）</a></h2>
+<p>除了对空间区域进行边界限定外，有时对一组方向进行边界限定也很有用。例如，如果光源在某些方向上发出光照而在其他方向上不发出，这些信息可以用来排除该光源在其显然不会照亮的点的光照计算中。 <strong>pbrt</strong> 提供了 <a href="#DirectionCone-definition"><strong>DirectionCone</strong></a> 类用于此类用途；它表示一个由中心方向（central direction）和角度扩展（angular spread）参数化的圆锥（见图 <a href="#figure-3-21">3.21</a>）。</p>
+<blockquote>
+<p><a name="figure-3-21"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f21.svg" width="582" height="222" style="max-width: 100%;">
+</div>
+<p><strong>图 3.21：用圆锥界定方向集。</strong> 方向集在这里以球面上的阴影区域表示，可以使用一个由中心方向向量 \( \mathbf{v} \) 和扩展角 \( \theta \) 描述的圆锥来界定，使得集合中的所有方向都位于圆锥内部。</p>
+</blockquote>
+<p><a name="DirectionCone-definition"></a></p>
+<pre><code class="language-cpp">/** DirectionCone 定义 */
+class DirectionCone {
+  public:
+    /** DirectionCone 公有方法 */
+    /** DirectionCone 公有成员 */
+};
+</code></pre>
+<p><a href="#DirectionCone-definition"><strong>DirectionCone</strong></a> 提供了多种构造函数，包括一个接受圆锥的中心轴和其扩展角的余弦值的构造函数，以及一个限制单一方向的构造函数。对于构造函数参数和存储在类中的圆锥表示，使用的是扩展角的余弦值，而不是角度本身。这样做使得可以使用高效的点积来替代更昂贵的三角函数，从而使 <a href="#DirectionCone-definition"><strong>DirectionCone</strong></a> 执行一些以下操作。</p>
+<pre><code class="language-cpp">/** DirectionCone 公有方法 */
+DirectionCone() = default;
+DirectionCone(Vector3f w, Float cosTheta)
+    : w(Normalize(w)), cosTheta(cosTheta) {}
+explicit DirectionCone(Vector3f w) : DirectionCone(w, 1) {}
+</code></pre>
+<p><strong>DirectionCone</strong> 的默认构造函数是空的；将 cosTheta 设置成无效的无穷大值来编码该情况。</p>
+<pre><code class="language-cpp">/** DirectionCone 公共成员 */
+Vector3f w;
+Float cosTheta = Infinity;
+</code></pre>
+<p>一个报告圆锥是否为空的便捷方法。</p>
+<pre><code class="language-cpp">/** DirectionCone 公有方法 */
+bool IsEmpty() const { return cosTheta == Infinity; }
+</code></pre>
+<p>另一个便捷方法提供了对所有方向的界限。</p>
+<pre><code class="language-cpp">/** DirectionCone 公有方法 */
+static DirectionCone EntireSphere() {
+    return DirectionCone(Vector3f(0, 0, 1), -1);
+}
+</code></pre>
+<p>给定一个 <strong>DirectionCone</strong> ，很容易检查给定的方向向量是否在其范围内：方向与圆锥中心方向之间的夹角的余弦必须大于圆锥扩展角的余弦。（注意，角度越小，余弦越大。）</p>
+<pre><code class="language-cpp">/** DirectionCone 内联函数 */
+bool Inside(const DirectionCone &amp;d, Vector3f w) {
+    return !d.IsEmpty() &amp;&amp; Dot(d.w, Normalize(w)) &gt;= d.cosTheta;
+}
+</code></pre>
+<p><a name="BoundSubtendedDirections"></a></p>
+<p><strong>BoundSubtendedDirections()</strong> 返回一个约束了给定边界框和相对点 <strong>p</strong> 所夹方向的 <strong>DirectionCone</strong>。</p>
+<pre><code class="language-cpp">/** DirectionCone 内联函数 */
+DirectionCone BoundSubtendedDirections(const Bounds3f &amp;b, Point3f p) {
+    /** 计算 b 的包围球并检查 p 是否在内部 */
+    /** 计算并返回包围球的 DirectionCone */
+}
+</code></pre>
+<p>首先，求出边界 <strong>b</strong> 的包围球（bounding sphere）。如果给定点 <strong>p</strong> 在球内，则返回所有方向的方向边界。请注意，点 <strong>p</strong> 可能在球内但在 <strong>b</strong> 外，在这种情况下，返回的边界将过于保守（overly conservative）。这个问题在本章末尾的练习中有进一步讨论。</p>
+<pre><code class="language-cpp">/** 计算 b 的包围球并检查 p 是否在内部 */
+Float radius;
+Point3f pCenter;
+b.BoundingSphere(&amp;pCenter, &amp;radius);
+if (DistanceSquared(p, pCenter) &lt; Sqr(radius))
+    return DirectionCone::EntireSphere();
+</code></pre>
+<p>否则，边界的中心轴由从 <strong>p</strong> 到球心的向量给出，扩展角的余弦可以通过基本三角函数轻松求出（见图 <a href="#figure-3-22">3.22</a>）。</p>
+<blockquote>
+<p><a name="figure-3-22"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f22.svg" width="588" height="339" style="max-width: 100%;">
+</div>
+<p><strong>图 3.22：由点 \( \text{p} \) 求出包围球所形成的角度。</strong> 给定一个包围球和一个位于球外的参考点 \( \text{p} \) ，首先通过将球的半径 \( r \) 除以点 \( \text{p} \) 与球心之间距离 \( d \) 计算出 \( \sin\theta \)，然后使用三角恒等式 \( \sin^2\theta + \cos^2\theta = 1 \) 算出角 \( \theta \) 的余弦。</p>
+</blockquote>
+<pre><code class="language-cpp">/** 计算并返回包围球的 DirectionCone */
+Vector3f w = Normalize(pCenter - p);
+Float sin2ThetaMax = Sqr(radius) / DistanceSquared(pCenter, p);
+Float cosThetaMax = SafeSqrt(1 - sin2ThetaMax);
+return DirectionCone(w, cosThetaMax);
+</code></pre>
+<p>最后，我们会发现能够取两个 <a href="#DirectionCone-definition"><strong>DirectionCone</strong></a> 的并集是有用的，求出一个同时包含他们两个的 <a href="#DirectionCone-definition"><strong>DirectionCone</strong></a> 。</p>
+<pre><code class="language-cpp">/** DirectionCone 函数定义 */
+DirectionCone Union(const DirectionCone &amp;a, const DirectionCone &amp;b) {
+    /** 处理一个或两个圆锥为空的情况 */
+    /** 处理一个圆锥在另一个圆锥内部的情况 */
+    /** 计算合并后圆锥的扩展角 theta_o */
+    /** 求出合并后圆锥的轴并返回圆锥集合 */
+}
+</code></pre>
+<p>如果其中一个圆锥是空的，我们可以立即返回另一个圆锥。</p>
+<pre><code class="language-cpp">/** 处理一个或两个圆锥为空的情况 */
+if (a.IsEmpty()) return b;
+if (b.IsEmpty()) return a;
+</code></pre>
+<p>否则，实现计算了一些有用的角度，包括每个锥体的实际扩展角以及它们两个中心方向向量之间的夹角。这些值提供了足够的信息来确定一个圆锥是否完全被另一个圆锥包围（见图 <a href="#figure-3-23">3.23</a>）。</p>
+<blockquote>
+<p><a name="figure-3-23"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f23.svg" width="337" height="316" style="max-width: 100%;">
+</div>
+<p><strong>图 3.23：确定一个方向锥是否完全在另一个方向锥内部。</strong> 给定两个方向锥 \( a \) 和 \( b \) ，它们的扩展角 \( \theta_a \) 和 \( \theta_b \) ，以及它们两个中心方向向量之间的夹角 \( \theta_d \) ，我们可以确定一个锥体是否完全在另一个锥体内部。如图，因为 \( \theta_a &gt; \theta_d + \theta_b \) ，所以 \( b \) 在 \( a \) 内部。</p>
+</blockquote>
+<pre><code class="language-cpp">/** 处理一个圆锥在另一个圆锥内部的情况 */
+Float theta_a = SafeACos(a.cosTheta), theta_b = SafeACos(b.cosTheta);
+Float theta_d = AngleBetween(a.w, b.w);
+if (std::min(theta_d + theta_b, Pi) &lt;= theta_a)
+    return a;
+if (std::min(theta_d + theta_a, Pi) &lt;= theta_b)
+    return b;
+</code></pre>
+<p>否则，需要计算一个新的圆锥来包围它们两个。如图 <a href="#figure-3-24">3.24</a> 所示， \( \theta_a \) 、 \( \theta_d \) 和 \( \theta_b \) 的总和给出了新圆锥必须覆盖的完整角度；其一半是其扩展角度。</p>
+<blockquote>
+<p><a name="figure-3-24"></a></p>
+<div class="figure-row">
+  <img src="figures/pha03f24.svg" width="337" height="302" style="max-width: 100%;">
+</div>
+<p><strong>图 3.24：计算包围两个其他圆锥的方向圆锥的扩展角。</strong> 如果 \( \theta_d \) 是两个圆锥中心轴之间的夹角，而两个圆锥的扩展角分别为 \( \theta_a \) 和 \( \theta_b \) ，那么该圆锥包围的总角度为 \( \theta_a + \theta_d + \theta_b \) ，因此其扩展角为该角度的一半。</p>
+</blockquote>
+<pre><code class="language-cpp">/** 计算合并后圆锥的扩展角 theta_o */
+Float theta_o = (theta_a + theta_d + theta_b) / 2;
+if (theta_o &gt;= Pi)
+    return DirectionCone::EntireSphere();
+</code></pre>
+<p>新圆锥的方向向量 <em>不</em> 应通过两个圆锥的方向向量的平均值来设定；该向量和一个扩展角 \( \theta_o \) 不一定能够包围这两个给定的圆锥。使用该向量将需要一个大小为 \( \theta_d/2 + \max(2\theta_a, 2\theta_b) \) 的扩展角，而这个角从来不会小于 \( \theta_o \) 。（在纸上画出几个案例以说服自己这一点是值得的。）</p>
+<p>相反，我们通过叉积找到与圆锥方向向量垂直的向量，并围绕该轴旋转 <strong>a.w</strong>，使其能够包围两个圆锥的角。（用于此的 <a href="./3_9_Transformations.html#Rotate"><strong>Rotate()</strong></a> 函数将在第 <a href="./3_9_Transformations.html#397-%E7%BB%95%E4%BB%BB%E6%84%8F%E8%BD%B4%E7%9A%84%E6%97%8B%E8%BD%ACrotation-around-an-arbitrary-axis">3.9.7</a> 节中介绍。）在 <strong>LengthSquared(wr) == 0</strong> 的情况下，两向量朝相反方向，此时返回整个球体的边界。†（在这种情况下，其实可以找到更紧的包围，但由于这种情况非常罕见，我们不花时间去更有效地处理它也没关系。）</p>
+<pre><code class="language-cpp">/** 求出合并后圆锥的轴并返回圆锥集合 */
+Float theta_r = theta_o - theta_a;
+Vector3f wr = Cross(a.w, b.w);
+if (LengthSquared(wr) == 0)
+    return DirectionCone::EntireSphere();
+Vector3f w = Rotate(Degrees(theta_r), wr)(a.w);
+return DirectionCone(w, std::cos(theta_o));
+</code></pre>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_9_Transformations.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../3_Geometry_and_Transformations/3_9_Transformations.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
