@@ -1,0 +1,1363 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>色彩 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html"><strong aria-hidden="true">4.2.</strong> 使用辐射度量积分</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html"><strong aria-hidden="true">4.3.</strong> 表面反射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html"><strong aria-hidden="true">4.4.</strong> 光的发射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html"><strong aria-hidden="true">4.5.</strong> 光谱分布的表示</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_6_Color.html" class="active"><strong aria-hidden="true">4.6.</strong> 色彩</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Further_Reading.html"><strong aria-hidden="true">4.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Exercises.html"><strong aria-hidden="true">4.8.</strong> 练习</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="46-色彩color"><a class="header" href="#46-色彩color">4.6 色彩（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Color">Color</a>）</a></h1>
+<p>“光谱分布” 和 “色彩” 看似是同一事物的两个名称，但它们是不同的。光谱分布是一个纯粹的物理概念，而色彩则描述了人类对光谱的感知。因此，色彩与人类视觉系统的生理结构和大脑对视觉刺激的处理密切相关。</p>
+<p>尽管 <strong>pbrt</strong> 中的大多数渲染计算基于光谱分布，但仍必须谨慎处理色彩。例如，渲染图像中每个像素的光谱分布必须转换为 RGB 颜色来显示在显示器上。准确执行此转换需要使用显示器色彩特性的相关信息。渲染器也会在场景描述中找到颜色，用于描述反射率和光发射。尽管人类使用颜色来描述建模场景的外观是方便的，但如果渲染器在其光传输模拟中使用光谱分布，那么这些颜色必须被转换为光谱。遗憾的是，这样做是一个不够明确的问题。人们为此开发了多种方法；在 <strong>pbrt</strong> 中实现的方法在会第 <a href="#466-%E4%BB%8E-rgb-%E5%88%B0%E5%85%89%E8%B0%B1from-rgb-to-spectra">4.6.6</a> 节中进行描述。</p>
+<p>色彩感知的 <em>三刺激理论（tristimulus theory）</em> 认为，对于人类观察者来说，所有可见光谱分布都可以用三个标量值准确地表示。其基础在于眼睛中有三种类型的感光锥细胞，各自对不同波长的光敏感。自 19 世纪引入以来，这一理论经过了众多实验的检验，促成了 <em>光谱匹配函数（spectral matching functions）</em> 的发展，这些函数是波长的函数，可用于计算光谱分布的三刺激表示。</p>
+<p>对光谱分布 \( S(\lambda) \) 与三个三刺激匹配函数 \( m_{{1,2,3}}(\lambda) \) 的乘积进行积分，得到三个 <em>三刺激值（tristimulus values）</em> \( v_i \) ：</p>
+<p>\[
+v_i = \int S(\lambda)\ m_i(\lambda)\ \text{d}\lambda<br />
+\]</p>
+<p>匹配函数因此定义了一个 <em>色彩空间（color space）</em>，这是一个三刺激值的三维向量空间：两个光谱的和的三刺激值由它们的三刺激值之和给出，而通过常数缩放的光谱所关联的三刺激值可以通过将三刺激值按相同的因子缩放来求出。请注意，根据这些定义，两个光谱分布的乘积的三刺激值并 <em>不</em> 是由它们的三刺激值的乘积给出的。这就是为什么使用像 RGB 这样的三刺激颜色进行渲染可能不会给出准确结果的原因；我们将在第 <a href="#466-%E4%BB%8E-rgb-%E5%88%B0%E5%85%89%E8%B0%B1from-rgb-to-spectra">4.6.6</a> 节中对此主题进行更多讨论。</p>
+<p>在 <strong>pbrt</strong> 发行版中的文件 <a href="https://github.com/mmp/pbrt-v4/tree/master/src/pbrt/util/color.h"><strong>util/color.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/tree/master/src/pbrt/util/color.cpp"><strong>util/color.cpp</strong></a> 包含了本节中介绍的与颜色相关的功能的实现。</p>
+<h2 id="461-xyz-颜色xyz-color"><a class="header" href="#461-xyz-颜色xyz-color">4.6.1 XYZ 颜色（XYZ Color）</a></h2>
+<blockquote>
+<p><a name="figure-4-18"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f18.svg" width="504" height="348" style="max-width: 100%;">
+</div>
+<p><strong>图 4.18：XYZ 颜色匹配曲线。</strong> 给定的光谱分布可以通过将其分别乘以三个匹配曲线并对结果进行积分求出值 \( x_\lambda \)、 \( y_\lambda \) 和 \( z_\lambda \) 来转换为 XYZ 颜色，使用方程（<a href="#equation-4-22">4.22</a>）。</p>
+</blockquote>
+<p>一组重要的颜色匹配函数是由国际照明委员会（CIE）标准机构在一系列与人类测试项目的实验后确定的。它们定义了 <em>XYZ 色彩空间（XYZ color space）</em>，并在图 <a href="#figure-4-18">4.18</a> 中绘制。XYZ 是一个 <em>设备无关（device-independent）</em> 的色彩空间，这意味着它不描述特定显示器或色彩测量设备的特性。</p>
+<p>给定一个光谱分布 \( S(\lambda) \)，其 XYZ 色彩空间坐标 \( x_\lambda \)、 \( y_\lambda \) 和 \( z_\lambda \) 是通过将其与光谱匹配曲线 \( X(\lambda) \)、 \( Y(\lambda) \) 和 \( Z(\lambda) \) 的乘积进行积分计算得出的：†（有多种不同的约定被用来定义这些积分，有时会使用其它或不使用归一化因子。对于 <strong>pbrt</strong> 来说，使用 \( Y \) 匹配曲线积分的倒数进行归一化比较方便，因为这样会使得当光谱分布的常数值为 1 时， \( y_\lambda=1 \)）</p>
+<p><a name="equation-4-22">(4.22)</a></p>
+<p>\[
+\begin{align}
+x_\lambda &amp;= \frac{1}{\int_{\lambda}\ Y(\lambda)\ \text{d}\lambda}\int_{\lambda}S(\lambda)\ X(\lambda)\ \text{d}\lambda \\
+y_\lambda &amp;= \frac{1}{\int_{\lambda}\ Y(\lambda)\ \text{d}\lambda}\int_{\lambda}S(\lambda)\ Y(\lambda)\ \text{d}\lambda \\
+z_\lambda &amp;= \frac{1}{\int_{\lambda}\ Y(\lambda)\ \text{d}\lambda}\int_{\lambda}S(\lambda)\ Z(\lambda)\ \text{d}\lambda \\
+\end{align}
+\]</p>
+<p>CIE \( Y(\lambda) \) 三刺激曲线被选为与 \( V(\lambda) \) 光谱响应曲线成比例，后者用于定义光度学量，如在公式 (<a href="./4_1_Radiometry.html#equation-4-6">4.6</a>) 中定义的亮度。它们之间的关系是：\( V(\lambda) = 683\ Y(\lambda) \) 。</p>
+<p>值得注意的是，具有显著不同分布的光谱可能具有非常相似的 \( x_\lambda \)、 \( y_\lambda \) 和 \( z_\lambda \) 值。对于人类观察者而言，这样的光谱看起来是相同的。这样的光谱对被称为 <em>同色异谱（metamers）</em>。</p>
+<p>图 <a href="#figure-4-19">4.19</a> 显示了在可见光范围内单一波长光的 XYZ 系数对应的曲线在 XYZ 空间中的三维图。更复杂的光谱分布的系数因此对应于沿该曲线的点的线性组合。尽管所有光谱分布都可以用 XYZ 系数表示，但并非所有 XYZ 系数的值都对应于可实现的光谱；这样的系数组称为 <em>虚色（imaginary colors）</em>。</p>
+<blockquote>
+<p><a name="figure-4-19"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f19.svg" width="400" height="385" style="max-width: 100%;">
+</div>
+<p><strong>图 4.19：</strong> 可见光波长的 XYZ 颜色系数图。曲线用与每个波长相关的 RGB 颜色进行着色。</p>
+</blockquote>
+<p>在 <strong>Spectra</strong> 命名空间中，三个函数提供了从 360 纳米到 830 纳米之间以 1 纳米为增量采样的 CIE XYZ 匹配曲线。</p>
+<pre><code class="language-cpp">/** Spectral 函数定义 */
+namespace Spectra {
+    const DenselySampledSpectrum &amp;X();
+    const DenselySampledSpectrum &amp;Y();
+    const DenselySampledSpectrum &amp;Z();
+}
+</code></pre>
+<p>\( Y(\lambda) \) 的积分是预先计算的，并且以常量形式提供。</p>
+<pre><code class="language-cpp">/** Spectrum 常量 */
+static constexpr Float CIE_Y_integral = 106.856895;
+</code></pre>
+<p>还有一个 <strong>XYZ</strong> 类表示 XYZ 颜色。</p>
+<p><a name="XYZ-definition"></a></p>
+<pre><code class="language-cpp">/** XYZ 定义 */
+class XYZ {
+  public:
+    /** XYZ 公有方法 */
+<span class="boring">    XYZ(Float X, Float Y, Float Z) : X(X), Y(Y), Z(Z) {}
+</span><span class="boring">    Float Average() const { return (X + Y + Z) / 3; }
+</span><span class="boring">    Point2f xy() const {
+</span><span class="boring">        return Point2f(X / (X + Y + Z), Y / (X + Y + Z));
+</span><span class="boring">    }
+</span><span class="boring">    static XYZ FromxyY(Point2f xy, Float Y = 1) {
+</span><span class="boring">        if (xy.y == 0)
+</span><span class="boring">            return XYZ(0, 0, 0);
+</span><span class="boring">        return XYZ(xy.x * Y / xy.y, Y, (1 - xy.x - xy.y) * Y / xy.y);
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ &amp;operator+=(const XYZ &amp;s) {
+</span><span class="boring">        X += s.X;
+</span><span class="boring">        Y += s.Y;
+</span><span class="boring">        Z += s.Z;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator+(const XYZ &amp;s) const {
+</span><span class="boring">        XYZ ret = *this;
+</span><span class="boring">        return ret += s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ &amp;operator-=(const XYZ &amp;s) {
+</span><span class="boring">        X -= s.X;
+</span><span class="boring">        Y -= s.Y;
+</span><span class="boring">        Z -= s.Z;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator-(const XYZ &amp;s) const {
+</span><span class="boring">        XYZ ret = *this;
+</span><span class="boring">        return ret -= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    friend XYZ operator-(Float a, const XYZ &amp;s) { return {a - s.X, a - s.Y, a - s.Z}; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ &amp;operator*=(const XYZ &amp;s) {
+</span><span class="boring">        X *= s.X;
+</span><span class="boring">        Y *= s.Y;
+</span><span class="boring">        Z *= s.Z;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator*(const XYZ &amp;s) const {
+</span><span class="boring">        XYZ ret = *this;
+</span><span class="boring">        return ret *= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator*(Float a) const {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        return {a * X, a * Y, a * Z};
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ &amp;operator*=(Float a) {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        X *= a;
+</span><span class="boring">        Y *= a;
+</span><span class="boring">        Z *= a;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ &amp;operator/=(const XYZ &amp;s) {
+</span><span class="boring">        X /= s.X;
+</span><span class="boring">        Y /= s.Y;
+</span><span class="boring">        Z /= s.Z;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator/(const XYZ &amp;s) const {
+</span><span class="boring">        XYZ ret = *this;
+</span><span class="boring">        return ret /= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ &amp;operator/=(Float a) {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        DCHECK_NE(a, 0);
+</span><span class="boring">        X /= a;
+</span><span class="boring">        Y /= a;
+</span><span class="boring">        Z /= a;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator/(Float a) const {
+</span><span class="boring">        XYZ ret = *this;
+</span><span class="boring">        return ret /= a;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ operator-() const { return {-X, -Y, -Z}; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator==(const XYZ &amp;s) const { return X == s.X &amp;&amp; Y == s.Y &amp;&amp; Z == s.Z; }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator!=(const XYZ &amp;s) const { return X != s.X || Y != s.Y || Z != s.Z; }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float operator[](int c) const {
+</span><span class="boring">        DCHECK(c &gt;= 0 &amp;&amp; c &lt; 3);
+</span><span class="boring">        if (c == 0)
+</span><span class="boring">            return X;
+</span><span class="boring">        else if (c == 1)
+</span><span class="boring">            return Y;
+</span><span class="boring">        return Z;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float &amp;operator[](int c) {
+</span><span class="boring">        DCHECK(c &gt;= 0 &amp;&amp; c &lt; 3);
+</span><span class="boring">        if (c == 0)
+</span><span class="boring">            return X;
+</span><span class="boring">        else if (c == 1)
+</span><span class="boring">            return Y;
+</span><span class="boring">        return Z;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>    /** XYZ 公有成员 */
+<span class="boring">    Float X = 0, Y = 0, Z = 0;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>它的实现显而易见，使用三个 <strong>Float</strong> 值来表示三个颜色分量。所有常规的算术运算都为 <strong>XYZ</strong> 提供了方法，这些方法在此文本中未包含。</p>
+<pre><code class="language-cpp">/** XYZ 公有方法 */
+XYZ(Float X, Float Y, Float Z) : X(X), Y(Y), Z(Z) {}
+</code></pre>
+<pre><code class="language-cpp">/** XYZ 公有成员 */
+Float X = 0, Y = 0, Z = 0;
+</code></pre>
+<p><strong>SpectrumToXYZ()</strong> 函数根据方程 (<a href="#equation-4-22">4.22</a>) 计算光谱分布的 XYZ 系数，它使用后面的 <strong>InnerProduct()</strong> 工具函数来处理每个分量。</p>
+<pre><code class="language-cpp">/** Spectrum 函数定义 */
+XYZ SpectrumToXYZ(Spectrum s) {
+    return XYZ(InnerProduct(&amp;Spectra::X(), s),
+               InnerProduct(&amp;Spectra::Y(), s),
+               InnerProduct(&amp;Spectra::Z(), s)) / CIE_Y_integral;
+}
+</code></pre>
+<p>蒙特卡罗方法对于两个光谱的简单一维积分并不是必需的，因此 <strong>InnerProduct()</strong> 计算了整数波长上的黎曼和（Riemann sum）：</p>
+<p>\[
+\int_{\lambda_\min}^{\lambda_\max} f(\lambda)\ g(\lambda)\ \text{d}\lambda \approx \sum_{\lambda = \lambda_\min}^{\lambda_\max} f(\lambda)\ g(\lambda)<br />
+\]</p>
+<pre><code class="language-cpp">/** Spectrum 内联函数 */
+Float InnerProduct(Spectrum f, Spectrum g) {
+    Float integral = 0;
+    for (Float lambda = Lambda_min; lambda &lt;= Lambda_max; ++lambda)
+        integral += f(lambda) * g(lambda);
+    return integral;
+}
+</code></pre>
+<p>能够计算 <a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 的 XYZ 系数也是有用的。由于 <a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 仅在
+预先确定的波长处具有光谱分布的点样本，因此通过使用在波长 \( \lambda_i \) 处采样的光谱值 \( s_i \) 和它们对应的 PDF 对方程（<a href="#equation-4-22">4.22</a>）进行蒙特卡罗估计来求出它们：</p>
+<p><a name="equation-4-23">(4.23)</a></p>
+<p>\[
+X_\lambda \approx \frac{1}{\int_{\lambda} Y(\lambda)\ \text{d}\lambda} \left( \frac{1}{n} \sum_{i=1}^{n} \frac{s_i\ X(\lambda_i)}{p(\lambda_i)} \right)<br />
+\]</p>
+<p>诸如此类，其中 \( n \) 是波长样本的数量。</p>
+<p><a href="#SampledSpectrum::ToXYZ"><strong>SampledSpectrum::ToXYZ()</strong></a> 计算该估计量的值。</p>
+<p><a name="SampledSpectrum::ToXYZ"></a></p>
+<pre><code class="language-cpp">/** XYZ 方法定义 */
+XYZ SampledSpectrum::ToXYZ(const SampledWavelengths &amp;lambda) const {
+    /** 采样 lambda 处的 X、 Y 和 Z 匹配曲线 */
+<span class="boring">    SampledSpectrum X = Spectra::X().Sample(lambda);
+</span><span class="boring">    SampledSpectrum Y = Spectra::Y().Sample(lambda);
+</span><span class="boring">    SampledSpectrum Z = Spectra::Z().Sample(lambda);
+</span><span class="boring">
+</span>    /** 评估估计量来计算 (x,y,z) 系数 */
+<span class="boring">    SampledSpectrum pdf = lambda.PDF();
+</span><span class="boring">    return XYZ(SafeDiv(X * *this, pdf).Average(),
+</span><span class="boring">                SafeDiv(Y * *this, pdf).Average(),
+</span><span class="boring">                SafeDiv(Z * *this, pdf).Average()) / CIE_Y_integral;
+</span><span class="boring">
+</span>}
+</code></pre>
+<p>第一步是在指定波长下对匹配曲线进行采样。</p>
+<pre><code class="language-cpp">/** 采样 lambda 处的 X、 Y 和 Z 匹配曲线 */
+SampledSpectrum X = Spectra::X().Sample(lambda);
+SampledSpectrum Y = Spectra::Y().Sample(lambda);
+SampledSpectrum Z = Spectra::Z().Sample(lambda);
+</code></pre>
+<p>方程 (<a href="#equation-4-23">4.23</a>) 中的被加数可以轻松地用已经获取的数值计算。在这里，我们用单个表达式评估每个求和的所有项。使用 <a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum::SafeDiv"><strong>SampledSpectrum::SafeDiv()</strong></a> 来除以 PDF 值处理了某些波长的 PDF 等于零的情况，这种情况可能发生在调用 <a href="./4_5_Representing_Spectral_Distributions.html#SampledWavelengths::TerminateSecondary"><strong>SampledWavelengths::TerminateSecondary()</strong></a> 时。最后， <a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum-definition"><strong>SampledSpectrum::Average()</strong></a> 顺利地处理了各个项的求和并除以 \( n \) 来计算每个系数的估计值。</p>
+<pre><code class="language-cpp">/** 评估估计量来计算 (x,y,z) 系数 */
+SampledSpectrum pdf = lambda.PDF();
+return XYZ(SafeDiv(X * *this, pdf).Average(),
+           SafeDiv(Y * *this, pdf).Average(),
+           SafeDiv(Z * *this, pdf).Average()) / CIE_Y_integral;
+</code></pre>
+<p>为了避免在仅需要亮度时计算 \( X \) 和 \( Z \) 系数的开销，还有个 <strong>y()</strong> 方法仅返回 \( Y \)。其实现显然是 <strong>XYZ()</strong> 的一个子集，因此不在此处包含。</p>
+<h3 id="色度和-xyy-颜色chromaticity-and-xyy-color"><a class="header" href="#色度和-xyy-颜色chromaticity-and-xyy-color">色度和 xyY 颜色（Chromaticity and xyY Color）</a></h3>
+<p>颜色可以分为 <em>亮度（lightness）</em> 和 <em>色度（chroma）</em>。亮度描述了颜色相对于白色的明亮程度，而色度描述了颜色相对于白色的相对色彩饱和度。量化色度的一种方法是 \( xyz \) <em>色坐标（chromaticity coordinates）</em>，它通过 XYZ 色彩空间坐标定义</p>
+<p>\[
+\begin {align}
+x &amp;= \frac{x_\lambda}{x_\lambda + y_\lambda + z_\lambda} \\
+y &amp;= \frac{y_\lambda}{x_\lambda + y_\lambda + z_\lambda} \\
+z &amp;= \frac{z_\lambda}{x_\lambda + y_\lambda + z_\lambda} = 1 - x - y \\
+\end {align}
+\]</p>
+<p>请注意，它们中的任意两个即可指定色度。</p>
+<p>仅考虑 \( x \) 和 \( y \) ，我们可以绘制一个 <em>色度图（chromaticity diagram）</em> 来可视化它们的值；见图 <a href="#figure-4-20">4.20</a>。仅包含单一波长光的光谱——即纯光谱颜色——位于色度图的弧形部分。这部分对应于图 <a href="#figure-4-19">4.19</a> 中显示的三维 XYZ 曲线的 \( xy \) 投影。所有有效颜色都位于倒置的马蹄形区域内；该区域之外的点对应于虚色。</p>
+<blockquote>
+<p><a name="figure-4-20"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f20.svg" width="378" height="376" style="max-width: 100%;">
+</div>
+<p><strong>图 4.20: \( xy \) 色度图。</strong> 所有有效颜色均位于着色区域内。</p>
+</blockquote>
+<p>xyY 色彩空间将颜色的色度与亮度分开。它使用 \( x \) 和 \( y \) 色坐标和来自 XYZ 的 \( y_\lambda \)，因为 \( Y(\lambda) \) 匹配曲线被定义为与亮度成比例。 <strong>pbrt</strong> 对 xyY 颜色的使用有限，因此没有提供表示它们的类，但 <a href="#XYZ-definition"><strong>XYZ</strong></a> 类提供了一个方法，该方法返回其 <a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong>Point2f</strong></a> 类型的 \( xy \) 色坐标。</p>
+<pre><code class="language-cpp">/** XYZ 公有方法 */
+Point2f xy() const {
+    return Point2f(X / (X + Y + Z), Y / (X + Y + Z));
+}
+</code></pre>
+<p>还有一个相应的方法将 xyY 转换为 XYZ，通过给定 \( xy \) 和可选的 \( y_\lambda \) 坐标。</p>
+<pre><code class="language-cpp">/** XYZ 公有方法 */
+static XYZ FromxyY(Point2f xy, Float Y = 1) {
+    if (xy.y == 0)
+        return XYZ(0, 0, 0);
+    return XYZ(xy.x * Y / xy.y, Y, (1 - xy.x - xy.y) * Y / xy.y);
+}
+</code></pre>
+<h2 id="462-rgb-颜色rgb-color-"><a class="header" href="#462-rgb-颜色rgb-color-">4.6.2 RGB 颜色（RGB Color ）</a></h2>
+<p>RGB 颜色在渲染应用中比 XYZ 更常用。在 RGB 色彩空间中，颜色由对应于红、绿、蓝的三元组值表示，通常称为 <em>RGB</em>。然而，RGB 三元组本身是没有意义的；它必须相对于特定的 RGB 色彩空间进行定义。</p>
+<p>要了解其中的原因，可以考虑当 RGB 颜色在显示器上显示时会发生什么：显示的光谱是由三条光谱发射曲线的加权和给出的，每条曲线分别对应红色、绿色和蓝色，这些是由显示元件（无论是荧光粉、LED 或 LCD 元件，还是等离子体单元）发出的。†（诚然，这个模型是一种简化，因为它忽略了显示设备可能进行的任何额外处理；特别是，许多显示设备会对显示的数值进行非线性重新映射。这个话题将在 <a href="../B_Utilities/B_5_Images.html#b56-%E9%A2%9C%E8%89%B2%E7%BC%96%E7%A0%81color-encodings">B.5.6</a> 节中讨论。）图 <a href="#figure-4-21">4.21</a> 绘制了 LCD 显示器和 LED 显示器发出的红、绿、蓝分布；请注意，它们有显著的不同。图 <a href="#figure-4-22">4.22</a> 则显示了在这些显示器上显示 RGB 颜色 \( (0.6,0.3,0.2) \) 所产生的光谱分布。不出所料，光谱的结果也相当不同。</p>
+<blockquote>
+<p><a name="figure-4-21"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f21.svg" width="784" height="299" style="max-width: 100%;">
+</div>
+<p><strong>图 4.21：LCD 显示器和 LED 显示器的红、绿、蓝发射曲线。</strong> 第一个图显示了 LCD 显示器的曲线，第二个图显示了 LED 的曲线。这两种显示器的发射特性截然不同。<em>（数据由 X-Rite 公司提供。）</em></p>
+</blockquote>
+<blockquote>
+<p><a name="figure-4-22"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f22.svg" width="364" height="281" style="max-width: 100%;">
+</div>
+<p><strong>图 4.22：在 LED（红色）和 LCD（蓝色）显示器上显示 RGB 颜色 \( (0.6,0.3,0.2) \) 的光谱分布。</strong> 由于图 <a href="#figure-4-21">4.21</a> 中所示的不同发射曲线，即使 RGB 值相同，所产生的发射分布也显著不同。</p>
+</blockquote>
+<p>如果已知显示器的 \( R(\lambda) \)、 \( G(\lambda) \) 和 \( B(\lambda) \) 曲线，该显示器上显示光谱分布 \( S(\lambda) \) 的 RGB 系数可以通过将 \( S(\lambda) \) 与每条曲线进行积分求出：</p>
+<p>\[
+r = \int R(\lambda)\ S(\lambda)\ \text{d}\lambda
+\]</p>
+<p>以此类推。在上一节中用于计算光谱的 XYZ 值的方法也可以用于计算这些积分的值。</p>
+<p>或者，如果我们已经拥有 \( S(\lambda) \) 的 \( (x_\lambda,y_\lambda,z_\lambda) \) 表示，可以直接将 XYZ 系数转换为相应的 RGB 系数。例如，考虑计算光谱分布 \( S(\lambda) \) 的红色分量的值：</p>
+<p><a name="equation-4-24">(4.24)</a></p>
+<p>\[
+\begin{align}
+r &amp;= \int R(\lambda)\ S(\lambda)\ \text{d}\lambda \\
+&amp;\approx \int R(\lambda)(x_\lambda X(\lambda) + y_\lambda Y(\lambda) + z_\lambda Z(\lambda))\ \text{d}\lambda \\
+&amp;= x_\lambda \int R(\lambda)\ X(\lambda)\ \text{d}\lambda + y_\lambda \int R(\lambda)\ Y(\lambda)\ \text{d}\lambda + z_\lambda \int R(\lambda)\ Z(\lambda)\ \text{d}\lambda
+\end{align}
+\]</p>
+<p>其中第二步利用了色彩感知的三刺激理论。</p>
+<p>RGB 响应函数和 XYZ 匹配函数的乘积的积分可以针对给定的响应曲线进行预计算，从而使得可以将完整的转换表示为一个矩阵：</p>
+<p>\[
+\begin{bmatrix}
+r \\ g \\ b
+\end{bmatrix} = \left( \begin{matrix}
+{\int R(\lambda)\ X(\lambda)\ \text{d}\lambda} &amp; {\int R(\lambda)\ Y(\lambda)\ \text{d}\lambda} &amp; {\int R(\lambda)\ Z(\lambda)\ \text{d}\lambda} \\
+{\int G(\lambda)\ X(\lambda)\ \text{d}\lambda} &amp; {\int G(\lambda)\ Y(\lambda)\ \text{d}\lambda} &amp; {\int G(\lambda)\ Z(\lambda)\ \text{d}\lambda} \\
+{\int B(\lambda)\ X(\lambda)\ \text{d}\lambda} &amp; {\int B(\lambda)\ Y(\lambda)\ \text{d}\lambda} &amp; {\int B(\lambda)\ Z(\lambda)\ \text{d}\lambda}
+\end{matrix} \right) \begin{bmatrix}
+x_\lambda \\ y_\lambda \\ z_\lambda
+\end{bmatrix}
+\]</p>
+<p><strong>pbrt</strong> 频繁使用这种方法，以便高效地将颜色从一个色彩空间转换到另一个。</p>
+<p><strong>pbrt</strong> 也提供了一个易懂的 <strong>RGB</strong> 类，并提供多种有用的算术运算（文本中未包含）。</p>
+<pre><code class="language-cpp">/** RGB 定义 */
+class RGB {
+  public:
+    /** RGB 公有方法 */
+<span class="boring">    RGB(Float r, Float g, Float b) : r(r), g(g), b(b) {}
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB &amp;operator+=(RGB s) {
+</span><span class="boring">        r += s.r;
+</span><span class="boring">        g += s.g;
+</span><span class="boring">        b += s.b;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator+(RGB s) const {
+</span><span class="boring">        RGB ret = *this;
+</span><span class="boring">        return ret += s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB &amp;operator-=(RGB s) {
+</span><span class="boring">        r -= s.r;
+</span><span class="boring">        g -= s.g;
+</span><span class="boring">        b -= s.b;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator-(RGB s) const {
+</span><span class="boring">        RGB ret = *this;
+</span><span class="boring">        return ret -= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    friend RGB operator-(Float a, RGB s) { return {a - s.r, a - s.g, a - s.b}; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB &amp;operator*=(RGB s) {
+</span><span class="boring">        r *= s.r;
+</span><span class="boring">        g *= s.g;
+</span><span class="boring">        b *= s.b;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator*(RGB s) const {
+</span><span class="boring">        RGB ret = *this;
+</span><span class="boring">        return ret *= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator*(Float a) const {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        return {a * r, a * g, a * b};
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB &amp;operator*=(Float a) {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        r *= a;
+</span><span class="boring">        g *= a;
+</span><span class="boring">        b *= a;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    friend RGB operator*(Float a, RGB s) { return s * a; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB &amp;operator/=(RGB s) {
+</span><span class="boring">        r /= s.r;
+</span><span class="boring">        g /= s.g;
+</span><span class="boring">        b /= s.b;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator/(RGB s) const {
+</span><span class="boring">        RGB ret = *this;
+</span><span class="boring">        return ret /= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB &amp;operator/=(Float a) {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        DCHECK_NE(a, 0);
+</span><span class="boring">        r /= a;
+</span><span class="boring">        g /= a;
+</span><span class="boring">        b /= a;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator/(Float a) const {
+</span><span class="boring">        RGB ret = *this;
+</span><span class="boring">        return ret /= a;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB operator-() const { return {-r, -g, -b}; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float Average() const { return (r + g + b) / 3; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator==(RGB s) const { return r == s.r &amp;&amp; g == s.g &amp;&amp; b == s.b; }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator!=(RGB s) const { return r != s.r || g != s.g || b != s.b; }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float operator[](int c) const {
+</span><span class="boring">        DCHECK(c &gt;= 0 &amp;&amp; c &lt; 3);
+</span><span class="boring">        if (c == 0)
+</span><span class="boring">            return r;
+</span><span class="boring">        else if (c == 1)
+</span><span class="boring">            return g;
+</span><span class="boring">        return b;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float &amp;operator[](int c) {
+</span><span class="boring">        DCHECK(c &gt;= 0 &amp;&amp; c &lt; 3);
+</span><span class="boring">        if (c == 0)
+</span><span class="boring">            return r;
+</span><span class="boring">        else if (c == 1)
+</span><span class="boring">            return g;
+</span><span class="boring">        return b;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>    /** RBG 公有成员 */
+<span class="boring">    Float r = 0, g = 0, b = 0;
+</span><span class="boring">
+</span>};
+</code></pre>
+<pre><code class="language-cpp">/** RBG 公有方法 */
+RGB(Float r, Float g, Float b) : r(r), g(g), b(b) {}
+</code></pre>
+<pre><code class="language-cpp">/** RBG 公有成员 */
+Float r = 0, g = 0, b = 0;
+</code></pre>
+<h2 id="463-rgb-色彩空间rgb-color-spaces"><a class="header" href="#463-rgb-色彩空间rgb-color-spaces">4.6.3 RGB 色彩空间（RGB Color Spaces）</a></h2>
+<p>完整的光谱响应曲线并不是定义色彩空间所必需的。例如，可以使用 \( xy \) 色坐标来定义一个色彩空间，以指定三 <em>原色（color primaries）</em>。从三原色，可以推导出将 XYZ 颜色转换到该色彩空间及逆转换的矩阵。在不需要明确的光谱响应曲线的情况下，这是一种方便的定义色彩空间的方法。</p>
+<p><strong>RGBColorSpace</strong> 类在文件 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/util/colorspace.h"><strong>util/colorspace.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/util/colorspace.cpp"><strong>util/colorspace.cpp</strong></a> 中定义，它采用了上述方法来封装 RGB 色彩空间的表示以及多种有用的操作，例如将 XYZ 颜色转换到其色彩空间及逆转换。</p>
+<p><a name="RGBColorSpace-definition"></a></p>
+<pre><code class="language-cpp">/** RGBColorSpace 定义 */
+class RGBColorSpace {
+  public:
+    /** RGBColorSpace 公有方法 */
+<span class="boring">    RGBColorSpace(Point2f r, Point2f g, Point2f b, Spectrum illuminant,
+</span><span class="boring">                    const RGBToSpectrumTable *rgbToSpectrumTable, Allocator alloc);
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGBSigmoidPolynomial ToRGBCoeffs(RGB rgb) const;
+</span><span class="boring">    
+</span><span class="boring">    static void Init(Allocator alloc);
+</span><span class="boring">    
+</span><span class="boring">    /** RGBColorSpace 公有成员 */
+</span><span class="boring">    Point2f r, g, b, w;
+</span><span class="boring">    DenselySampledSpectrum illuminant;
+</span><span class="boring">    SquareMatrix&lt;3&gt; XYZFromRGB, RGBFromXYZ;
+</span><span class="boring">    static const RGBColorSpace *sRGB, *DCI_P3, *Rec2020, *ACES2065_1;
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator==(const RGBColorSpace &amp;cs) const {
+</span><span class="boring">        return (r == cs.r &amp;&amp; g == cs.g &amp;&amp; b == cs.b &amp;&amp; w == cs.w &amp;&amp;
+</span><span class="boring">                rgbToSpectrumTable == cs.rgbToSpectrumTable);
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator!=(const RGBColorSpace &amp;cs) const {
+</span><span class="boring">        return (r != cs.r || g != cs.g || b != cs.b || w != cs.w ||
+</span><span class="boring">                rgbToSpectrumTable != cs.rgbToSpectrumTable);
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    RGB LuminanceVector() const {
+</span><span class="boring">        return RGB(XYZFromRGB[1][0], XYZFromRGB[1][1], XYZFromRGB[1][2]);
+</span><span class="boring">    }
+</span><span class="boring">    RGB ToRGB(XYZ xyz) const { return Mul&lt;RGB&gt;(RGBFromXYZ, xyz); }
+</span><span class="boring">    XYZ ToXYZ(RGB rgb) const { return Mul&lt;XYZ&gt;(XYZFromRGB, rgb); }
+</span><span class="boring">    static const RGBColorSpace *GetNamed(std::string name);
+</span><span class="boring">    static const RGBColorSpace *Lookup(Point2f r, Point2f g, Point2f b,
+</span><span class="boring">                                        Point2f w);
+</span><span class="boring">
+</span>  private:
+    /** RGBColorSpace 私有成员 */
+<span class="boring">    const RGBToSpectrumTable *rgbToSpectrumTable;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>RGB 色彩空间是通过红、绿、蓝原色的色度来定义的。原色定义了色彩空间的色域（gamut），即它可以用 0 到 1 之间的 RGB 值来表示颜色集合。对于三原色，色域在色度图上形成一个三角形，每个原色的色度定义了三角形的一个顶点。†（一些显示器使用超过三种原色来增加色域范围，不过在此我们将假设使用传统的 RGB。）</p>
+<p>除了原色外，还需要指定色彩空间的 <em>白点（whitepoint）</em>，即当所有三原色都激活到最大发射量时所显示的颜色。这可能令人惊讶——毕竟，白色不应该对应于每个波长都具有相同值的光谱分布吗？然而，白色是一种颜色，作为一种颜色，它在人类 <em>感知（perceive ）</em> 上是统一的，并被贴上 “白色” 的标签。白色的光谱在对应于蓝色和绿色的较低波长处往往具有更强的能量，而在对应于橙色和红色的较高波长处则较弱。如第 <a href="./4_4_Light_Emission.html#442-%E6%A0%87%E5%87%86%E5%85%89%E6%BA%90standard-illuminants">4.4.2</a> 节所描述并在图 <a href="./4_4_Light_Emission.html#figure-4-14">4.14</a> 中绘制的 D65 光源，是指定色彩空间白点的常见选择。</p>
+<p>虽然白点的色度足以定义一个色彩空间，但 <strong>RGBColorSpace</strong> 构造函数接受其完整的光谱分布，这对于即将到来的将颜色转换为光谱分布的代码非常有用。存储光源光谱使渲染器的用户能够使用 RGB 颜色指定光源的发射；提供的光源则为 RGB 白色 \( (1,1,1) \) 提供光谱分布。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 方法定义 */
+RGBColorSpace::RGBColorSpace(Point2f r, Point2f g, Point2f b,
+        Spectrum illuminant, const RGBToSpectrumTable *rgbToSpec,
+        Allocator alloc)
+    : r(r), g(g), b(b), illuminant(illuminant, alloc),
+      rgbToSpectrumTable(rgbToSpec) {
+    /** 计算白点原色和 XYZ 坐标 */
+<span class="boring">    XYZ W = SpectrumToXYZ(illuminant);
+</span><span class="boring">    w = W.xy();
+</span><span class="boring">    XYZ R = XYZ::FromxyY(r), G = XYZ::FromxyY(g), B = XYZ::FromxyY(b);
+</span><span class="boring">
+</span>    /** 初始化 XYZ 色彩空间变换矩阵 */
+<span class="boring">    SquareMatrix&lt;3&gt; rgb(R.X, G.X, B.X,
+</span><span class="boring">                    R.Y, G.Y, B.Y,
+</span><span class="boring">                    R.Z, G.Z, B.Z);
+</span><span class="boring">    XYZ C = InvertOrExit(rgb) * W;
+</span><span class="boring">    XYZFromRGB = rgb * SquareMatrix&lt;3&gt;::Diag(C[0], C[1], C[2]);
+</span><span class="boring">    RGBFromXYZ = InvertOrExit(XYZFromRGB);
+</span><span class="boring">    
+</span>}
+</code></pre>
+<p><strong>RGBColorSpace</strong> 使用 <a href="./4_5_Representing_Spectral_Distributions.html#DenselySampledSpectrum-definition"><strong>DenselySampledSpectrum</strong></a> 作为光源的表示，以便通过波长进行高效查找。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 公有成员 */
+Point2f r, g, b, w;
+DenselySampledSpectrum illuminant;
+</code></pre>
+<p><strong>RGBColorSpace</strong> 还存储一个指向 <a href="#RGBToSpectrumTable-definition"><strong>RGBToSpectrumTable</strong></a> 类的指针，该类存储与将色彩空间中的 RGB 值转换为完整光谱分布相关的信息；将在第 <a href="#466-%E4%BB%8E-rgb-%E5%88%B0%E5%85%89%E8%B0%B1from-rgb-to-spectra">4.6.6</a> 节中简要介绍。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 私有成员 */
+const RGBToSpectrumTable *rgbToSpectrumTable;
+</code></pre>
+<p>要在色彩空间中求 RGB 值时，能够进行 XYZ 之间的转换是非常有用的。这可以通过 \( 3 \times 3 \) 矩阵来实现。为了计算它们，我们需要色度的 XYZ 坐标和白点。</p>
+<pre><code class="language-cpp">/** 计算白点原色和 XYZ 坐标 */
+XYZ W = SpectrumToXYZ(illuminant);
+w = W.xy();
+XYZ R = XYZ::FromxyY(r), G = XYZ::FromxyY(g), B = XYZ::FromxyY(b);
+</code></pre>
+<p>我们将首先推导出将色彩空间中的 RGB 系数转换为 XYZ 的矩阵 \( M \) ：</p>
+<p>\[
+\begin{bmatrix}
+x_\lambda \\ y_\lambda \\ z_\lambda
+\end{bmatrix} = M \begin{bmatrix}
+r \\ g \\ b
+\end{bmatrix}
+\]</p>
+<p>这个矩阵可以通过考虑 RGB 三元组 \( (1,1,1) \) 与 XYZ 坐标系中的白点之间的关系来求出，可以在 <strong>W</strong> 中获得这个白点。在这种情况下，我们知道 \( w_{x_\lambda} \) 必须与红、绿、蓝原色的 \( x_\lambda \) 坐标之和成比例，因为我们考虑的是 \( (1,1,1) \) RGB 的情况。对于 \( y_\lambda \) 和 \( z_\lambda \) 也是如此。这个关系可以表示为</p>
+<p>\[
+\begin{bmatrix}
+w_{x_\lambda} \\ w_{y_\lambda} \\ w_{z_\lambda}
+\end{bmatrix} = \left( \begin{matrix}
+{r_{x_\lambda}} &amp; {g_{x_\lambda}} &amp; {b_{x_\lambda}} \\
+{r_{y_\lambda}} &amp; {g_{y_\lambda}} &amp; {b_{y_\lambda}} \\
+{r_{z_\lambda}} &amp; {g_{z_\lambda}} &amp; {b_{z_\lambda}}
+\end{matrix} \right) \left( \begin{matrix}
+{c_r} &amp; {0} &amp; {0} \\
+{0} &amp; {c_g} &amp; {0} \\
+{0} &amp; {0} &amp; {c_b}
+\end{matrix} \right) \begin{bmatrix}
+1 \\ 1 \\ 1
+\end{bmatrix} = \left( \begin{matrix}
+{r_{x_\lambda}} &amp; {g_{x_\lambda}} &amp; {b_{x_\lambda}} \\
+{r_{y_\lambda}} &amp; {g_{y_\lambda}} &amp; {b_{y_\lambda}} \\
+{r_{z_\lambda}} &amp; {g_{z_\lambda}} &amp; {b_{z_\lambda}}
+\end{matrix} \right) \begin{bmatrix}
+c_r \\ c_g \\ c_b
+\end{bmatrix}
+\]</p>
+<p>其仅包含未知数 \( c_r \)、 \( c_g \) 和 \( c_b \)。这些可以通过将白点 XYZ 坐标乘以剩余矩阵的逆来找到。反转该矩阵后，得到从 XYZ 到 RGB 的变换矩阵。</p>
+<pre><code class="language-cpp">/** 初始化 XYZ 色彩空间变换矩阵 */
+SquareMatrix&lt;3&gt; rgb(R.X, G.X, B.X,
+                    R.Y, G.Y, B.Y,
+                    R.Z, G.Z, B.Z);
+XYZ C = InvertOrExit(rgb) * W;
+XYZFromRGB = rgb * SquareMatrix&lt;3&gt;::Diag(C[0], C[1], C[2]);
+RGBFromXYZ = InvertOrExit(XYZFromRGB);
+</code></pre>
+<pre><code class="language-cpp">/** RGBColorSpace 公有成员 */
+SquareMatrix&lt;3&gt; XYZFromRGB, RGBFromXYZ;
+</code></pre>
+<p>给定一个色彩空间的 XYZ/RGB 转换矩阵，矩阵与向量的乘法足以将任何 XYZ 三元组转换到该色彩空间，和将该色彩空间中的任何 RGB 转换为 XYZ。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 公有方法 */
+RGB ToRGB(XYZ xyz) const { return Mul&lt;RGB&gt;(RGBFromXYZ, xyz); }
+XYZ ToXYZ(RGB rgb) const { return Mul&lt;XYZ&gt;(XYZFromRGB, rgb); }
+</code></pre>
+<p>此外，通过使用这些矩阵和 XYZ 颜色的方法，计算从一种色彩空间转换到另一种的矩阵是很简单的。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 方法定义 */
+SquareMatrix&lt;3&gt; ConvertRGBColorSpace(const RGBColorSpace &amp;from,
+                                     const RGBColorSpace &amp;to) {
+    if (from == to) return {};
+    return to.RGBFromXYZ * from.XYZFromRGB;
+}
+</code></pre>
+<p><a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 提供了一种便捷的方法，可以通过 XYZ 在给定的色彩空间中转换为 RGB。</p>
+<pre><code class="language-cpp">/** Spectrum 方法定义 */
+RGB SampledSpectrum::ToRGB(const SampledWavelengths &amp;lambda,
+                           const RGBColorSpace &amp;cs) const {
+    XYZ xyz = ToXYZ(lambda);
+    return cs.ToRGB(xyz);
+}
+</code></pre>
+<h3 id="标准色彩空间standard-color-spaces"><a class="header" href="#标准色彩空间standard-color-spaces">标准色彩空间（Standard Color Spaces）</a></h3>
+<p><strong>pbrt</strong> 内置支持许多广泛使用的标准色彩空间。 其中包括</p>
+<ul>
+<li>sRGB 是在 1990 年代开发的，并在许多年里广泛用于显示器。其开发的一个初衷是为了实现网络色彩的标准化。</li>
+<li>DCI-P3 是为数字电影放映而开发的，覆盖的色域比 sRGB 更广。撰写时，它正越来越多地被用于计算机显示器和手机。</li>
+<li>Rec2020，涵盖了更广泛的范围，并被用于 UHDTV 电视标准。</li>
+<li>ACES2065-1 的原色超出了可表示颜色的范围，并且其位置设置使得所有颜色都可以由其表示。选择它的一个原因是它适合作为长期档案存储的格式</li>
+</ul>
+<p>每个的色域如图 <a href="#figure-4-23">4.23</a> 所示。</p>
+<blockquote>
+<p><a name="figure-4-23"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f23.svg" width="385" height="439" style="max-width: 100%;">
+</div>
+<p><strong>图 4.23：</strong> sRGB、DCI-P3、Rec2020 和 ACES2065-1 色彩空间的色域，通过色度图进行可视化。sRGB 覆盖的色域最小，DCI-P3 次之，Rec2020 则更大。ACES2065-1 对应于大三角形，其特点是使用对应于虚色的原色。通过这样做，它能够表示所有有效颜色，与其他色彩空间不同。</p>
+</blockquote>
+<p><strong>RGBColorSpace</strong> 类为每个这些提供了预先初始化的 <a href="#RGBColorSpace-definition"><strong>RGBColorSpace</strong></a> 类实例。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 公有成员 */
+static const RGBColorSpace *sRGB, *DCI_P3, *Rec2020, *ACES2065_1;
+</code></pre>
+<p>也可以通过名称查找色彩空间，或通过指定原色的色度和白点来查找。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 公有方法 */
+static const RGBColorSpace *GetNamed(std::string name);
+static const RGBColorSpace *Lookup(Point2f r, Point2f g, Point2f b,
+                                   Point2f w);
+</code></pre>
+<h2 id="464-为什么选择光谱渲染why-spectral-rendering"><a class="header" href="#464-为什么选择光谱渲染why-spectral-rendering">4.6.4 为什么选择光谱渲染？（Why Spectral Rendering?）</a></h2>
+<p>到目前为止，我们在描述 <strong>pbrt</strong> 的实现时一直认为它使用点采样光谱来表示光谱量。虽然考虑到 <strong>pbrt</strong> 的物理基础和蒙特卡罗积分的普遍采用，这似乎是自然的，但它与当前在渲染中使用 RGB 颜色进行光谱计算的普遍做法并不相符。我们在本节开始时暗示了这种做法的一个重大问题；在引入 RGB 色彩空间后，我们现在可以更深入地探讨。</p>
+<p>如前所述，由于色彩空间是向量空间，在同一色彩空间中两个颜色的相加会得到与将底层光谱相加后再找到结果光谱的颜色相同的颜色。但乘法则不是这样。为了理解这个问题，假设我们正在渲染一个均匀着色的物体（例如，绿色），该物体均匀地被同色的光照射。为简单起见，假设照明和物体的反射值都用 RGB 颜色 \( (0,1,0) \) 表示。散射光则由反射率和入射照明的乘积给出：</p>
+<p>\[
+\left( \begin{matrix}
+0 \\ 1 \\ 0
+\end{matrix} \right) \odot \left( \begin{matrix}
+0 \\ 1 \\ 0
+\end{matrix} \right) = \left( \begin{matrix}
+0 \\ 1 \\ 0
+\end{matrix} \right)
+\]</p>
+<p>RGB 颜色的逐分量乘法用 “\( \odot \)” 运算符表示。</p>
+<p>在 sRGB 色彩空间中，绿色 \( (0,1,0) \) 映射到可表示颜色的色域的上顶点（图 <a href="#figure-4-24">4.24</a>），并且这个 RGB 颜色值在乘法运算后保持不变。</p>
+<p>现在假设我们切换到广色域色彩空间 ACES2065-1。在这个色彩空间中，sRGB 颜色 \( (0,1,0) \) 可以被求出为色彩空间中的 \( (0.38,0.82,0.12) \) ——因此它映射到可表示颜色集合的内部位置。进行相同的分量乘法得到的结果是：</p>
+<p>\[
+\left( \begin{matrix}
+0.38 \\ 0.82 \\ 0.12
+\end{matrix} \right) \odot \left( \begin{matrix}
+0.38 \\ 0.82 \\ 0.12
+\end{matrix} \right) = \left( \begin{matrix}
+0.14 \\ 0.67 \\ 0.01
+\end{matrix} \right)
+\]</p>
+<p>这次，得到的颜色强度低于起始值，并且由于绿色光相对比例的增加，饱和度也变得更高。这导致了图 <a href="#figure-4-24">4.24</a> 中所示的有些奇怪的情况：在这个新的色彩空间中，分量乘法不仅产生了不同的颜色——它还严重增加了饱和度，以至于颜色被推到了物理可实现颜色的 CIE 马蹄形状的外部！</p>
+<blockquote>
+<p><a name="figure-4-24"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f24.svg" width="385" height="439" style="max-width: 100%;">
+</div>
+<p><strong>图 4.24：</strong> 相同的颜色在不同形状的色域的 RGB 色彩空间中可以具有非常不同的 RGB 值。在 sRGB 颜色域（内三角形）中，绿原色 \( (0,1,0) \) 的色坐标为 \( (0.3, 0.6) \)（白点）。在广色域 ACES2065-1 色彩空间（外三角形）中，相同颜色的 RGB 值为 \( (0.38,0.82,0.12) \)。</p>
+</blockquote>
+<p>在渲染的上下文中，光谱值相乘的能力对于评估材质与光源的相互作用至关重要。同时，这个例子展示了使用 RGB 值进行此目的时的问题：乘法运算在某种意义上是任意的（arbitrary），因为其行为在很大程度上依赖于所选择的色彩空间。因此，即使在最终希望得到 RGB 输出的情况下，使用光谱模型进行渲染也是更可取的，正如 <strong>pbrt</strong> 的情况所示。</p>
+<p>使用光谱表示进行渲染的额外好处在于：可以轻松地对色散（dispersion）进行建模，并且先进的反射率模型通常与波长有自然的依赖关系，可以解释薄层中的彩虹色（iridescence）或表面微结构的衍射（diffraction）。</p>
+<h2 id="465-选择波长样本的数量choosing-the-number-of-wavelength-samples"><a class="header" href="#465-选择波长样本的数量choosing-the-number-of-wavelength-samples">4.6.5 选择波长样本的数量（Choosing the Number of Wavelength Samples）</a></h2>
+<p>尽管它使用光传输模拟的光谱模型， <strong>pbrt</strong> 的输出通常是以三刺激颜色（如 RGB）表示的图像。我们已经描述了这些颜色是如何计算的——即光谱与匹配函数的乘积的蒙特卡罗估计，形式如方程 (<a href="#equation-4-23">4.23</a>)——我们将简要回到关于 <a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 类使用多少光谱样本的问题。相关的蒙特卡罗估计器易于评估，但其中的误差会导致图像中的 <em>颜色噪声（color noise）</em>。图 <a href="#figure-4-25">4.25</a> 显示了这一现象的一个例子。</p>
+<blockquote>
+<p><a name="figure-4-25"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f25.svg" width="994" height="353" style="max-width: 100%;">
+</div>
+<p><strong>图 4.25:</strong> (a) 示例场景的参考图像。 (b) 如果场景仅使用每个像素一个图像样本进行渲染，每个样本仅采样一个波长，则像素的 RGB 颜色在蒙特卡罗估计中会出现大量误差方差。 (c) 使用四个波长样本（ <strong>pbrt</strong> 的默认值）时，这种方差显著减少，尽管颜色噪声仍然明显。在实际应用中，四个波长样本通常是足够的，因为每个像素通常会采集多个图像样本。<em>（模型由 Yasutoshi Mori 提供。）</em></p>
+</blockquote>
+<p>图 <a href="#figure-4-25">4.25</a>(a)显示了一个由点光源照明的场景，其中仅包含来自光源的直接照明。在这个简单的环境中，散射光的蒙特卡罗估计在所有波长下的方差为零，因此蒙特卡罗误差的唯一来源是颜色匹配函数的积分。每个像素只有一条光线路径，并且每条光线跟踪一个单一波长，因此图像相当嘈杂，如图 <a href="#figure-4-25">4.25</a>(b)所示。直观上，这种情况下的挑战可以理解为渲染器试图在每个像素处估计三个值——红色、绿色和蓝色——而这些值都是基于单一波长的光谱值。</p>
+<p>增加像素样本的数量可以减少这种误差（只要它们采样不同的波长），尽管将多个波长样本与每条光线关联更为有效。光线在场景中传播的路径通常与波长无关，而在多个波长下计算光照的增量成本通常相对于寻找光线交点和计算其他与波长无关的量的成本来说是较小的。（考虑每条光线的多个波长可以视为第 <a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html#225-%E5%88%86%E8%A3%82splitting">2.2.5</a> 节中描述的蒙特卡罗分裂技术的应用。）图 <a href="#figure-4-25">4.25</a>(c)显示了将四个波长与每条光线关联所带来的改进；颜色噪声显著减少。</p>
+<blockquote>
+<p><a name="figure-4-26"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f26.svg" width="784" height="549" style="max-width: 100%;">
+</div>
+<p><strong>图 4.26：</strong>（a）渲染图 <a href="#figure-4-25">4.25</a> 中场景的时间与波长样本数量的关系图，已归一化为渲染一个波长样本的时间。（b）独立样本和分层样本的波长样本数量与均方误差的关系。（c）分层波长样本数量与蒙特卡罗效率的关系。这些结果表明，至少 32 个波长样本是最佳的。</p>
+</blockquote>
+<p>然而，计算从每条光线发出的大量波长的散射会影响效率，因为计算光谱量所需的计算也增加了。为了研究这种权衡，我们使用不同数量的波长样本渲染了图 <a href="#figure-4-25">4.25</a> 中的场景，既包括独立采样的波长，也包括分层采样的波长。（对于两者，波长都是在 360–830 纳米范围内均匀采样的。†（在 <a href="../5_Cameras_and_Film/5_4_Film_and_Imaging.html#542-%E4%BC%A0%E6%84%9F%E5%99%A8%E5%93%8D%E5%BA%94%E5%BB%BA%E6%A8%A1modeling-sensor-response">5.4.2</a> 节，我们会看到对波长进行非均匀采样更好，但此处为了简便仍使用均匀采样。））图 <a href="#figure-4-26">4.26</a> 显示了结果。</p>
+<p>图 <a href="#figure-4-26">4.26</a>(a)显示，对于这个场景，使用 32 个波长样本的渲染所需时间几乎比使用单个波长样本多 1.6 倍。 （独立采样和分层采样的渲染性能实际上是相同的。）然而，如图 <a href="#figure-4-26">4.26</a>(b)所示，更多波长样本的好处是显著的。在那个对数–对数图（log–log plot）中，我们可以看到，使用独立样本时，均方误差以 \( O(1/n) \) 的速率下降，这与方差随着样本增多而下降的速率一致。分层采样表现得非常出色，不仅提供了数量级更低的误差，而且渐进收敛到速率也更快。</p>
+<p>图 <a href="#figure-4-26">4.26</a>(c)绘制了两种方法的蒙特卡罗效率（注意，\( y \) 轴采用对数刻度）。结果似乎很明确；32 个分层波长样本的效率比一个样本高出超过一百万倍，并且曲线尚未平稳。为什么在 32 个样本时停止测量，为什么 <strong>pbrt</strong> 的 <a href="./4_5_Representing_Spectral_Distributions.html#sampledspectrum-%E7%B1%BB"><strong>NSpectrumSamples</strong></a> 参数默认只有四个波长样本？</p>
+<blockquote>
+<p><a name="figure-4-27"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f27.svg" width="784" height="568" style="max-width: 100%;">
+</div>
+<p><strong>图 4.27：</strong>（a）一个更复杂的场景，其中蒙特卡罗估计的方差来自波长采样以外的多种来源。（b）均方误差与分层波长样本数量的图表。额外波长样本的优势在六个样本之后有限。（c）蒙特卡罗效率与分层波长样本数量的关系图，归一化为一个波长样本时的效率。对于这个场景，八个样本是最佳的。</p>
+</blockquote>
+<p>当前设置的主要原因有三个。首先，尽管图 <a href="#figure-4-25">4.26</a>(a)显示从 8 到 32 个波长样本的误差几乎减少了 500 倍，但这两幅图像几乎无法区分——由于显示技术和人类视觉系统的限制，误差的差异是无关紧要的。其次，场景通常是通过每个像素中的多个光线路径进行渲染，以减少其他蒙特卡罗估计带来的误差。随着使用更少波长采集更多像素样本，贡献给每个像素值的波长总数也随之增加。</p>
+<p>最后，也是最重要的，其他来源的蒙特卡罗误差往往对整体误差的贡献大于波长采样。图 <a href="#figure-4-27">4.27</a>(a)展示了一个更复杂的场景，该场景的光照具有挑战性，使用蒙特卡罗进行采样。图 <a href="#figure-4-27">4.27</a>(b)显示了均方误差与波长样本数量的关系图，图 <a href="#figure-4-27">4.27</a>(c)展示了蒙特卡罗效率。显然，在八个波长样本之后，增加更多样本的增量成本并没有带来好处。</p>
+<h2 id="466-从-rgb-到光谱from-rgb-to-spectra"><a class="header" href="#466-从-rgb-到光谱from-rgb-to-spectra">4.6.6 从 RGB 到光谱（From RGB to Spectra）</a></h2>
+<p>虽然将光谱转换为用于图像输出的 RGB 是一个明确规定的操作，但将 RGB 颜色转换为光谱分布则并非如此。这是一个重要的任务，因为渲染器的输入通常以 RGB 颜色的形式存在。目前 3D 建模工具中创作的场景通常使用 RGB 参数和纹理来指定物体的反射属性和光源的发射。在光谱渲染器中，这些 RGB 值必须以某种方式转换为等效的颜色光谱，但不幸的是，由于存在同色异谱现象，任何这样的转换本质上都是模糊的。如果问题定义得如此不清晰，我们又如何期望找到合理的解决方案呢？从另一方面看，这种模糊性也有积极意义：它为包含简单高效技术的可能答案留下了广阔的空间。</p>
+<blockquote>
+<p><a name="figure-4-28"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f28.svg" width="446" height="287" style="max-width: 100%;">
+</div>
+<p><strong>图 4.28：</strong> 几种色彩校正补丁（color checker patches）的光谱反射率。每条曲线用对应的 RGB 颜色进行着色。</p>
+</blockquote>
+<p>使这项任务更加复杂的是，我们必须考虑三种完全不同的光谱分布类型：</p>
+<ul>
+<li><em>光源光谱（Illuminant spectra）</em>，指定了光源发射特征的光谱依赖性。这些光谱是非负且无界的；其形状从平滑（白炽灯光源、LED）到极其尖锐（激光中的受激发射或氙弧灯和荧光灯中的气体放电）不等。</li>
+<li><em>反射光谱（Reflectance spectra）</em>，描述了从吸收表面的反射。反射光谱保持每个波长上的能量守恒，这意味着数值不能超出 \( 0,1[] \) 范围。它们通常在可见波长范围内是平滑的函数。 †（请注意，这一观察并非总是成立：在紫外线和红外线波长范围内，吸收带会导致反射光谱中出现明显的尖峰。此外，诸如虹彩效应等波动光学效应会产生振荡的光谱变化。这些行为可能需要使用专门的转换技术来处理，这超出了本文讨论的简单方法的范围。）（图 <a href="#figure-4-28">4.28</a> 显示了来自色彩校正的几个反射光谱示例。）</li>
+<li><em>无界光谱（Unbounded spectra）</em>，是非负且无界的，但不描述发射。常见的例子包括随光谱变化的折射率和用于描述介质散射特性的系数。</li>
+</ul>
+<p>本节首先提出了一种将 RGB 颜色值（各分量在 0 到 1 之间）转换为相应反射光谱的方法，随后推广到无界光谱和光源光谱。该转换利用了问题的模糊性，来实现以下目标：</p>
+<ul>
+<li><em>一致性（Identity）</em>：如果一个 RGB 值被转换为光谱，那么将该光谱转换回 RGB 应该得到相同的 RGB 系数。</li>
+<li><em>平滑性（Smoothness）</em>：受到关于现实世界反射光谱的早期观察的启发，输出光谱应尽可能平滑。另一种平滑性也很重要：输入 RGB 颜色的微小变化应导致输出光谱相应的小变化。 由于不连续性会在不同光源下观察纹理对象时产生可见的缝隙，因此不连续性不是我们想要的。</li>
+<li><em>能量守恒（Energy conservation）</em>：给定在 \( [0,1] \) 内的 RGB 值，对应的光谱分布也应在 \( [0,1] \) 内。</li>
+</ul>
+<p>尽管现实世界中的反射光谱形状多种多样，但它们通常可以用常量（白色、黑色）、近似线性或具有单峰（绿色、黄色）或双峰（蓝紫色）的峰值曲线来很好地近似。</p>
+<p>这里选择的方法尝试使用一个函数族来表示这些光谱，该函数族旨在简单、平滑，并且在运行时高效评估，同时提供足够的自由度以精确再现任意的 RGB 颜色值。</p>
+<p>多项式通常是此类构造中的标准构件；实际上，二次多项式可以表示常量和线性曲线，以及在波长范围的中间或端点处达到峰值的曲线。然而，它们缺乏能量守恒性，这一问题我们通过使用 sigmoid 函数来解决：</p>
+<p><a name="equation-4-25">(4.25)</a></p>
+<p>\[
+s(x) = \frac{1}{2} + \frac{x}{2\sqrt{1+x^2}}<br />
+\]</p>
+<p>该函数如图 <a href="#figure-4-29">4.29</a> 所示，是严格单调的，并在 \( x \rightarrow \mp \infty \) 时平滑地趋近于端点 \( 0 \) 和 \( 1 \) 。</p>
+<blockquote>
+<p><a name="figure-4-29"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f29.svg" width="418" height="278" style="max-width: 100%;">
+</div>
+<p><strong>图 4.29：S 形曲线（Sigmoid curve）。</strong> 术语 <em>sigmoid</em> 指的是将所有输入映射到一个有限输出区间的光滑 S 形曲线。这里使用的特定类型的 sigmoid 是通过代数函数定义的，从而在运行时实现高效评估。</p>
+</blockquote>
+<p>我们将这个 sigmoid 应用于由三个系数 \( c_i \) 定义的二次多项式，将其定义域压扁到区间 \( [0,1] \) 以确保能量守恒。</p>
+<p><a name="equation-4-26">(4.26)</a></p>
+<p>\[
+S(\lambda) = s(c_0 \lambda^2 + c_1 \lambda + c_2)<br />
+\]</p>
+<p>使用这种表示法来表示理想的吸收和反射光谱（即 \( S(\lambda) = 0 \) 或 \( 1 \) ）有些尴尬，因为多项式必须评估为正无穷或负无穷才能达到这两个极限。这又导致了方程 (<a href="#eqaution-4-25">4.25</a>) 中出现形如 \( \pm \infty / \infty \) 的分数，而在 IEEE-754 算术中，这将计算为一个非数值（NaN）。我们需要单独处理这种极限情况。</p>
+<p>我们首先定义一个类，该类封装系数 \( c_i \) 并评估方程（<a href="#figure-4-26">4.26</a>）。</p>
+<p><a name="RGBSigmoidPolynomial-definition"></a></p>
+<pre><code class="language-cpp">/** RGBSigmoidPolynomial 定义 */
+class RGBSigmoidPolynomial {
+  public:
+    /** RGBSigmoidPolynomial 公有方法 */
+<span class="boring">    RGBSigmoidPolynomial(Float c0, Float c1, Float c2)
+</span><span class="boring">        : c0(c0), c1(c1), c2(c2) {}
+</span><span class="boring">    Float operator()(Float lambda) const {
+</span><span class="boring">        return s(EvaluatePolynomial(lambda, c2, c1, c0));
+</span><span class="boring">    }
+</span><span class="boring">    Float MaxValue() const {
+</span><span class="boring">        Float result = std::max((*this)(360), (*this)(830));
+</span><span class="boring">        Float lambda = -c1 / (2 * c0);
+</span><span class="boring">        if (lambda &gt;= 360 &amp;&amp; lambda &lt;= 830)
+</span><span class="boring">            result = std::max(result, (*this)(lambda));
+</span><span class="boring">        return result;
+</span><span class="boring">    }
+</span><span class="boring">
+</span>  private:
+    /** RGBSigmoidPolynomial 私有方法 */
+<span class="boring">    static Float s(Float x) {
+</span><span class="boring">        if (IsInf(x)) return x &gt; 0 ? 1 : 0;
+</span><span class="boring">        return .5f + x / (2 * std::sqrt(1 + Sqr(x)));
+</span><span class="boring">    };
+</span><span class="boring">
+</span>    /** RGBSigmoidPolynomial 私有成员 */
+<span class="boring">    Float c0, c1, c2;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>它具有预期的构造函数和成员变量。</p>
+<pre><code class="language-cpp">/** RGBSigmoidPolynomial 公有方法 */
+RGBSigmoidPolynomial(Float c0, Float c1, Float c2)
+    : c0(c0), c1(c1), c2(c2) {}
+</code></pre>
+<pre><code class="language-cpp">/** RGBSigmoidPolynomial 私有成员 */
+Float c0, c1, c2;
+</code></pre>
+<p>给定系数值，在指定波长下评估光谱函数是很容易的。</p>
+<pre><code class="language-cpp">/** RGBSigmoidPolynomial 公有方法 */
+Float operator()(Float lambda) const {
+    return s(EvaluatePolynomial(lambda, c2, c1, c0));
+}
+</code></pre>
+<p>sigmoid 函数遵循先前的定义，并添加了一个特殊情况来处理正无穷和负无穷。</p>
+<pre><code class="language-cpp">/** RGBSigmoidPolynomial 私有方法 */
+static Float s(Float x) {
+    if (IsInf(x)) return x &gt; 0 ? 1 : 0;
+    return .5f + x / (2 * std::sqrt(1 + Sqr(x)));
+};
+</code></pre>
+<p><strong>MaxValue()</strong> 方法返回可见波长范围 360–830 nm 内光谱分布的最大值。由于 sigmoid 函数是单调递增的，因此该问题简化为定位方程 (<a href="#equation-4-25">4.25</a>) 中二次多项式的最大值并在该处评估模型。</p>
+<p>通过将多项式的导数设为零并求解波长 <strong>lambda</strong>，我们可以保守地用刚求出的极值来检查区间的端点。如果该值恰好是局部最小值，则将被忽略。</p>
+<pre><code class="language-cpp">/** RGBSigmoidPolynomial 公有方法 */
+Float MaxValue() const {
+    Float result = std::max((*this)(360), (*this)(830));
+    Float lambda = -c1 / (2 * c0);
+    if (lambda &gt;= 360 &amp;&amp; lambda &lt;= 830)
+        result = std::max(result, (*this)(lambda));
+    return result;
+}
+</code></pre>
+<p>我们现在转向 <strong>RGBSigmoidPolynomial</strong> 的后半部分，即为给定 RGB 颜色确定合适系数 \( c_0、c_1、c_2 \) 的计算。这一步依赖于色彩原色（color primaries）的光谱发射曲线，并且通常没有显式解。我们将其表述为一个优化问题，通过计算正向和反向转换后输入和输出 RGB 值之间的差异，最小化往返误差（round-trip error）（即上述提到的 <em>一致性</em> 目标）。精确的优化目标是</p>
+<p>\[
+(c_0^*,c_1^*,c_2^*) = \operatorname*{argmin}_{c_0,c_1,c_2} \left\Vert \begin{bmatrix}
+r \\ g \\ b
+\end{bmatrix} - \int \begin{bmatrix}
+R(\lambda) \\ G(\lambda) \\ B(\lambda)
+\end{bmatrix} S(\lambda,c_0,c_1,c_2)\ W(\lambda)\ \text{d}\lambda\ \right\Vert
+\]</p>
+<p>其中 \( R(\lambda)、G(\lambda)、B(\lambda) \) 描述了色彩原色的发射曲线，\( W(\lambda) \) 代表白点（例如，图 <a href="./4_4_Light_Emission.html#figure-4-14">4.14</a> 中显示的 sRGB 色彩空间中的 D65）。在这个优化问题中包含白点，确保了单色的 RGB 值能够映射到均匀的反射光谱。</p>
+<p>在像 sRGB 这样相对紧凑的色域空间中，无论用什么方法来量化颜色距离，这种优化都可以实现零误差。在更大的色彩空间中，特别是那些包含虚色的色彩空间，如 ACES2065-1，显然无法实现零往返误差，因此范数 \( \Vert\cdot\Vert \) 的选择变得相关。原则上，我们可以简单地使用 2范数（2-norm）——然而，这种基本选择的问题在于它并不是视觉上均匀（perceptually uniform）的：给定量的误差是否可见取决于其在 RGB 立方中的位置。我们改为使用 CIE76 \( \Delta E \)，它首先将两种颜色转换到名为 CIELAB 的色彩空间，然后再评估 \( L_2 \)-距离。</p>
+<p>我们然后使用高斯-牛顿算法求解这个优化问题，这是一种牛顿法的近似形式。这个优化过程大约需要几微秒，如果在每次 RGB 值必须转换为光谱时都要执行（例如，对于高分辨率纹理的每个像素执行一次），将会导致效率低下。</p>
+<p>为了避免这种低效，我们在 <strong>pbrt</strong> 首次编译时预计算了涵盖 \( [0,1]^3 \) RGB 颜色立方的系数表。值得注意的是，原则上也可以在较低维度的二维色度空间中进行表格化：例如，表示最大饱和度颜色红色 \( (1,0,0) \) 的计算光谱可以简单地缩放来再现较少饱和的 RGB 颜色 \( (c,0,0) \)，其中 \( c \in (0,1) \)。然而，饱和度较高的颜色的光谱必须在一个狭小的波长范围内达到峰值以实现这种饱和度，而饱和度较低的颜色可以通过更平滑的光谱来表示。由于在物理现实中遇到的反射光谱的固有平滑性，这通常是可行时的更佳选择。</p>
+<p>因此，我们为 <strong>pbrt</strong> 支持的每个 RGB 色彩空间（目前为 sRGB、DCI-P3、Rec2020 和 ACES2065-1）预先计算了的完整的 3D 表格。此优化步骤的实现包含在文件 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/cmd/rgb2spec_opt.cpp"><strong>cmd/rgb2spec_opt.cpp</strong></a> 中，因此我们在此不详细讨论；有关更多信息，请参见 “<a href="./Further_Reading.html">延伸阅读</a>” 部分。图 <a href="#figure-4-30">4.30</a> 显示了与一些 RGB 值对应的光谱图。</p>
+<blockquote>
+<p><a name="figure-4-30"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f30.svg" width="421" height="295" style="max-width: 100%;">
+</div>
+<p><strong>图 4.30：从 RGB 值计算的光谱。</strong> 由 <a href="#RGBSigmoidPolynomial-definition"><strong>RGBSigmoidPolynomial</strong></a> 表示的 RGB 颜色 \( (0.7,0.5,0.8) \)（紫线）、 \( (0.25,0.44,0.33) \)（绿线）和 \( (0.36,0.275,0.21\)（棕线）的反射光谱图。每条线的用其对应的 RGB 颜色着色。</p>
+</blockquote>
+<p>生成的表格存储在 <strong>pbrt</strong> 二进制文件中。在系统启动时，为每个 RGB 色彩空间创建一个 <strong>RGBToSpectrumTable</strong> 。</p>
+<p><a name="RGBToSpectrumTable-definition"></a></p>
+<pre><code class="language-cpp">/** RGBToSpectrumTable 定义 */
+class RGBToSpectrumTable {
+  public:
+    /** RGBToSpectrumTable 公有常量 */
+<span class="boring">    static constexpr int res = 64;
+</span><span class="boring">    using CoefficientArray = float[3][res][res][res][3];
+</span><span class="boring">
+</span>    /** RGBToSpectrumTable 公有方法 */
+<span class="boring">    RGBToSpectrumTable(const float *zNodes, const CoefficientArray *coeffs)
+</span><span class="boring">        : zNodes(zNodes), coeffs(coeffs) { }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGBSigmoidPolynomial operator()(RGB rgb) const;
+</span><span class="boring">    
+</span><span class="boring">    static void Init(Allocator alloc);
+</span><span class="boring">    
+</span><span class="boring">    static const RGBToSpectrumTable *sRGB;
+</span><span class="boring">    static const RGBToSpectrumTable *DCI_P3;
+</span><span class="boring">    static const RGBToSpectrumTable *Rec2020;
+</span><span class="boring">    static const RGBToSpectrumTable *ACES2065_1;
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>  private:
+    /** RGBToSpectrumTable 私有成员 */
+<span class="boring">    const float *zNodes;
+</span><span class="boring">    const CoefficientArray *coeffs;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p><strong>RGBToSpectrumTable</strong> 的主要方法返回与给定 RGB 颜色对应的 <a href="#RGBSigmoidPolynomial-definition"><strong>RGBSigmoidPolynomial</strong></a>。</p>
+<pre><code class="language-cpp">/** RGBToSpectrumTable 方法定义 */
+RGBSigmoidPolynomial RGBToSpectrumTable::operator()(RGB rgb) const {
+    /** 处理统一的 rgb 值 */
+<span class="boring">    if (rgb[0] == rgb[1] &amp;&amp; rgb[1] == rgb[2])
+</span><span class="boring">        return RGBSigmoidPolynomial(
+</span><span class="boring">            0, 0, (rgb[0] - .5f) / std::sqrt(rgb[0] * (1 - rgb[0])));
+</span><span class="boring">
+</span>    /** 求出最大的分量并计算重新映射的分量值 */
+<span class="boring">    int maxc = (rgb[0] &gt; rgb[1]) ? ((rgb[0] &gt; rgb[2]) ? 0 : 2) :
+</span><span class="boring">                                ((rgb[1] &gt; rgb[2]) ? 1 : 2);
+</span><span class="boring">    float z = rgb[maxc];
+</span><span class="boring">    float x = rgb[(maxc + 1) % 3] * (res - 1) / z;
+</span><span class="boring">    float y = rgb[(maxc + 2) % 3] * (res - 1) / z;
+</span><span class="boring">
+</span>    /** 计算系数插值的整数索引和偏移量 */
+<span class="boring">    int xi = std::min((int)x, res - 2), yi = std::min((int)y, res - 2),
+</span><span class="boring">        zi = FindInterval(res, [&amp;](int i) { return zNodes[i] &lt; z; });
+</span><span class="boring">    Float dx = x - xi, dy = y - yi,
+</span><span class="boring">          dz = (z - zNodes[zi]) / (zNodes[zi + 1] - zNodes[zi]);
+</span><span class="boring">
+</span>    /** 三线性插值 sigmoid 多项式系数 c */
+<span class="boring">    pstd::array&lt;Float, 3&gt; c;
+</span><span class="boring">    for (int i = 0; i &lt; 3; ++i) {
+</span><span class="boring">        /** 定义查找 sigmoid 多项式系数的 co lambda函数 */
+</span><span class="boring">        auto co = [&amp;](int dx, int dy, int dz) {
+</span><span class="boring">            return (*coeffs)[maxc][zi + dz][yi + dy][xi + dx][i];
+</span><span class="boring">        };
+</span><span class="boring">        c[i] = Lerp(dz, Lerp(dy, Lerp(dx, co(0, 0, 0), co(1, 0, 0)),
+</span><span class="boring">                                Lerp(dx, co(0, 1, 0), co(1, 1, 0))),
+</span><span class="boring">                        Lerp(dy, Lerp(dx, co(0, 0, 1), co(1, 0, 1)),
+</span><span class="boring">                                Lerp(dx, co(0, 1, 1), co(1, 1, 1))));
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    return RGBSigmoidPolynomial(c[0], c[1], c[2]);
+}
+</code></pre>
+<p>如果三个 RGB 值相等，则确保返回的光谱完全恒定是有用的。（在某些情况下，如果使用系数表中的插值值，可能会出现轻微的颜色偏移。）如果方程（<a href="#equation-4-26">4.26</a>）中 \( c_0 = c_1 = 0 \) ，并通过反转 sigmoid 函数求出适当的 \( c_2 \) 值，就会得到一个恒定的光谱。</p>
+<pre><code class="language-cpp">/** 处理统一的 rgb 值 */
+if (rgb[0] == rgb[1] &amp;&amp; rgb[1] == rgb[2])
+    return RGBSigmoidPolynomial(
+        0, 0, (rgb[0] - .5f) / std::sqrt(rgb[0] * (1 - rgb[0])));
+</code></pre>
+<blockquote>
+<p><a name="figure-4-31"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f31.svg" width="927" height="775" style="max-width: 100%;">
+</div>
+<p><strong>图 4.31：光谱多项式系数 \( c_i \) 的图。</strong> 该图显示了在 sRGB 色彩空间中 \( xy \) 色度对应的多项式系数。 (a) \( c_0 \)、(b) \( c_1 \) 和 (c) \( c_2 \) 的变化大致平滑，尽管它们表现出急剧的过渡。 (d) 根据红色、绿色或蓝色的最大幅度对色域进行划分，与这些过渡密切相关；因此，这三个区域的系数被独立地制成表格。</p>
+</blockquote>
+<p>优化得到的系数 \( c_i \) 通常是平滑变化的；RGB 的微小变化通常会导致其值的微小变化。（这一特性对于 <em>平滑性</em> 目标也非常有帮助。）然而，在 RGB 空间中有一些区域，其变化较快，这使得在这些区域直接进行三维表格化容易出错——见图 <a href="#figure-4-31">4.31</a>(a)、(b)和(c)。一种更好的方法是根据红、绿、蓝 RGB 系数中哪个具有最大幅度，独立地进行表格化。这种划分很好地匹配了系数的不连续性，如图 <a href="#figure-4-31">4.31</a>(d)所示。</p>
+<p>在三个分区中的每一个分区内都存在一个三维表格化问题。我们将使用红色分量 \( r \) 具有最大幅度的分区来解释表格是如何索引的。对于给定的 \( (r,g,b) \)，第一步是计算一个重新归一化的坐标</p>
+<p>\[
+(x,y,z) = \left( \frac{g}{r}, \frac{b}{r}, r \right)<br />
+\]</p>
+<p>（根据惯例，最大的分量总是映射到 \( z \)。）如果 \( g \) 或 \( b \) 是最大值，则应用类似的重新映射。通过这种映射，所有三个坐标覆盖范围 \( [0,1] \)，这使得在固定网格中更好地利用样本成为可能。</p>
+<pre><code class="language-cpp">/** 求出最大的分量并计算重新映射的分量值 */
+int maxc = (rgb[0] &gt; rgb[1]) ? ((rgb[0] &gt; rgb[2]) ? 0 : 2) :
+                               ((rgb[1] &gt; rgb[2]) ? 1 : 2);
+float z = rgb[maxc];
+float x = rgb[(maxc + 1) % 3] * (res - 1) / z;
+float y = rgb[(maxc + 2) % 3] * (res - 1) / z;
+</code></pre>
+<p>表格化的分辨率 <strong>res</strong> 在三个维度中是相同的。由于在这里它被设置为编译时常量，因此更改表的大小将需要重新编译 <strong>pbrt</strong>。</p>
+<pre><code class="language-cpp">/** RGBToSpectrumTable 公有常量 */
+static constexpr int res = 64;
+</code></pre>
+<p>在系数表中，\( x \) 和 \( y \) 坐标使用等间距离散化（equally spaced discretization），而 \( z \) 则通过非线性函数重新映射，该函数在 0 和 1 附近分配更多样本。 \( c_i \) 系数在该区域变化最快，因此这种重新映射更有效地分配了样本。</p>
+<p><strong>zNodes</strong> 数组（包含 <strong>res</strong> 个元素）存储重映射的结果，其中如果 \( f \) 是重映射函数，则 zNodes 的第 \( i \) 个元素存储 \( f(i/\text{res}) \)。</p>
+<pre><code class="language-cpp">/** RGBToSpectrumTable 私有成员 */
+const float *zNodes;
+</code></pre>
+<p>在表中求出整数坐标对于给定等间距离散化的 \( x \) 和 \( y \) 来说很简单。对于 \( z \)，需要通过 <strong>zNodes</strong> 进行二分查找。给定这些坐标后，随后求出它们的浮点偏移量以用于插值。</p>
+<pre><code class="language-cpp">/** 计算系数插值的整数索引和偏移量 */
+int xi = std::min((int)x, res - 2), yi = std::min((int)y, res - 2),
+    zi = FindInterval(res, [&amp;](int i) { return zNodes[i] &lt; z; });
+Float dx = x - xi, dy = y - yi,
+      dz = (z - zNodes[zi]) / (zNodes[zi + 1] - zNodes[zi]);
+</code></pre>
+<p>我们现在可以实现一个片段，该片段在围绕 \( (x,y,z) \) 查找点的八个系数之间进行三线性插值。系数表的索引细节由 <strong>co</strong> lambda 函数处理，我们将在描述内存中表的布局后定义该函数。请注意，尽管 \( z \) 坐标应用了非线性映射，但我们仍然在 \( z \) 中对系数样本进行线性插值。实际上，这样做的误差是最小的。</p>
+<pre><code class="language-cpp">/** 三线性插值 sigmoid 多项式系数 c */
+pstd::array&lt;Float, 3&gt; c;
+for (int i = 0; i &lt; 3; ++i) {
+    /** 定义查找 sigmoid 多项式系数的 co lambda函数 */
+<span class="boring">    auto co = [&amp;](int dx, int dy, int dz) {
+</span><span class="boring">        return (*coeffs)[maxc][zi + dz][yi + dy][xi + dx][i];
+</span><span class="boring">    };
+</span><span class="boring">    
+</span>    c[i] = Lerp(dz, Lerp(dy, Lerp(dx, co(0, 0, 0), co(1, 0, 0)),
+                             Lerp(dx, co(0, 1, 0), co(1, 1, 0))),
+                    Lerp(dy, Lerp(dx, co(0, 0, 1), co(1, 0, 1)),
+                             Lerp(dx, co(0, 1, 1), co(1, 1, 1))));
+}
+</code></pre>
+<p>系数存储在一个五维数组中。第一维对应于 \( r \)、 \( g \) 或 \( b \) 的最大幅度，接下来的三维分别对应于 \( z \)、 \( y \) 和 \( x \)。最后一维则是关于三个系数 \( c_i \) 。</p>
+<pre><code class="language-cpp">/** RGBToSpectrumTable 公有常量 */
+using CoefficientArray = float[3][res][res][res][3];
+</code></pre>
+<pre><code class="language-cpp">/** RGBToSpectrumTable 私有成员 */
+const CoefficientArray *coeffs;
+</code></pre>
+<p>系数查找的 lambda 函数现在只需为数组的每个维度使用正确的值即可。在这样做时，提供的整数增量被应用于 \( x \)、 \( y \) 和 \( z \) 。</p>
+<pre><code class="language-cpp">/** 定义查找 sigmoid 多项式系数的 co lambda函数 */
+auto co = [&amp;](int dx, int dy, int dz) {
+    return (*coeffs)[maxc][zi + dz][yi + dy][xi + dx][i];
+};
+</code></pre>
+<p>随着 <strong>RGBSigmoidPolynomial</strong> 的实现完成，我们现在可以向 <a href="#RGBColorSpace-definition"><strong>RGBColorSpace</strong></a> 添加一个方法，将其色彩空间中的 RGB 转换为 <a href="#RGBSigmoidPolynomial-definition"><strong>RGBSigmoidPolynomial</strong></a> 。</p>
+<pre><code class="language-cpp">/** RGBColorSpace 方法定义 */
+RGBSigmoidPolynomial RGBColorSpace::ToRGBCoeffs(RGB rgb) const {
+    return (*rgbToSpectrumTable)(ClampZero(rgb));
+}
+</code></pre>
+<p>凭借这些能力，我们现在可以定义 <strong>RGBAlbedoSpectrum</strong> 类，该类实现 <a href="./4_5_Representing_Spectral_Distributions.html#Spectrum-definition"><strong>Spectrum</strong></a> 接口，以根据 sigmoid-多项式模型返回光谱样本。</p>
+<p><a name="RGBAlbedoSpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class RGBAlbedoSpectrum {
+  public:
+    /** RGBAlbedoSpectrum 公有方法 */
+<span class="boring">    Float operator()(Float lambda) const { return rsp(lambda); }
+</span><span class="boring">    Float MaxValue() const { return rsp.MaxValue(); }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGBAlbedoSpectrum(const RGBColorSpace &amp;cs, RGB rgb);
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const {
+</span><span class="boring">        SampledSpectrum s;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            s[i] = rsp(lambda[i]);
+</span><span class="boring">        return s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>  private:
+    /** RGBAlbedoSpectrum 私有成员 */
+<span class="boring">    RGBSigmoidPolynomial rsp;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>构造函数中的运行时断言（此处未显示）验证提供的 RGB 值在 0 和 1 之间。</p>
+<pre><code class="language-cpp">/** Spectrum 方法定义 */
+RGBAlbedoSpectrum::RGBAlbedoSpectrum(const RGBColorSpace &amp;cs, RGB rgb) {
+    rsp = cs.ToRGBCoeffs(rgb);
+}
+</code></pre>
+<p>唯一必要的成员变量是一个用于存储多项式系数的变量。</p>
+<pre><code class="language-cpp">/** RGBAlbedoSpectrum 私有成员 */
+RGBSigmoidPolynomial rsp;
+</code></pre>
+<p>所需的 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 方法的实现是将请求转发到适当的 <a href="#RGBSigmoidPolynomial-definition"><strong>RGBSigmoidPolynomial</strong></a> 方法。与大多数 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 实现一样，我们在这里不包括 <strong>Sample()</strong> 方法，因为它只是遍历波长并在每个波长上评估方程（<a href="#equation-4-26">4.26</a>）。</p>
+<pre><code class="language-cpp">/** RGBAlbedoSpectrum 公有方法 */
+Float operator()(Float lambda) const { return rsp(lambda); }
+Float MaxValue() const { return rsp.MaxValue(); }
+</code></pre>
+<h3 id="无界-rgbunbounded-rgb"><a class="header" href="#无界-rgbunbounded-rgb">无界 RGB（Unbounded RGB）</a></h3>
+<p>对于无界（正值）RGB 值，<a href="#RGBSigmoidPolynomial-definition"><strong>RGBSigmoidPolynomial</strong></a> 基础仍然可以使用——只需添加一个缩放因子，将其范围重新映射到给定 RGB 所需的范围。该方法在 <strong>RGBUnboundedSpectrum</strong> 类中实现。</p>
+<p><a name="RGBUnboundedSpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class RGBUnboundedSpectrum {
+  public:
+    /** RGBUnboundedSpectrum 公有方法 */
+<span class="boring">    Float operator()(Float lambda) const { return scale * rsp(lambda); }
+</span><span class="boring">    Float MaxValue() const { return scale * rsp.MaxValue(); }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGBUnboundedSpectrum(const RGBColorSpace &amp;cs, RGB rgb);
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGBUnboundedSpectrum()
+</span><span class="boring">        : rsp(0, 0, 0), scale(0) {}
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const {
+</span><span class="boring">        SampledSpectrum s;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            s[i] = scale * rsp(lambda[i]);
+</span><span class="boring">        return s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>  private:
+    /** RGBUnboundedSpectrum 私有成员 */
+<span class="boring">    Float scale = 1;
+</span><span class="boring">    RGBSigmoidPolynomial rsp;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>缩放因子的自然选择是超过红、绿、蓝颜色分量最大值的数。然后，我们将使用它来归一化 RGB 值，然后找到多项式系数，并相应地重新缩放 <a href="#RGBSigmoidPolynomial-definition"><strong>RGBSigmoidPolynomial</strong></a> 返回的值。然而，通过将 RGB 归一化到最大值为 \( 1/2 \) 而不是 1，可能会获得更好的结果。原因在图 <a href="#figure-4-32">4.32</a> 中说明：由于反射光谱不得超过 1，当提供高度饱和的颜色时，结果光谱可能会出现不寻常的特征，包括光谱中非饱和区域的大幅度。重新缩放到 \( 1/2 \) 为拟合提供了更多的空间，因为归一化约束不会立即影响它。</p>
+<blockquote>
+<p><a name="figure-4-32"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f32.svg" width="637" height="295" style="max-width: 100%;">
+</div>
+<p><strong>图 4.32：</strong> 使用 sigmoid 多项式表示，高饱和度颜色在其光谱中可能会出现意想不到的特征。这里我们绘制了 <a href="#RGBAlbedoSpectrum-definitino"><strong>RGBAlbedoSpectrum</strong></a> 对 RGB 颜色 \( (0.95,0.05,0.025) \) 返回的光谱，以及该颜色的所有分量除以二后的光谱。对于原始颜色，我们看到很大一部分范围的较高波长接近 1，而较低波长的能量则高于预期。如果该颜色除以二，得到的光谱表现得更为良好，但请注意，在较高波长处，其幅度超过了原始红色值 \( 0.475 \)。</p>
+</blockquote>
+<pre><code class="language-cpp">/** Spectrum 方法定义 */
+RGBUnboundedSpectrum::RGBUnboundedSpectrum(const RGBColorSpace &amp;cs,
+                                           RGB rgb) {
+    Float m = std::max({rgb.r, rgb.g, rgb.b});
+    scale = 2 * m;
+    rsp = cs.ToRGBCoeffs(scale ? rgb / scale : RGB(0, 0, 0));
+}
+</code></pre>
+<pre><code class="language-cpp">/** RGBUnboundedSpectrum 私有成员 */
+Float scale = 1;
+RGBSigmoidPolynomial rsp;
+</code></pre>
+<p>与 <a href="#RGBAlbedoSpectrum-definitino"><strong>RGBAlbedoSpectrum</strong></a> 实现相比，这里的波长评估和 <strong>MaxValue()</strong> 方法仅增加了乘以缩放因子。 <strong>Sample()</strong> 方法也进行了类似的更新，但未在此处包含。</p>
+<pre><code class="language-cpp">/** RGBUnboundedSpectrum 公有方法 */
+Float operator()(Float lambda) const { return scale * rsp(lambda); }
+Float MaxValue() const { return scale * rsp.MaxValue(); }
+</code></pre>
+<h3 id="rgb-光源rgb-illuminants"><a class="header" href="#rgb-光源rgb-illuminants">RGB 光源（RGB Illuminants）</a></h3>
+<p>如第 <a href="./4_4_Light_Emission.html#442-%E6%A0%87%E5%87%86%E5%85%89%E6%BA%90standard-illuminants">4.4.2</a> 节中光源光谱的图示所示，现实世界中的光源通常具有复杂的光谱分布。给定使用 RGB 颜色指定的光源，我们不尝试推断复杂的光谱分布，而是将保持平滑的光谱，并进行适当的缩放。具体细节由 <strong>RGBIlluminantSpectrum</strong> 类处理。</p>
+<p><a name="RGBIlluminantSpectrum"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class RGBIlluminantSpectrum {
+  public:
+    /** RGBIlluminantSpectrum 公有方法 */
+<span class="boring">    RGBIlluminantSpectrum() = default;
+</span><span class="boring">    RGBIlluminantSpectrum(const RGBColorSpace &amp;cs, RGB rgb);
+</span><span class="boring">    Float operator()(Float lambda) const {
+</span><span class="boring">        if (!illuminant) return 0;
+</span><span class="boring">        return scale * rsp(lambda) * (*illuminant)(lambda);
+</span><span class="boring">    }
+</span><span class="boring">    Float MaxValue() const {
+</span><span class="boring">        if (!illuminant) return 0;
+</span><span class="boring">        return scale * rsp.MaxValue() * illuminant-&gt;MaxValue();
+</span><span class="boring">    }
+</span><span class="boring">    const DenselySampledSpectrum *Illuminant() const {
+</span><span class="boring">        return illuminant;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const {
+</span><span class="boring">        if (!illuminant) return SampledSpectrum(0);
+</span><span class="boring">        SampledSpectrum s;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            s[i] = scale * rsp(lambda[i]);
+</span><span class="boring">        return s * illuminant-&gt;Sample(lambda);
+</span><span class="boring">    }
+</span><span class="boring">    
+</span>    std::string ToString() const;
+
+  private:
+    /** RGBIlluminantSpectrum 私有成员 */
+<span class="boring">    Float scale;
+</span><span class="boring">    RGBSigmoidPolynomial rsp;
+</span><span class="boring">    const DenselySampledSpectrum *illuminant;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>除了与 <a href="#RGBUnboundedSpectrum-definition"><strong>RGBUnboundedSpectrum</strong></a> 中相同的用来允许任意最大 RGB 值的缩放因子， <strong>RGBIlluminantSpectrum</strong> 还将给定波长返回的值乘以该波长下色彩空间标准光源的值。光源的光谱建模的一个非直观方面是，均匀光谱通常在转换为 RGB 后并不映射到中性白色。色彩空间总是假设观察者适应某种环境光照，这会影响颜色感知和中性色的概念。例如，常用的 D65 白点是典型的日光照明条件下的平均值。因此，为了重现具有所需颜色的光源，我们使用一种粗略但有效的解决方案，即将白点与合适的反射光谱相乘。从概念上讲，这类似于通过彩色胶片观察白色参考光源。它还确保被白光照亮的白色物体在渲染图像中产生白色像素值。</p>
+<pre><code class="language-cpp">/** Spectrum 方法定义 */
+RGBIlluminantSpectrum::RGBIlluminantSpectrum(const RGBColorSpace &amp;cs,
+                                             RGB rgb)
+    : illuminant(&amp;cs.illuminant) {
+    Float m = std::max({rgb.r, rgb.g, rgb.b});
+    scale = 2 * m;
+    rsp = cs.ToRGBCoeffs(scale ? rgb / scale : RGB(0, 0, 0));
+}
+</code></pre>
+<p>因此，一个指向光源的指针被保存在成员变量中。</p>
+<pre><code class="language-cpp">/** RGBIlluminantSpectrum 私有成员 */
+Float scale;
+RGBSigmoidPolynomial rsp;
+const DenselySampledSpectrum *illuminant;
+</code></pre>
+<p>各种 <a href="./4_5_Representing_Spectral_Distributions.html#Spectrum-definition"><strong>Spectrum</strong></a> 接口方法的实现如下；这里是评估单个波长下光谱分布的方法。有一个细节是，我们必须处理 <strong>nullptr illuminant</strong> 的情况，这会发生在 <strong>RGBIlluminantSpectrum</strong> 被默认初始化的时候。在这种情况下，结果应该是一个零值光谱。</p>
+<pre><code class="language-cpp">/** RGBIlluminantSpectrum 公有方法 */
+Float operator()(Float lambda) const {
+    if (!illuminant) return 0;
+    return scale * rsp(lambda) * (*illuminant)(lambda);
+}
+</code></pre>
+<p>我们在这里不包括 <strong>Sample()</strong> 或 <strong>MaxValue()</strong> 方法的实现，因为它们的实现与预期相同。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/Further_Reading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/Further_Reading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

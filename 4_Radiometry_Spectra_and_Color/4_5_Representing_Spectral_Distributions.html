@@ -1,0 +1,941 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>光谱分布的表示 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html"><strong aria-hidden="true">4.2.</strong> 使用辐射度量积分</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html"><strong aria-hidden="true">4.3.</strong> 表面反射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html"><strong aria-hidden="true">4.4.</strong> 光的发射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html" class="active"><strong aria-hidden="true">4.5.</strong> 光谱分布的表示</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_6_Color.html"><strong aria-hidden="true">4.6.</strong> 色彩</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Further_Reading.html"><strong aria-hidden="true">4.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Exercises.html"><strong aria-hidden="true">4.8.</strong> 练习</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="45-光谱分布的表示representing-spectral-distributions"><a class="header" href="#45-光谱分布的表示representing-spectral-distributions">4.5 光谱分布的表示（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Representing_Spectral_Distributions">Representing Spectral Distributions</a>）</a></h1>
+<blockquote>
+<p><a name="figure-4-16"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f16.svg" width="446" height="302" style="max-width: 100%;">
+</div>
+<p>图 4.16：柠檬皮反射的光谱分布。</p>
+</blockquote>
+<p>现实世界中的光谱分布非常复杂；我们已经见过了多种复杂的发射光谱，图 <a href="#figure-4-16">4.16</a> 展示了柠檬皮反射率（reflectance）的光谱分布图。为了渲染包含多种复杂光谱的场景图像，渲染器必须具备高效且准确的光谱分布表示。本节将介绍 <strong>pbrt</strong> 用于表示和进行计算的抽象；相应的代码可以在文件 <a href="https://github.com/mmp/pbrt-v4/blob/master/src/pbrt/util/spectrum.h"><strong>util/spectrum.h</strong></a> 和 <a href="https://github.com/mmp/pbrt-v4/tree/master/src/pbrt/util/spectrum.cpp"><strong>util/spectrum.cpp</strong></a> 中找到。</p>
+<p>我们首先定义可见波长的范围的常量。在这里以及在 <strong>pbrt</strong> 其余的光谱代码中，波长均以纳米（nm）为单位表示，这一量级使得可见波长的值易于人类阅读。</p>
+<pre><code class="language-cpp">/** Spectrum 常量 */
+constexpr Float Lambda_min = 360, Lambda_max = 830;
+</code></pre>
+<h2 id="451-光谱接口spectrum-interface"><a class="header" href="#451-光谱接口spectrum-interface">4.5.1 光谱接口（Spectrum Interface）</a></h2>
+<p>我们将找到多种对于 <strong>pbrt</strong> 有用的光谱表示，范围包括从按波长列出光谱样本值到黑体函数等功能描述。这引出了我们的第一个接口类 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 。一个 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 对应于一个指向实现了这样的光谱表示的类的指针。</p>
+<p><strong>Spectrum</strong> 继承自 <a href="../B_Utilities/B_4_Containers_and_Memory_Management.html#TaggedPointer-definition"><strong>TaggedPointer</strong></a> ，该类处理运行时多态性（polymorphism）的细节。 <a href="../B_Utilities/B_4_Containers_and_Memory_Management.html#TaggedPointer-definition"><strong>TaggedPointer</strong></a> 要求所有 <strong>Spectrum</strong> 实现的类型作为模板参数提供，这使得它能够为每种类型关联一个唯一的整数标识符。（有关其实现的详细信息，请参见 <a href="../B_Utilities/B_4_Containers_and_Memory_Management.html#b44-%E6%A0%87%E8%AE%B0%E6%8C%87%E9%92%88tagged-pointers">B.4.4</a> 节。）</p>
+<p><a name="Spectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class Spectrum
+    : public TaggedPointer&lt;ConstantSpectrum, DenselySampledSpectrum,
+                           PiecewiseLinearSpectrum, RGBAlbedoSpectrum,
+                           RGBUnboundedSpectrum, RGBIlluminantSpectrum,
+                           BlackbodySpectrum&gt; {
+  public:
+    /** Spectrum 接口 */
+<span class="boring">    using TaggedPointer::TaggedPointer;
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    Float operator()(Float lambda) const;
+</span><span class="boring">    Float MaxValue() const;
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>与其他基于 <a href="../B_Utilities/B_4_Containers_and_Memory_Management.html#TaggedPointer-definition"><strong>TaggedPointer</strong></a> 的类一样，<strong>Spectrum</strong> 定义了一个接口，所有光谱表示都必须实现该接口。在 C++ 中，通常的做法是通过 <strong>Spectrum</strong> 中的纯虚方法来指定这样的接口，并且 <strong>Spectrum</strong> 的实现从 <strong>Spectrum</strong> 继承并实现这些方法。使用 <strong>TaggedPointer</strong> 方法时，接口是隐式指定的：对于接口中的每个方法，<strong>Spectrum</strong> 中有一个方法派发调用到适当类型的实现。我们将在这里讨论其中一个方法的运作细节，并省略其他 <strong>Spectrum</strong> 方法和其他接口类的细节，因为它们都遵循相同的模板。</p>
+<p><a href="#Spectrum-definition"><strong>Spectrum</strong></a> 定义的最重要的方法是 <strong>operator()</strong> ，该方法接收一个波长 \( \lambda \) 作为参数并返回该波长的光谱分布。</p>
+<pre><code class="language-cpp">/** Spectrum 接口 */
+Float operator()(Float lambda) const;
+</code></pre>
+<p>相应的方法实现简洁但信息量大。对 <a href="../B_Utilities/B_4_Containers_and_Memory_Management.html#TaggedPointer::Dispatch"><strong>TaggedPointer::Dispatch()</strong></a> 的调用开始了派发方法调用的过程。 <a href="../B_Utilities/B_4_Containers_and_Memory_Management.html#TaggedPointer-definition"><strong>TaggedPointer</strong></a> 类存储了一个对象指针，该指针带有编码其类型的整数标签；反过来，<strong>Dispatch()</strong> 能够在运行时确定指针的具体类型。然后，它调用提供给它的回调函数并传入对象的指针（指针被转换为其实际类型的指针）。</p>
+<p>在这里被调用的 lambda 函数 <strong>op</strong> 接受一个带有 <strong>auto</strong> 类型说明符的指针作为参数。在 C++17 中，这样的 lambda 函数相当于一个模板函数；用具体类型调用它相当于实例化一个使用该类型的 lambda。因此，lambda 函数内调用的 *<em>(<em>ptr)(lambda)</em></em> 最终成为对适当方法的直接调用。</p>
+<p><a name="Spectrum::operator"></a></p>
+<pre><code class="language-cpp">/** Spectrum 内联方法定义 */
+inline Float Spectrum::operator()(Float lambda) const {
+    auto op = [&amp;](auto ptr) { return (*ptr)(lambda); };
+    return Dispatch(op);
+}
+</code></pre>
+<p><strong>Spectrum</strong> 实现还必须提供一个 <strong>MaxValue()</strong> 方法，该方法返回其波长范围内光谱分布的最大值的界限。该方法在 <strong>pbrt</strong> 中的主要用途是计算光源发出的功率的界限，以便根据它们对场景照明的期望贡献对光源进行采样。</p>
+<pre><code class="language-cpp">/** Spectrum 接口 */
+Float MaxValue() const;
+</code></pre>
+<h2 id="452-一般光谱分布general-spectral-distributions"><a class="header" href="#452-一般光谱分布general-spectral-distributions">4.5.2 一般光谱分布（General Spectral Distributions）</a></h2>
+<p>定义了 <strong>Spectrum</strong> 接口之后，我们将开始实现几个具体的 <strong>Spectrum</strong> 类，这些实现显式地表格化光谱分布函数的值。 <a href="#ConstantSpectrum-definition"><strong>ConstantSpectrum</strong></a> 是最简单的：它表示在所有波长上恒定的光谱分布。 <a href="#ConstantSpectrum-definition"><strong>ConstantSpectrum</strong></a> 类在 <strong>pbrt</strong> 中的最常见用途是在某种特定形式的散射不存在的情况下定义零值光谱分布。</p>
+<p><strong>ConstantSpectrum</strong> 的实现是简单直接的，我们在这里省略其不重要的的 <strong>MaxValue()</strong> 方法。请注意，它并不继承自 <a href="#Spectrum-definition"><strong>Spectrum</strong></a>。这是与使用带有虚函数的传统 C++ 抽象基类的另一个不同之处——就 C++ 类型系统而言，<a href="#ConstantSpectrum-definition"><strong>ConstantSpectrum</strong></a> 和 <strong>Spectrum</strong> 之间没有显式的联系。</p>
+<p><a name="ConstantSpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class ConstantSpectrum {
+  public:
+    ConstantSpectrum(Float c) : c(c) {}
+    Float operator()(Float lambda) const { return c; }
+  private:
+    Float c;
+};
+</code></pre>
+<p><strong>DenselySampledSpectrum</strong> 的表现力更强，它存储了在给定整数波长范围内以 1 nm 间隔采样的光谱分布 \( [\lambda_\min,\lambda_\max] \)。</p>
+<p><a name="DenselySampledSpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class DenselySampledSpectrum {
+  public:
+    /** DenselySampledSpectrum 公有方法 */
+<span class="boring">    DenselySampledSpectrum(int lambda_min = Lambda_min, int lambda_max = Lambda_max,
+</span><span class="boring">                             Allocator alloc = {})
+</span><span class="boring">        : lambda_min(lambda_min),
+</span><span class="boring">            lambda_max(lambda_max),
+</span><span class="boring">            values(lambda_max - lambda_min + 1, alloc) {}
+</span><span class="boring">    DenselySampledSpectrum(Spectrum s, Allocator alloc)
+</span><span class="boring">        : DenselySampledSpectrum(s, Lambda_min, Lambda_max, alloc) {}
+</span><span class="boring">    DenselySampledSpectrum(const DenselySampledSpectrum &amp;s, Allocator alloc)
+</span><span class="boring">        : lambda_min(s.lambda_min),
+</span><span class="boring">            lambda_max(s.lambda_max),
+</span><span class="boring">            values(s.values.begin(), s.values.end(), alloc) {}
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const {
+</span><span class="boring">        SampledSpectrum s;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i) {
+</span><span class="boring">            int offset = std::lround(lambda[i]) - lambda_min;
+</span><span class="boring">            if (offset &lt; 0 || offset &gt;= values.size())
+</span><span class="boring">                s[i] = 0;
+</span><span class="boring">            else
+</span><span class="boring">                s[i] = values[offset];
+</span><span class="boring">        }
+</span><span class="boring">        return s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    void Scale(Float s) {
+</span><span class="boring">        for (Float &amp;v : values)
+</span><span class="boring">            v *= s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float MaxValue() const { return *std::max_element(values.begin(), values.end()); }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    DenselySampledSpectrum(Spectrum spec, int lambda_min = Lambda_min,
+</span><span class="boring">                            int lambda_max = Lambda_max, Allocator alloc = {})
+</span><span class="boring">        : lambda_min(lambda_min), lambda_max(lambda_max),
+</span><span class="boring">            values(lambda_max - lambda_min + 1, alloc) {
+</span><span class="boring">        if (spec)
+</span><span class="boring">            for (int lambda = lambda_min; lambda &lt;= lambda_max; ++lambda)
+</span><span class="boring">                values[lambda - lambda_min] = spec(lambda);
+</span><span class="boring">    }
+</span><span class="boring">    template &lt;typename F&gt;
+</span><span class="boring">    static DenselySampledSpectrum SampleFunction(
+</span><span class="boring">            F func, int lambda_min = Lambda_min, int lambda_max = Lambda_max,
+</span><span class="boring">            Allocator alloc = {}) {
+</span><span class="boring">        DenselySampledSpectrum s(lambda_min, lambda_max, alloc);
+</span><span class="boring">        for (int lambda = lambda_min; lambda &lt;= lambda_max; ++lambda)
+</span><span class="boring">            s.values[lambda - lambda_min] = func(lambda);
+</span><span class="boring">        return s;
+</span><span class="boring">    }
+</span><span class="boring">    Float operator()(Float lambda) const {
+</span><span class="boring">        int offset = std::lround(lambda) - lambda_min;
+</span><span class="boring">        if (offset &lt; 0 || offset &gt;= values.size()) return 0;
+</span><span class="boring">        return values[offset];
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator==(const DenselySampledSpectrum &amp;d) const {
+</span><span class="boring">        if (lambda_min != d.lambda_min || lambda_max != d.lambda_max ||
+</span><span class="boring">            values.size() != d.values.size())
+</span><span class="boring">            return false;
+</span><span class="boring">        for (size_t i = 0; i &lt; values.size(); ++i)
+</span><span class="boring">            if (values[i] != d.values[i])
+</span><span class="boring">                return false;
+</span><span class="boring">        return true;
+</span><span class="boring">    }
+</span><span class="boring">
+</span>  private:
+    /** DenselySampledSpectrum 私有成员 */
+<span class="boring">    int lambda_min, lambda_max;
+</span><span class="boring">    pstd::vector&lt;Float&gt; values;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>它的构造函数接受另一个 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 并在范围内的每个波长上评估该光谱分布。 <strong>DenselySampledSpectrum</strong> 在提供的光谱分布计算开销较大时非常有用，因为它允许通过从内存中读取单个值来完成后续评估。</p>
+<pre><code class="language-cpp">/** DenselySampledSpectrum 公有方法 */
+DenselySampledSpectrum(Spectrum spec, int lambda_min = Lambda_min,
+                       int lambda_max = Lambda_max, Allocator alloc = {})
+    : lambda_min(lambda_min), lambda_max(lambda_max),
+      values(lambda_max - lambda_min + 1, alloc) {
+    if (spec)
+        for (int lambda = lambda_min; lambda &lt;= lambda_max; ++lambda)
+            values[lambda - lambda_min] = spec(lambda);
+}
+</code></pre>
+<pre><code class="language-cpp">/** DenselySampledSpectrum 私有成员 */
+int lambda_min, lambda_max;
+pstd::vector&lt;Float&gt; values;
+</code></pre>
+<p>求给定波长 <strong>lambda</strong> 的光谱的值，若波长在有效范围外则返回零，而对于有效范围内的波长则索引存储的值。</p>
+<pre><code class="language-cpp">/** DenselySampledSpectrum 公有方法 */
+Float operator()(Float lambda) const {
+    int offset = std::lround(lambda) - lambda_min;
+    if (offset &lt; 0 || offset &gt;= values.size()) return 0;
+    return values[offset];
+}
+</code></pre>
+<p>尽管对于渲染中的大部分用途来说在 1 纳米的精度上采样光谱分布已经足够准确，但这样做需要近 <strong>2 kB</strong> 的内存来存储覆盖可见波长的分布。 <strong>PiecewiseLinearSpectrum</strong> 提供了另一种通常更紧凑的表示；其分布由一组值对 \( (\lambda_i, v_i) \) 指定，其中光谱分布通过在它们之间进行线性插值来定义；见图 <a href="#figure-4-17">4.17</a>。对于在某些区域平滑而在其他区域快速变化的光谱，这种表示方式使得可以在变化众多的区域以更高的速率来确定分布。</p>
+<p><a name="PiecewiseLinearSpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class PiecewiseLinearSpectrum {
+  public:
+    /** PiecewiseLinearSpectrum 公有方法 */
+<span class="boring">    PiecewiseLinearSpectrum() = default;
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    void Scale(Float s) {
+</span><span class="boring">        for (Float &amp;v : values)
+</span><span class="boring">            v *= s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float MaxValue() const;
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const {
+</span><span class="boring">        SampledSpectrum s;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            s[i] = (*this)(lambda[i]);
+</span><span class="boring">        return s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float operator()(Float lambda) const;
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    PiecewiseLinearSpectrum(pstd::span&lt;const Float&gt; lambdas,
+</span><span class="boring">        pstd::span&lt;const Float&gt; values, Allocator alloc = {});
+</span><span class="boring">    static pstd::optional&lt;Spectrum&gt; Read(const std::string &amp;filename,
+</span><span class="boring">                                                Allocator alloc);
+</span><span class="boring">    static PiecewiseLinearSpectrum *FromInterleaved(pstd::span&lt;const Float&gt; samples,
+</span><span class="boring">                                                    bool normalize, Allocator alloc);
+</span><span class="boring">
+</span>  private:
+    /** PiecewiseLinearSpectrum 私有成员 */
+<span class="boring">    pstd::vector&lt;Float&gt; lambdas, values;
+</span><span class="boring">
+</span>};
+</code></pre>
+<blockquote>
+<p><a name="figure-4-17"></a></p>
+<div class="figure-row">
+  <img src="figures/piecewise-linear-spectrum.svg" width="349" height="249" style="max-width: 100%;">
+</div>
+<p><strong>图 4.17：</strong> <a href="#PiecewiseLinearSpectrum-definition"><strong>PiecewiseLinearSpectrum</strong></a> 使用一组样本值 \( (\lambda_i,v_i) \) 定义了光谱分布。然后通过在它们之间进行线性插值来定义连续分布。</p>
+</blockquote>
+<p><strong>PiecewiseLinearSpectrum</strong> 构造函数（此处未包含）会检查提供的 <strong>lambda</strong> 值是否已排序，然后将它们及对应的光谱值存储在相应的成员变量中。</p>
+<pre><code class="language-cpp">/** PiecewiseLinearSpectrum 公有方法 */
+PiecewiseLinearSpectrum(pstd::span&lt;const Float&gt; lambdas,
+    pstd::span&lt;const Float&gt; values, Allocator alloc = {});
+</code></pre>
+<pre><code class="language-cpp">/** PiecewiseLinearSpectrum 私有成员 */
+pstd::vector&lt;Float&gt; lambdas, values;
+</code></pre>
+<p>找到给定波长的值需要首先在 <strong>lambdas</strong> 数组中找到包围它的一对值，然后在它们之间进行线性插值。</p>
+<pre><code class="language-cpp">/** Spectrum 方法定义 */
+Float PiecewiseLinearSpectrum::operator()(Float lambda) const {
+    /** 处理 PiecewiseLinearSpectrum 边缘情况 */
+<span class="boring">    if (lambdas.empty() || lambda &lt; lambdas.front() || lambda &gt; lambdas.back())
+</span><span class="boring">        return 0;
+</span><span class="boring">
+</span>    /** 找到小于 lambda 的最大 lambdas 的偏移量并进行插值 */
+<span class="boring">    int o = FindInterval(lambdas.size(),
+</span><span class="boring">                        [&amp;](int i) { return lambdas[i] &lt;= lambda; });
+</span><span class="boring">    Float t = (lambda - lambdas[o]) / (lambdas[o + 1] - lambdas[o]);
+</span><span class="boring">    return Lerp(t, values[o], values[o + 1]);
+</span><span class="boring">
+</span>}
+</code></pre>
+<p>与 <a href="#DenselySampledSpectrum-definition"><strong>DenselySampledSpectrum</strong></a> 相同，超出指定范围波长的返回值为零。</p>
+<pre><code class="language-cpp">/** 处理 PiecewiseLinearSpectrum 边缘情况 */
+if (lambdas.empty() || lambda &lt; lambdas.front() || lambda &gt; lambdas.back())
+    return 0;
+</code></pre>
+<p>如果 <strong>lambda</strong> 在范围内，则 <a href="../B_Utilities/B_2_Mathematical_Infrastructure.html#FindInterval"><strong>FindInterval()</strong></a> 给出小于或等于 <strong>lambda</strong> 的 <strong>lambdas</strong> 的最大值的偏移量。接着，用 <strong>lambda</strong> 在该波长与下一个波长之间的偏移量取出存储值用作线性插值参数。</p>
+<pre><code class="language-cpp">/** 找到小于 lambda 的最大 lambdas 的偏移量并进行插值 */
+int o = FindInterval(lambdas.size(),
+                     [&amp;](int i) { return lambdas[i] &lt;= lambda; });
+Float t = (lambda - lambdas[o]) / (lambdas[o + 1] - lambdas[o]);
+return Lerp(t, values[o], values[o + 1]);
+</code></pre>
+<p>分布的最大值可以通过 <strong>std::max_element()</strong> 轻松求得，该方法执行线性搜索。当前在 <strong>pbrt</strong> 的任何性能敏感部分都没有调用此函数；如果调用了，缓存该值以避免重新计算可能是值得的。</p>
+<pre><code class="language-cpp">/** Spectrum 方法定义 */
+Float PiecewiseLinearSpectrum::MaxValue() const {
+    if (values.empty()) return 0;
+    return *std::max_element(values.begin(), values.end());
+}
+</code></pre>
+<p>另一个有用的 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 实现，<strong>BlackbodySpectrum</strong>，给出了在特定温度下黑体发射体的光谱分布。</p>
+<p><a name="BlackbodySpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** Spectrum 定义 */
+class BlackbodySpectrum {
+  public:
+    /** BlackbodySpectrum 公有方法 */
+<span class="boring">    BlackbodySpectrum(Float T) : T(T) {
+</span><span class="boring">        /** 计算给定温度的黑体归一化常数 */
+</span><span class="boring">        Float lambdaMax = 2.8977721e-3f / T;
+</span><span class="boring">        normalizationFactor = 1 / Blackbody(lambdaMax * 1e9f, T);
+</span><span class="boring">    }
+</span><span class="boring">    Float operator()(Float lambda) const {
+</span><span class="boring">        return Blackbody(lambda, T) * normalizationFactor;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const {
+</span><span class="boring">        SampledSpectrum s;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            s[i] = Blackbody(lambda[i], T) * normalizationFactor;
+</span><span class="boring">        return s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float MaxValue() const { return 1.f; }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">
+</span>  private:
+    /** BlackbodySpectrum 私有成员 */
+<span class="boring">    Float T;
+</span><span class="boring">    Float normalizationFactor;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>构造函数的唯一参数是黑体的温度，以开尔文为单位。</p>
+<pre><code class="language-cpp">/** BlackbodySpectrum 公有方法 */
+BlackbodySpectrum(Float T) : T(T) {
+    /** 计算给定温度的黑体归一化常数 */
+<span class="boring">    Float lambdaMax = 2.8977721e-3f / T;
+</span><span class="boring">    normalizationFactor = 1 / Blackbody(lambdaMax * 1e9f, T);
+</span><span class="boring">    
+</span>}
+</code></pre>
+<pre><code class="language-cpp">/** BlackbodySpectrum 私有成员 */
+Float T;
+</code></pre>
+<p>由于黑体发出的功率随着温度的升高而迅速增长（回忆斯特藩-玻尔兹曼定律，方程（<a href="./4_4_Light_Emission.html#equation-4-19">4.19</a>））， <a href="#BlackbodySpectrum-definition"><strong>BlackbodySpectrum</strong></a> 代表一个归一化的黑体光谱分布，其中任何波长上的最大值为 1。维恩位移定律，方程（<a href="./4_4_Light_Emission.html#equation-4-20">4.20</a>），给出了发射辐射亮度达到最大值时的波长（以米为单位）；在调用 <strong>Blackbody()</strong> 以求出相应的辐射亮度之前，我们必须将此值转换为纳米。</p>
+<pre><code class="language-cpp">/** 计算给定温度的黑体归一化常数 */
+Float lambdaMax = 2.8977721e-3f / T;
+normalizationFactor = 1 / Blackbody(lambdaMax * 1e9f, T);
+</code></pre>
+<pre><code class="language-cpp">/** BlackbodySpectrum 私有成员 */
+Float normalizationFactor;
+</code></pre>
+<p>返回特定波长下分布值的方法，返回了 <a href="./4_4_Light_Emission.html#Blackbody"><strong>Blackbody()</strong></a> 的返回值与归一化因子的乘积。</p>
+<pre><code class="language-cpp">/** BlackbodySpectrum 公有方法 */
+Float operator()(Float lambda) const {
+    return Blackbody(lambda, T) * normalizationFactor;
+}
+</code></pre>
+<h2 id="453-嵌入光谱数据embedded-spectral-data"><a class="header" href="#453-嵌入光谱数据embedded-spectral-data">4.5.3 嵌入光谱数据（Embedded Spectral Data）</a></h2>
+<p><strong>pbrt</strong> 的场景描述格式提供了多种指定光谱数据的方法，从 黑体温度 到 \( \lambda \)-值对 的数组，来指定分段-线性（piecewise-linear）光谱。为了方便起见，许多有用的光谱分布也直接嵌入在 <strong>pbrt</strong> 二进制文件中，包括描述各种光源类型的发射特征的分布、各种导体的散射特性的分布以及各种类型玻璃的波长依赖折射率（wavelength-dependent indices of refraction）的分布。有关所有这些的列表，请参见在线 <strong>pbrt</strong> 文件格式文档。</p>
+<p><strong>GetNamedSpectrum()</strong> 函数在这些光谱中进行搜索，如果给定的光谱名称存在则返回对应的 <a href="#Spectrum-definition"><strong>Spectrum</strong></a>。</p>
+<pre><code class="language-cpp">/** Spectral 函数定义 */
+Spectrum GetNamedSpectrum(std::string name);
+</code></pre>
+<p>一些重要的光谱通过相应的函数直接提供，所有这些函数都位于 <strong>Spectra</strong> 命名空间中。其中包括 <strong>Spectra::X()</strong> 、 <strong>Spectra::Y()</strong> 和 <strong>Spectra::Z()</strong>，它们返回在第 <a href="./4_6_Color.html#461-xyz-%E9%A2%9C%E8%89%B2xyz-color">4.6.1</a> 节中描述的颜色匹配曲线，以及 <strong>Spectra::D()</strong>，它返回一个 <a href="#DenselySampledSpectrum-definition"><strong>DenselySampledSpectrum</strong></a> ，表示在给定温度下的 D 光源。</p>
+<pre><code class="language-cpp">/** Spectrum 函数定义 */
+DenselySampledSpectrum D(Float T, Allocator alloc);
+</code></pre>
+<h2 id="454-采样光谱分布sampled-spectral-distributions"><a class="header" href="#454-采样光谱分布sampled-spectral-distributions">4.5.4 采样光谱分布（Sampled Spectral Distributions）</a></h2>
+<p>细心的读者可能已经注意到，尽管 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 使得评估光谱分布函数成为可能，但除了在指定波长处采样其值外，并不提供对它们进行大量计算的能力。然而，例如，评估反射方程（<a href="./4_3_Surface_Reflection.html#equation-4-14">4.14</a>）的被积函数需要对两个光谱分布进行乘积运算，一个用于 BSDF，另一个用于入射辐射亮度函数。</p>
+<p>把目前为止引入的抽象提供给这种功能，很快就会变得臃肿不堪。例如，虽然两个 <a href="#DenselySampledSpectrum-definition"><strong>DenselySampledSpectrum</strong></a> 的乘积可以通过另一个 <a href="#DenselySampledSpectrum-definition"><strong>DenselySampledSpectrum</strong></a> 来如实表示，但考虑两个 <a href="#PiecewiseLinearSpectrum-definition"><strong>PiecewiseLinearSpectrum</strong></a> 的乘积：结果函数将是分段二次（piecewise- quadratic）的，后续的乘积只会增加其次数。此外，不同类型的 <strong>Spectrum</strong> 实现之间的运算不仅需要为每对实现定制实现，还需要为每个结果选择合适的 <strong>Spectrum</strong> 表示。</p>
+<p><strong>pbrt</strong> 通过在一组离散波长下进行光谱计算，来避免这种复杂性，这些计算是已经在图像合成中计算的蒙特卡罗积分的一部分。为了理解这一过程，考虑在表面法线为 \( \mathbf{n} \) 的某一点 \( \text{p} \) 上计算波长范围为 \( [\lambda_0,\lambda_1] \) 的（非光谱）辐照度。使用方程（<a href="./4_2_Working_with_Radiometric_Integrals.html#equation-4-7">4.7</a>），该方程将辐照度表示为入射辐射亮度，以及方程（<a href="./4_1_Radiometry.html#equation-4-5">4.5</a>），该方程将辐射亮度表示为光谱辐射亮度，我们得到</p>
+<p>\[
+E = \int_{\Omega}\int_{\lambda_0}^{\lambda_1} L_\text{i}(\text{p},\omega,\lambda)|\cos\theta|\text{d}\omega\text{d}\lambda<br />
+\]</p>
+<p>其中 \( L_\text{i}(\text{p},\omega,\lambda) \) 是在波长 \( \lambda \) 上的入射光谱辐射亮度。</p>
+<p>应用标准的蒙特卡罗估计器，并利用 \( \omega \) 和 \( \lambda \) 是无关的这一事实，我们可以看到 \( E \) 的估计可以通过从某个分布 \( p_\omega \) 中采样方向 \( \omega_i \)，从某个分布 \( p_\lambda \) 中采样波长 \( \lambda_i \)，然后进行下面的评估来计算：</p>
+<p><a name="equation-4-21">(4.21)</a></p>
+<p>\[
+E \approx \frac{1}{n} \sum_{i=1}^{n} \frac{L_\text{i}(\text{p},\omega_i,\lambda_i)|\cos\theta_i|}{p_\omega(\omega_i)p_\lambda(\lambda_i)}<br />
+\]</p>
+<p>因此，我们只需要能够在指定的离散波长下评估被积函数，来估计辐照度。更一般地，我们将看到可以将 <strong>pbrt</strong> 输出的所有光谱量表示为对波长的积分。例如，第 <a href="./4_6_Color.html">4.6</a> 表明，当使用 RGB 颜色表示来渲染图像时，每个像素的颜色可以通过对到达该像素的光谱辐射亮度使用将红、绿、蓝颜色响应建模的函数进行积分，来计算得到。因此 <strong>pbrt</strong> 仅使用离散光谱样本进行光谱计算。</p>
+<p>为了能够实现采样光谱相关的类和对光谱样本进行计算，我们将在此定义设置光谱样本数量的常量。（第 <a href="./4_6_Color.html#465-%E9%80%89%E6%8B%A9%E6%B3%A2%E9%95%BF%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%95%B0%E9%87%8Fchoosing-the-number-of-wavelength-samples">4.6.5</a> 节将更详细地讨论选择该值所涉及的权衡。） <strong>pbrt</strong> 默认使用 4 个波长样本；这个值可以很容易地更改，但这样做需要重新编译系统。</p>
+<pre><code class="language-cpp">/** Spectrum 常量 */
+static constexpr int NSpectrumSamples = 4;
+</code></pre>
+<h3 id="sampledspectrum-类"><a class="header" href="#sampledspectrum-类">SampledSpectrum 类</a></h3>
+<p><strong>SampledSpectrum</strong> 类存储一个 <strong>NSpectrumSamples</strong> 值的数组，这些值表示在离散波长下的光谱分布值。它提供了允许对这些值进行各种数学运算的方法。</p>
+<p><a name="SampledSpectrum-definition"></a></p>
+<pre><code class="language-cpp">/** SampledSpectrum 定义 */
+class SampledSpectrum {
+  public:
+    /** SampledSpectrum 公有方法 */
+<span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator+(const SampledSpectrum &amp;s) const {
+</span><span class="boring">        SampledSpectrum ret = *this;
+</span><span class="boring">        return ret += s;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum &amp;operator-=(const SampledSpectrum &amp;s) {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            values[i] -= s.values[i];
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator-(const SampledSpectrum &amp;s) const {
+</span><span class="boring">        SampledSpectrum ret = *this;
+</span><span class="boring">        return ret -= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    friend SampledSpectrum operator-(Float a, const SampledSpectrum &amp;s) {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        SampledSpectrum ret;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            ret.values[i] = a - s.values[i];
+</span><span class="boring">        return ret;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum &amp;operator*=(const SampledSpectrum &amp;s) {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            values[i] *= s.values[i];
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator*(const SampledSpectrum &amp;s) const {
+</span><span class="boring">        SampledSpectrum ret = *this;
+</span><span class="boring">        return ret *= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator*(Float a) const {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        SampledSpectrum ret = *this;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            ret.values[i] *= a;
+</span><span class="boring">        return ret;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum &amp;operator*=(Float a) {
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            values[i] *= a;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    friend SampledSpectrum operator*(Float a, const SampledSpectrum &amp;s) { return s * a; }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum &amp;operator/=(const SampledSpectrum &amp;s) {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i) {
+</span><span class="boring">            DCHECK_NE(0, s.values[i]);
+</span><span class="boring">            values[i] /= s.values[i];
+</span><span class="boring">        }
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator/(const SampledSpectrum &amp;s) const {
+</span><span class="boring">        SampledSpectrum ret = *this;
+</span><span class="boring">        return ret /= s;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum &amp;operator/=(Float a) {
+</span><span class="boring">        DCHECK_NE(a, 0);
+</span><span class="boring">        DCHECK(!IsNaN(a));
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            values[i] /= a;
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator/(Float a) const {
+</span><span class="boring">        SampledSpectrum ret = *this;
+</span><span class="boring">        return ret /= a;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    SampledSpectrum operator-() const {
+</span><span class="boring">        SampledSpectrum ret;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            ret.values[i] = -values[i];
+</span><span class="boring">        return ret;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator==(const SampledSpectrum &amp;s) const { return values == s.values; }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator!=(const SampledSpectrum &amp;s) const { return values != s.values; }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool HasNaNs() const {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            if (IsNaN(values[i]))
+</span><span class="boring">                return true;
+</span><span class="boring">        return false;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    XYZ ToXYZ(const SampledWavelengths &amp;lambda) const;
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    RGB ToRGB(const SampledWavelengths &amp;lambda, const RGBColorSpace &amp;cs) const;
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float y(const SampledWavelengths &amp;lambda) const;
+</span><span class="boring">    explicit SampledSpectrum(Float c) { values.fill(c); }
+</span><span class="boring">    SampledSpectrum(pstd::span&lt;const Float&gt; v) {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            values[i] = v[i];
+</span><span class="boring">    }
+</span><span class="boring">    Float operator[](int i) const { return values[i]; }
+</span><span class="boring">    Float &amp;operator[](int i) { return values[i]; }
+</span><span class="boring">    explicit operator bool() const {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            if (values[i] != 0) return true;
+</span><span class="boring">        return false;
+</span><span class="boring">    }
+</span><span class="boring">    SampledSpectrum &amp;operator+=(const SampledSpectrum &amp;s) {
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            values[i] += s.values[i];
+</span><span class="boring">        return *this;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float MinComponentValue() const {
+</span><span class="boring">    Float m = values[0];
+</span><span class="boring">        for (int i = 1; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            m = std::min(m, values[i]);
+</span><span class="boring">        return m;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float MaxComponentValue() const {
+</span><span class="boring">        Float m = values[0];
+</span><span class="boring">        for (int i = 1; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            m = std::max(m, values[i]);
+</span><span class="boring">        return m;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    Float Average() const {
+</span><span class="boring">        Float sum = values[0];
+</span><span class="boring">        for (int i = 1; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            sum += values[i];
+</span><span class="boring">        return sum / NSpectrumSamples;
+</span><span class="boring">    }
+</span><span class="boring">
+</span>  private:
+    pstd::array&lt;Float, NSpectrumSamples&gt; values;
+};
+</code></pre>
+<p>它有一个允许为所有波长提供单一值的构造函数，和一个接受包含每个波长处值的适当尺寸的 <strong>pstd::span</strong> 的构造函数。</p>
+<pre><code class="language-cpp">/** SampledSpectrum 公有方法 */
+explicit SampledSpectrum(Float c) { values.fill(c); }
+SampledSpectrum(pstd::span&lt;const Float&gt; v) {
+    for (int i = 0; i &lt; NSpectrumSamples; ++i)
+        values[i] = v[i];
+}
+</code></pre>
+<p>也提供了通常的索引操作来访问和设置每个波长处值的功能。</p>
+<pre><code class="language-cpp">/** SampledSpectrum 公有方法 */
+Float operator[](int i) const { return values[i]; }
+Float &amp;operator[](int i) { return values[i]; }
+</code></pre>
+<p>通常，知道 <strong>SampledSpectrum</strong> 中的所有值是否都为零是实用的。例如，如果一个表面的反射率为零，那么光传输例程可以避免计算成本，避免投射那些最终会被乘以零的反射光线。这种能力是通过类型转换运算符提供给 <strong>bool</strong> 的。†（C++奥秘：explicit 修饰符确保 SampledSpectrum 不会在没有显式转换的情况下，被意外地作为 bool 参数传递给函数。然而，如果 SampledSpectrum 被用作 if 语句中的条件，它仍然会自动转换为布尔值而无需显式转换。）</p>
+<pre><code class="language-cpp">/** SampledSpectrum 公有方法 */
+explicit operator bool() const {
+    for (int i = 0; i &lt; NSpectrumSamples; ++i)
+        if (values[i] != 0) return true;
+    return false;
+}
+</code></pre>
+<p><a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 对象的所有标准算术运算均已提供；每个运算都是对存储值逐分量（component-wise）进行的。 <strong>operator+=</strong> 的实现如下。其他运算类似，因此未在文本中包含。</p>
+<pre><code class="language-cpp">/** SampledSpectrum 公有方法 */
+SampledSpectrum &amp;operator+=(const SampledSpectrum &amp;s) {
+    for (int i = 0; i &lt; NSpectrumSamples; ++i)
+        values[i] += s.values[i];
+    return *this;
+}
+</code></pre>
+<p><strong>SafeDiv()</strong> 将两个采样光谱相除，但对于任何除数为零的样本，结果为零。</p>
+<p><a name="SampledSpectrum::SafeDiv"></a></p>
+<pre><code class="language-cpp">/** SampledSpectrum 内联函数 */
+SampledSpectrum SafeDiv(SampledSpectrum a, SampledSpectrum b) {
+    SampledSpectrum r;
+    for (int i = 0; i &lt; NSpectrumSamples; ++i)
+        r[i] = (b[i] != 0) ? a[i] / b[i] : 0.;
+    return r;
+}
+</code></pre>
+<p>除了基本的算术运算，<a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 也提供了 <strong>Lerp()</strong> 、 <strong>Sqrt()</strong> 、 <strong>Clamp()</strong> 、 <strong>ClampZero()</strong> 、 <strong>Pow()</strong> 、 <strong>Exp()</strong> 和 <strong>FastExp()</strong> 函数，这些函数在 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 对象上执行运算（也是逐分量的）；其中一些运算对于评估第 <a href="../9_Reflection_Models/">9</a> 章中的某些反射模型和第 <a href="../14_Light_Transport_II_Volume_Rendering/">14</a> 章中的体散射模型是必要的。最后， <strong>MinComponentValue()</strong> 和 <strong>MaxComponentValue()</strong> 返回所有值中的最小值和最大值，而 <strong>Average()</strong> 返回它们的平均值。这些方法都很简单，因此未在文本中包含。</p>
+<h3 id="sampledwavelengths-类"><a class="header" href="#sampledwavelengths-类">SampledWavelengths 类</a></h3>
+<p>单独分开的类， <strong>SampledWavelengths</strong>，为 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 中存储的样本存储对应的波长。因此，重要的是不仅要仔细跟踪由单独的 <strong>SampledSpectrum</strong> 表示的 <strong>SampledWavelengths</strong> ，而且还要避免对具有不同波长样本的 <strong>SampledSpectrum</strong> 执行任何运算。</p>
+<p><a name="SampledWavelengths-definition"></a></p>
+<pre><code class="language-cpp">/** SampledWavelengths 定义 */
+class SampledWavelengths {
+  public:
+    /** SampledWavelengths 公有方法 */
+<span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator==(const SampledWavelengths &amp;swl) const {
+</span><span class="boring">        return lambda == swl.lambda &amp;&amp; pdf == swl.pdf;
+</span><span class="boring">    }
+</span><span class="boring">    PBRT_CPU_GPU
+</span><span class="boring">    bool operator!=(const SampledWavelengths &amp;swl) const {
+</span><span class="boring">        return lambda != swl.lambda || pdf != swl.pdf;
+</span><span class="boring">    }
+</span><span class="boring">    
+</span><span class="boring">    std::string ToString() const;
+</span><span class="boring">    static SampledWavelengths SampleUniform(Float u,
+</span><span class="boring">            Float lambda_min = Lambda_min, Float lambda_max = Lambda_max) {
+</span><span class="boring">        SampledWavelengths swl;
+</span><span class="boring">        /** 使用 u 采样第一个波长 */
+</span><span class="boring">        swl.lambda[0] = Lerp(u, lambda_min, lambda_max);
+</span><span class="boring">
+</span><span class="boring">        /** 为剩余的波长初始化 lambda */
+</span><span class="boring">        Float delta = (lambda_max - lambda_min) / NSpectrumSamples;
+</span><span class="boring">        for (int i = 1; i &lt; NSpectrumSamples; ++i) {
+</span><span class="boring">            swl.lambda[i] = swl.lambda[i - 1] + delta;
+</span><span class="boring">            if (swl.lambda[i] &gt; lambda_max)
+</span><span class="boring">                swl.lambda[i] = lambda_min + (swl.lambda[i] - lambda_max);
+</span><span class="boring">        }
+</span><span class="boring">    
+</span><span class="boring">        /** 为采样的波长计算 PDF */
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            swl.pdf[i] = 1 / (lambda_max - lambda_min);
+</span><span class="boring">
+</span><span class="boring">        return swl;
+</span><span class="boring">    }
+</span><span class="boring">    Float operator[](int i) const { return lambda[i]; }
+</span><span class="boring">    Float &amp;operator[](int i) { return lambda[i]; }
+</span><span class="boring">    SampledSpectrum PDF() const { return SampledSpectrum(pdf); }
+</span><span class="boring">    void TerminateSecondary() {
+</span><span class="boring">        if (SecondaryTerminated()) return;
+</span><span class="boring">        /** 更新终止的波长概率 */
+</span><span class="boring">        for (int i = 1; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            pdf[i] = 0;
+</span><span class="boring">        pdf[0] /= NSpectrumSamples;
+</span><span class="boring">    
+</span><span class="boring">    }
+</span><span class="boring">    bool SecondaryTerminated() const {
+</span><span class="boring">        for (int i = 1; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">            if (pdf[i] != 0)
+</span><span class="boring">                return false;
+</span><span class="boring">        return true;
+</span><span class="boring">    }
+</span><span class="boring">    static SampledWavelengths SampleVisible(Float u) {
+</span><span class="boring">        SampledWavelengths swl;
+</span><span class="boring">        for (int i = 0; i &lt; NSpectrumSamples; ++i) {
+</span><span class="boring">            &lt;&lt;Compute up for th wavelength sample&gt;&gt; 
+</span><span class="boring">            swl.lambda[i] = SampleVisibleWavelengths(up);
+</span><span class="boring">            swl.pdf[i] = VisibleWavelengthsPDF(swl.lambda[i]);
+</span><span class="boring">        }
+</span><span class="boring">        return swl;
+</span><span class="boring">    }
+</span><span class="boring">
+</span>  private:
+    /** SampledWavelengths 私有成员 */
+<span class="boring">    friend struct SOA&lt;SampledWavelengths&gt;;
+</span><span class="boring">    pstd::array&lt;Float, NSpectrumSamples&gt; lambda, pdf;
+</span><span class="boring">
+</span>};
+</code></pre>
+<p>为了能在蒙特卡罗积分的上下文中使用，存储在 <a href="#SampledWavelengths-definition"><strong>SampledWavelengths</strong></a> 中的波长必须从某种概率分布中采样。因此，该类存储了波长本身以及每个波长的概率密度。</p>
+<pre><code class="language-cpp">/** SampledWavelengths 私有成员 */
+pstd::array&lt;Float, NSpectrumSamples&gt; lambda, pdf;
+</code></pre>
+<p>在给定范围内均匀采样波长的最简单方法是用 <strong>SampleUniform()</strong> 方法，该方法接受一个均匀样本 <strong>u</strong> 和波长的范围。</p>
+<pre><code class="language-cpp">/** SampledWavelengths 公有方法 */
+static SampledWavelengths SampleUniform(Float u,
+        Float lambda_min = Lambda_min, Float lambda_max = Lambda_max) {
+    SampledWavelengths swl;
+    /** 使用 u 采样第一个波长 */
+<span class="boring">    swl.lambda[0] = Lerp(u, lambda_min, lambda_max);
+</span><span class="boring">
+</span>    /** 为剩余的波长初始化 lambda */
+<span class="boring">    Float delta = (lambda_max - lambda_min) / NSpectrumSamples;
+</span><span class="boring">    for (int i = 1; i &lt; NSpectrumSamples; ++i) {
+</span><span class="boring">        swl.lambda[i] = swl.lambda[i - 1] + delta;
+</span><span class="boring">        if (swl.lambda[i] &gt; lambda_max)
+</span><span class="boring">            swl.lambda[i] = lambda_min + (swl.lambda[i] - lambda_max);
+</span><span class="boring">    }
+</span><span class="boring">    
+</span>    /** 为采样的波长计算 PDF */
+<span class="boring">    for (int i = 0; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">        swl.pdf[i] = 1 / (lambda_max - lambda_min);
+</span><span class="boring">
+</span>    return swl;
+}
+</code></pre>
+<p>它均匀地从范围内选择第一个波长。</p>
+<pre><code class="language-cpp">/** 使用 u 采样第一个波长 */
+swl.lambda[0] = Lerp(u, lambda_min, lambda_max);
+</code></pre>
+<p>剩余的波长通过从第一个波长开始以均匀步长 <strong>delta</strong> 选择，并在超过 <strong>lambda_max</strong> 时循环。结果是一组分层的波长样本，这些样本是使用单个随机数生成的。以这种方式对波长进行采样而不是为每个波长使用不同的均匀样本的一个优点是，可以在不需要修改调用 <strong>SampleUniform()</strong> 的代码以调整传递给该方法的样本值数量的情况下，改变 <strong>NSpectrumSamples</strong> 的值。</p>
+<pre><code class="language-cpp">/** 为剩余的波长初始化 lambda */
+Float delta = (lambda_max - lambda_min) / NSpectrumSamples;
+for (int i = 1; i &lt; NSpectrumSamples; ++i) {
+    swl.lambda[i] = swl.lambda[i - 1] + delta;
+    if (swl.lambda[i] &gt; lambda_max)
+        swl.lambda[i] = lambda_min + (swl.lambda[i] - lambda_max);
+}
+</code></pre>
+<p>每个样本的概率密度很容易计算，因为采样分布是均匀的。</p>
+<pre><code class="language-cpp">/** 为采样的波长计算 PDF */
+for (int i = 0; i &lt; NSpectrumSamples; ++i)
+    swl.pdf[i] = 1 / (lambda_max - lambda_min);
+</code></pre>
+<p>额外的方法提供了对各个波长及其所有 PDF 的访问。PDF 值以 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 的形式返回，这使得计算相关的蒙特卡罗估计量变得简单。</p>
+<pre><code class="language-cpp">/** SampledWavelengths 公有方法 */
+Float operator[](int i) const { return lambda[i]; }
+Float &amp;operator[](int i) { return lambda[i]; }
+SampledSpectrum PDF() const { return SampledSpectrum(pdf); }
+</code></pre>
+<p>在某些情况下，不同波长的光在散射事件后可能会沿不同的路径传播。最常见的例子是光发生色散（dispersion）时，不同波长的光折射到不同的方向。当这种情况发生时，无法再用单一光线追踪多个波长的光。对于这种情况，<a href="#SampledWavelengthes-definition"><strong>SampledWavelengths</strong></a> 提供了终止除一个波长之外所有波长的能力；后续计算可以只考虑唯一存活的波长。</p>
+<p><a name="SampledWavelengths::TerminateSecondary"></a></p>
+<pre><code class="language-cpp">/** SampledWavelengths 公有方法 */
+void TerminateSecondary() {
+    if (SecondaryTerminated()) return;
+    /** 更新终止的波长概率 */
+<span class="boring">    for (int i = 1; i &lt; NSpectrumSamples; ++i)
+</span><span class="boring">        pdf[i] = 0;
+</span><span class="boring">    pdf[0] /= NSpectrumSamples;
+</span><span class="boring">    
+</span>}
+</code></pre>
+<p>存储在 <strong>lambda[0]</strong> 中的波长始终是幸存者：只要每个 <strong>lambda</strong> 值是从与 <strong>SampleUniform()</strong> 相同的分布中随机抽样的，就不需要随机选择幸存的波长。请注意，这意味着将 <strong>lambda[0]</strong> 始终放置在 <strong>lambda_min</strong> 和 <strong>lambda_min+delta</strong> 之间的第一个波长层中，将 <strong>lambda[1]</strong> 放置在第二个波长层中，以此类推的做法是错误的。†（这个错误是作者在 <strong>pbrt</strong> 中初次开发此功能时遇到的 bug 之一。）</p>
+<p>终止波长的 PDF 值被设置为零；因此，使用 <strong>SampledWavelengths</strong> 计算蒙特卡罗估计的代码必须检测这种情况并相应地忽略被终止的波长。存活波长的 PDF 通过将其乘以波长存活终止的概率 <strong>1 / NSpectrumSamples</strong> 来更新，以考虑终止事件。（这类似于应用俄罗斯轮盘赌对蒙特卡罗估计器的影响——见第 <a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html#224-%E4%BF%84%E7%BD%97%E6%96%AF%E8%BD%AE%E7%9B%98%E8%B5%8Crussian-roulette">2.2.4</a> 节。）</p>
+<pre><code class="language-cpp">/** 更新终止的波长概率 */
+for (int i = 1; i &lt; NSpectrumSamples; ++i)
+    pdf[i] = 0;
+pdf[0] /= NSpectrumSamples;
+</code></pre>
+<p><strong>SecondaryTerminated()</strong> 表示 <strong>TerminateSecondary()</strong> 是否已经被调用。由于路径终止是导致第一个波长后出现零值 PDF 的唯一原因，因此检查 PDF 值足以进行此测试。</p>
+<pre><code class="language-cpp">/** SampledWavelengths 公有方法 */
+bool SecondaryTerminated() const {
+    for (int i = 1; i &lt; NSpectrumSamples; ++i)
+        if (pdf[i] != 0)
+            return false;
+    return true;
+}
+</code></pre>
+<p>我们通常会有一个 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 和一组我们希望评估的波长。因此，我们将向 <a href="#Spectrum-definition"><strong>Spectrum</strong></a> 接口添加一个方法，该方法提供一个 <strong>Sample()</strong> 方法，该方法接受一组波长，在每个波长处评估其光谱分布函数，并返回一个 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 。这个便利方法消除了在这种常见情况下对波长进行显式循环并单独调用 <a href="#Spectrum::operator"><strong>Spectrum::operator()</strong></a> 的需要。该方法的实现比较简单，这里不包括。</p>
+<pre><code class="language-cpp">/** Spectrum 接口 */
+SampledSpectrum Sample(const SampledWavelengths &amp;lambda) const;
+</code></pre>
+<h3 id="讨论discussion"><a class="header" href="#讨论discussion">讨论（Discussion）</a></h3>
+<p>既然现在已经介绍完了 <a href="#SampledWavelengths-definition"><strong>SampledWavelengths</strong></a> 和 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a>，有理由提出这样一个问题：为什么它们是独立的类，而不是一个存储波长及其样本值的单一类？实际上，这种设计的一个优点是可以在运行时检测到是否对为不同波长存储值的两个 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 实例执行了运算——这样的运算是没有意义的，并且表明着系统中存在一个 bug。</p>
+<p>然而，在实际操作中，渲染过程中会创建许多 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 对象，其中许多是评估涉及光谱计算的表达式时的临时值。因此，尽量减小对象的大小是值得的，哪怕只是为了避免初始化和复制额外的数据。虽然 <strong>pbrt</strong> 的基于 CPU 的积分器在内存中不会同时存储许多 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 值，但 GPU 渲染路径会存储几百万个，从而进一步激励我们减小它们的大小。</p>
+<p>根据我们的经验，不同波长计算混合所产生的错误很少。根据 <strong>pbrt</strong> 中的计算结构，波长通常在跟随光线在场景中路径的开始时进行采样，然后在路径上的所有光谱计算中使用相同的波长。在 <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 实例中，几乎没有机会意外混合采样的波长。实际上，在系统的早期版本中， <a href="#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 确实在调试构建中携带了一个 <a href="#SampledWavelengths-definition"><strong>SampledWavelengths</strong></a> 成员变量，以便能够检查这种情况。经过几个月没有发现错误后，为了简化，该变量被删除。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/4_6_Color.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/4_6_Color.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

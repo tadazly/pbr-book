@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>使用辐射度量积分 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html" class="active"><strong aria-hidden="true">4.2.</strong> 使用辐射度量积分</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html"><strong aria-hidden="true">4.3.</strong> 表面反射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html"><strong aria-hidden="true">4.4.</strong> 光的发射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html"><strong aria-hidden="true">4.5.</strong> 光谱分布的表示</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_6_Color.html"><strong aria-hidden="true">4.6.</strong> 色彩</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Further_Reading.html"><strong aria-hidden="true">4.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Exercises.html"><strong aria-hidden="true">4.8.</strong> 练习</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="42-使用辐射度量积分working-with-radiometric-integrals"><a class="header" href="#42-使用辐射度量积分working-with-radiometric-integrals">4.2 使用辐射度量积分（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Working_with_Radiometric_Integrals">Working with Radiometric Integrals</a>）</a></h1>
+<p>在渲染中，一个常见的任务是评估辐射度量量的积分。在本节中，我们将介绍一些可以简化这一过程的技巧。为了说明这些技术的使用，我们将以计算某一点的辐照度为例。由于一组方向 \( \Omega \) 上的射辐亮度，位于点 \( \text{p} \) 且表面法线为 \( \mathbf{n} \) 的辐照度为</p>
+<p><a name="equation-4-7">(4.7)</a></p>
+<p>\[
+E(\text{p},\text{n}) = \int_{\Omega} L_{\text{i}}(\text{p},\omega)|\cos\theta|\text{d}\omega
+\]</p>
+<p>其中 \( L_{\text{i}}(\text{p},\omega) \) 是入射辐射亮度函数（图 <a href="#figure-4-5">4.5</a>），而积分中的 \( \cos\theta \) 因子是由辐射亮度定义中的 \( \text{d}A^{\perp} \) 因子产生的。 \( \theta \) 是 \( \omega \) 和表面法线 \( \mathbf{n} \) 之间的夹角。辐照度通常是在给定表面法线 \( \mathbf{n} \) 的方向半球 \( \text{H}^2(\mathbf{n}) \) 上计算的。</p>
+<blockquote>
+<p><a name="figure-4-5"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f05.svg" width="462" height="189" style="max-width: 100%;">
+</div>
+<p><strong>图 4.5：</strong> 点 \( \text{p} \) 的辐照度对该点上方整个上半球的辐射亮度乘以入射方向的余弦进行积分求出的。</p>
+</blockquote>
+<p>方程（<a href="#equation-4-7">4.7</a>）中的积分是相对于半球上的立体角进行的，测度 \( \text{d}\omega \) 对应于单位半球上的表面积。（回顾第 <a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html#381-%E7%AB%8B%E4%BD%93%E8%A7%92solid-angles">3.8.1</a> 节中立体角的定义。）</p>
+<h2 id="421-投影立体角的积分integrals-over-projected-solid-angle"><a class="header" href="#421-投影立体角的积分integrals-over-projected-solid-angle">4.2.1 投影立体角的积分（Integrals over Projected Solid Angle）</a></h2>
+<p>在辐射度量量的积分中，各种余弦因子往往会使积分表达的内容变得混乱。通过使用 <em>投影立体角（projected solid angle）</em> 而非立体角来测量被积分对象所覆盖的面积，可以避免这个问题。物体所张的投影立体角是通过将物体投影到单位球上（就像计算立体角时所做的那样），然后将得到的形状向下投影到与表面法线垂直的单位圆盘上（如图 <a href="#figure-4-6">4.6</a> 所示）来确定的。涉及余弦加权立体角的半球方向积分可以重写为关于投影立体角的积分。</p>
+<blockquote>
+<p><a name="figure-4-6"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f06.svg" width="537" height="248" style="max-width: 100%;">
+</div>
+<p>图 4.6：物体所张的投影立体角是其所张的余弦加权立体角。它可以通过找到物体的立体角，将其向下投影到与表面法线垂直的平面上，并在该平面上测量其面积来计算。因此，投影立体角取决于测量时的表面法线，因为法线决定了投影平面的方向。</p>
+</blockquote>
+<p>投影立体角测度与立体角测度的关系为</p>
+<p>\[
+\text{d}\omega^{\perp} = |\cos\theta|\text{d}\omega<br />
+\]</p>
+<p>因此，半球上的辐照度-辐射亮度积分（irradiance-from-radiance integral）可以更简单地写为：</p>
+<p>\[
+E(\text{p},\mathbf{n}) = \int_{\text{H}^2(\mathbf{n})} L_{\text{i}}(\text{p},\omega)\text{d}\omega^{\perp}
+\]</p>
+<p>在本书的其余部分，我们将用立体角而不是投影立体角来表示关于方向的积分。然而，在其他资料中，可能会使用投影立体角，因此始终注意被积函数的实际测度是很重要的。</p>
+<h2 id="422-球面坐标的积分integrals-over-spherical-coordinates"><a class="header" href="#422-球面坐标的积分integrals-over-spherical-coordinates">4.2.2 球面坐标的积分（Integrals over Spherical Coordinates）</a></h2>
+<p>通常，使用方程（<a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html#equation-3-7">3.7</a>）将立体角的积分转换为球面坐标 \( (\theta,\phi) \) 的积分是方便的。为了将立体角的积分转换为 \( (\theta,\phi) \) 的积分，我们需要能够表达一组方向 \( \text{d}\omega \) 的微分面积与一个 \( (\theta,\phi) \) 对的微分面积之间的关系（图 <a href="#figure-4-7">4.7</a>）。单位球面上的微分面积 \( \text{d}\omega \) 是它两条边的微分长度 \( \sin\theta\text{d}\phi \) 和 \( \text{d}\theta \) 的乘积。因此，</p>
+<p><a name="equation-4-8">(4.8)</a></p>
+<p>\[
+\text{d}\omega = \sin\theta\text{d}\theta\text{d}\phi<br />
+\]</p>
+<p>（这个结果也可以通过第 <a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html#241-%E5%A4%9A%E7%BB%B4%E4%B8%AD%E7%9A%84%E5%8F%98%E6%8D%A2transformation-in-multiple-dimensions">2.4.1</a> 节中的多维变换方法推导得出。）</p>
+<blockquote>
+<p><a name="figure-4-7"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f07.svg" width="537" height="222" style="max-width: 100%;">
+</div>
+<p><strong>图 4.7：</strong> 由微分立体角所张的微分面积 \( \text{d}\omega \) 是两条边 \( \sin\theta\text{d}\phi \) 和 \( \text{d}\theta \) 的微分长度的乘积。由此得出的关系 \( \text{d}\omega = \sin\theta\text{d}\theta\text{d}\phi \) 是立体角的积分与球面角的积分之间转换的关键。</p>
+</blockquote>
+<p>因此，我们可以看到半球上的辐照度积分，当方程（<a href="#equation-4-7">4.7</a>）中的 \( \Omega = \text{H}^2(\mathbf{n}) \)时，可以等效地写为</p>
+<p>\[
+E(\text{p},\mathbf{n}) = \int_{0}^{2\pi}\int_{0}^{\pi/2} L_{\text{i}}(\text{p},\theta,\phi)\cos\theta\sin\theta\text{d}\theta\text{d}\phi
+\]</p>
+<p>如果所有方向上的辐射亮度相同，则方程简化为 \( E = \pi L_{\text{i}} \) 。</p>
+<h2 id="423-面积的积分integrals-over-area"><a class="header" href="#423-面积的积分integrals-over-area">4.2.3 面积的积分（Integrals over Area）</a></h2>
+<p>最后一个有用的变换是将方向上的积分转化为面积上的积分。再次考虑方程（<a href="#equation-4-7">4.7</a>）中的辐照度积分，想象有一个发出恒定辐射亮度的四边形，我们希望计算在点 \( \text{p} \) 处的辐照度。作为方向 \( \omega \) 或球面坐标 \( (\theta,\phi) \) 的积分来计算这个值通常并不简单，因为给定一个特定方向，确定四边形在该方向或 \( (\theta,\phi) \) 上是否可见并非易事。将辐照度作为四边形面积的积分来计算要容易得多。</p>
+<p>表面的微分面积 \( \text{d}A \) 与从点 \( \text{p} \) 观察的微分立体角的关系是</p>
+<p><a name="equation-4-9">(4.9)</a></p>
+<p>\[
+\text{d}\omega = \frac{\text{d}A\cos\theta}{r^2}
+\]</p>
+<p>其中 \( \theta \) 是 \( \text{d}A \) 的表面法线与指向 \( \text{p} \) 的向量之间的夹角，而 \( r \) 是从 \( \text{p} \) 到 \( \text{d}A \) 的距离（图 <a href="#figure-4-8">4.8</a>）。我们在此不推导这个结果，但可以直观地理解它：如果 \( \text{d}A \) 与 \( \text{p} \) 的距离为 <strong>1</strong>，并且完全对齐以垂直于 \( \text{d}\omega \) ，那么 \( \text{d}\omega=\text{d}A \)、 \( \theta=0 \) 且方程 (<a href="#equation-4-9">4.9</a>) 成立。当 \( \text{d}A \) 距离 \( \text{p} \) 更远，或者旋转后不再与 \( \text{d}\omega \) 的方向对齐时， \( r^2 \) 和 \( \cos\theta \) 因子会相应补偿以减小 \( \text{d}\omega \) 。</p>
+<blockquote>
+<p><a name="figure-4-8"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f08.svg" width="537" height="294" style="max-width: 100%;">
+</div>
+<p><strong>图 4.8：</strong> 由微分面积 \( \text{d}A \) 所张的微分立体角 \( \text{d}\omega \) 等于 \( \text{d}A\cos\theta/r^2 \)，其中 \( \theta \) 是 \( \text{d}A \) 的表面法线与指向点 \( \text{p} \) 的向量之间的夹角，\( r \) 是从 \( \text{p} \) 到 \( \text{d}A \) 的距离。</p>
+</blockquote>
+<p>因此，我们可以将四边形源的辐照度积分写为</p>
+<p>\[
+E(\text{p},\mathbf{n})=\int_{A}L\cos\theta_{\text{i}}\frac{\cos\theta_{\text{o}}\text{d}A}{r^2}<br />
+\]</p>
+<p>其中 \( L \) 是四边形表面发射的辐射亮度，\( \theta_\text{i} \) 是在 \( \text{p} \) 处的表面法线与从 \( \text{p} \) 到光源上的点 \( \text{p}' \) 的方向之间的夹角，\( \theta_\text{o} \) 是光源在 \( \text{p}' \) 处的表面法线与从 \( \text{p}' \) 到 \( \text{p} \) 的方向之间的夹角（图 <a href="#figure-4-9">4.9</a>）。</p>
+<blockquote>
+<p><a name="figure-4-9"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f09.svg" width="537" height="302" style="max-width: 100%;">
+</div>
+<p><strong>图 4.9：</strong> 要计算来自四边形的光源在点 \( \text{p} \) 的辐照度，用光源的表面积进行积分比用其所张的不规则方向集进行积分更为简单。方程（<a href="#equation-4-9">4.9</a>）给出的立体角与面积之间的关系使我们能够在这两种方法之间来回转换。</p>
+</blockquote>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

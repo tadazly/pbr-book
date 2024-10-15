@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>延伸阅读 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html"><strong aria-hidden="true">4.2.</strong> 使用辐射度量积分</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html"><strong aria-hidden="true">4.3.</strong> 表面反射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html"><strong aria-hidden="true">4.4.</strong> 光的发射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html"><strong aria-hidden="true">4.5.</strong> 光谱分布的表示</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_6_Color.html"><strong aria-hidden="true">4.6.</strong> 色彩</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Further_Reading.html" class="active"><strong aria-hidden="true">4.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Exercises.html"><strong aria-hidden="true">4.8.</strong> 练习</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="延伸阅读further-reading"><a class="header" href="#延伸阅读further-reading">延伸阅读（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading">Further Reading</a>）</a></h1>
+<p>McCluney 的辐射度量学书籍是该主题的优秀入门书籍（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:McCluney94">McCluney 1994</a>）。Preisendorfer（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Preisendorfer65">1965</a>）也以通俗易懂的方式介绍了辐射度量学，并深入探讨了辐射度量与光的物理学之间的关系。Nicodemus 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Nicodemus77">1977</a>）仔细定义了 BRDF、BSSRDF 及其衍生的各种量。</p>
+<p>Moon 和 Spencer（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Moon36">1936</a> ，<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Moon48">1948</a>）以及 Gershun（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Gershun39">1939</a>）的书籍是辐射度量学的早期经典介绍。Lambert 在 18 世纪中叶关于光度的开创性早期著作已由 DiLaura 翻译成英文（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Lambert1760">Lambert 1760</a>）。</p>
+<p>Preisendorfer（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Preisendorfer65">1965</a>）将辐射传输理论与描述电磁场的麦克斯韦经典方程联系起来，Fante（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Fante81">1981</a>）在这一领域进行了进一步的研究。Steinberg 和 Yan（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Steinberg2021">2021</a>）最近提出了一种基于波动模型的光传输综合模型，超越了早期使用维格纳分布函数表示辐射以模拟波动效应的工作（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Oh2010">Oh 2010</a>，<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Cuypers2012">Cuypers 等，2012</a>），并包括了光传输方程的推广。</p>
+<p>正确实施辐射度量计算可能很棘手：一个遗漏的余弦因子就会导致计算出与预期完全不同的量。调试这类问题可能非常耗时。Ou 和 Pellacini（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Ou2010">2010</a>）展示了如何利用 C++的类型系统将单位与这些计算的每个项关联起来，例如，尝试将一个辐射亮度值与另一个表示辐照度的值相加时，会触发编译时错误。</p>
+<p>McCluney（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:McCluney94">1994</a>）和 Malacara（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Malacara02">2002</a>）的书籍详细讨论了黑体发射体和标准光源。标准光源在 CIE 技术报告（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Report2004">2004</a>）中被定义；Judd 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Judd1964">1964</a>）开发了用于定义 D 标准光源的方法。</p>
+<p>Wilkie 和 Weidlich (<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Wilkie2011">2011</a>) 指出，渲染中的常见做法是使用方程 (<a href="./4_4_Light_Emission.html#equation-4-17">4.17</a>) 的黑体分布来模拟光的发射，而基尔霍夫定律，即方程 (<a href="./4_4_Light_Emission.html#equation-4-18">4.18</a>)，则会更为准确。他们还指出，随着物体变热，它们的 BRDF 通常会发生变化，这使得基尔霍夫定律的采用变得更加困难，特别是考虑温度变化对 BRDF 影响的模型通常不可用。</p>
+<h3 id="光谱表示spectral-representations"><a class="header" href="#光谱表示spectral-representations">光谱表示（Spectral Representations）</a></h3>
+<p>Meyer 是最早深入研究图形中的光谱表示的研究者之一（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Meyer80">Meyer 和 Greenberg 1980</a>；Meyer 等人 <a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Meyer86">1986</a>）。Hall（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Hall89">1989</a>）总结了截至 1989 年光谱表示的最新进展，Glassner 的 <em>《数字图像合成原理》（Principles of Digital Image Synthesis）</em>（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Glassner:PODIS">1995</a>）涵盖了直到 1990 年代中期的该主题。Hall（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Hall:1999:CSC">1999</a>）、Johnson 和 Fairchild（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Johnson1999">1999</a>）以及 Devlin 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Devlin02">2002</a>）的调查文章是该主题早期工作的良好资源。</p>
+<p>Borges（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Borges1991">1991</a>）分析了在进行光谱计算时，三刺激表示法引入的误差。基于使用基函数表示光谱的多种方法已被开发，包括 Peercy（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Peercy93">1993</a>），他提出了一种基于场景依赖性选择基函数的技术，考虑了场景中光源和反射物体的光谱分布。Rougeron 和 Péroche（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Rougeron97">1997</a>）将场景中的所有光谱投影到一个层次基（Haar wavelets）上，并展示了这种自适应表示可以用于保持在所需的误差范围内。Ward 和 Eydelberg-Vileshin（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Ward02">2002</a>）开发了一种方法，通过在渲染之前仔细调整提供给系统的颜色值，来提高常规 RGB-only 渲染系统的光谱保真度。</p>
+<p>另一种光谱表示的方法由 Sun 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Sun01">2001</a>）研究的，他们将光谱分布划分为平滑的基础分布和一组尖峰。每个部分采用不同的表示方式，使用适合这些分布部分的基函数。Drew 和 Finlayson（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Drew2003">2003</a>）应用了一种 “尖锐（sharp）” 基，这种基是自适应的，但具有一个特性，即计算基中两个函数的乘积不需要像许多其他基表示那样进行完整的矩阵乘法。</p>
+<p>Walter 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Walter:1997:GIU">1997</a>）和 Morley 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Morley2006">2006</a>）都描述了基于将单一波长与每条光路径关联的光传输算法。Evans 和 McCool（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Evans1999">1999</a>）通过 <em>分层波长聚类（stratified wavelength clusters）</em> 对这些技术进行了概括，这实际上是 <a href="./4_5_Representing_Spectral_Distributions.html#SampledSpectrum-definition"><strong>SampledSpectrum</strong></a> 和 <a href="./4_5_Representing_Spectral_Distributions.html#SampledWavelengths-definition"><strong>SampledWavelengths</strong></a> 中实现的方法。</p>
+<p>Radziszewski 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Radziszewski2009">2009</a>）指出，当在非镜面界面发生色散等效应时，不必终止所有次级光谱波长；他们展示了可以通过多重重要性采样计算单一路径的所有波长贡献，并对结果进行加权。Wilkie 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Wilkie2014">2014</a>）在波长域中使用等间距点样本，并展示了这种方法如何也可以用于光子映射和参与介质的渲染。</p>
+<h3 id="颜色color"><a class="header" href="#颜色color">颜色（Color）</a></h3>
+<p>关于人类视觉系统特性的背景信息，Wandell 的视觉书籍是一个很好的起点（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Wandell95">Wandell 1995</a>）。Ferwerda（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Ferwerda01">2001</a>）为图形应用提供了人类视觉系统的概述，而 Malacara（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Malacara02">2002</a>）简要概述了色彩理论及人类视觉系统处理颜色的基本特性。Ciechanowski（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Ciechanowski2019">2019</a>）提供了一个优秀的色彩空间的互动介绍；他的处理方法影响了我们对 XYZ 色彩空间和色度的呈现。</p>
+<p>人们已经开发出多种不同的方法来将超出色域的颜色映射到可以在具有特定显示原色的设备上显示的颜色。这个问题可能以几种方式表现出来：一种颜色的色度可能超出显示范围，它的色度可能有效但对于显示来说过于明亮，或者两者都超出范围。</p>
+<p>关于如何处理无法显示的色度的问题，请参见 Rougeron 和 Péroche 的综述文章，其中包括许多方法的参考文献（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Rougeron98">Rougeron 和 Péroche 1998</a>）。Hall（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Hall89">1989</a>）也讨论了这个主题。Morovi 的书（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Morovi2008">2008</a>）涵盖了这一主题，Faridul 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Faridul2016">2016</a>）也撰写了一篇更近期的综述。</p>
+<p>虽然能够显示广泛强度范围的高动态范围显示器现在开始逐渐普及，但大多数仍无法重现渲染图像中的完整亮度范围。这个问题可以通过使用人类视觉响应模型的 <em>色调重现（tone reproduction）</em> 算法来解决，以充分利用显示器的可用动态范围。自 Tumblin 和 Rushmeier（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Tumblin93">1993</a>）的工作开始，这一主题成为了一个活跃的研究领域。Devlin 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Devlin02">2002</a>）的综述文章总结了截至 2002 年该领域的大部分工作，并给出了原始论文的索引。请参阅 Reinhard 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Reinhard10">2010</a>）关于高动态范围成像的书籍，其中全面涵盖了这一主题，直到 2010 年。最近，Reinhard 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Reinhard2012">2012</a>）开发了同时考虑准确亮度和色彩重现的色调重现算法，同时考虑了显示和观看环境，而 Eilertsen 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Eilertsen2017">2017</a>）则对视频的色调映射算法进行了调查。</p>
+<h3 id="从-rgb-到光谱from-rgb-to-spectra"><a class="header" href="#从-rgb-到光谱from-rgb-to-spectra">从 RGB 到光谱（From RGB to Spectra）</a></h3>
+<p>Glassner（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Glassner89rgb">1989b</a>）从事了将 RGB 值转换为光谱分布的早期工作。Smits（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Smits:1999:ARC">1999</a>）优化了离散反射光谱，以重现原色（红、绿、蓝）及原色组合（黄、青、品红、白），基于观察到在这种扩展空间中线性插值往往能产生更平滑的反射光谱。Mallett 和 Yuksel（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Mallett2019">2019</a>）提出了一个令人惊讶的结果，显示三种精心选择的光谱的线性插值可以完全覆盖 sRGB 色域，尽管在平滑度上有所牺牲。Meng 等（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Meng2015">2015</a>）基于对色度 \( xy \) 空间的密集采样，优化了一种高度平滑的光谱插值器，使其能够独立于任何特定的 RGB 色域使用。</p>
+<p>第 <a href="./4_6_Color.html#466-%E4%BB%8E-rgb-%E5%88%B0%E5%85%89%E8%B0%B1from-rgb-to-spectra">4.6.6</a> 节中描述的方法是由 Jakob 和 Hanika（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Jakob2019">2019</a>）开发的。在 <strong>pbrt</strong> 选择它有几个原因：光谱表示基于具有 3 个参数的平滑函数族（即，与 RGB 具有相同的维度）。转换可以分为两个步骤：预处理步骤（例如，每个纹素）用多项式系数替换 RGB 值，而在渲染时性能关键的评估仅需要少量浮点指令。Jung 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Jung2019">2019</a>）扩展了这一方法，利用荧光允许转换无法仅通过反射重现的高度饱和 RGB 值。</p>
+<p>Peters 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Peters2019:moments">2019</a>）提出了一种强大的平滑反射光谱参数化方法，基于傅里叶系数。与其在截断的傅里叶级数中使用这些系数（这会导致振铃现象），不如利用矩理论重建平滑且能量守恒的光谱。</p>
+<p>之前的方法都将平滑性作为一个核心设计约束。虽然自然光谱确实往往趋向于平滑，但最大平滑的光谱不一定是最自然的，特别是在可以获得更多有关表面下材质类型的信息时。Otsu 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Otsu2018:rgb">2018b</a>）处理了一个测量光谱的大型数据库，使用主成分分析创建了一个数据驱动的插值器。Tódová等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Todova2021">2021</a>）在 Peters 等人（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Further_Reading#cite:Peters2019:moments">2019</a>）基于矩（moment-based）的方法的基础上，预计算了一个高效的光谱插值器，旨在为特定的 RGB 输入重现用户指定的光谱。</p>
+<h2 id="参考文献references"><a class="header" href="#参考文献references">参考文献（References）</a></h2>
+<ul>
+<li>Borges, C. 1991. Trichromatic approximation for computer graphics illumination models. Computer Graphics (Proceedings of SIGGRAPH ’91) 25, 101–4.</li>
+<li>CIE Technical Report. 2004. Colorimetry. Publication 15:2004 (3rd ed.), CIE Central Bureau, Vienna.</li>
+<li>Ciechanowski, B. 2019. Color spaces. https://ciechanow.ski/color-spaces/.</li>
+<li>Cuypers, T., T. Haber, P. Bekaert, S. B. Oh, and R. Raskar. 2012. Reflectance model for diffraction. ACM Transactions on Graphics 31 (5), 122:1–11.</li>
+<li>Devlin, K., A. Chalmers, A. Wilkie, and W. Purgathofer. 2002. Tone reproduction and physically based spectral rendering. Proceedings of Eurographics 2002, 101–23.</li>
+<li>Drew, M., and G. Finlayson. 2003. Multispectral rendering without spectra. Journal of the Optical Society of America A 20 (7), 1181–93.</li>
+<li>Eilertsen, G., R. K. Mantiuk, and J. Unger. 2017. A comparative review of tone-mapping algorithms for high dynamic range video. Computer Graphics Forum (Eurographics State of the Art Report) 36 (2), 565–92.</li>
+<li>Evans, G., and M. McCool. 1999. Stratified wavelength clusters for efficient spectral Monte Carlo rendering. Proceedings of Graphics Interface 1999, 42–49.</li>
+<li>Fante, R. L. 1981. Relationship between radiative-transport theory and Maxwell’s equations in dielectric media. Journal of the Optical Society of America 71 (4), 460–68.</li>
+<li>Faridul, H. S., T. Pouli, C. Chamaret, J. Stauder, E. Reinhard, D. Kuzovkin, and A. Tremeau. 2016. Colour mapping: A review of recent methods, extensions and applications. Computer Graphics Forum 35 (1), 59–88.</li>
+<li>Ferwerda, J. A. 2001. Elements of early vision for computer graphics. IEEE Computer Graphics and Applications 21 (5), 22–33.</li>
+<li>Gershun, A. 1939. The light field. Journal of Mathematics and Physics 18 (1-4), 51–151.</li>
+<li>Glassner, A. 1989b. How to derive a spectrum from an RGB triplet. IEEE Computer Graphics and Applications 9 (4), 95–99.</li>
+<li>Glassner, A. 1995. Principles of Digital Image Synthesis. San Francisco: Morgan Kaufmann.</li>
+<li>Hall, R. 1989. Illumination and Color in Computer Generated Imagery. New York: Springer-Verlag.</li>
+<li>Hall, R. 1999. Comparing spectral color computation methods. IEEE Computer Graphics and Applications 19 (4), 36–46.</li>
+<li>Jakob, W., and J. Hanika. 2019. A low-dimensional function space for efficient spectral upsampling. Computer Graphics Forum (Proceedings of Eurographics) 38 (2), 147–55.</li>
+<li>Johnson, G. M., and M. D. Fairchild. 1999. Full spectral color calculations in realistic image synthesis. IEEE Computer Graphics and Applications 19 (4), 47–53.</li>
+<li>Judd, D. B., D. L. MacAdam, and G. Wyszecki. 1964. Spectral distribution of typical daylight as a function of correlated color temperature. Journal of the Optical Society of America 54 (8), 1031–40.</li>
+<li>Jung, A., A. Wilkie, J. Hanika, W. Jakob, and C. Dachsbacher. 2019. Wide gamut spectral upsampling with fluorescence. Computer Graphics Forum 38 (4), 87–96.</li>
+<li>Lambert, J. H. 1760. Photometry, or, On the Measure and Gradations of Light, Colors, and Shade. The Illuminating Engineering Society of North America. Translated by David L. DiLaura in 2001.</li>
+<li>Malacara, D. 2002. Color Vision and Colorimetry: Theory and Applications. SPIE—The International Society for Optical Engineering. Bellingham, WA.</li>
+<li>Mallett, I., and C. Yuksel. 2019. Spectral primary decomposition for rendering with sRGB reflectance. Eurographics Symposium on Rendering–DL-only and Industry Track.</li>
+<li>McCluney, W. R. 1994. Introduction to Radiometry and Photometry. Boston: Artech House.</li>
+<li>Meng, J., F. Simon, J. Hanika, and C. Dachsbacher. 2015. Physically meaningful rendering using tristimulus colours. Computer Graphics Forum (Proceedings of the 2015 Eurographics Symposium on Rendering) 34 (4), 31–40.</li>
+<li>Meyer, G. W., and D. P. Greenberg. 1980. Perceptual color spaces for computer graphics. In Computer Graphics (Proceedings of SIGGRAPH ’80), Volume 14, 254–61.</li>
+<li>Meyer, G. W., H. E. Rushmeier, M. F. Cohen, D. P. Greenberg, and K. E. Torrance. 1986. An experimental evaluation of computer graphics imagery. ACM Transactions on Graphics 5 (1), 30–50.</li>
+<li>Moon, P., and D. E. Spencer. 1936. The Scientific Basis of Illuminating Engineering. New York: McGraw-Hill.</li>
+<li>Moon, P., and D. E. Spencer. 1948. Lighting Design. Reading, Massachusetts: Addison-Wesley.</li>
+<li>Morley, R. K., S. Boulos, J. Johnson, D. Edwards, P. Shirley, M. Ashikhmin, and S. Premoze. 2006. Image synthesis using adjoint photons. In Proceedings of Graphics Interface 2006, 179–86.</li>
+<li>Morovi, J. 2008. Color Gamut Mapping. New York: John Wiley &amp; Sons.</li>
+<li>Nicodemus, F., J. Richmond, J. Hsia, I. Ginsburg, and T. Limperis. 1977. Geometrical Considerations and Nomenclature for Reflectance. NBS Monograph 160, Washington, D.C.: National Bureau of Standards, U.S. Department of Commerce.</li>
+<li>Oh, S. B., S. Kashyap, R. Garg, S. Chandran, and R. Raskar. 2010. Rendering wave effects with augmented light field. Computer Graphics Forum (Eurographics 2010) 29 (2), 507–16.</li>
+<li>Otsu, H., M. Yamamoto, and T. Hachisuka. 2018b. Reproducing spectral reflectances from tristimulus colours. Computer Graphics Forum 37 (6), 370–381.</li>
+<li>Ou, J., and F. Pellacini. 2010. SafeGI: Type checking to improve correctness in rendering system implementation. Computer Graphics Forum (Proceedings of the 2010 Eurographics Symposium on Rendering) 29 (4), 1267–77.</li>
+<li>Peercy, M. S. 1993. Linear color representations for full spectral rendering. Computer Graphics (SIGGRAPH ’93 Proceedings), Volume 27, 191–98.</li>
+<li>Peters, C., S. Merzbach, J. Hanika, and C. Dachsbacher. 2019. Using moments to represent bounded signals for spectral rendering. ACM Transactions on Graphics (Proceedings of SIGGRAPH) 38 (4), 136:1–14.</li>
+<li>Preisendorfer, R. W. 1965. Radiative Transfer on Discrete Spaces. Oxford: Pergamon Press.</li>
+<li>Radziszewski, M., K. Boryczko, and W. Alda. 2009. An improved technique for full spectral rendering. Journal of WSCG 17 (1-3), 9–16.</li>
+<li>Reinhard, E., G. Ward, P. Debevec, S. Pattanaik, W. Heidrich, and K. Myszkowski. 2010. High Dynamic Range Imaging: Acquisition, Display, and Image-Based Lighting. San Francisco: Morgan Kaufmann.</li>
+<li>Reinhard, E., T. Pouli, T. Kunkel, B. Long, A. Ballestad, and G. Damberg. 2012. Calibrated image appearance reproduction. ACM Transactions on Graphics (Proceedings of SIGGRAPH Asia 2012) 31 (6), 201:1–11.</li>
+<li>Rougeron, G., and B. Péroche. 1997. An adaptive representation of spectral data for reflectance computations. In Eurographics Rendering Workshop 1997, 126–38.</li>
+<li>Rougeron, G., and B. Péroche. 1998. Color fidelity in computer graphics: A survey. Computer Graphics Forum 17 (1), 3–16.</li>
+<li>Smits, B. 1999. An RGB-to-spectrum conversion for reflectances. Journal of Graphics Tools 4 (4), 11–22.</li>
+<li>Steinberg, S., and L.-Q. Yan. 2021. A generic framework for physical light transport. ACM Transactions on Graphics (Proceedings of SIGGRAPH) 40 (4), 139:1–20.</li>
+<li>Sun, Y., F. D. Fracchia, M. S. Drew, and T. W. Calvert. 2001. A spectrally based framework for realistic image synthesis. The Visual Computer 17 (7), 429–44.</li>
+<li>Tódová, L., A. Wilkie, and L. Fascione. 2021. Moment-based constrained spectral uplifting. Proceedings of the Eurographics Symposium on Rendering, 215–24.</li>
+<li>Tumblin, J., and H. E. Rushmeier. 1993. Tone reproduction for realistic images. IEEE Computer Graphics and Applications 13 (6), 42–48.</li>
+<li>Walter, B., P. M. Hubbard, P. Shirley, and D. F. Greenberg. 1997. Global illumination using local linear density estimation. ACM Transactions on Graphics 16 (3), 217–59.</li>
+<li>Wandell, B. 1995. Foundations of Vision. Sunderland, Massachusetts: Sinauer Associates.</li>
+<li>Ward, G., and E. Eydelberg-Vileshin. 2002. Picture perfect RGB rendering using spectral prefiltering and sharp color primaries. In Proceedings of 13th Eurographics Workshop on Rendering, 117–24.</li>
+<li>Wilkie, A., and A. Weidlich. 2011. A physically plausible model for light emission from glowing solid objects. Computer Graphics Forum (Proceedings of the 2011 Eurographics Symposium on Rendering) 30 (4), 1269–76.</li>
+<li>Wilkie, A., S. Nawaz, M. Droske, A. Weidlich, and J. Hanika. 2014. Hero wavelength spectral sampling. Computer Graphics Forum (Proceedings of the 2014 Eurographics Symposium on Rendering) 33 (4), 123–31.</li>
+</ul>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_6_Color.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/Exercises.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_6_Color.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/Exercises.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

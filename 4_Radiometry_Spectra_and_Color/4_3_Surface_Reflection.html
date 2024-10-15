@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>表面反射 - pbr-book-4ed</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/css/style.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">原版目录</a></li><li class="chapter-item expanded affix "><a href="../Preface/index.html">前言</a></li><li class="chapter-item expanded "><a href="../1_Introduction/index.html"><strong aria-hidden="true">1.</strong> 引言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../1_Introduction/1_1_Literate_Programming.html"><strong aria-hidden="true">1.1.</strong> 文艺编程</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_2_Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.html"><strong aria-hidden="true">1.2.</strong> 照片级真实感渲染与光线追踪算法</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_3_pbrt_System_Overview.html"><strong aria-hidden="true">1.3.</strong> pbrt：系统概述</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_4_How_to_Proceed_through_This_Book.html"><strong aria-hidden="true">1.4.</strong> 如何阅读本书</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_5_Using_and_Understanding_the_Code.html"><strong aria-hidden="true">1.5.</strong> 使用和理解代码</a></li><li class="chapter-item expanded "><a href="../1_Introduction/1_6_A_Brief_History_of_Physically_Based_Rendering.html"><strong aria-hidden="true">1.6.</strong> 基于物理的渲染简史</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Further_Reading.html"><strong aria-hidden="true">1.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../1_Introduction/Exercises.html"><strong aria-hidden="true">1.8.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/index.html"><strong aria-hidden="true">2.</strong> 蒙特卡罗积分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_1_Monte_Carlo_Basics.html"><strong aria-hidden="true">2.1.</strong> 蒙特卡罗：基础知识</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_2_Improving_Efficiency.html"><strong aria-hidden="true">2.2.</strong> 提高效率</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_3_Sampling_Using_the_Inversion_Method.html"><strong aria-hidden="true">2.3.</strong> 使用反演法进行采样</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/2_4_Transforming_between_Distributions.html"><strong aria-hidden="true">2.4.</strong> 分布之间的转换</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Further_Reading.html"><strong aria-hidden="true">2.5.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../2_Monte_Carlo_Integration/Exercises.html"><strong aria-hidden="true">2.6.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/index.html"><strong aria-hidden="true">3.</strong> 几何与变换</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_1_Coordinate_Systems.html"><strong aria-hidden="true">3.1.</strong> 坐标系统</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_2_n-Tuple_Base_Classes.html"><strong aria-hidden="true">3.2.</strong> n-元组基类</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_3_Vectors.html"><strong aria-hidden="true">3.3.</strong> 向量</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_4_Points.html"><strong aria-hidden="true">3.4.</strong> 点</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_5_Normals.html"><strong aria-hidden="true">3.5.</strong> 法线</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_6_Rays.html"><strong aria-hidden="true">3.6.</strong> 光线（射线）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_7_Bounding_Boxes.html"><strong aria-hidden="true">3.7.</strong> 边界框（包围盒）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_8_Spherical_Geometry.html"><strong aria-hidden="true">3.8.</strong> 球面几何</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_9_Transformations.html"><strong aria-hidden="true">3.9.</strong> 变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_10_Applying_Transformations.html"><strong aria-hidden="true">3.10.</strong> 应用变换</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/3_11_Interactions.html"><strong aria-hidden="true">3.11.</strong> 交互（相互作用）</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Further_Reading.html"><strong aria-hidden="true">3.12.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../3_Geometry_and_Transformations/Exercises.html"><strong aria-hidden="true">3.13.</strong> 练习</a></li></ol></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/index.html"><strong aria-hidden="true">4.</strong> 辐射度量学、光谱与颜色</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_1_Radiometry.html"><strong aria-hidden="true">4.1.</strong> 辐射度量学</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html"><strong aria-hidden="true">4.2.</strong> 使用辐射度量积分</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_3_Surface_Reflection.html" class="active"><strong aria-hidden="true">4.3.</strong> 表面反射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html"><strong aria-hidden="true">4.4.</strong> 光的发射</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_5_Representing_Spectral_Distributions.html"><strong aria-hidden="true">4.5.</strong> 光谱分布的表示</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/4_6_Color.html"><strong aria-hidden="true">4.6.</strong> 色彩</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Further_Reading.html"><strong aria-hidden="true">4.7.</strong> 延伸阅读</a></li><li class="chapter-item expanded "><a href="../4_Radiometry_Spectra_and_Color/Exercises.html"><strong aria-hidden="true">4.8.</strong> 练习</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">pbr-book-4ed</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="content-wrap">
+                            <h1 id="43-表面反射surface-reflection"><a class="header" href="#43-表面反射surface-reflection">4.3 表面反射（<a href="https://www.pbr-book.org/4ed/Radiometry,_Spectra,_and_Color/Surface_Reflection">Surface Reflection</a>）</a></h1>
+<p>当光线照射到一个表面时，表面会散射光线，将其中一部分反射回环境中。为了对这种反射进行建模，需要描述两个主要效应：反射光的光谱分布和它的方向分布。例如，柠檬的表皮主要吸收蓝色波长的光，但反射大部分红色和绿色波长的光。因此，当它被白光照射时，它的颜色是黄色的。无论从哪个方向观察，它的颜色基本相同，尽管在某些方向上可以看到高光——一个比黄色更接近白色的更亮区域。相反，镜子上某一点反射的光几乎完全取决于观察方向。在镜子的一个固定点上，随着观察角度的变化，镜中反射的物体也会相应地改变。</p>
+<p>来自半透明（translucent）表面的反射更加复杂；各种材料，从皮肤和树叶到蜡和液体，都表现出 <em>次表面光传输（subsurface light transport）</em>，即光在某一点进入表面，在一段距离之外离开表面。（例如，想象一下，当把手电筒照进嘴里时，脸颊会亮起来，因为进入脸颊内部的光穿过皮肤并从脸部透出。）</p>
+<p>有两种抽象概念用于描述这些光反射机制：BRDF 和 BSSRDF，分别在第 <a href="#431-brdf-%E4%B8%8E-btdfthe-brdf-and-the-btdf">4.3.1</a> 节和第 <a href="#432-bssrdfthe-bssrdf">4.3.2</a> 节中描述。 BRDF 描述了在忽略次表面光传输效应的情况下，表面在某一点的反射。对于这种传输机制影响不大的材料，这种简化只会引入很小的误差，并使渲染算法的实现更加高效。 BSSRDF 则是 BRDF 的推广，描述了来自半透明材料的光反射的更一般情况。</p>
+<h2 id="431-brdf-与-btdfthe-brdf-and-the-btdf"><a class="header" href="#431-brdf-与-btdfthe-brdf-and-the-btdf">4.3.1 BRDF 与 BTDF（The BRDF and the BTDF）</a></h2>
+<p><em>双向反射分布函数（bidirectional reflectance distribution function）</em>（BRDF）提供了一种描述表面反射的形式。考虑图 <a href="#figure-4-10">4.10</a> 中的环境：我们想知道在朝向观察者的方向 \( \omega_\text{o} \) 上离开表面的辐射亮度 \( L_\text{o}(\text{p},\omega_\text{o}) \) 是多少，作为沿着方向 \( \omega_\text{i} \) 入射的辐射亮度 \( L_\text{i}(\text{p},\omega_\text{i}) \) 的结果。（在考虑表面位置的光散射时，<strong>pbrt</strong> 使用的约定是 \( \omega_\text{i} \) 指的是感兴趣的量（在这种情况下是辐射亮度）到达的方向，而不是 <strong>Integrator</strong> 到达表面的方向。）</p>
+<blockquote>
+<p><a name="figure-4-10"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f10.svg" width="490" height="222" style="max-width: 100%;">
+</div>
+<p><strong>图 4.10：BRDF。</strong> 双向反射分布函数是一个关于方向对 \( \omega_\text{i} \) 和 \( \omega_\text{o} \) 的四维函数，描述了沿着 \( \omega_\text{i} \) 入射的光有多少被表面散射到方向 \( \omega_\text{o} \) 。</p>
+</blockquote>
+<p>如果将方向 \( \omega_\text{i} \) 视为方向的微分圆锥，则在 \( \text{p} \) 处的微分辐照度为</p>
+<p><a name="equation-4-10">(4.10)</a></p>
+<p>\[
+\text{d}E(\text{p},\omega_\text{i})=L_\text{i}(\text{p},\omega_\text{i})\cos\theta_\text{i}\text{d}\omega_\text{i}
+\]</p>
+<p>由于这种辐照度，将在方向 \( \omega_{o} \) 反射出微分量的辐射亮度。由于几何光学的线性假设，反射的微分辐射亮度与辐照度成正比</p>
+<p>\[
+\text{d}L_\text{o}(\text{p},\omega_\text{o}) \propto \text{d}E(\text{p},\omega_\text{i})
+\]</p>
+<p>比例常数定义了特定方向对 \( \omega_\text{i} \) 和 \( \omega_\text{o} \) 的表面 BRDF \( f_\text{r} \) ：</p>
+<p><a name="equation-4-11">(4.11)</a></p>
+<p>\[
+f_\text{r}(\text{p},\omega_\text{o},\omega_\text{i}) = \frac{\text{d}L_\text{o}(\text{p},\omega_\text{o})}{\text{d}E(\text{p},\omega_\text{i})} = \frac{\text{d}L_\text{o}(\text{p},\omega_\text{o})}{L_\text{i}(\text{p},\omega_\text{i})\cos\theta_\text{i}\text{d}\omega_\text{i}}
+\]</p>
+<p>光谱 BRDF 是通过使用光谱辐射亮度代替辐射亮度来定义的。</p>
+<p>基于物理的 BRDF 具有两个重要特性：</p>
+<ol>
+<li>
+<p><em>互易性（Reciprocity）：</em> 对于所有方向对 \( \omega_\text{i} \) 和 \( \omega_\text{o} \)，<br />
+\[
+f_\text{r}(\text{p},\omega_\text{i},\omega_\text{o}) = f_\text{r}(\text{p},\omega_\text{o},\omega_\text{i})
+\]</p>
+</li>
+<li>
+<p><em>能量守恒（Energy conservation）：</em> 反射光的总能量小于或等于入射光的能量。对于所有方向 \( \omega_\text{o} \)，
+\[
+\int_{\text{H}^2(\mathbf{n})} f_\text{r}(\text{p},\omega_\text{o},\omega')\cos\theta'\text{d}\omega' \leq 1
+\]</p>
+</li>
+</ol>
+<p><br />
+请注意，方向对 \( \omega_\text{i} \) 和 \( \omega_\text{o} \) 的 BRDF 值 <em>不</em> 一定小于 1；只有它的积分具有这种归一化约束。</p>
+<p>有两个基于 BRDF 的量有时会很有用。首先，<em>半球-方向反射率（hemispherical-directional reflectance）</em> 是一个二维函数，它给出了由于半球内的恒定照明而在给定方向上的总反射，或者等效地，来自给定方向的光在半球上的总反射。†（这两个量相等的事实是由于反射函数的互易性。）它的定义为</p>
+<p><a name="equation-4-12">(4.12)<a></p>
+<p>\[
+\rho_{\text{hd}}(\omega_\text{o}) = \int_{\text{H}^2(\mathbf{n})} f_\text{r}(\text{p},\omega_\text{o},\omega_\text{i})|\cos\theta_\text{i}|\text{d}\omega_\text{i}
+\]</p>
+<p>BRDF 的 <em>半球-半球反射率（hemispherical-hemispherical reflectance）</em>，记作 \( \rho_\text{hh} \)，表示当入射光从各个方向相同时，表面反射的入射光的比例（fraction）。它是</p>
+<p><a name="equation-4-13">(4.13)</a></p>
+<p>\[
+\rho_\text{hh} = \frac{1}{\pi} \int_{\text{H}^2(\mathbf{n})}\int_{\text{H}^2(\mathbf{n})} f_\text{r}(\text{p},\omega_\text{o},\omega_\text{i})|\cos\theta_\text{o}\cos\theta_\text{i}|\text{d}\omega_\text{o}\text{d}\omega_\text{i}
+\]</p>
+<p>表面的 <em>双向透射分布函数（bidirectional transmittance distribution function）</em>（BTDF），描述了透射光的分布，可以以类似于 BRDF 的方式定义。BTDF 通常用 \( f_\text{t}(\text{p},\omega_\text{o},\omega_\text{i}) \) 表示，其中 \( \omega_\text{i} \) 和 \( \omega_\text{o} \) 位于 \( \text{p} \) 周围的相对半球中。值得注意的是，BTDF 并不遵循上述定义的互易性；我们将在第 <a href="../9_Reflection_Models/9_5_Dielectric_BSDF.html#952-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E6%95%A3%E5%B0%84%E5%92%8C%E6%8A%98%E5%B0%84non-symmetric-scattering-and-refraction">9.5.2</a> 节中详细讨论这个问题。</p>
+<p>为了方便计算，我们将同时考虑 BRDF 和 BTDF 的函数表示为 \( f(\text{p},\omega_\text{o},\omega_\text{i}) \)；我们称之为 <em>双向散射分布函数（bidirectional scattering distribution function）</em>（BSDF）。第 <a href="../9_Reflection_Models/">9</a> 章将完全致力于描述多种对渲染有用的 BSDF。</p>
+<p>利用 BSDF 的定义，我们有</p>
+<p>\[
+\text{d}L_\text{o}(\text{p},\omega_\text{o})=f(\text{p},\omega_\text{o},\omega_\text{i})L_\text{i}(\text{p},\omega_\text{i})|\cos\theta_\text{i}|\text{d}\omega_\text{i}<br />
+\]</p>
+<p>在这里，\( \cos\theta_\text{i} \) 因子被添加了绝对值。这是因为在 <strong>pbrt</strong> 中的表面法线并没有重新定向到与 \( \omega_\text{i} \) 同一侧（许多其他渲染系统会这样做，但是我们发现将它们保持在 <a href="../6_Shapes/6_1_Basic_Shape_Interface.html#Shape-definition"><strong>Shape</strong></a> 所给出的自然方向上更为有用）。这样做使得在系统的其他地方一致地应用“假定表面法线指向表面外部”等约定变得更容易。因此，像这样对 \( \cos\theta \) 因子应用绝对值确保了所需量的计算。</p>
+<p>我们可以在围绕 \( \text{p} \) 的入射方向的球面上对这个方程进行积分，以计算所有方向上由于 \( \text{p} \) 的入射照明而在方向 \( \omega_\text{o} \) 上的出射辐射亮度</p>
+<p><a name="equation-4-14">(4.14)</a></p>
+<p>\[
+L_\text{o}(\text{p},\omega_\text{o}) = \int_{\text{S}^2} f(\text{p},\omega_\text{o},\omega_\text{i}) L_\text{i}(\text{p},\omega_\text{i})|\cos\theta_\text{i}|\text{d}\omega_\text{i}<br />
+\]</p>
+<p>这是渲染中的一个基础方程；它描述了在一个点上入射光的分布如何根据表面的散射特性转化为出射分布。当球体 \( \text{S}^2 \) 是定义域时（如这里所示），它通常被称为 <em>散射方程（scattering equation）</em> ；而当仅对上半球 \( \text{H}^2(\mathbf{n}) \) 进行积分时，则称为 <em>反射方程（reflection equation）</em>。在第 <a href="../13_Light_Transport_I_Surface_Reflection/">13</a> 到 <a href="../15_Wavefront_Rendering_on_GPUs/">15</a> 章的积分例程中，评估场景中表面上点的这个积分是一个关键任务。</p>
+<h2 id="432-bssrdfthe-bssrdf"><a class="header" href="#432-bssrdfthe-bssrdf">4.3.2 BSSRDF（The BSSRDF）</a></h2>
+<p><em>双向散射表面反射分布函数（bidirectional scattering surface reflectance distribution function）</em>（BSSRDF）是描述具有次表面光传输的材料的散射的形式。它是一个分布函数 \( S(\text{p}_\text{o},\omega_\text{o},\text{p}_\text{i},\omega_\text{i}) \)，描述了在点 \( \text{p}_\text{o} \) 处朝向 \( \omega_\text{o} \) 的出射微分辐射亮度与在 \(\text{p}_\text{i} \) 处来自方向 \( \omega_\text{i} \) 的入射微分通量的比率（图 <a href="#figure-4-11">4.11</a>）：</p>
+<p><a name="equation-4-15">(4.15)</a></p>
+<p>\[
+S(\text{p}_{\text{o}},\omega_{\text{o}},\text{p}_{\text{i}},\omega_{\text{i}}) = \frac{\text{d}L_{\text{o}}(\text{p}_{\text{o}},\omega_{\text{o}})}{\text{d}\Phi(\text{p}_{\text{i}},\omega_{\text{i}})}<br />
+\]</p>
+<blockquote>
+<p><a name="figure-4-11"></a></p>
+<div class="figure-row">
+  <img src="figures/pha04f11.svg" width="505" height="320" style="max-width: 100%;">
+</div>
+<p><strong>图 4.11：</strong> 双向散射表面反射分布函数将 BSDF 推广，以考虑光在不同于入射点的表面位置射出的情况。尽管次表面光传输对许多现实世界物体的外观有显著贡献，但其评估通常比 BSDF 更为困难。</p>
+</blockquote>
+<p>对于 BSSRDF 的散射方程的推广，需要对表面积 <em>和</em> 入射方向进行积分，将二维散射方程（<a href="#equation-4-14">4.14</a>）转化为四维积分。</p>
+<p><a name="equation-4-16">(4.16)</a></p>
+<p>\[
+L_\text{o}(\text{p}_\text{o},\omega_\text{o}) = \int_{\text{A}}\int_{\text{H}^2(\mathbf{n})} S(\text{p}_\text{o},\omega_\text{o},\text{p}_\text{i},\omega_\text{i})L_\text{i}(\text{p}_\text{i},\omega_\text{i})|\cos\theta_\text{i}|\text{d}\omega_\text{i}\text{d}A
+\]</p>
+<p>由于需要在两个额外的维度上进行积分，在渲染算法中考虑这一点比方程（<a href="#equation-4-14">4.14</a>）要复杂得多。然而，随着点 \( \text{p}_\text{i} \) 和 \( \text{p}_\text{o} \) 之间的距离增加，\( S \) 的值通常会减小。这个事实在实现次表面散射算法时可以提供实质性的帮助。</p>
+<p>光在表面下的传输遵循与参与介质中的体积光传输相同的原理，并由转移方程描述，该方程在第 <a href="../14_Light_Transport_II_Volume_Rendering/14_1_The_Equation_of_Transfer.html">14.1</a> 节中介绍。因此，次表面散射基于与云和烟雾中的光散射相同的效应——只是规模更小。</p>
+
+                        </div>
+                        <div class="sidetoc">
+                            <nav class="pagetoc"></nav>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../4_Radiometry_Spectra_and_Color/4_2_Working_with_Radiometric_Integrals.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../4_Radiometry_Spectra_and_Color/4_4_Light_Emission.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
